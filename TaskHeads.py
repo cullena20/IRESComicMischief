@@ -45,7 +45,7 @@ class MultiTaskClassification(nn.Module):
         )
 
  
-        self.text_audio_image_gory = nn.Sequential(
+        self.text_audio_image_linear_gory = nn.Sequential(
             nn.Linear(768*3  , 200),
             nn.BatchNorm1d(200),
             nn.Dropout(0.3),
@@ -58,7 +58,7 @@ class MultiTaskClassification(nn.Module):
             nn.Linear(20, 2)
         )
 
-        self.text_audio_image_slapstick = nn.Sequential(
+        self.text_audio_image_linear_slapstick = nn.Sequential(
             nn.Linear(768*3  , 200),
             nn.BatchNorm1d(200),
             nn.Dropout(0.3),
@@ -71,7 +71,7 @@ class MultiTaskClassification(nn.Module):
             nn.Linear(20, 2)
         )
 
-        self.text_audio_image_sarcasm = nn.Sequential(
+        self.text_audio_image_linear_sarcasm = nn.Sequential(
             nn.Linear(768*3  , 200),
             nn.BatchNorm1d(200),
             nn.Dropout(0.3),
@@ -85,9 +85,10 @@ class MultiTaskClassification(nn.Module):
         )
 
     def forward(self, x):
-        output_mature = F.softmax(self.img_audio_text_linear_mature(x), -1)
-        output_gory = F.softmax(self.img_audio_text_linear_gory(x), -1)
-        output_slapstick = F.softmax(self.img_audio_text_linear_slapstick(x), -1)
-        output_sarcasm = F.softmax(self.img_audio_text_linear_sarcasm(x), -1)
+        output_mature = F.softmax(self.text_audio_image_linear_mature(x), -1)
+        output_gory = F.softmax(self.text_audio_image_linear_gory(x), -1)
+        output_slapstick = F.softmax(self.text_audio_image_linear_slapstick(x), -1)
+        output_sarcasm = F.softmax(self.text_audio_image_linear_sarcasm(x), -1)
         
-        return [output_mature, output_gory, output_slapstick, output_sarcasm]
+        # old return value is list: [output_mature, output_gory, output_slapstick, output_sarcasm]
+        return torch.stack([output_mature, output_gory, output_slapstick, output_sarcasm], dim=1)

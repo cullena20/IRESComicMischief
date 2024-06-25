@@ -5,21 +5,57 @@ from BaseModel import Bert_Model
 from TaskHeads import BinaryClassification, MultiTaskClassification
 
 class UnifiedModel(nn.Module):
-
-    def __init__(self, base_model, task_head):
+    def __init__(self, base_model, task_heads):
         super(UnifiedModel, self).__init__()
         self.base_model = base_model
-        self.task_head = task_head
+        self.task_heads = nn.ModuleDict(task_heads)
 
-    def forward(self, x):
-        # using Bert_Model, this should be text, audio, image embeddings concatenated (768 * 3)
-        embedding = self.base_model(x)
-        output = self.task_head(embedding)
-        return output
+    def forward(self, sentences, mask, image, image_mask, audio, audio_mask, task):
+        shared_output = self.base_model(sentences, mask, image, image_mask, audio, audio_mask)
+        task_output = self.task_heads[task](shared_output)
+        return task_output
 
-base_model = Bert_Model()
-binary_head = BinaryClassification()
-multi_head = MultiTaskClassification()
 
-BinaryModel = UnifiedModel(base_model, binary_head)
-MultiTaskModel = UnifiedModel(base_model, multi_head)
+if __name__ == "__main__":
+    base_model = Bert_Model()
+    task_heads = {
+        "binary": BinaryClassification(),
+        "multi": MultiTaskClassification()
+    }
+
+
+    unified_model = UnifiedModel(base_model, task_heads)
+
+    # Check if CUDA is available and set the device accordingly
+    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+
+    base_model.to(device)
+    unified_model.to(device)
+
+
+    # Define input shapes
+    batch_size = 8
+    sequence_length_text = 20
+    sequence_length_image = 10
+    sequence_length_audio = 15
+    input_size_image = 1024
+    input_size_audio = 128
+    embedding_dim = 768
+
+    # Create random inputs and move them to the appropriate device
+    sentences = torch.randint(0, 30522, (batch_size, sequence_length_text)).to(device)  # BERT vocab size is 30522 for 'bert-base-uncased'
+    mask = torch.randint(0, 2, (batch_size, sequence_length_text)).float().to(device)
+    image = torch.randn(batch_size, sequence_length_image, input_size_image).to(device)
+    image_mask = torch.randint(0, 2, (batch_size, sequence_length_image)).float().to(device)
+    audio = torch.randn(batch_size, sequence_length_audio, input_size_audio).to(device)
+    audio_mask = torch.randint(0, 2, (batch_size, sequence_length_audio)).float().to(device)
+
+    # Forward pass
+    base_output = base_model(sentences, mask, image, image_mask, audio, audio_mask)
+    binary_output = unified_model(sentences, mask, image, image_mask, audio, audio_mask, task="binary")
+    multi_output = unified_model(sentences, mask, image, image_mask, audio, audio_mask, task="multi")
+
+    # Print the output shape
+    print("Base Output shape:", base_output.shape) # batch_size by 2304 (768 per modality * 3 modalities)
+    print("Binary Output shape:", binary_output.shape) # batch size by 2 (one for each prediction ?, why not by 1)
+    print("Multi Output shape:", multi_output.shape) # batch size by 4 by 2 (4 for 4 tasks and 2 for each task)
