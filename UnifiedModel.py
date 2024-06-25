@@ -22,8 +22,6 @@ if __name__ == "__main__":
         "binary": BinaryClassification(),
         "multi": MultiTaskClassification()
     }
-
-
     unified_model = UnifiedModel(base_model, task_heads)
 
     # Check if CUDA is available and set the device accordingly
@@ -32,23 +30,27 @@ if __name__ == "__main__":
     base_model.to(device)
     unified_model.to(device)
 
-
     # Define input shapes
     batch_size = 8
-    sequence_length_text = 20
+    sequence_length_text = 20 # not totally sure where numbers except batch_size and embedding_dim come from, check it
     sequence_length_image = 10
     sequence_length_audio = 15
-    input_size_image = 1024
-    input_size_audio = 128
+    input_size_image = 1024 # I3D feature size
+    input_size_audio = 128 # VGGish feature size
     embedding_dim = 768
 
     # Create random inputs and move them to the appropriate device
-    sentences = torch.randint(0, 30522, (batch_size, sequence_length_text)).to(device)  # BERT vocab size is 30522 for 'bert-base-uncased'
-    mask = torch.randint(0, 2, (batch_size, sequence_length_text)).float().to(device)
+    # Sentences is going to be BERT tokenized sentences 
+    sentences = torch.randint(0, 30522, (batch_size, sequence_length_text)).to(device)  # BERT vocab size is 30522 for 'bert-base-uncased' -> each number corresponds to a token
+    mask = torch.randint(0, 2, (batch_size, sequence_length_text)).float().to(device) # 0 or 1 for size (batch_size, sequence_length_txt) -> determines which tokens are valid
+    
+    # Image is really going to be I3D video embeddings
     image = torch.randn(batch_size, sequence_length_image, input_size_image).to(device)
     image_mask = torch.randint(0, 2, (batch_size, sequence_length_image)).float().to(device)
+
+    # Audio is going to be VGGish embeddings
     audio = torch.randn(batch_size, sequence_length_audio, input_size_audio).to(device)
-    audio_mask = torch.randint(0, 2, (batch_size, sequence_length_audio)).float().to(device)
+    audio_mask = torch.randint(0, 2, (batch_size, sequence_length_audio)).float().to(device) 
 
     # Forward pass
     base_output = base_model(sentences, mask, image, image_mask, audio, audio_mask)
@@ -59,3 +61,6 @@ if __name__ == "__main__":
     print("Base Output shape:", base_output.shape) # batch_size by 2304 (768 per modality * 3 modalities)
     print("Binary Output shape:", binary_output.shape) # batch size by 2 (one for each prediction ?, why not by 1)
     print("Multi Output shape:", multi_output.shape) # batch size by 4 by 2 (4 for 4 tasks and 2 for each task)
+
+    print(binary_output[0])
+    print(multi_output[0])

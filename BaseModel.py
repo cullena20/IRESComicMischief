@@ -7,7 +7,7 @@ from torch import nn
 from torch.nn import functional as F
 # from source.models.attention_ORG import *
 from attention import * # changed to just attention, I think this is fine
-# from source import config as C
+# from source import confg as C
 import pprint
 import numpy as np
 from transformers import BertTokenizer, BertModel
@@ -96,175 +96,194 @@ class Bert_Model(nn.Module):
     def __init__(self):
         super(Bert_Model, self).__init__()
 
-        self.rnn_units = 512
-        self.embedding_dim = 768
+        self.rnn_units = 512 # rnn units used to further encode audio and video
+        self.embedding_dim = 768 # output embedding for each modality
         
         dropout = 0.2
-        att1 = BertOutAttention(self.embedding_dim)
-        att1_drop_norm1 = nn.Sequential(
+
+        # this is the attention module used to embed text, along with dropout layers
+        self.att1 = BertOutAttention(self.embedding_dim)
+        self.att1_drop_norm1 = nn.Sequential(
             nn.Dropout(dropout),
             nn.LayerNorm(self.embedding_dim, eps=1e-5),
         ) 
-        att1_drop_norm2 = nn.Sequential(
-            nn.Dropout(dropout),
-            nn.LayerNorm(self.embedding_dim, eps=1e-5),
-        ) 
-        att2 = BertOutAttention(self.embedding_dim)
-        att2_drop_norm1 = nn.Sequential(
-            nn.Dropout(dropout),
-            nn.LayerNorm(self.embedding_dim, eps=1e-5),
-        ) 
-        att2_drop_norm2 = nn.Sequential(
-            nn.Dropout(dropout),
-            nn.LayerNorm(self.embedding_dim, eps=1e-5),
-        ) 
-        
-        att3 = BertOutAttention(self.embedding_dim)
-        att3_drop_norm1 = nn.Sequential(
-            nn.Dropout(dropout),
-            nn.LayerNorm(self.embedding_dim, eps=1e-5),
-        ) 
-        att3_drop_norm2 = nn.Sequential(
+        self.att1_drop_norm2 = nn.Sequential(
             nn.Dropout(dropout),
             nn.LayerNorm(self.embedding_dim, eps=1e-5),
         ) 
 
-        sequential_audio = nn.Sequential(
+        # attention to embed audio, along with dropout layers
+        self.att2 = BertOutAttention(self.embedding_dim)
+        self.att2_drop_norm1 = nn.Sequential(
+            nn.Dropout(dropout),
+            nn.LayerNorm(self.embedding_dim, eps=1e-5),
+        ) 
+        self.att2_drop_norm2 = nn.Sequential(
+            nn.Dropout(dropout),
+            nn.LayerNorm(self.embedding_dim, eps=1e-5),
+        ) 
+        
+        # attention to embed audio, along with dropout layers
+        self.att3 = BertOutAttention(self.embedding_dim)
+        self.att3_drop_norm1 = nn.Sequential(
+            nn.Dropout(dropout),
+            nn.LayerNorm(self.embedding_dim, eps=1e-5),
+        ) 
+        self.att3_drop_norm2 = nn.Sequential(
+            nn.Dropout(dropout),
+            nn.LayerNorm(self.embedding_dim, eps=1e-5),
+        ) 
+
+        # FC layers to pass RNN embeded audio into (raw audio -> VGGish features elsewhere -> LSTM here -> FC here -> attention)
+        self.sequential_audio = nn.Sequential(
             nn.Linear(self.rnn_units*2  , self.embedding_dim),
             nn.LayerNorm(self.embedding_dim),
             nn.Dropout(0.3),
 
         )
-        sequential_image = nn.Sequential(
+
+        # FC layers to pass RNN embedded video into
+        self.sequential_image = nn.Sequential(
             nn.Linear(self.rnn_units*2  , self.embedding_dim),
             nn.LayerNorm(self.embedding_dim),
             nn.Dropout(0.3),
 
         )
-        bert = BertModel.from_pretrained('bert-base-uncased', output_hidden_states=True,
-                                                                output_attentions=True)
 
-        rnn_audio = nn.LSTM(128, self.rnn_units, num_layers=2, bidirectional=True, batch_first = True)
-        rnn_audio_drop_norm = nn.Sequential(
+        # CULLEN: added eager thing, meaning some manual implementation is being used to prevent future issues
+        # Maybe want to address this later
+
+        # Load BERT model from pretrained to embed sentence tokens
+        # Might want to freeze for consistency, or not
+        self.bert = BertModel.from_pretrained('bert-base-uncased', output_hidden_states=True,
+                                                                output_attentions=True, 
+                                                                attn_implementation="eager")
+
+        # LSTM: input_size_audio (128 VGG) dim inputs -> rnn_units (512)
+        # Then norm will make it rnn_units * 2 (1024) - not sure why 
+        input_size_audio = 128
+        self.rnn_audio = nn.LSTM(input_size_audio, self.rnn_units, num_layers=2, bidirectional=True, batch_first = True)
+        self.rnn_audio_drop_norm = nn.Sequential(
             nn.Dropout(dropout),
             nn.LayerNorm(self.rnn_units*2, eps=1e-5),
         ) 
-        rnn_img = nn.LSTM(1024, self.rnn_units, num_layers=2, bidirectional=True, batch_first = True)
-        rnn_img_drop_norm = nn.Sequential(
+
+        # LSTM: input_size_image (1024 I3D) dim inputs -> rnn_units (512)
+        # Then norm will make it rnn_units * 2 (1024) - not sure why  
+        input_size_image = 1024
+        self.rnn_img = nn.LSTM(input_size_image, self.rnn_units, num_layers=2, bidirectional=True, batch_first = True)
+        self.rnn_img_drop_norm = nn.Sequential(
             nn.Dropout(dropout),
             nn.LayerNorm(self.rnn_units*2, eps=1e-5),
         ) 
 
-        attention_audio = Attention(768)
-        attention_audio_drop_norm = nn.Sequential(
+        #  Self attention layer for embedded audio
+        self.attention_audio = Attention(self.embedding_dim)
+        self.attention_audio_drop_norm = nn.Sequential(
             nn.Dropout(dropout),
             nn.LayerNorm(self.embedding_dim, eps=1e-5),
         ) 
-        attention_image = Attention(768)
-        attention_image_drop_norm = nn.Sequential(
+
+        # Self attention layer for embedded video - input has to be self.embedding_dim too: embedding_dim -> embedding_dim
+        self.attention_image = Attention(self.embedding_dim)
+        self.attention_image_drop_norm = nn.Sequential(
             nn.Dropout(dropout),
             nn.LayerNorm(self.embedding_dim, eps=1e-5),
         ) 
-        attention = Attention(768)
-        attention_drop_norm = nn.Sequential(
+
+        # Self attention layer for embedded audio
+        self.attention = Attention(self.embedding_dim)
+        self.attention_drop_norm = nn.Sequential(
             nn.Dropout(dropout),
             nn.LayerNorm(self.embedding_dim, eps=1e-5),
         )
         
-        self.features = nn.ModuleList([bert, rnn_img, rnn_img_drop_norm, rnn_audio, rnn_audio_drop_norm, sequential_audio, sequential_image, att1, att1_drop_norm1, att1_drop_norm2, att2, att2_drop_norm1, att2_drop_norm2, att3, att3_drop_norm1, att3_drop_norm2, attention, attention_drop_norm, attention_audio, attention_audio_drop_norm, attention_image, attention_image_drop_norm])
-       
-        # Cullen: Up to here, same as multitask model
-        # Difference now is adding these heads
-        # Binary has a different head
-        # This can probably me modularized
-
-        # THIS ISN'T USED
-        # self.sequential = nn.Sequential(
-        #     nn.Linear(self.rnn_units, 100),
-        #     nn.BatchNorm1d(100),
-        #     nn.Dropout(0.3),
-
-        #     nn.Linear(100, 40),
-        #     nn.BatchNorm1d(40),
-        #     nn.Dropout(0.3),
-
-        #     nn.Linear(40, 20)
-        # )
-
-        # self.img_audio_text_linear = nn.Sequential(
-        #     nn.Linear(768*3  , 200),
-        #     nn.BatchNorm1d(200),
-        #     nn.Dropout(0.3),
-
-        #     nn.Linear(200, 40),
-        #     nn.BatchNorm1d(40),
-        #     nn.Dropout(0.3),
-
-        #     nn.Linear(40, 20),
-        #     nn.Linear(20, 2)
-        # )
-
+        # Got rid of below for easier readibility and just referenced names directly
+        # self.features = nn.ModuleList([bert, rnn_img, rnn_img_drop_norm, rnn_audio, rnn_audio_drop_norm, sequential_audio, sequential_image, att1, att1_drop_norm1, att1_drop_norm2, att2, att2_drop_norm1, att2_drop_norm2, att3, att3_drop_norm1, att3_drop_norm2, attention, attention_drop_norm, attention_audio, attention_audio_drop_norm, attention_image, attention_image_drop_norm])
 
 
     def forward(self, sentences, mask, image, image_mask, audio, audio_mask, mode='pre_train'):
-      
-        hidden, _ = self.features[0](sentences)[-2:]
+        """
+        Forward pass for the Bert_Model.
+
+        Parameters:
+        -----------
+        sentences : torch.Tensor
+            Input tensor representing the tokenized sentences, with shape (batch_size, sequence_length).
+        mask : torch.Tensor
+            Attention mask for the sentences, with shape (batch_size, sequence_length). This mask differentiates between valid tokens (1) and padding tokens (0).
+        image : torch.Tensor
+            Input tensor representing the image data, with shape (batch_size, sequence_length, 1024). This data is processed by an LSTM.
+        image_mask : torch.Tensor
+            Attention mask for the image data, with shape (batch_size, sequence_length). This mask differentiates between valid image segments (1) and padding segments (0).
+        audio : torch.Tensor
+            Input tensor representing the audio data, with shape (batch_size, sequence_length, 128). This data is processed by an LSTM.
+        audio_mask : torch.Tensor
+            Attention mask for the audio data, with shape (batch_size, sequence_length). This mask differentiates between valid audio segments (1) and padding segments (0).
+        mode : str, optional
+            Mode for the model, default is 'pre_train'.
+
+        Returns:
+        --------
+        torch.Tensor
+            The concatenated tensor of processed text, audio, and image representations with shape (batch_size, embedding_dim * 3).
+        """
+
+        hidden, _ = self.bert(sentences)[-2:]
         
-        rnn_img_encoded, (hid, ct) = self.features[1](image)
-        rnn_img_encoded = self.features[2](rnn_img_encoded)
-        rnn_audio_encoded, (hid_audio, ct_audio) = self.features[3](audio)
-        rnn_audio_encoded = self.features[4](rnn_audio_encoded)
-        
-        extended_attention_mask= mask.float().unsqueeze(1).unsqueeze(2)
+        rnn_img_encoded, _ = self.rnn_img(image)
+        rnn_img_encoded = self.rnn_img_drop_norm(rnn_img_encoded)
+        rnn_audio_encoded, _ = self.rnn_audio(audio)
+        rnn_audio_encoded = self.rnn_audio_drop_norm(rnn_audio_encoded)
+
+        extended_attention_mask = mask.float().unsqueeze(1).unsqueeze(2)
         extended_attention_mask = extended_attention_mask.to(dtype=next(self.parameters()).dtype)
         extended_attention_mask = (1.0 - extended_attention_mask) * -10000.0
         
         extended_audio_attention_mask = audio_mask.float().unsqueeze(1).unsqueeze(2)
-        extended_audio_attention_mask = extended_audio_attention_mask.to(dtype=next(self.parameters()).dtype) # fp16 compatibility
+        extended_audio_attention_mask = extended_audio_attention_mask.to(dtype=next(self.parameters()).dtype)
         extended_audio_attention_mask = (1.0 - extended_audio_attention_mask) * -10000.0
       
         extended_image_attention_mask = image_mask.float().unsqueeze(1).unsqueeze(2)
-        extended_image_attention_mask = extended_image_attention_mask.to(dtype=next(self.parameters()).dtype) # fp16 compatibility
+        extended_image_attention_mask = extended_image_attention_mask.to(dtype=next(self.parameters()).dtype)
         extended_image_attention_mask = (1.0 - extended_image_attention_mask) * -10000.0
  
-        output_text = self.features[7](hidden[-1], self.features[6](rnn_img_encoded) ,extended_image_attention_mask)
-        output_text = self.features[8](output_text)
-        output_text = self.features[7](output_text, self.features[5](rnn_audio_encoded) ,extended_audio_attention_mask)
-        output_text = self.features[9](output_text)
+        output_text = self.att1(hidden[-1], self.sequential_image(rnn_img_encoded), extended_image_attention_mask)
+        output_text = self.att1_drop_norm1(output_text)
+        output_text = self.att1(output_text, self.sequential_audio(rnn_audio_encoded), extended_audio_attention_mask)
+        output_text = self.att1_drop_norm2(output_text)
         
         output_text = output_text + hidden[-1]
 
-        output_audio = self.features[10](self.features[5](rnn_audio_encoded), self.features[6](rnn_img_encoded) ,extended_image_attention_mask)
-        output_audio = self.features[11](output_audio)
-        output_audio = self.features[10](output_audio, hidden[-1], extended_attention_mask)   
-        output_audio = self.features[12](output_audio)
+        output_audio = self.att2(self.sequential_audio(rnn_audio_encoded), self.sequential_image(rnn_img_encoded), extended_image_attention_mask)
+        output_audio = self.att2_drop_norm1(output_audio)
+        output_audio = self.att2(output_audio, hidden[-1], extended_attention_mask)   
+        output_audio = self.att2_drop_norm2(output_audio)
         
-        output_audio = output_audio + self.features[5](rnn_audio_encoded)
+        output_audio = output_audio + self.sequential_audio(rnn_audio_encoded)
 
-        output_image = self.features[13](self.features[6](rnn_img_encoded), hidden[-1], extended_attention_mask)
-        output_image = self.features[14](output_image)
-        output_image = self.features[13](output_image, self.features[5](rnn_audio_encoded) ,extended_audio_attention_mask)
-        output_image = self.features[15](output_image)
+        output_image = self.att3(self.sequential_image(rnn_img_encoded), hidden[-1], extended_attention_mask)
+        output_image = self.att3_drop_norm1(output_image)
+        output_image = self.att3(output_image, self.sequential_audio(rnn_audio_encoded), extended_audio_attention_mask)
+        output_image = self.att3_drop_norm2(output_image)
         
-        output_image = output_image + self.features[6](rnn_img_encoded)
-       
-        # Cullen: refactored below to use device
-        mask = torch.tensor(np.array([1]*output_text.size()[1])).to(device) # cuda()
-        audio_mask = torch.tensor(np.array([1]*output_audio.size()[1])).to(device) # cuda()
-        image_mask = torch.tensor(np.array([1]*output_image.size()[1])).to(device) # cuda()
+        output_image = output_image + self.sequential_image(rnn_img_encoded)
 
-        output_text, attention_weights = self.features[16](output_text, mask.float())
-        output_text = self.features[17](output_text)
-        output_audio,  attention_weights = self.features[18](output_audio, audio_mask.float())
-        output_audio = self.features[19](output_audio)
-        output_image,  attention_weights = self.features[20](output_image, image_mask.float())
-        output_image = self.features[21](output_image)
+        mask = torch.tensor(np.array([1]*output_text.size()[1])).to(next(self.parameters()).device) # cuda()
+        audio_mask = torch.tensor(np.array([1]*output_audio.size()[1])).to(next(self.parameters()).device) # cuda()
+        image_mask = torch.tensor(np.array([1]*output_image.size()[1])).to(next(self.parameters()).device) # cuda()
 
-        text_audio_image_cat = torch.cat([output_text,output_audio,output_image], dim=-1)
-        #image_audio_text  = torch.cat([cls_token, image_audio], dim=-1)
+        #print("TEXT BEFORE SELF ATTENTION:", output_text.shape)
+        output_text, attention_weights = self.attention(output_text, mask.float())
+        output_text = self.attention_drop_norm(output_text)
+        #print("TEXT AFTER SELF ATTENTION:", output_text.shape)
+        output_audio, attention_weights = self.attention_audio(output_audio, audio_mask.float())
+        output_audio = self.attention_audio_drop_norm(output_audio)
+        #print("IMAGE BEFORE SELF ATTENTION", output_image.shape)
+        output_image, attention_weights = self.attention_image(output_image, image_mask.float())
+        output_image = self.attention_image_drop_norm(output_image)
+        #print("IMAGE AFTER SELF ATTENTION", output_image.shape)
 
-        # Only difference with multi task
-        # output = F.softmax(self.img_audio_text_linear(audio_text_image), -1)
-        
-        # return output, sequential_output -> note problems possible further down the line
+        text_audio_image_cat = torch.cat([output_text, output_audio, output_image], dim=-1)
+
         return text_audio_image_cat
