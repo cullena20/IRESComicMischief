@@ -206,7 +206,7 @@ class Bert_Model(nn.Module):
 
 
 
-    def forward(self, sentences,mask,image, image_mask, audio, audio_mask, mode='pre_train'):
+    def forward(self, sentences, mask, image, image_mask, audio, audio_mask, mode='pre_train'):
       
         hidden, _ = self.features[0](sentences)[-2:]
         
@@ -260,13 +260,11 @@ class Bert_Model(nn.Module):
         output_image,  attention_weights = self.features[20](output_image, image_mask.float())
         output_image = self.features[21](output_image)
 
-        audio_text_image_cat = torch.cat([output_text,output_audio,output_image], dim=-1)
+        text_audio_image_cat = torch.cat([output_text,output_audio,output_image], dim=-1)
         #image_audio_text  = torch.cat([cls_token, image_audio], dim=-1)
 
         # Only difference with multi task
         # output = F.softmax(self.img_audio_text_linear(audio_text_image), -1)
         
         # return output, sequential_output -> note problems possible further down the line
-        return audio_text_image_cat
-
-
+        return text_audio_image_cat
