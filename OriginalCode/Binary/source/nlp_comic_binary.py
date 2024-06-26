@@ -122,51 +122,112 @@ def compute_l2_reg_val(model):
     return l2_lambda * l2_reg.item()
 
 
-def masking(docs_ints, seq_length=500):
 
-    masks = np.zeros((len(docs_ints), seq_length), dtype=int)
-    for i, row in enumerate(docs_ints):
-        #mask[i, :len(row)] = 1
-        masks[i, -len(row):] = 1
+# the below two functions are used for individual data entries
 
-    return masks
-
-def mask_vector(max_size,arr):
-    # print (arr,arr.shape)
+def mask_vector(max_size, arr):
+    """
+    Creates a mask vector of length `max_size` for the input array `arr`. 
+    
+    The mask vector contains 1s for the length of `arr` and 0s for the remaining elements 
+    if `arr` is shorter than `max_size`. If `arr` is longer than `max_size`, the mask vector 
+    contains only 1s up to `max_size`.
+    
+    Args:
+        max_size (int): The maximum size of the mask vector.
+        arr (numpy.ndarray): The input array to create the mask for.
+        
+    Returns:
+        numpy.ndarray: A mask vector of length `max_size`.
+    """
     if arr.shape[0] > max_size:
-       output = [1]*max_size
+       output = [1] * max_size
     else:
-       len_zero_value = max_size -  arr.shape[0]
-       output = [1]*arr.shape[0] + [0]*len_zero_value
+       len_zero_value = max_size - arr.shape[0]
+       output = [1] * arr.shape[0] + [0] * len_zero_value
     
     return np.array(output)
 
 def pad_segment(feature, max_feature_len, pad_idx):
+    """
+    Pads or truncates the input feature array to ensure it has `max_feature_len` rows.
+    
+    If the input feature array has fewer rows than `max_feature_len`, it is padded with 
+    rows of zeros at the end. If it has more rows, it is truncated to `max_feature_len` rows.
+    
+    Args:
+        feature (numpy.ndarray): The input feature array of shape (S, D), where S is the 
+                                 number of rows and D is the number of columns.
+        max_feature_len (int): The desired number of rows in the output array.
+        pad_idx (int): Index used for padding (currently unused, but included for compatibility).
+        
+    Returns:
+        numpy.ndarray: The padded or truncated feature array of shape (max_feature_len, D).
+    """
     S, D = feature.shape
-    #print (S, D)
     try:
        pad_l =  max_feature_len - S
        # pad
        pad_segment = np.zeros((pad_l, D))
-       feature = np.concatenate((feature,pad_segment), axis=0)
-       #print (feature.shape)
+       feature = np.concatenate((feature, pad_segment), axis=0)
     except:
        feature = feature[0:max_feature_len]
-       #print (feature.shape)
     return feature
+
 
 # Cullen: Above same
 
-def pad_features(docs_ints, seq_length=500):
+# the below two functions are used for entire batches
+import numpy as np
 
-    # getting the correct rows x cols shape
+def pad_features(docs_ints, seq_length=500):
+    """
+    Pads or truncates each sequence in `docs_ints` to a fixed length of `seq_length`.
+    
+    For each sequence in `docs_ints`, this function either pads it with zeros if it is shorter 
+    than `seq_length`, or truncates it if it is longer than `seq_length`. Padding or truncation 
+    is applied from the beginning of the sequence.
+    
+    Args:
+        docs_ints (list of list of int): List of sequences, where each sequence is a list of integers.
+        seq_length (int, optional): The desired length for each sequence. Defaults to 500.
+        
+    Returns:
+        numpy.ndarray: A 2D array of shape (len(docs_ints), seq_length) containing the padded or truncated sequences.
+    """
+    # Getting the correct rows x cols shape
     features = np.zeros((len(docs_ints), seq_length), dtype=int)
 
-    # for each review, I grab that review and
+    # For each review, grab that review and pad or truncate it
     for i, row in enumerate(docs_ints):
         features[i, -len(row):] = np.array(row)[:seq_length]
 
     return features
+
+def masking(docs_ints, seq_length=500):
+    """
+    Creates mask vectors for each sequence in `docs_ints`, indicating the presence of actual data points.
+    
+    For each sequence in `docs_ints`, this function creates a mask vector of length `seq_length`. 
+    The mask vector contains 1s for the positions corresponding to the data points in the sequence, 
+    and 0s for the padding positions. If the sequence is shorter than `seq_length`, the mask is padded 
+    with 0s. If the sequence is longer, the mask is truncated.
+    
+    Args:
+        docs_ints (list of list of int): List of sequences, where each sequence is a list of integers.
+        seq_length (int, optional): The desired length for each mask vector. Defaults to 500.
+        
+    Returns:
+        numpy.ndarray: A 2D array of shape (len(docs_ints), seq_length) containing the mask vectors.
+    """
+    masks = np.zeros((len(docs_ints), seq_length), dtype=int)
+    for i, row in enumerate(docs_ints):
+        masks[i, -len(row):] = 1
+
+    return masks
+
+
+
 
 # CULLEN: Stuff only gets meaningfully different below
 
@@ -213,49 +274,74 @@ def train(model, optimizer):
 
         # Cullen: mid condition not in multi task, not important I think
         # changed mid to i
+        # the below example has no words, but 31 else do
+        # it must just not have I3D features, should deal with or just remove
+        # or do try and except like with VGG
+        # note that tokens is 101 and 102 -> special beginning and end tokens
         if i == "laqIl3LniQE.02":
                 a1 = np.array([1024*[0.0]])
                 a2 = np.array([1024*[0.0]])
                 continue
         else:
+                # need to modify path to work generally
                 path = "path_to_I3D_features/"
                 #image_vec = np.load("./deepMoji_out/"+mid+".npy")
-                a1 = np.load(path+mid+"_rgb.npy")
-                a2 = np.load(path+mid+"_flow.npy")
+                a1 = np.load(path+i+"_rgb.npy") # changed mid to i
+                a2 = np.load(path+i+"_flow.npy")
         a = a1+a2
-        masked_img = mask_vector(36,a)
+        # we load the I3D features and combine them as such
+
+        masked_img = mask_vector(36,a) # this mask is used later
         a = pad_segment(a, 36, 0)
-        image_vec = a
+        image_vec = a 
+
+        # IMAGE PADS TO 36 or something like that
+
         #masked_img = mask_vector(36,a)
 
+        # similar to above but with audio
         path = "path_to_VGGish_features/"
         try:
-           audio_arr = np.load(path+mid+"_vggish.npy")
+           audio_arr = np.load(path+i+"_vggish.npy") # changed mid to i
         except:
            audio_arr = np.array([128*[0.0]])
-        masked_audio = mask_vector(63,audio_arr)
+        masked_audio = mask_vector(63,audio_arr) # create the mask
         #print (masked_audio)
-        audio_vec = pad_segment(audio_arr, 63, 0)
+        audio_vec = pad_segment(audio_arr, 63, 0) # now pad
+
         batch_audio.append(audio_vec)
         batch_mask_audio.append(masked_audio)
+        # AUDIO PADS TO 63 or something like that
 
-        train_imdb.append(mid)
+
+        train_imdb.append(i) # changed i to mid -> append the data names
         batch_x.append(np.array(sh_train_set[i]['indexes']))
+        # these are the tokenized input (not captions!)
+        # might want to deal with captions here and if no words
+
         batch_mask_img.append(masked_img)
+        # add masked image
+
         batch_image.append(image_vec)
+        # image encodings
+
         batch_y.append(sh_train_set[i]['y'])
+        # the label
         # Cullen: multi task handles batches for each category independently
     
+        # we keep on adding items to the batch until we get to batch size, and then train
+        # I'll fix this
         if (len(batch_x) == batch_size or index == len(sh_train_set) - 1 ) and len(batch_x)>0:
             #try:
                 #print("index:", index)
                 optimizer.zero_grad()
 
-                mask = masking(batch_x)
-                batch_x = pad_features(batch_x)
-                batch_x = np.array(batch_x)
-                batch_x = torch.tensor(batch_x).cuda()
+                mask = masking(batch_x) # for some reason we are handling input masking differently overly complicated
+                batch_x = pad_features(batch_x) # padding for text as batches, again inconsistent
+                batch_x = np.array(batch_x) 
+                batch_x = torch.tensor(batch_x).cuda() # this should be a tensor from the start, also shouldn't be cuda should be .to(device)
 
+                # turn all batches into tensors and put into GPU
                 batch_image = np.array(batch_image)
                 batch_image = torch.tensor(batch_image).cuda()
 
@@ -268,7 +354,9 @@ def train(model, optimizer):
                 batch_mask_audio = np.array(batch_mask_audio)
                 batch_mask_audio = torch.tensor(batch_mask_audio).cuda()
 
-                out, mid = model(batch_x, torch.tensor(mask).cuda(),batch_image.float(),batch_mask_img, batch_audio.float(),batch_mask_audio)
+                # i deleted second output because it isn't used and I modified the model
+                out = model(batch_x, torch.tensor(mask).cuda(), batch_image.float(), batch_mask_img, batch_audio.float(), batch_mask_audio)
+                # out, mid = model(batch_x, torch.tensor(mask).cuda(),batch_image.float(),batch_mask_img, batch_audio.float(),batch_mask_audio)
 
 
                 # Cullen: below has things being done differently until optimizer.step(), but this should be able to be modularizable
@@ -282,14 +370,15 @@ def train(model, optimizer):
 
                 optimizer.step()
 
-                torch_helper.show_progress(batch_idx, np.ceil(len(sh_train_set) / batch_size), start_time,
-                                           round(total_loss / (index + 1), 4))
+                # get torch helper
+                # torch_helper.show_progress(batch_idx, np.ceil(len(sh_train_set) / batch_size), start_time,
+                #                            round(total_loss / (index + 1), 4))
                 batch_idx += 1
+
+                # empty out batches
                 batch_x, batch_y,batch_image,batch_mask_img = [], [], [],[]
                 batch_audio, batch_mask_audio = [],[]
                 # Cullen: multi task has extra line to initialize empty batches, but I think this actually doesn't matter
-
-            
 
     return model
 

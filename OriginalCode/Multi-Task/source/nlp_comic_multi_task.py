@@ -281,7 +281,6 @@ def train(model, optimizer):
             gory_pred = out[1].cpu()
             slapstick_pred = out[2].cpu()
             sarcasm_pred = out[3].cpu()
-            print(f"Mature Pred Shape: {mature_pred.shape}")
 
             loss1 = F.binary_cross_entropy(mature_pred, torch.Tensor(batch_mature)) 
             loss2 = F.binary_cross_entropy(gory_pred, torch.Tensor(batch_gory))
