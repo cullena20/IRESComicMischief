@@ -183,4 +183,4 @@ dependencies:
       - jmespath==1.0.1
       - pytorch-pretrained-bert==0.6.2
       - s3transfer==0.10.1
-prefix: /home/cander24/anaconda3/envs/ires
+# prefix: /home/cander24/anaconda3/envs/ires

@@ -190,26 +190,30 @@ def train(model, optimizer):
     batch_x = []
     batch_image, batch_mask_img = [],[]
     batch_audio, batch_mask_audio = [],[]
-    batch_emo_deepMoji = []
-    batch_mask = []
+    # batch_emo_deepMoji = []
+    # batch_mask = []
 
     # CULLEN: Multi task has batch_y and batch for each of four categories, I think batch_y is
     batch_y = []
-    batch_text = []
+    # batch_text = []
     train_imdb = []
     sh_train_set = train_set
     
     for index, i in enumerate(sh_train_set):
-        #list(np.int_(batch_x))
-        mid = sh_train_set[i]['IMDBid']
+        # index here is a number
+        # i is the key for the dictionary
 
-        file_path = "path_to_I3D_features/"+mid+"_rgb.npy"
+        # commmeted out below because mid is the same as i (double checked by looping through features)
+        # mid = sh_train_set[i]['IMDBid'] # pretty sure this is the same as i
+        
+        file_path = "path_to_I3D_features/"+ i +"_rgb.npy" # changed mid to i
         if not os.path.isfile(file_path): 
-            print(index, "  - mid:", mid)
+            print(index, "  - mid:", i) # changed mid to i 
             continue
 
         # Cullen: mid condition not in multi task, not important I think
-        if mid == "laqIl3LniQE.02":
+        # changed mid to i
+        if i == "laqIl3LniQE.02":
                 a1 = np.array([1024*[0.0]])
                 a2 = np.array([1024*[0.0]])
                 continue
