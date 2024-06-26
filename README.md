@@ -1,6 +1,6 @@
-# Comic Mischief Prediction
+# Comic Mischief Prediction (WIP)
 
-IRES Project to explore finetuning and pretraining methods for Multimodal Comic Mischief Prediction, particularly from the perspective of curriculum learning.
+IRES Project to explore finetuning and pretraining methods for Multimodal Comic Mischief Prediction, particularly from the perspective of curriculum learning. This is an early stage project in progress right now.
 
 # Current Code Outline
 
