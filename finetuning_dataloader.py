@@ -82,7 +82,11 @@ class CustomDataset(Dataset):
         mask = mask_vector(self.text_pad_length, text)
         text = pad_features([text], self.text_pad_length)[0]
 
-        label = torch.tensor(item['y']) # this will need changing depending on binary or multi task
+        binary_label = torch.tensor(item['y']) 
+        mature = torch.tensor(item["mature"])
+        gory = torch.tensor(item["gory"])
+        sarcasm = torch.tensor(item["sarcasm"])
+        slapstick = torch.tensor(item["slapstick"])
 
         return {
             'text': text,
@@ -91,7 +95,11 @@ class CustomDataset(Dataset):
             'image_mask': masked_img,
             'audio': audio_vec.float(),
             'audio_mask': masked_audio,
-            'label': label.float()
+            'binary_label': binary_label.float(),
+            "mature": mature.float(),
+            "gory": gory.float(),
+            "sarcasm": sarcasm.float(),
+            "slapstick": slapstick.float()
         }
 
 def mask_vector(max_size, arr):
@@ -115,7 +123,7 @@ def pad_segment(feature, max_feature_len, pad_idx):
 def pad_features(docs_ints, text_pad_length=500):
     features = torch.zeros((len(docs_ints), text_pad_length), dtype=int)
     for i, row in enumerate(docs_ints):
-        features[i, -len(row):] = torch.tensor(row)[:text_pad_length]
+        features[i, -len(row):] = row[:text_pad_length]
     return features
 
 if __name__ == "__main__":

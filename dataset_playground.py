@@ -3,6 +3,9 @@ import torch
 import os
 import string
 
+# TRAINING SET INFO
+# 2890 EXAMPLES, 31 NO WORDS
+
 # Define the base directory as the directory where the script is located
 base_dir = os.path.dirname(os.path.abspath(__file__))
 
@@ -58,7 +61,7 @@ train_dict_iter = iter(features_dict_train.items())
 key, value = next(train_dict_iter)
 # print(key)
 
-# print(value.keys())
+print(value.keys())
 # print(value)
 
 no_words_cnt = 0
@@ -74,8 +77,6 @@ for index, i in enumerate(features_dict_train):
     if len(features_dict_train[i]["words"]) == 0:
         no_words_cnt += 1
 print(no_words_cnt) # 31 
-print(len(features_dict_train))
-
 
 
 # print(value["words"])

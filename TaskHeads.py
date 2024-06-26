@@ -91,4 +91,5 @@ class MultiTaskClassification(nn.Module):
         output_sarcasm = F.softmax(self.text_audio_image_linear_sarcasm(x), -1)
         
         # old return value is list: [output_mature, output_gory, output_slapstick, output_sarcasm]
-        return torch.stack([output_mature, output_gory, output_slapstick, output_sarcasm], dim=1)
+        # I changed the order slightly to follow same order as data, hopefully no issues
+        return torch.stack([output_mature, output_gory, output_sarcasm, output_slapstick], dim=1)
