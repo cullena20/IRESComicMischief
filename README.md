@@ -4,12 +4,11 @@ IRES Project to explore finetuning and pretraining methods for Multimodal Comic 
 
 # Current Code Outline
 
-BaseModel: The main model. Takes in BERT tokenized text, I3D video embeddings, VGG audio embeddings and outputs concatenated embeddings (768 * 3)
-TaskHeads: Task specific heads. Takes in output of base model (768 * 3) and produces some output. There are binary and multi task heads currently.
-UnifiedModel: Wrapper to unify the base model with task specific heads. Has some demo code to show model works.
-
-finetuning_dataloader: A data loader for the comic mischief data used for fine tuning
-train: Training code for the model. Unified training loop for binary and multi task prediction
+* BaseModel: The main model. Takes in BERT tokenized text, I3D video embeddings, VGG audio embeddings and outputs concatenated embeddings (768 * 3)
+* TaskHeads: Task specific heads. Takes in output of base model (768 * 3) and produces some output. There are binary and multi task heads currently.
+* UnifiedModel: Wrapper to unify the base model with task specific heads. Has some demo code to show model works.
+* finetuning_dataloader: A data loader for the comic mischief data used for fine tuning
+* train: Training code for the model. Unified training loop for binary and multi task prediction
 
 # To Do
 
