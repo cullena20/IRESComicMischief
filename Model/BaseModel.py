@@ -1,35 +1,17 @@
 import sys
-
-#
-sys.path.append('../../')
 import torch
 from torch import nn
-from torch.nn import functional as F
-# from source.models.attention_ORG import *
-from attention import * # changed to just attention, I think this is fine
-# from source import confg as C
-import pprint
+from .attention import * 
 import numpy as np
-from transformers import BertTokenizer, BertModel
-import copy
-import json
-import logging
+from transformers import BertModel
 import math
-import os
-import shutil
-import tarfile
-import tempfile
-import sys
-from io import open
-import random
-from collections import OrderedDict
 
 # Cullen: Deal with below
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
-pp = pprint.PrettyPrinter(indent=4).pprint
+# pp = pprint.PrettyPrinter(indent=4).pprint
+# debug = False
 
-debug = False
 bidirectional = True
 class BertOutAttention(nn.Module):
     def __init__(self, size, ctx_dim=None):

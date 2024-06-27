@@ -5,6 +5,9 @@ from torch.utils.data import Dataset, DataLoader
 import torch.nn.functional as F
 import time
 import json
+from helpers import pad_segment, mask_vector, pad_features
+
+# I think there's issues with the padding and masking (also doesn't padding set to -infinity)
 
 # so here is the data we need to load
 # sentences (tokenized)
@@ -101,30 +104,6 @@ class CustomDataset(Dataset):
             "sarcasm": sarcasm.float(),
             "slapstick": slapstick.float()
         }
-
-def mask_vector(max_size, arr):
-    if arr.shape[0] > max_size:
-        output = [1] * max_size
-    else:
-        len_zero_value = max_size - arr.shape[0]
-        output = [1] * arr.shape[0] + [0] * len_zero_value
-    return torch.tensor(output)
-
-def pad_segment(feature, max_feature_len, pad_idx):
-    S, D = feature.shape
-    if S > max_feature_len:
-        feature = feature[:max_feature_len]
-    else:
-        pad_l = max_feature_len - S
-        pad_segment = torch.zeros((pad_l, D))
-        feature = torch.concatenate((feature, pad_segment), axis=0)
-    return feature
-
-def pad_features(docs_ints, text_pad_length=500):
-    features = torch.zeros((len(docs_ints), text_pad_length), dtype=int)
-    for i, row in enumerate(docs_ints):
-        features[i, -len(row):] = row[:text_pad_length]
-    return features
 
 if __name__ == "__main__":
     dataset = CustomDataset("test_features_lrec_camera.json")
