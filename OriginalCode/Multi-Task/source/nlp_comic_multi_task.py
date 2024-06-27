@@ -282,6 +282,7 @@ def train(model, optimizer):
             slapstick_pred = out[2].cpu()
             sarcasm_pred = out[3].cpu()
 
+
             loss1 = F.binary_cross_entropy(mature_pred, torch.Tensor(batch_mature)) 
             loss2 = F.binary_cross_entropy(gory_pred, torch.Tensor(batch_gory))
             loss3 = F.binary_cross_entropy(slapstick_pred, torch.Tensor(batch_slapstick))
@@ -294,8 +295,7 @@ def train(model, optimizer):
 
             optimizer.step()
 
-            torch_helper.show_progress(batch_idx, np.ceil(len(sh_train_set) / batch_size), start_time,
-                                       round(total_loss / (index + 1), 4))
+            # torch_helper.show_progress(batch_idx, np.ceil(len(sh_train_set) / batch_size), start_time, round(total_loss / (index + 1), 4))
             batch_idx += 1
             batch_x, batch_y,batch_image,batch_mask_img = [], [], [],[]
             batch_audio, batch_mask_audio = [],[]
