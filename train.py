@@ -2,9 +2,8 @@ import torch
 from torch.utils.data import DataLoader
 from torch.nn import functional as F
 from finetuning_dataloader import CustomDataset
-from BaseModel import Bert_Model
-from TaskHeads import BinaryClassification, MultiTaskClassification
-from UnifiedModel import UnifiedModel
+
+from helpers import compute_l2_reg_val
 
 import time
 
@@ -17,23 +16,6 @@ import time
 # currently this has no  lr_scheduler, or checkpoint modeling which the original does
 # also does not have evaluation right now
 
-# this functino maybe should be elsewhere
-l2_regularize = True
-l2_lambda = 0.1
-def compute_l2_reg_val(model):
-    if not l2_regularize:
-        return 0.
-
-    l2_reg = None
-
-    for w in model.parameters():
-        if l2_reg is None:
-            l2_reg = w.norm(2)
-        else:
-            l2_reg = l2_reg + w.norm(2)
-
-    return l2_lambda * l2_reg.item()
-
 # where did these come from? supposed to be learnable
 mature_w = 0.1
 gory_w = 0.4
@@ -45,7 +27,7 @@ sarcasm_w = 0.2
 # for now lets have the dataset return all labels
 # then task will determine how to evaluate and train
 # this can be further modularized
-def train(model, optimizer, json_data, task, batch_size=32, num_epochs=1, text_pad_length=500, img_pad_length=36, audio_pad_length=63, shuffle=True):
+def train(model, optimizer, json_data, task, batch_size=32, num_epochs=1, text_pad_length=500, img_pad_length=36, audio_pad_length=63, shuffle=True, device=torch.device("cuda" if torch.cuda.is_available() else "cpu")):
     # the dataset has x values: 
     # text, text_mask, image, image_mask, audio, audio_maxk
     # and y value (deal with depending on task)
@@ -136,17 +118,21 @@ def train(model, optimizer, json_data, task, batch_size=32, num_epochs=1, text_p
 
     return model
 
-# Usage
-device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+if __name__ == "__main__":
+    from BaseModel import Bert_Model
+    from TaskHeads import BinaryClassification, MultiTaskClassification
+    from UnifiedModel import UnifiedModel
+    # Usage
+    device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
-base_model = Bert_Model()
-task_heads = {
-    "binary": BinaryClassification(),
-    "multi": MultiTaskClassification()
-}
-model = UnifiedModel(base_model, task_heads)
+    base_model = Bert_Model()
+    task_heads = {
+        "binary": BinaryClassification(),
+        "multi": MultiTaskClassification()
+    }
+    model = UnifiedModel(base_model, task_heads)
 
-optimizer = torch.optim.Adam(model.parameters(), lr=0.001)
+    optimizer = torch.optim.Adam(model.parameters(), lr=0.001)
 
-# train(model, optimizer, "train_features_lrec_camera.json", "binary", batch_size=8, num_epochs=10)
-train(model, optimizer, "train_features_lrec_camera.json", "multi", batch_size=8, num_epochs=10, shuffle=False)
+    # train(model, optimizer, "train_features_lrec_camera.json", "binary", batch_size=8, num_epochs=10)
+    train(model, optimizer, "train_features_lrec_camera.json", "multi", batch_size=8, num_epochs=10, shuffle=False)
