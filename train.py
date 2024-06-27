@@ -57,7 +57,7 @@ def train(model, optimizer, json_data, task, batch_size=32, num_epochs=1, text_p
             out = model(batch_text, batch_text_mask, batch_image, batch_mask_img, batch_audio, batch_mask_audio, task)
                 
             if task == "binary":
-                batch_y = batch['label'].to(device)
+                batch_y = batch['binary'].to(device)
 
                 # print(f"batch_text shape: {batch_text.shape}")
                 # print(f"batch_text_mask shape: {batch_text_mask.shape}")

@@ -68,5 +68,5 @@ def basic_eval_pass(model, device, task):
 if __name__ == "__main__":
     unified_model, base_model = initiate_model()
     # basic_forward_pass(unified_model, base_model, "multi")
-    # basic_train_pass(unified_model, device)
-    basic_eval_pass(unified_model, device, "binary")
+    basic_train_pass(unified_model, device, "binary")
+    # basic_eval_pass(unified_model, device, "binary")

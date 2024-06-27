@@ -98,7 +98,7 @@ class CustomDataset(Dataset):
             'image_mask': masked_img,
             'audio': audio_vec.float(),
             'audio_mask': masked_audio,
-            'binary_label': binary_label.float(),
+            'binary': binary_label.float(),
             "mature": mature.float(),
             "gory": gory.float(),
             "sarcasm": sarcasm.float(),
