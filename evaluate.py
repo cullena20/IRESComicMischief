@@ -1,8 +1,59 @@
 import torch
-import os
+from torch.utils.data import DataLoader
+from finetuning_dataloader import CustomDataset
+from torch.nn import functional as F
+from sklearn.metrics import accuracy_score, f1_score
 
 # the evaluation functions need refactoring using our data loader
 # the bulk of the code is repetition with data loader stuff, but we've cleaned that up
+
+def evaluate(model, json_data, task, batch_size=32, text_pad_length=500, img_pad_length=36, audio_pad_length=63, shuffle=True, device=torch.device("cuda" if torch.cuda.is_available() else "cpu")):
+    dataset = CustomDataset(json_data, text_pad_length, img_pad_length, audio_pad_length)
+    dataloader = DataLoader(dataset, batch_size=batch_size, shuffle=shuffle)
+        
+    model.eval()
+
+    total_loss = 0 
+    all_preds = []
+    all_labels = []
+    with torch.no_grad():
+        for batch_idx, batch in enumerate(dataloader):
+            batch_text = batch['text'].to(device)
+            batch_text_mask = batch['text_mask'].to(device)
+            batch_image = batch['image'].float().to(device)
+            batch_mask_img = batch['image_mask'].to(device)
+            batch_audio = batch['audio'].float().to(device)
+            batch_mask_audio = batch['audio_mask'].to(device)
+            batch_pred = batch["binary_label"].to(device) # batch_size by 2
+
+            # batch_size by 2 for binary
+            # batch size by 4 by 2 for multi task
+            out = model(batch_text, batch_text_mask, batch_image, batch_mask_img, batch_audio, batch_mask_audio, task)
+              
+            loss = F.binary_cross_entropy(out, batch_pred)
+            total_loss += loss.item()
+
+            # Collect predictions and true labels
+            preds = (out[:, 1] > 0.5).cpu().numpy()  # Using the second column for binary classification
+            true_labels = (batch_pred[:, 1] > 0.5).cpu().numpy()  # Using the second column for binary classification
+            
+            all_preds.extend(preds)
+            all_labels.extend(true_labels)
+
+            if batch_idx == 20:
+                break
+    
+    # Calculate accuracy and F1 score
+    accuracy = accuracy_score(all_labels, all_preds)
+    f1 = f1_score(all_labels, all_preds, average='binary')  # use 'macro' or 'weighted' for multi-class
+
+    avg_loss = total_loss / len(dataloader)
+    
+    print(f'Loss: {avg_loss:.4f}, Accuracy: {accuracy:.4f}, F1 Score: {f1:.4f}')
+    
+    return avg_loss, accuracy, f1
+
+
 
 # def multi_evaluate(model, dataset, division):
 #     model.eval()
