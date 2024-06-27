@@ -1,6 +1,7 @@
 import torch
 from torch import nn
 
+# There may be an issue here since I can getting really high loss after making this change
 class UnifiedModel(nn.Module):
     def __init__(self, base_model, task_heads):
         super(UnifiedModel, self).__init__()
