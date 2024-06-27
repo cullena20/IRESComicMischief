@@ -8,8 +8,14 @@ class UnifiedModel(nn.Module):
         self.base_model = base_model
         self.task_heads = nn.ModuleDict(task_heads)
 
+        # enable dynamic reweighting of losses
+        # For simplicity: loss_weights[0]: binary, 1: mature, 2: gory, 3: sarcasm, 4: slapstick
+        # Might change later on
+        self.loss_weights = nn.Parameter(torch.ones(len(task_heads)))
+
     def forward(self, text_tokens, text_mask, image, image_mask, audio, audio_mask, tasks):
         shared_output = self.base_model(text_tokens, text_mask, image, image_mask, audio, audio_mask)
+        print(shared_output)
         task_output = torch.stack([self.task_heads[task](shared_output) for task in tasks], dim=1)
         return task_output
 
