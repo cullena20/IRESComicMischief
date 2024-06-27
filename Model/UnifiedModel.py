@@ -7,9 +7,9 @@ class UnifiedModel(nn.Module):
         self.base_model = base_model
         self.task_heads = nn.ModuleDict(task_heads)
 
-    def forward(self, text_tokens, text_mask, image, image_mask, audio, audio_mask, task):
+    def forward(self, text_tokens, text_mask, image, image_mask, audio, audio_mask, tasks):
         shared_output = self.base_model(text_tokens, text_mask, image, image_mask, audio, audio_mask)
-        task_output = self.task_heads[task](shared_output)
+        task_output = torch.stack([self.task_heads[task](shared_output) for task in tasks], dim=1)
         return task_output
 
 
