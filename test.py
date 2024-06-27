@@ -68,5 +68,6 @@ def basic_eval_pass(model, device, task):
 if __name__ == "__main__":
     unified_model, base_model = initiate_model()
     # basic_forward_pass(unified_model, base_model, "multi")
-    basic_train_pass(unified_model, device, "binary")
+    basic_train_pass(unified_model, device, "binary") # loss is on scale of 500
+    basic_train_pass(unified_model, device, "multi") # loss is on scale of 0.8
     # basic_eval_pass(unified_model, device, "binary")
