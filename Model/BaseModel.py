@@ -6,7 +6,7 @@ import numpy as np
 from transformers import BertModel
 import math
 
-debug=True
+debug=False
 
 def dprint(text):
     if debug:
@@ -246,7 +246,7 @@ class Bert_Model(nn.Module):
         dprint(f"Audio Embedded shape {audio_encoded.shape}")
 
         # Every attention mask goes from batch_size by modality_token_size to batch_size by 1 by 1 by modality_token_size
-        #
+        # Bring 0s to -10000, bring 1s to 0. Huh?
 
         extended_text_attention_mask = text_mask.float().unsqueeze(1).unsqueeze(2)
         extended_text_attention_mask = extended_text_attention_mask.to(dtype=next(self.parameters()).dtype)
@@ -289,6 +289,7 @@ class Bert_Model(nn.Module):
         
         output_image = output_image + img_encoded
 
+        # why are there new masks here?
         mask = torch.tensor(np.array([1]*output_text.size()[1])).to(next(self.parameters()).device) # cuda()
         audio_mask = torch.tensor(np.array([1]*output_audio.size()[1])).to(next(self.parameters()).device) # cuda()
         image_mask = torch.tensor(np.array([1]*output_image.size()[1])).to(next(self.parameters()).device) # cuda()

@@ -88,8 +88,9 @@ class CustomDataset(Dataset):
         mask = mask_vector(self.text_pad_length, text)
         # print("TEXT MASK", mask)
 
-        # NOTE: MODIFIED FROM PRIOR CODE TO PAD ENDING
-        text = pad_features(text, self.text_pad_length)
+        # NOTE: PADDING AT BEGINNING FOR SOME REASON
+        # To use my function where you pad at end, go to helpers and uncomment, and feed in text not [text]
+        text = pad_features([text], self.text_pad_length)[0]
         # print("PADDED TEXT", text)
 
         binary = torch.tensor(item['y']) 

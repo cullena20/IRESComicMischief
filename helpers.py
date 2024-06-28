@@ -46,14 +46,21 @@ def pad_segment(feature, max_feature_len):
 #     pad_amount = text_pad_length - current_length
 #     return F.pad(feature, (0, pad_amount), 'constant', pad_value)
 
+
+def pad_features(docs_ints, text_pad_length=500):
+    features = torch.zeros((len(docs_ints), text_pad_length), dtype=int)
+    for i, row in enumerate(docs_ints):
+        features[i, -len(row):] = row[:text_pad_length]
+    return features
+
 # ORIGINAL PADS ENDING
 # I think that this is done because the mask is handled very strangely in the model
-def pad_features(docs_ints, seq_length=500):
+# def pad_features(docs_ints, seq_length=500):
 
-    # getting the correct rows x cols shape
-    features = torch.zeros((len(docs_ints), seq_length), dtype=int)
+#     # getting the correct rows x cols shape
+#     features = torch.zeros((len(docs_ints), seq_length), dtype=int)
 
-    for i, row in enumerate(docs_ints):
-        features[i, -len(row):] = torch.tensor(row)[:seq_length]
+#     for i, row in enumerate(docs_ints):
+#         features[i, -len(row):] = torch.tensor(row)[:seq_length]
 
     return features

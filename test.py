@@ -3,7 +3,7 @@ import numpy as np
 from Model.UnifiedModel import UnifiedModel
 from Model.BaseModel import Bert_Model
 from Model.TaskHeads import BinaryClassification, MultiTaskClassification
-from train import train # are these names an issue
+from train import train, dynamic_difficulty_sampling # are these names an issue
 from evaluate import evaluate
 
 # Check if CUDA is available and set the device accordingly
@@ -62,19 +62,25 @@ def basic_forward_pass(unified_model):
     print(binary_output[0]) 
     # print(multi_output[0])
 
-def basic_train_pass(model, device, tasks, training_method="all_at_once"):
+def basic_train_pass(model, device, tasks, training_method="all_at_once", loss_setting="unweighted"):
     # just see if it actually runs
     optimizer = torch.optim.Adam(model.parameters(), lr=0.001)
-    train(model, optimizer, "train_features_lrec_camera.json", tasks, training_method=training_method, batch_size=batch_size, num_epochs=1, shuffle=False, device=device)
+    train(model, optimizer, "train_features_lrec_camera.json", tasks, loss_setting=loss_setting, training_method=training_method, batch_size=batch_size, num_epochs=1, shuffle=False, device=device)
 
-def basic_eval_pass(model, device, task):
-    evaluate(model, "test_features_lrec_camera.json", task, batch_size=batch_size, shuffle=False, device=device)
+def basic_eval_pass(model, device, tasks):
+    evaluate(model, "test_features_lrec_camera.json", tasks, batch_size=batch_size, shuffle=False, device=device)
+
+def dynamic_difficulty_sample_test(model, device, tasks):
+    optimizer = torch.optim.Adam(model.parameters(), lr=0.001)
+    dynamic_difficulty_sampling(model, optimizer, "train_features_lrec_camera.json", tasks, loss_setting="unweighted", batch_size=32, num_epochs=1, text_pad_length=500, img_pad_length=36, audio_pad_length=63, shuffle=True, device=device)
 
 if __name__ == "__main__":
     model, _ = initiate_model_new()
-    basic_forward_pass(model)
+    # basic_forward_pass(model)
     # basic_train_pass(model, device, binary_tasks) # loss on order of 500 when beginning because of regularization (like original model)
-    #basic_train_pass(model, device, multi_tasks) # loss less than one beginning (no regularization)
+    # basic_train_pass(model, device, multi_tasks, loss_setting="unweighted") # loss around 2.5 when you just add loss for each task
+    # basic_train_pass(model, device, multi_tasks, loss_setting="predefined_weights") # multi task setting in paper - loss less than one beginning (no regularization)
     # basic_train_pass(model, device, multi_tasks, training_method="round_robin")
     # basic_eval_pass(model, device, binary_tasks)
     # basic_eval_pass(model, device, multi_tasks)
+    dynamic_difficulty_sample_test(model, device, multi_tasks) # loss starts around 2.5, same as unweighted as it should be
