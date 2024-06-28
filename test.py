@@ -68,7 +68,7 @@ def basic_train_pass(model, device, tasks, training_method):
     train(model, optimizer, "train_features_lrec_camera.json", tasks, training_method=training_method, batch_size=batch_size, num_epochs=1, shuffle=False, device=device)
 
 def basic_eval_pass(model, device, task):
-    evaluate(model, "train_features_lrec_camera.json", task, batch_size=batch_size, shuffle=False, device=device)
+    evaluate(model, "test_features_lrec_camera.json", task, batch_size=batch_size, shuffle=False, device=device)
 
 if __name__ == "__main__":
     model, _ = initiate_model_new()
@@ -76,4 +76,5 @@ if __name__ == "__main__":
     # basic_train_pass(model, device, binary_tasks) # loss on order of 500 when beginning (like original model)
     # basic_train_pass(model, device, multi_tasks) # loss now on order of 500 (original model was like 0.8)
     # basic_train_pass(model, device, multi_tasks, training_method="round_robin")
-    basic_eval_pass(model, device, binary_tasks)
+    # basic_eval_pass(model, device, binary_tasks)
+    basic_eval_pass(model, device, multi_tasks)

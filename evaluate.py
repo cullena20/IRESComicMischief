@@ -7,7 +7,8 @@ from sklearn.metrics import accuracy_score, f1_score
 # the evaluation functions need refactoring using our data loader
 # the bulk of the code is repetition with data loader stuff, but we've cleaned that up
 
-# ADAPT FOR MULTI TASK AND NEW WAY OF DOING MODEL
+# Further adapt to allow for more evaluation methods
+# This does main tasks of returning accuracy and F1 score but not really loss or confusion matrices
 def evaluate(model, json_data, tasks, batch_size=32, text_pad_length=500, img_pad_length=36, audio_pad_length=63, shuffle=True, device=torch.device("cuda" if torch.cuda.is_available() else "cpu")):
     dataset = CustomDataset(json_data, text_pad_length, img_pad_length, audio_pad_length)
     dataloader = DataLoader(dataset, batch_size=batch_size, shuffle=shuffle)
@@ -15,8 +16,12 @@ def evaluate(model, json_data, tasks, batch_size=32, text_pad_length=500, img_pa
     model.eval()
 
     total_loss = 0 
-    all_preds = []
-    all_labels = []
+
+    all_labels = {} # dictionary to store model predictions (binary label) for every task
+    all_true_labels = {} # dictionary to store true labels for every task
+    for task in tasks:
+        all_labels[task] = [] # each task will have a list which we append predictions (binary labels) to
+        all_true_labels[task] = []
     with torch.no_grad():
         for batch_idx, batch in enumerate(dataloader):
             batch_text = batch['text'].to(device)
@@ -30,29 +35,50 @@ def evaluate(model, json_data, tasks, batch_size=32, text_pad_length=500, img_pa
             # batch_size by 2 for binary
             # batch size by 4 by 2 for multi task
             out = model(batch_text, batch_text_mask, batch_image, batch_mask_img, batch_audio, batch_mask_audio, tasks)
-              
-            loss = F.binary_cross_entropy(out, batch_pred)
-            total_loss += loss.item()
 
-            # Collect predictions and true labels
-            preds = (out[:, 1] > 0.5).cpu().numpy()  # Using the second column for binary classification
-            true_labels = (batch_pred[:, 1] > 0.5).cpu().numpy()  # Using the second column for binary classification
-            
-            all_preds.extend(preds)
-            all_labels.extend(true_labels)
+            out_dict = {}  # store output of model for each task
+            for i, task in enumerate(tasks):
+                # sort the output for every task into a dictionary
+                # each entry will be batch_size by 2 (for binary classification heads)
+                out_dict[task] = out[:, i, :]
 
-            if batch_idx == 20:
+            task_losses = {}   
+            for task in tasks:
+                # sort the loss for every task into a dictionary
+                # note that original code accumulates total loss, we can do that later if we wish
+                batch_pred = out_dict[task]
+                batch_true_y_task = batch[task].to(device)
+                temp_loss = F.binary_cross_entropy(batch_pred, batch_true_y_task) # not used
+                task_losses[task] = temp_loss # not used
+
+                # each of these has labels for a batch
+                batch_label = (batch_pred[:, 1] > 0.5).cpu().numpy()  # Using the second column for binary classification
+                batch_true_label = (batch_true_y_task[:, 1] > 0.5).cpu().numpy()  # Using the second column for binary classification
+                all_labels[task].extend(batch_label)
+                all_true_labels[task].extend(batch_true_label)
+
+            # for debugging report performance over 20 batches
+            if batch_idx == 2:
                 break
     
     # Calculate accuracy and F1 score
-    accuracy = accuracy_score(all_labels, all_preds)
-    f1 = f1_score(all_labels, all_preds, average='binary')  # use 'macro' or 'weighted' for multi-class
 
-    avg_loss = total_loss / len(dataloader)
+    accuracies = {}
+    f1_scores = {}
+
+    # not dealing with loss currently
+    for task in tasks:
+        print(f"Task {task}")
+        print(all_labels[task])
+        print(all_true_labels[task])
+        accuracies[task] = accuracy_score(all_labels[task], all_true_labels[task])
+        f1_scores[task] = f1_score(all_labels[task], all_true_labels[task], average='binary')  # use 'macro' or 'weighted' for multi-class
+
+        print(f"Accuracy: {accuracies[task]}, F1 Score: {f1_scores[task]:.4f}")
+        # print(f'Loss: {avg_loss:.4f}, Accuracy: {accuracy:.4f}, F1 Score: {f1:.4f}')
     
-    print(f'Loss: {avg_loss:.4f}, Accuracy: {accuracy:.4f}, F1 Score: {f1:.4f}')
-    
-    return avg_loss, accuracy, f1
+    return accuracies, f1_scores
+    # return avg_loss, accuracy, f1
 
 
 
