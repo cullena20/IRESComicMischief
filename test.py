@@ -53,16 +53,16 @@ def basic_forward_pass(unified_model):
 
     # Forward pass
     binary_output = unified_model(text_tokens, text_mask, image, image_mask, audio, audio_mask, tasks=binary_tasks)
-    multi_output = unified_model(text_tokens, text_mask, image, image_mask, audio, audio_mask, tasks=multi_tasks)
+    # multi_output = unified_model(text_tokens, text_mask, image, image_mask, audio, audio_mask, tasks=multi_tasks)
 
     # Print the output shape
     print("Binary Output shape:", binary_output.shape) # batch size by 2 (one for each prediction ?, why not by 1)
-    print("Multi Output shape:", multi_output.shape) # batch size by 4 by 2 (4 for 4 tasks and 2 for each task)
+    # print("Multi Output shape:", multi_output.shape) # batch size by 4 by 2 (4 for 4 tasks and 2 for each task)
 
     print(binary_output[0]) 
-    print(multi_output[0])
+    # print(multi_output[0])
 
-def basic_train_pass(model, device, tasks, training_method):
+def basic_train_pass(model, device, tasks, training_method="all_at_once"):
     # just see if it actually runs
     optimizer = torch.optim.Adam(model.parameters(), lr=0.001)
     train(model, optimizer, "train_features_lrec_camera.json", tasks, training_method=training_method, batch_size=batch_size, num_epochs=1, shuffle=False, device=device)
@@ -72,9 +72,9 @@ def basic_eval_pass(model, device, task):
 
 if __name__ == "__main__":
     model, _ = initiate_model_new()
-    # basic_forward_pass(model)
-    # basic_train_pass(model, device, binary_tasks) # loss on order of 500 when beginning (like original model)
-    # basic_train_pass(model, device, multi_tasks) # loss now on order of 500 (original model was like 0.8)
+    basic_forward_pass(model)
+    # basic_train_pass(model, device, binary_tasks) # loss on order of 500 when beginning because of regularization (like original model)
+    #basic_train_pass(model, device, multi_tasks) # loss less than one beginning (no regularization)
     # basic_train_pass(model, device, multi_tasks, training_method="round_robin")
     # basic_eval_pass(model, device, binary_tasks)
-    basic_eval_pass(model, device, multi_tasks)
+    # basic_eval_pass(model, device, multi_tasks)

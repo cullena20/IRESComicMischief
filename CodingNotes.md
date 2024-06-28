@@ -10,3 +10,9 @@
     * Text Masking and Text positions are reversed (should it be like this?)
     * The NaNs were in my code before major refactoring (splitting multi task into more heads, having different training loop)
     See if they were there originally.
+
+# Padding & Masking
+
+* I pad and mask in the dataset, maybe better to do this in the data loader?
+* Also, text padding was previously done to have padding before: [11, 12, 14] would become [0, 0, 0, 11, 12, 14] instead of [11, 12, 14, 0, 0, 0]
+  I changed this, but maybe this isn't good

@@ -64,7 +64,7 @@ class CustomDataset(Dataset):
             a2 = torch.load(image_path_flow)
             image_vec = a1 + a2
             masked_img = mask_vector(self.img_pad_length, image_vec)
-            image_vec = pad_segment(image_vec, self.img_pad_length, 0)
+            image_vec = pad_segment(image_vec, self.img_pad_length)
         else:
             # print("Image not found")
             image_vec = torch.zeros((self.img_pad_length, 1024)) 
@@ -78,12 +78,19 @@ class CustomDataset(Dataset):
             # print("Audio Not Found")
             audio_vec = torch.zeros((1, 128))
         masked_audio = mask_vector(self.audio_pad_length, audio_vec)
-        audio_vec = pad_segment(audio_vec, self.audio_pad_length, 0)
+        audio_vec = pad_segment(audio_vec, self.audio_pad_length)
 
         # Process text
         text = torch.tensor(item['indexes']) # tokenized text
+        # print("TEXT", text)
+        # print("TEXT SHAPE", text.shape)
+
         mask = mask_vector(self.text_pad_length, text)
-        text = pad_features([text], self.text_pad_length)[0]
+        # print("TEXT MASK", mask)
+
+        # NOTE: MODIFIED FROM PRIOR CODE TO PAD ENDING
+        text = pad_features(text, self.text_pad_length)
+        # print("PADDED TEXT", text)
 
         binary = torch.tensor(item['y']) 
         mature = torch.tensor(item["mature"])
