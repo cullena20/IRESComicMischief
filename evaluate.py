@@ -7,7 +7,8 @@ from sklearn.metrics import accuracy_score, f1_score
 # the evaluation functions need refactoring using our data loader
 # the bulk of the code is repetition with data loader stuff, but we've cleaned that up
 
-def evaluate(model, json_data, task, batch_size=32, text_pad_length=500, img_pad_length=36, audio_pad_length=63, shuffle=True, device=torch.device("cuda" if torch.cuda.is_available() else "cpu")):
+# ADAPT FOR MULTI TASK AND NEW WAY OF DOING MODEL
+def evaluate(model, json_data, tasks, batch_size=32, text_pad_length=500, img_pad_length=36, audio_pad_length=63, shuffle=True, device=torch.device("cuda" if torch.cuda.is_available() else "cpu")):
     dataset = CustomDataset(json_data, text_pad_length, img_pad_length, audio_pad_length)
     dataloader = DataLoader(dataset, batch_size=batch_size, shuffle=shuffle)
         
@@ -24,11 +25,11 @@ def evaluate(model, json_data, task, batch_size=32, text_pad_length=500, img_pad
             batch_mask_img = batch['image_mask'].to(device)
             batch_audio = batch['audio'].float().to(device)
             batch_mask_audio = batch['audio_mask'].to(device)
-            batch_pred = batch["binary_label"].to(device) # batch_size by 2
+            batch_pred = batch["binary"].to(device) # batch_size by 2
 
             # batch_size by 2 for binary
             # batch size by 4 by 2 for multi task
-            out = model(batch_text, batch_text_mask, batch_image, batch_mask_img, batch_audio, batch_mask_audio, task)
+            out = model(batch_text, batch_text_mask, batch_image, batch_mask_img, batch_audio, batch_mask_audio, tasks)
               
             loss = F.binary_cross_entropy(out, batch_pred)
             total_loss += loss.item()

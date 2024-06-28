@@ -126,7 +126,7 @@ def train(model, optimizer, json_data, tasks, training_method="all_at_once", bat
                         print(f"batch_mask_img: {batch_mask_img}")
                         print(f"batch_audio: {batch_audio}")
                         print(f"batch_mask_audio: {batch_mask_audio}")
-                        print(f"batch_pred {batch_pred}")
+                        print(f"batch_pred: {batch_pred}")
                         break
                     loss.backward()
                     optimizer.step()

@@ -8,3 +8,5 @@
 * The output of the model is sometimes NaN, I think this has to do with the input data
     * This emerges from NaN's in the base_model!
     * Text Masking and Text positions are reversed (should it be like this?)
+    * The NaNs were in my code before major refactoring (splitting multi task into more heads, having different training loop)
+    See if they were there originally.

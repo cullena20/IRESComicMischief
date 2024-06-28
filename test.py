@@ -75,4 +75,5 @@ if __name__ == "__main__":
     # basic_forward_pass(model)
     # basic_train_pass(model, device, binary_tasks) # loss on order of 500 when beginning (like original model)
     # basic_train_pass(model, device, multi_tasks) # loss now on order of 500 (original model was like 0.8)
-    basic_train_pass(model, device, multi_tasks, training_method="round_robin")
+    # basic_train_pass(model, device, multi_tasks, training_method="round_robin")
+    basic_eval_pass(model, device, binary_tasks)
