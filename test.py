@@ -74,6 +74,7 @@ def dynamic_difficulty_sample_test(model, device, tasks):
     optimizer = torch.optim.Adam(model.parameters(), lr=0.001)
     dynamic_difficulty_sampling(model, optimizer, "train_features_lrec_camera.json", tasks, loss_setting="unweighted", batch_size=32, num_epochs=1, text_pad_length=500, img_pad_length=36, audio_pad_length=63, shuffle=True, device=device)
 
+
 if __name__ == "__main__":
     model, _ = initiate_model_new()
     # basic_forward_pass(model)
@@ -83,4 +84,6 @@ if __name__ == "__main__":
     # basic_train_pass(model, device, multi_tasks, training_method="round_robin")
     # basic_eval_pass(model, device, binary_tasks)
     # basic_eval_pass(model, device, multi_tasks)
-    dynamic_difficulty_sample_test(model, device, multi_tasks) # loss starts around 2.5, same as unweighted as it should be
+    # dynamic_difficulty_sample_test(model, device, multi_tasks) # loss starts around 2.5, same as unweighted as it should be
+    # print(model.base_model.named_parameters)
+    basic_train_pass(model, device, multi_tasks, loss_setting="gradnorm")

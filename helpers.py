@@ -63,4 +63,4 @@ def pad_features(docs_ints, text_pad_length=500):
 #     for i, row in enumerate(docs_ints):
 #         features[i, -len(row):] = torch.tensor(row)[:seq_length]
 
-    return features
+#    return features

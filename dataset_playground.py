@@ -13,8 +13,6 @@ img_pad_length=36
 audio_pad_length=63
 
 dataset = CustomDataset(json_data, text_pad_length, img_pad_length, audio_pad_length)
-print(dataset[10:15])
-
 # for i, entry in enumerate(dataset):
 #     print(entry)
 #     if i == 1:

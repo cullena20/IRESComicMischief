@@ -113,6 +113,7 @@ class CustomDataset(Dataset):
             "slapstick": slapstick.float()
         }
 
+
 if __name__ == "__main__":
     dataset = CustomDataset("test_features_lrec_camera.json")
     idx = 0

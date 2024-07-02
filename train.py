@@ -1,7 +1,9 @@
 import torch
 from torch.utils.data import DataLoader
 from torch.nn import functional as F
+import torch.nn as nn
 from finetuning_dataloader import CustomDataset
+from gradnorm import gradnorm
 import math
 
 from helpers import compute_l2_reg_val
@@ -94,6 +96,14 @@ def train(model, optimizer, json_data_path, tasks, training_method="all_at_once"
                     batch_true_y_task = batch[task].to(device) # TO DO NEED TO CHANGE "LABEL" TO "BINARY" IN DATASET
                     temp_loss = F.binary_cross_entropy(batch_pred, batch_true_y_task) 
                     task_losses[task] = temp_loss
+
+                if loss_setting == "gradnorm" and batch_idx == 0:
+                    # we need initial task losses for gradnorm
+                    initial_task_losses = {key: loss.detach() for key, loss in task_losses.items()} # initial code detaches these
+                    loss_weights = torch.ones(len(tasks))
+                    loss_weights = nn.Parameter(loss_weights)
+                    dprint(f"Initial Loss Weights {loss_weights}")
+                    gradnorm_optimizer = torch.optim.Adam([loss_weights], lr=0.001) # this should be an input
                 
                 # TO DO - Below is pretty sloppy I think, see if we can make this nicer
                 # Note the use of regularization in one task and not in multi tasks, per the original code (probably fix later)
@@ -113,16 +123,37 @@ def train(model, optimizer, json_data_path, tasks, training_method="all_at_once"
                     for task_loss in task_losses.values():
                         dprint(f"Unweighted Task Loss {task_loss}")
                         dprint(f"Loss Weight: {model.loss_weights[i]}")
+                        dprint(f"Weighted Task Loss: {model.loss_weights[i] * task_loss}")
                         loss += model.loss_weights[i] * task_loss
                 
+                # CAN PUT GRADNORM HERE (THOUGH IT NEEDS STUFF EARLIER)
+                # if i were to modularize, this would take in task losses as values - but it might not be that simple
+                # Psuedo Code
+                elif loss_setting == "gradnorm":
+                    dprint("Beginning Grad Norm")
+                    loss = 0
+                    # passing in model.base_model here should be put elsewhere since it makes the training loop model_specific
+                    # can enforce these task specific hyperparameters using **kwargs maybe?
+                    # Make consistent the way we handle loss weights would be better
+                    # Currently this returns weigts and does not update model.loss_weights
+                    weights = gradnorm(task_losses, initial_task_losses, model, model.base_model, gradnorm_optimizer, loss_weights) # update model weights using grad norm
+                    dprint(f"Updated Weights {weights}")
+                    for i, task_loss in enumerate(task_losses.values()):
+                        dprint(f"Task {i}")
+                        dprint(f"Unweighted Task Loss {task_loss}")
+                        dprint(f"Loss Weight: {weights[i]}")
+                        dprint(f"Weighted Task Loss: {weights[i] * task_loss}\n\n")
+                        loss += weights[i] * task_loss # currently weights just come from gradnorm and are aliged based on gradnorm implemetation
+                    # then backward step like before
+
                 # don't weight losses
                 else:
                     loss = 0
                     for task_loss in task_losses.values():
                         loss += task_loss
 
-                total_loss += loss.item() # not sure the point of this
-                loss.backward()
+                total_loss += loss.item()
+                loss.backward(retain_graph=True) # We get problems with retain_graph=False with GradNorm - note possible issues (code I saw does this though)
                 optimizer.step()
                 print(f"Current Loss: {loss}")
 
@@ -169,6 +200,10 @@ def train(model, optimizer, json_data_path, tasks, training_method="all_at_once"
                     optimizer.step()
                     print(f"Task: {task}, Current Loss {loss}")
 
+            # IDEA - could loss reweighting have a roll here at all?
+            # combined idea - Loss reweighting on round robin instead of
+            # We would train one task at a time but weight them differently
+
             # TO DO: This way of reporting loss doesn't make sense with round robin (have to divide total loss by 4 * batch_idx + 1)
             if (batch_idx + 1) % 10 == 0:
                 # is this a normal way to report loss?
@@ -177,6 +212,8 @@ def train(model, optimizer, json_data_path, tasks, training_method="all_at_once"
     return model
 
 
+# IDEA - GradNorm (and adjacent techniques) can also be easily combined with dynamic difficulty sampling
+# so we definetly need a modularized implementaiton
 
 
 # they don't normalize losses, we probably should
