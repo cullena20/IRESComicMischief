@@ -6,7 +6,7 @@ import numpy as np
 from transformers import BertModel
 import math
 
-debug=False
+debug = True
 
 def dprint(text):
     if debug:
@@ -218,18 +218,20 @@ class Bert_Model(nn.Module):
             The concatenated tensor of processed text, audio, and image representations with shape (batch_size, embedding_dim * 3).
         """
 
-        dprint(f"text shape: {text.shape}") # batch_size by 500
-        dprint(f"text_mask shape: {text_mask.shape}") # batch_size by 500
-        dprint(f"Image shape: {image.shape}") # batch_size by 36 by 1024 (tokens and embedding dimension)
-        dprint(f"Image_mask shape: {image_mask.shape}") # batch_size by 36
-        dprint(f"Audio shape: {audio.shape}") # batch_size by 63 by 128 (tokens and embedding dimension)
-        dprint(f"Audio_mask shape: {audio_mask.shape}") # batch_size by 63
+        dprint(f"text shape: {text.shape}, device: {text.device}")
+        dprint(f"text_mask shape: {text_mask.shape}, device: {text_mask.device}")
+        dprint(f"Image shape: {image.shape}, device: {image.device}")
+        dprint(f"Image_mask shape: {image_mask.shape}, device: {image_mask.device}")
+        dprint(f"Audio shape: {audio.shape}, device: {audio.device}")
+        dprint(f"Audio_mask shape: {audio_mask.shape}, device: {audio_mask.device}")
 
-        # encode text tokens using BERT
+        # BERT CAUSES THE MEMORY BOTTLENECK -> why is this not an issue on my CPU
         hidden, _ = self.bert(text)[-2:] 
         text_encoded = hidden[-1] # MOVED [-1] here because it is the only thing used
 
         dprint(f"BERT Embedded text shape {text_encoded.shape}")
+        dprint(f'Allocated: {torch.cuda.memory_allocated() / 1024**2} MB')
+        dprint(f'Cached: {torch.cuda.memory_reserved() / 1024**2} MB')
         
         # encode video using LSTM and FC layers (I3D done beforehand)
         rnn_img_encoded, _ = self.rnn_img(image)
@@ -237,6 +239,8 @@ class Bert_Model(nn.Module):
         img_encoded = self.sequential_image(rnn_img_encoded)
 
         dprint(f"Image Embedded shape {img_encoded.shape}")
+        dprint(f'Allocated: {torch.cuda.memory_allocated() / 1024**2} MB')
+        dprint(f'Cached: {torch.cuda.memory_reserved() / 1024**2} MB')
 
         # encode audio using LSTM and FC layers (VGG done beforehand)
         rnn_audio_encoded, _ = self.rnn_audio(audio)
@@ -244,6 +248,8 @@ class Bert_Model(nn.Module):
         audio_encoded = self.sequential_audio(rnn_audio_encoded)
 
         dprint(f"Audio Embedded shape {audio_encoded.shape}")
+        dprint(f'Allocated: {torch.cuda.memory_allocated() / 1024**2} MB')
+        dprint(f'Cached: {torch.cuda.memory_reserved() / 1024**2} MB')
 
         # Every attention mask goes from batch_size by modality_token_size to batch_size by 1 by 1 by modality_token_size
         # Bring 0s to -10000, bring 1s to 0. Huh?
@@ -252,7 +258,7 @@ class Bert_Model(nn.Module):
         extended_text_attention_mask = extended_text_attention_mask.to(dtype=next(self.parameters()).dtype)
         extended_text_attention_mask = (1.0 - extended_text_attention_mask) * -10000.0
 
-        dprint(f"Extended text mask shape {extended_text_attention_mask.shape}")
+        dprint(f"Extended text mask shape {extended_text_attention_mask.shape}, device: {extended_text_attention_mask.device}")
         
         extended_audio_attention_mask = audio_mask.float().unsqueeze(1).unsqueeze(2)
         extended_audio_attention_mask = extended_audio_attention_mask.to(dtype=next(self.parameters()).dtype)
