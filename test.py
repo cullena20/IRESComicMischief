@@ -191,7 +191,6 @@ def dynamic_difficulty_sample_test(model, device, tasks):
 # Also, after a view runs you get NaN errors -> the GPU doesn't report this clearly, but I think it's the same error
 
 if __name__ == "__main__":
-
     print(torch.cuda.device_count())  # Number of available GPUs
     print(torch.cuda.current_device())  # Current GPU device index
     print(torch.cuda.get_device_name(0))  # Name of the GPU
