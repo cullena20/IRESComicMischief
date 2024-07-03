@@ -1,2 +1,4 @@
 __pycache__/
 Model/__pycache__/
+i3D-vggish-features/
+checkpoint_pretraining/

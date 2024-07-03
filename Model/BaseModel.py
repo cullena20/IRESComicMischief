@@ -6,8 +6,24 @@ import numpy as np
 from transformers import BertModel
 import math
 
+debug = True
+
+def dprint(text):
+    if debug:
+        print(text)
+
 # Cullen: Deal with below
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+
+# TEMPORARY
+import psutil
+
+# Function to get the memory usage in MB
+def get_memory_usage():
+    process = psutil.Process()
+    memory_info = process.memory_info()
+    return memory_info.rss / 1024 ** 2  # Convert from bytes to MB
+
 
 # pp = pprint.PrettyPrinter(indent=4).pprint
 # debug = False
@@ -183,17 +199,18 @@ class Bert_Model(nn.Module):
         # Got rid of below for easier readibility and just referenced names directly
         # self.features = nn.ModuleList([bert, rnn_img, rnn_img_drop_norm, rnn_audio, rnn_audio_drop_norm, sequential_audio, sequential_image, att1, att1_drop_norm1, att1_drop_norm2, att2, att2_drop_norm1, att2_drop_norm2, att3, att3_drop_norm1, att3_drop_norm2, attention, attention_drop_norm, attention_audio, attention_audio_drop_norm, attention_image, attention_image_drop_norm])
 
-
-    def forward(self, sentences, mask, image, image_mask, audio, audio_mask, mode='pre_train'):
+    # NOTE: it is possible that there are size issues below
+    # CHECK LOSER
+    def forward(self, text, text_mask, image, image_mask, audio, audio_mask, mode='pre_train'):
         """
         Forward pass for the Bert_Model.
 
         Parameters:
         -----------
-        sentences : torch.Tensor
-            Input tensor representing the tokenized sentences, with shape (batch_size, sequence_length).
-        mask : torch.Tensor
-            Attention mask for the sentences, with shape (batch_size, sequence_length). This mask differentiates between valid tokens (1) and padding tokens (0).
+        text : torch.Tensor
+            Input tensor representing the tokenized text, with shape (batch_size, sequence_length).
+        text_mask : torch.Tensor
+            Attention mask for the text, with shape (batch_size, sequence_length). This mask differentiates between valid tokens (1) and padding tokens (0).
         image : torch.Tensor
             Input tensor representing the image data, with shape (batch_size, sequence_length, 1024). This data is processed by an LSTM.
         image_mask : torch.Tensor
@@ -211,61 +228,123 @@ class Bert_Model(nn.Module):
             The concatenated tensor of processed text, audio, and image representations with shape (batch_size, embedding_dim * 3).
         """
 
-        hidden, _ = self.bert(sentences)[-2:]
+        dprint(f"text shape: {text.shape}") # batch_size by 500
+        dprint(f"text_mask shape: {text_mask.shape}") # batch_size by 500
+        dprint(f"Image shape: {image.shape}") # batch_size by 36 by 1024 (tokens and embedding dimension)
+        dprint(f"Image_mask shape: {image_mask.shape}") # batch_size by 36
+        dprint(f"Audio shape: {audio.shape}") # batch_size by 63 by 128 (tokens and embedding dimension)
+        dprint(f"Audio_mask shape: {audio_mask.shape}") # batch_size by 63
+
+        dprint("INSIDE TRAINING LOOP")
+        dprint(f'CPU Memory Usage: {get_memory_usage()} MB') # started at 232, now is 916
+        # encode text tokens using BERT
+        hidden, _ = self.bert(text)[-2:] 
+        text_encoded = hidden[-1] # MOVED [-1] here because it is the only thing used
+
+        dprint("Text Encoded Is NaN?")
+        dprint(torch.isnan(text_encoded.sum()))
+        # print(text_encoded)
+
+        dprint(f'CPU Memory Usage After BERT: {get_memory_usage()} MB') # went to 3000
+        dprint(f"BERT Embedded text shape {text_encoded.shape}") 
+        dprint(f'Allocated: {torch.cuda.memory_allocated() / 1024**2} MB')
+        dprint(f'Cached: {torch.cuda.memory_reserved() / 1024**2} MB')
         
+        # encode video using LSTM and FC layers (I3D done beforehand)
         rnn_img_encoded, _ = self.rnn_img(image)
         rnn_img_encoded = self.rnn_img_drop_norm(rnn_img_encoded)
+        img_encoded = self.sequential_image(rnn_img_encoded)
+
+        dprint(f"Image Embedded shape {img_encoded.shape}")
+        dprint(f'Allocated: {torch.cuda.memory_allocated() / 1024**2} MB')
+        dprint(f'Cached: {torch.cuda.memory_reserved() / 1024**2} MB')
+
+        # encode audio using LSTM and FC layers (VGG done beforehand)
         rnn_audio_encoded, _ = self.rnn_audio(audio)
         rnn_audio_encoded = self.rnn_audio_drop_norm(rnn_audio_encoded)
+        audio_encoded = self.sequential_audio(rnn_audio_encoded)
 
-        extended_attention_mask = mask.float().unsqueeze(1).unsqueeze(2)
-        extended_attention_mask = extended_attention_mask.to(dtype=next(self.parameters()).dtype)
-        extended_attention_mask = (1.0 - extended_attention_mask) * -10000.0
+        dprint(f"Audio Embedded shape {audio_encoded.shape}")
+        dprint(f'Allocated: {torch.cuda.memory_allocated() / 1024**2} MB')
+        dprint(f'Cached: {torch.cuda.memory_reserved() / 1024**2} MB')
+
+        # Every attention mask goes from batch_size by modality_token_size to batch_size by 1 by 1 by modality_token_size
+        # Bring 0s to -10000, bring 1s to 0. Huh?
+
+        extended_text_attention_mask = text_mask.float().unsqueeze(1).unsqueeze(2)
+        extended_text_attention_mask = extended_text_attention_mask.to(dtype=next(self.parameters()).dtype)
+        extended_text_attention_mask = (1.0 - extended_text_attention_mask) * -10000.0
+
+        dprint(f"Extended text mask shape {extended_text_attention_mask.shape}, device: {extended_text_attention_mask.device}")
         
         extended_audio_attention_mask = audio_mask.float().unsqueeze(1).unsqueeze(2)
         extended_audio_attention_mask = extended_audio_attention_mask.to(dtype=next(self.parameters()).dtype)
         extended_audio_attention_mask = (1.0 - extended_audio_attention_mask) * -10000.0
       
+        dprint(f"Extended audio mask shape {extended_audio_attention_mask.shape}")
+
         extended_image_attention_mask = image_mask.float().unsqueeze(1).unsqueeze(2)
         extended_image_attention_mask = extended_image_attention_mask.to(dtype=next(self.parameters()).dtype)
         extended_image_attention_mask = (1.0 - extended_image_attention_mask) * -10000.0
+
+        dprint(f"Extended image mask shape {extended_image_attention_mask.shape}")
+        dprint(f"Image Mask One Example {image_mask[0]}")
+        dprint(f"Extended Image Mask One Example {extended_image_attention_mask[0]}")
  
-        output_text = self.att1(hidden[-1], self.sequential_image(rnn_img_encoded), extended_image_attention_mask)
+        output_text = self.att1(text_encoded, img_encoded, extended_image_attention_mask)
         output_text = self.att1_drop_norm1(output_text)
-        output_text = self.att1(output_text, self.sequential_audio(rnn_audio_encoded), extended_audio_attention_mask)
+        output_text = self.att1(output_text, audio_encoded, extended_audio_attention_mask)
         output_text = self.att1_drop_norm2(output_text)
         
-        output_text = output_text + hidden[-1]
+        output_text = output_text + text_encoded
+        dprint(f"Output Text")
+        dprint(f"NaN? : {torch.isnan(output_text.sum())}")
 
-        output_audio = self.att2(self.sequential_audio(rnn_audio_encoded), self.sequential_image(rnn_img_encoded), extended_image_attention_mask)
+        output_audio = self.att2(audio_encoded, img_encoded, extended_image_attention_mask)
         output_audio = self.att2_drop_norm1(output_audio)
-        output_audio = self.att2(output_audio, hidden[-1], extended_attention_mask)   
+        output_audio = self.att2(output_audio, text_encoded, extended_text_attention_mask)   
         output_audio = self.att2_drop_norm2(output_audio)
         
-        output_audio = output_audio + self.sequential_audio(rnn_audio_encoded)
+        output_audio = output_audio + audio_encoded
+        dprint(f"Output Audio")
+        dprint(f"NaN? : {torch.isnan(output_audio.sum())}")
 
-        output_image = self.att3(self.sequential_image(rnn_img_encoded), hidden[-1], extended_attention_mask)
+        output_image = self.att3(img_encoded, text_encoded, extended_text_attention_mask)
         output_image = self.att3_drop_norm1(output_image)
-        output_image = self.att3(output_image, self.sequential_audio(rnn_audio_encoded), extended_audio_attention_mask)
+        output_image = self.att3(output_image, audio_encoded, extended_audio_attention_mask)
         output_image = self.att3_drop_norm2(output_image)
         
-        output_image = output_image + self.sequential_image(rnn_img_encoded)
+        output_image = output_image + img_encoded
+        dprint(f"Output Image")
+        dprint(f"NaN? : {torch.isnan(output_image.sum())}")
 
+        # why are there new masks here?
         mask = torch.tensor(np.array([1]*output_text.size()[1])).to(next(self.parameters()).device) # cuda()
         audio_mask = torch.tensor(np.array([1]*output_audio.size()[1])).to(next(self.parameters()).device) # cuda()
         image_mask = torch.tensor(np.array([1]*output_image.size()[1])).to(next(self.parameters()).device) # cuda()
 
-        #print("TEXT BEFORE SELF ATTENTION:", output_text.shape)
+        #dprint("TEXT BEFORE SELF ATTENTION:", output_text.shape)
         output_text, attention_weights = self.attention(output_text, mask.float())
         output_text = self.attention_drop_norm(output_text)
-        #print("TEXT AFTER SELF ATTENTION:", output_text.shape)
+
+        dprint(f"Post Attetion Output Text NaN? : {torch.isnan(output_text.sum())}")
+
+        #dprint("TEXT AFTER SELF ATTENTION:", output_text.shape)
         output_audio, attention_weights = self.attention_audio(output_audio, audio_mask.float())
         output_audio = self.attention_audio_drop_norm(output_audio)
-        #print("IMAGE BEFORE SELF ATTENTION", output_image.shape)
+
+        dprint(f"Post Attetion Output Audio NaN? : {torch.isnan(output_audio.sum())}")
+
+        #dprint("IMAGE BEFORE SELF ATTENTION", output_image.shape)
         output_image, attention_weights = self.attention_image(output_image, image_mask.float())
         output_image = self.attention_image_drop_norm(output_image)
-        #print("IMAGE AFTER SELF ATTENTION", output_image.shape)
+
+        dprint(f"Post Attetion Output Image NaN? : {torch.isnan(output_image.sum())}")
+        #dprint("IMAGE AFTER SELF ATTENTION", output_image.shape)
+
+        dprint("Final Concat")
 
         text_audio_image_cat = torch.cat([output_text, output_audio, output_image], dim=-1)
+        dprint(f"Is final cat NaN? {torch.isnan(text_audio_image_cat.sum())}")
 
         return text_audio_image_cat

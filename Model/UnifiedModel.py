@@ -1,18 +1,32 @@
 import torch
 from torch import nn
 
+debug=False
+
+def dprint(text):
+    if debug:
+        print(text)
+
+# There may be an issue here since I can getting really high loss after making this change
 class UnifiedModel(nn.Module):
     def __init__(self, base_model, task_heads):
         super(UnifiedModel, self).__init__()
         self.base_model = base_model
         self.task_heads = nn.ModuleDict(task_heads)
 
-    def forward(self, text_tokens, text_mask, image, image_mask, audio, audio_mask, task):
+        # enable dynamic reweighting of losses
+        # For simplicity: loss_weights[0]: binary, 1: mature, 2: gory, 3: sarcasm, 4: slapstick
+        # Might change later on
+        self.loss_weights = nn.Parameter(torch.ones(len(task_heads)))
+
+    def forward(self, text_tokens, text_mask, image, image_mask, audio, audio_mask, tasks):
         shared_output = self.base_model(text_tokens, text_mask, image, image_mask, audio, audio_mask)
-        task_output = self.task_heads[task](shared_output)
+        dprint(shared_output)
+        task_output = torch.stack([self.task_heads[task](shared_output) for task in tasks], dim=1)
         return task_output
 
 
+# we don't do this in below paradigm anymore, instead using binary classification head for every task
 if __name__ == "__main__":
     from BaseModel import Bert_Model
     from TaskHeads import BinaryClassification, MultiTaskClassification

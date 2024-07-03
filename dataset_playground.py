@@ -1,6 +1,6 @@
 import json
 import torch
-from torch.utils.data import DataLoader
+from torch.utils.data import DataLoader, Subset
 import os
 import string
 from finetuning_dataloader import CustomDataset
@@ -13,14 +13,21 @@ img_pad_length=36
 audio_pad_length=63
 
 dataset = CustomDataset(json_data, text_pad_length, img_pad_length, audio_pad_length)
+# for i, entry in enumerate(dataset):
+#     print(entry)
+#     if i == 1:
+#         exit()
 dataloader = DataLoader(dataset, batch_size=batch_size, shuffle=shuffle)
 
-data_entry = next(iter(dataloader))
-for key, item in data_entry.items():
-    print(key)
-    print(item)
-    print(item.shape)
-    print()
+print(next(iter(Subset(dataset, torch.arange(10, 14)))))
+
+
+# data_entry = next(iter(dataloader))
+# for key, item in data_entry.items():
+#     print(key)
+#     print(item)
+#     print(item.shape)
+#     print()
 
 # TRAINING SET INFO
 # 2890 EXAMPLES, 31 NO WORDS

@@ -52,40 +52,68 @@ class CustomDataset(Dataset):
         
         # FIX THIS
         # NOTE THAT ORIGINAL CODE DOES ERROR HANDLING HERE
-        image_path = os.path.join(self.base_dir, "path_to_I3D_features/")
+        image_path = os.path.join(self.base_dir, "i3D-vggish-features/i3d_vecs_extended_merged")
 
         # ERROR HANDLING BELOW NEEDS UNIFYING
 
         # Load image features
         image_path_rgb = os.path.join(image_path, f"{key}_rgb.npy")
         image_path_flow = os.path.join(image_path, f"{key}_flow.npy")
+        # MODIFIED BELOW FOR TESTING, CAN CLEAN UP
         if os.path.isfile(image_path_rgb) and os.path.isfile(image_path_flow):
-            a1 = torch.load(image_path_rgb)
-            a2 = torch.load(image_path_flow)
-            image_vec = a1 + a2
-            masked_img = mask_vector(self.img_pad_length, image_vec)
-            image_vec = pad_segment(image_vec, self.img_pad_length, 0)
+            try:
+                a1 = np.load(image_path_rgb)
+                a2 = np.load(image_path_flow)
+                a1 = torch.tensor(a1)
+                a2 = torch.tensor(a2)
+                image_vec = a1 + a2
+                masked_img = mask_vector(self.img_pad_length, image_vec)
+                image_vec = pad_segment(image_vec, self.img_pad_length)
+            except:
+                print("Image not found")
+                image_vec = torch.zeros((self.img_pad_length, 1024)) 
+                masked_img = torch.zeros(self.img_pad_length)
         else:
-            # print("Image not found")
+            print("Image not found")
             image_vec = torch.zeros((self.img_pad_length, 1024)) 
             masked_img = torch.zeros(self.img_pad_length)
 
+        print("PADDED IMAGE VEC")
+        print(image_vec)
+        print("IMAGE Mask", masked_img)
+
         # Load audio features
-        audio_path = os.path.join(self.base_dir, "path_to_VGGish_features/")
+        audio_path = os.path.join(self.base_dir, "i3D-vggish-features/vgg_vecs_extended_merged/")
+        audio_path = audio_path+key+"_vggish.npy"
+
         try:
             audio_vec = np.load(audio_path)
+            audio_vec = torch.tensor(audio_vec)
         except FileNotFoundError:
-            # print("Audio Not Found")
+            print("Audio not found")
             audio_vec = torch.zeros((1, 128))
+
         masked_audio = mask_vector(self.audio_pad_length, audio_vec)
-        audio_vec = pad_segment(audio_vec, self.audio_pad_length, 0)
+        audio_vec = pad_segment(audio_vec, self.audio_pad_length)
+
+        print("PADDED AUDIO VEC")
+        print(audio_vec)
+        print("AUDIO Mask", masked_audio)
 
         # Process text
         text = torch.tensor(item['indexes']) # tokenized text
-        mask = mask_vector(self.text_pad_length, text)
-        text = pad_features([text], self.text_pad_length)[0]
+        # print("TEXT", text)
+        # print("TEXT SHAPE", text.shape)
 
-        binary_label = torch.tensor(item['y']) 
+        mask = mask_vector(self.text_pad_length, text)
+        # print("TEXT MASK", mask)
+
+        # NOTE: PADDING AT BEGINNING FOR SOME REASON
+        # To use my function where you pad at end, go to helpers and uncomment, and feed in text not [text]
+        text = pad_features([text], self.text_pad_length)[0]
+        # print("PADDED TEXT", text)
+
+        binary = torch.tensor(item['y']) 
         mature = torch.tensor(item["mature"])
         gory = torch.tensor(item["gory"])
         sarcasm = torch.tensor(item["sarcasm"])
@@ -98,12 +126,13 @@ class CustomDataset(Dataset):
             'image_mask': masked_img,
             'audio': audio_vec.float(),
             'audio_mask': masked_audio,
-            'binary': binary_label.float(),
+            'binary': binary.float(),
             "mature": mature.float(),
             "gory": gory.float(),
             "sarcasm": sarcasm.float(),
             "slapstick": slapstick.float()
         }
+
 
 if __name__ == "__main__":
     dataset = CustomDataset("test_features_lrec_camera.json")
@@ -114,6 +143,7 @@ if __name__ == "__main__":
         for key, value in item.items():
             print(key)
             print(value)
+            print(value.shape)
             print()
         idx += 1
 
