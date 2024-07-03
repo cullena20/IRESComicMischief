@@ -5,6 +5,7 @@ from Model.BaseModel import Bert_Model
 from Model.TaskHeads import BinaryClassification, MultiTaskClassification
 from train import train, dynamic_difficulty_sampling # are these names an issue
 from evaluate import evaluate
+import psutil
 import os
 import re # needed to load the state dict into the slightly modified model
 
@@ -114,9 +115,9 @@ def initiate_pretrained_model(verbose=False):
         # print the parameters and their shapes saved in the pretrained parameters
         # the model has extra task specific heads
         # simply set strict=False to deal with (this would also work if we had new task specific heads in our model - but some names might be different if we were to used UnifiedModel directly)
-        for param_tensor in pretrained_state_dict["model_state"]:
-            print(f"{param_tensor}  {pretrained_state_dict["model_state"][param_tensor].size()}") # we need to replace things like features.0 with bert - use regex
-        print()
+        # for param_tensor in pretrained_state_dict["model_state"]:
+        #    print(f"{param_tensor}  {pretrained_state_dict["model_state"].size()}") # we need to replace things like features.0 with bert - use regex
+        # print()
 
         # print the parameters and their shapes in our new base model
         for param_tensor in base_model.state_dict():
@@ -191,14 +192,16 @@ def dynamic_difficulty_sample_test(model, device, tasks):
 # Also, after a view runs you get NaN errors -> the GPU doesn't report this clearly, but I think it's the same error
 
 if __name__ == "__main__":
-    print(torch.cuda.device_count())  # Number of available GPUs
-    print(torch.cuda.current_device())  # Current GPU device index
-    print(torch.cuda.get_device_name(0))  # Name of the GPU
-    print(f'Allocated: {torch.cuda.memory_allocated() / 1024**2} MB')
-    print(f'Cached: {torch.cuda.memory_reserved() / 1024**2} MB')
-    torch.cuda.empty_cache()
-    # non_pretrained_model, _ = initiate_model_new()
-    model, _ = initiate_pretrained_model()
+    if device == "cuda":
+        print(torch.cuda.device_count())  # Number of available GPUs
+        print(torch.cuda.current_device())  # Current GPU device index
+        print(torch.cuda.get_device_name(0))  # Name of the GPU
+        print(f'Allocated: {torch.cuda.memory_allocated() / 1024**2} MB')
+        print(f'Cached: {torch.cuda.memory_reserved() / 1024**2} MB')
+        torch.cuda.empty_cache()
+    
+    model, _ = initiate_model_new()
+    # model, _ = initiate_pretrained_model()
 
 
     # basic_forward_pass(model) # seems to work, including on GPU
