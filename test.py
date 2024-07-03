@@ -5,9 +5,18 @@ from Model.BaseModel import Bert_Model
 from Model.TaskHeads import BinaryClassification, MultiTaskClassification
 from train import train, dynamic_difficulty_sampling # are these names an issue
 from evaluate import evaluate
+import psutil
 
 # Check if CUDA is available and set the device accordingly
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+
+## TEMPORARY
+# Function to get the memory usage in MB
+def get_memory_usage():
+    process = psutil.Process()
+    memory_info = process.memory_info()
+    return memory_info.rss / 1024 ** 2  # Convert from bytes to MB
+
 
 # Define input shapes 
 batch_size = 8
@@ -76,14 +85,17 @@ def dynamic_difficulty_sample_test(model, device, tasks):
 
 
 if __name__ == "__main__":
+    # TEMPORARY
+    print(f'CPU Memory Usage: {get_memory_usage()} MB')
+
     model, _ = initiate_model_new()
     # basic_forward_pass(model)
-    # basic_train_pass(model, device, binary_tasks) # loss on order of 500 when beginning because of regularization (like original model)
-    # basic_train_pass(model, device, multi_tasks, loss_setting="unweighted") # loss around 2.5 when you just add loss for each task
+    basic_train_pass(model, device, binary_tasks) # loss on order of 500 when beginning because of regularization (like original model)
+    #basic_train_pass(model, device, multi_tasks, loss_setting="unweighted") # loss around 2.5 when you just add loss for each task
     # basic_train_pass(model, device, multi_tasks, loss_setting="predefined_weights") # multi task setting in paper - loss less than one beginning (no regularization)
     # basic_train_pass(model, device, multi_tasks, training_method="round_robin")
     # basic_eval_pass(model, device, binary_tasks)
     # basic_eval_pass(model, device, multi_tasks)
     # dynamic_difficulty_sample_test(model, device, multi_tasks) # loss starts around 2.5, same as unweighted as it should be
     # print(model.base_model.named_parameters)
-    basic_train_pass(model, device, multi_tasks, loss_setting="gradnorm")
+    # basic_train_pass(model, device, multi_tasks, loss_setting="gradnorm")

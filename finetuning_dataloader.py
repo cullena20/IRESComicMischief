@@ -72,8 +72,10 @@ class CustomDataset(Dataset):
 
         # Load audio features
         audio_path = os.path.join(self.base_dir, "path_to_VGGish_features/")
+        audio_path = audio_path+key+"_vggish.npy"
+
         try:
-            audio_vec = np.load(audio_path)
+            audio_vec = torch.load(audio_path)
         except FileNotFoundError:
             # print("Audio Not Found")
             audio_vec = torch.zeros((1, 128))

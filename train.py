@@ -128,7 +128,7 @@ def train(model, optimizer, json_data_path, tasks, training_method="all_at_once"
                 
                 # CAN PUT GRADNORM HERE (THOUGH IT NEEDS STUFF EARLIER)
                 # if i were to modularize, this would take in task losses as values - but it might not be that simple
-                # Psuedo Code
+                # It might be better to do this and training together in case of issues in optimization
                 elif loss_setting == "gradnorm":
                     dprint("Beginning Grad Norm")
                     loss = 0
