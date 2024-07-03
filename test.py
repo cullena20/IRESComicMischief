@@ -7,6 +7,7 @@ from train import train, dynamic_difficulty_sampling # are these names an issue
 from evaluate import evaluate
 import os
 import re # needed to load the state dict into the slightly modified model
+import psutil
 
 os.environ['CUDA_VISIBLE_DEVICES'] = '5'
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
