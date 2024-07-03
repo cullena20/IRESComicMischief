@@ -116,7 +116,7 @@ def train(model, optimizer, json_data_path, tasks, training_method="all_at_once"
                     loss_weights = nn.Parameter(loss_weights)
                     dprint(f"Initial Loss Weights {loss_weights}")
                     gradnorm_optimizer = torch.optim.Adam([loss_weights], lr=0.001) # this should be an input
-                
+                    
                 # TO DO - Below is pretty sloppy I think, see if we can make this nicer
                 # Note the use of regularization in one task and not in multi tasks, per the original code (probably fix later)
                             
