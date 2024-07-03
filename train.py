@@ -70,12 +70,24 @@ def train(model, optimizer, json_data_path, tasks, training_method="all_at_once"
             # print(f"BATCH NUMBER: {batch_idx}")
             # each batch is a dictionary and contains tensors for everything
 
+            dprint(f"DEVICE {device}")
             batch_text = batch['text'].to(device)
-            batch_text_mask = batch['text_mask'].to(device)
+            batch_text_mask = batch['text_mask'].to(device) # this is inverted for some reason, might be part of model code
             batch_image = batch['image'].float().to(device)
             batch_mask_img = batch['image_mask'].to(device)
             batch_audio = batch['audio'].float().to(device)
             batch_mask_audio = batch['audio_mask'].to(device)
+
+            # dprint(f"batch_text: {batch_text}")
+            # dprint(f"batch_text type and size {type(batch_text), batch_text.shape}") # batch_size by 500 tensor
+            # dprint(f"batch_text_mask: {batch_text_mask}")
+            # dprint(f"batch_image: {batch_image}")
+            # dprint(f"batch_mask_img: {batch_mask_img}")
+            # dprint(f"batch_audio: {batch_audio}")
+            # dprint(f"batch_mask_audio: {batch_mask_audio}")
+
+            dprint(f'Allocated: {torch.cuda.memory_allocated() / 1024**2} MB')
+            dprint(f'Cached: {torch.cuda.memory_reserved() / 1024**2} MB')
 
             # this also works for individual tasks
             if training_method == "all_at_once":

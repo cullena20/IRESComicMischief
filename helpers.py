@@ -2,6 +2,8 @@ import torch
 from torch.nn import functional as F
 
 # the below is used in the training loop
+# this might have issues since it really increases the loss (around 2 to around 530 in the beginning)
+# this makes sense with how many parameters there are, but do we want this?
 l2_regularize = True
 l2_lambda = 0.1
 def compute_l2_reg_val(model):

@@ -6,7 +6,7 @@ import numpy as np
 from transformers import BertModel
 import math
 
-debug=False
+debug = True
 
 def dprint(text):
     if debug:
@@ -247,6 +247,8 @@ class Bert_Model(nn.Module):
 
         dprint(f'CPU Memory Usage After BERT: {get_memory_usage()} MB') # went to 3000
         dprint(f"BERT Embedded text shape {text_encoded.shape}") 
+        dprint(f'Allocated: {torch.cuda.memory_allocated() / 1024**2} MB')
+        dprint(f'Cached: {torch.cuda.memory_reserved() / 1024**2} MB')
         
         # encode video using LSTM and FC layers (I3D done beforehand)
         rnn_img_encoded, _ = self.rnn_img(image)
@@ -254,7 +256,8 @@ class Bert_Model(nn.Module):
         img_encoded = self.sequential_image(rnn_img_encoded)
 
         dprint(f"Image Embedded shape {img_encoded.shape}")
-        # print(img_encoded)
+        dprint(f'Allocated: {torch.cuda.memory_allocated() / 1024**2} MB')
+        dprint(f'Cached: {torch.cuda.memory_reserved() / 1024**2} MB')
 
         # encode audio using LSTM and FC layers (VGG done beforehand)
         rnn_audio_encoded, _ = self.rnn_audio(audio)
@@ -262,7 +265,8 @@ class Bert_Model(nn.Module):
         audio_encoded = self.sequential_audio(rnn_audio_encoded)
 
         dprint(f"Audio Embedded shape {audio_encoded.shape}")
-        # print(audio_encoded)
+        dprint(f'Allocated: {torch.cuda.memory_allocated() / 1024**2} MB')
+        dprint(f'Cached: {torch.cuda.memory_reserved() / 1024**2} MB')
 
         # Every attention mask goes from batch_size by modality_token_size to batch_size by 1 by 1 by modality_token_size
         # Bring 0s to -10000, bring 1s to 0. Huh?
@@ -271,7 +275,7 @@ class Bert_Model(nn.Module):
         extended_text_attention_mask = extended_text_attention_mask.to(dtype=next(self.parameters()).dtype)
         extended_text_attention_mask = (1.0 - extended_text_attention_mask) * -10000.0
 
-        dprint(f"Extended text mask shape {extended_text_attention_mask.shape}")
+        dprint(f"Extended text mask shape {extended_text_attention_mask.shape}, device: {extended_text_attention_mask.device}")
         
         extended_audio_attention_mask = audio_mask.float().unsqueeze(1).unsqueeze(2)
         extended_audio_attention_mask = extended_audio_attention_mask.to(dtype=next(self.parameters()).dtype)
