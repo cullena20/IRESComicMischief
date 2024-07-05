@@ -1,7 +1,15 @@
 import torch
+import os 
+
+base_dir = os.path.dirname(os.path.abspath(__file__))
+original_code_dir = os.path.dirname(os.path.dirname(base_dir))  # Move up two levels to OriginalCode
+processed_data_dir = os.path.join(original_code_dir, "processed_data/")
 
 
-processed_data_dir = "../../processed_data/"
+print("base_dir:", base_dir)
+print("original_code_dir:", original_code_dir)
+print("processed_data_dir:", processed_data_dir)
+# processed_data_dir = "/Users/cullen/Desktop/IRESCode/IRESComicMischief/OriginalCode/processed_data"
 
 
 label_to_idx = {0: 0, 1: 1}

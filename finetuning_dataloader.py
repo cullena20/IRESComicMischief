@@ -5,7 +5,13 @@ from torch.utils.data import Dataset, DataLoader
 import torch.nn.functional as F
 import time
 import json
-from helpers import pad_segment, mask_vector, pad_features
+from helpers import pad_segment, mask_vector, pad_features, mask_vector_reverse
+
+debug = False
+
+def dprint(text):
+    if debug:
+        print(text)
 
 # I think there's issues with the padding and masking (also doesn't padding set to -infinity)
 
@@ -70,17 +76,17 @@ class CustomDataset(Dataset):
                 masked_img = mask_vector(self.img_pad_length, image_vec)
                 image_vec = pad_segment(image_vec, self.img_pad_length)
             except:
-                print("Image not found")
+                dprint("Image not found")
                 image_vec = torch.zeros((self.img_pad_length, 1024)) 
                 masked_img = torch.zeros(self.img_pad_length)
         else:
-            print("Image not found")
+            dprint("Image not found")
             image_vec = torch.zeros((self.img_pad_length, 1024)) 
             masked_img = torch.zeros(self.img_pad_length)
 
-        print("PADDED IMAGE VEC")
-        print(image_vec)
-        print("IMAGE Mask", masked_img)
+        dprint("PADDED IMAGE VEC")
+        dprint(image_vec)
+        dprint(f"IMAGE Masked {masked_img}")
 
         # Load audio features
         audio_path = os.path.join(self.base_dir, "i3D-vggish-features/vgg_vecs_extended_merged/")
@@ -90,28 +96,27 @@ class CustomDataset(Dataset):
             audio_vec = np.load(audio_path)
             audio_vec = torch.tensor(audio_vec)
         except FileNotFoundError:
-            print("Audio not found")
+            dprint("Audio not found")
             audio_vec = torch.zeros((1, 128))
 
         masked_audio = mask_vector(self.audio_pad_length, audio_vec)
         audio_vec = pad_segment(audio_vec, self.audio_pad_length)
 
-        print("PADDED AUDIO VEC")
-        print(audio_vec)
-        print("AUDIO Mask", masked_audio)
+        dprint("PADDED AUDIO VEC")
+        dprint(audio_vec)
+        dprint(f"AUDIO Mask {masked_audio}")
 
         # Process text
         text = torch.tensor(item['indexes']) # tokenized text
-        # print("TEXT", text)
-        # print("TEXT SHAPE", text.shape)
+        dprint(f"TEXT {text}")
+        dprint(f"TEXT SHAPE {text.shape}")
 
-        mask = mask_vector(self.text_pad_length, text)
-        # print("TEXT MASK", mask)
+        text_mask = mask_vector_reverse(self.text_pad_length, text)
+        dprint(f"TEXT MASK {text_mask}")
 
         # NOTE: PADDING AT BEGINNING FOR SOME REASON
-        # To use my function where you pad at end, go to helpers and uncomment, and feed in text not [text]
         text = pad_features([text], self.text_pad_length)[0]
-        # print("PADDED TEXT", text)
+        dprint(f"PADDED TEXT {text}")
 
         binary = torch.tensor(item['y']) 
         mature = torch.tensor(item["mature"])
@@ -121,7 +126,7 @@ class CustomDataset(Dataset):
 
         return {
             'text': text,
-            'text_mask': mask,
+            'text_mask': text_mask,
             'image': image_vec.float(),
             'image_mask': masked_img,
             'audio': audio_vec.float(),
