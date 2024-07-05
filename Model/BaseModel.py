@@ -6,7 +6,7 @@ import numpy as np
 from transformers import BertModel
 import math
 
-debug = True
+debug = False
 
 def dprint(text):
     if debug:
@@ -23,6 +23,14 @@ def get_memory_usage():
     process = psutil.Process()
     memory_info = process.memory_info()
     return memory_info.rss / 1024 ** 2  # Convert from bytes to MB
+
+# temporary helper to debug NaNs
+def dprint_nan_percentage(tensor, tensor_name="tensor"):
+    if debug == True:
+        num_elements = tensor.numel()
+        num_nans = torch.isnan(tensor).sum().item()
+        nan_percentage = (num_nans / num_elements) * 100
+        print(f"{tensor_name} contains {nan_percentage:.2f}% NaNs")
 
 
 # pp = pprint.PrettyPrinter(indent=4).pprint
@@ -154,8 +162,7 @@ class Bert_Model(nn.Module):
         # Load BERT model from pretrained to embed sentence tokens
         # Might want to freeze for consistency, or not
         self.bert = BertModel.from_pretrained('bert-base-uncased', output_hidden_states=True,
-                                                                output_attentions=True, 
-                                                                attn_implementation="eager")
+                                                                output_attentions=True)
 
         # LSTM: input_size_audio (128 VGG) dim inputs -> rnn_units (512)
         # Then norm will make it rnn_units * 2 (1024) - not sure why 
@@ -228,77 +235,93 @@ class Bert_Model(nn.Module):
             The concatenated tensor of processed text, audio, and image representations with shape (batch_size, embedding_dim * 3).
         """
 
-        dprint(f"text shape: {text.shape}") # batch_size by 500
-        dprint(f"text_mask shape: {text_mask.shape}") # batch_size by 500
-        dprint(f"Image shape: {image.shape}") # batch_size by 36 by 1024 (tokens and embedding dimension)
-        dprint(f"Image_mask shape: {image_mask.shape}") # batch_size by 36
-        dprint(f"Audio shape: {audio.shape}") # batch_size by 63 by 128 (tokens and embedding dimension)
-        dprint(f"Audio_mask shape: {audio_mask.shape}") # batch_size by 63
+        # dprint(f"text shape: {text.shape}") # batch_size by 500
+        # dprint(f"text_mask shape: {text_mask.shape}") # batch_size by 500
+        # dprint(f"Image shape: {image.shape}") # batch_size by 36 by 1024 (tokens and embedding dimension)
+        # dprint(f"Image_mask shape: {image_mask.shape}") # batch_size by 36
+        # dprint(f"Audio shape: {audio.shape}") # batch_size by 63 by 128 (tokens and embedding dimension)
+        # dprint(f"Audio_mask shape: {audio_mask.shape}") # batch_size by 63
 
-        dprint("INSIDE TRAINING LOOP")
-        dprint(f'CPU Memory Usage: {get_memory_usage()} MB') # started at 232, now is 916
+        dprint("\nInside Forward Pass")
+        dprint(f'CPU Memory Usage: {get_memory_usage()} MB') # goes to around 8000 with batch size 8
         # encode text tokens using BERT
         hidden, _ = self.bert(text)[-2:] 
         text_encoded = hidden[-1] # MOVED [-1] here because it is the only thing used
 
-        dprint("Text Encoded Is NaN?")
-        dprint(torch.isnan(text_encoded.sum()))
-        # print(text_encoded)
+        # after a few runs this seems to happen every run - so something when you keep training it probably messes this up
+        # in general after training a few iterations, everything will have NaNs, even when you remove them from here
+        # my guess is that this happens even when we alter things because of bert out attention? not totally sure
+       # dprint(f"Text Encoded Is NaN? {torch.isnan(text_encoded.sum())}")
+        dprint_nan_percentage(text_encoded, "text_encoded")
+        
+        # sometimes the error comes from here which propogates into everything else - comes from unknown tokens I think
+        # Brute Force solution
+        text_encoded = torch.nan_to_num(text_encoded, nan=0)
 
-        dprint(f'CPU Memory Usage After BERT: {get_memory_usage()} MB') # went to 3000
-        dprint(f"BERT Embedded text shape {text_encoded.shape}") 
-        dprint(f'Allocated: {torch.cuda.memory_allocated() / 1024**2} MB')
-        dprint(f'Cached: {torch.cuda.memory_reserved() / 1024**2} MB')
+        # dprint(f'CPU Memory Usage After BERT: {get_memory_usage()} MB') # went to 3000
+        # dprint(f"BERT Embedded text shape {text_encoded.shape}") 
+        # dprint(f'Allocated: {torch.cuda.memory_allocated() / 1024**2} MB')
+        # dprint(f'Cached: {torch.cuda.memory_reserved() / 1024**2} MB')
         
         # encode video using LSTM and FC layers (I3D done beforehand)
         rnn_img_encoded, _ = self.rnn_img(image)
         rnn_img_encoded = self.rnn_img_drop_norm(rnn_img_encoded)
         img_encoded = self.sequential_image(rnn_img_encoded)
+        #dprint(f"Image Encoded is NaN? {torch.isnan(img_encoded.sum())}")
+        dprint_nan_percentage(img_encoded, "img_encoded")
 
-        dprint(f"Image Embedded shape {img_encoded.shape}")
-        dprint(f'Allocated: {torch.cuda.memory_allocated() / 1024**2} MB')
-        dprint(f'Cached: {torch.cuda.memory_reserved() / 1024**2} MB')
+        # dprint(f"Image Embedded shape {img_encoded.shape}")
+        # dprint(f'Allocated: {torch.cuda.memory_allocated() / 1024**2} MB')
+        # dprint(f'Cached: {torch.cuda.memory_reserved() / 1024**2} MB')
 
         # encode audio using LSTM and FC layers (VGG done beforehand)
         rnn_audio_encoded, _ = self.rnn_audio(audio)
         rnn_audio_encoded = self.rnn_audio_drop_norm(rnn_audio_encoded)
         audio_encoded = self.sequential_audio(rnn_audio_encoded)
+        #dprint(f"Audio Encoded is NaN? {torch.isnan(audio_encoded.sum())}")
+        dprint_nan_percentage(audio_encoded, "audio_encoded")
 
-        dprint(f"Audio Embedded shape {audio_encoded.shape}")
-        dprint(f'Allocated: {torch.cuda.memory_allocated() / 1024**2} MB')
-        dprint(f'Cached: {torch.cuda.memory_reserved() / 1024**2} MB')
+        # dprint(f"Audio Embedded shape {audio_encoded.shape}")
+        # dprint(f'Allocated: {torch.cuda.memory_allocated() / 1024**2} MB')
+        # dprint(f'Cached: {torch.cuda.memory_reserved() / 1024**2} MB')
 
-        # Every attention mask goes from batch_size by modality_token_size to batch_size by 1 by 1 by modality_token_size
+        # # Every attention mask goes from batch_size by modality_token_size to batch_size by 1 by 1 by modality_token_size
         # Bring 0s to -10000, bring 1s to 0. Huh?
 
         extended_text_attention_mask = text_mask.float().unsqueeze(1).unsqueeze(2)
         extended_text_attention_mask = extended_text_attention_mask.to(dtype=next(self.parameters()).dtype)
         extended_text_attention_mask = (1.0 - extended_text_attention_mask) * -10000.0
 
-        dprint(f"Extended text mask shape {extended_text_attention_mask.shape}, device: {extended_text_attention_mask.device}")
+        # dprint(f"Extended text mask shape {extended_text_attention_mask.shape}, device: {extended_text_attention_mask.device}")
         
         extended_audio_attention_mask = audio_mask.float().unsqueeze(1).unsqueeze(2)
         extended_audio_attention_mask = extended_audio_attention_mask.to(dtype=next(self.parameters()).dtype)
         extended_audio_attention_mask = (1.0 - extended_audio_attention_mask) * -10000.0
       
-        dprint(f"Extended audio mask shape {extended_audio_attention_mask.shape}")
+        # dprint(f"Extended audio mask shape {extended_audio_attention_mask.shape}")
 
         extended_image_attention_mask = image_mask.float().unsqueeze(1).unsqueeze(2)
         extended_image_attention_mask = extended_image_attention_mask.to(dtype=next(self.parameters()).dtype)
         extended_image_attention_mask = (1.0 - extended_image_attention_mask) * -10000.0
 
-        dprint(f"Extended image mask shape {extended_image_attention_mask.shape}")
-        dprint(f"Image Mask One Example {image_mask[0]}")
-        dprint(f"Extended Image Mask One Example {extended_image_attention_mask[0]}")
+        # dprint(f"Extended image mask shape {extended_image_attention_mask.shape}")
+        # dprint(f"Image Mask One Example {image_mask[0]}")
+        # dprint(f"Extended Image Mask One Example {extended_image_attention_mask[0]}")
  
+        # Examine Attention Layer here
         output_text = self.att1(text_encoded, img_encoded, extended_image_attention_mask)
+        dprint_nan_percentage(output_text, "output_text img attention")
         output_text = self.att1_drop_norm1(output_text)
+        dprint_nan_percentage(output_text, "output_text dropout")
         output_text = self.att1(output_text, audio_encoded, extended_audio_attention_mask)
+        dprint_nan_percentage(output_text, "output_text audio attention")
         output_text = self.att1_drop_norm2(output_text)
-        
+        dprint_nan_percentage(output_text, "output_text dropout")
+
         output_text = output_text + text_encoded
-        dprint(f"Output Text")
-        dprint(f"NaN? : {torch.isnan(output_text.sum())}")
+        #dprint(f"Output Text")
+        #dprint(f"NaN? : {torch.isnan(output_text.sum())}")
+        dprint_nan_percentage(output_text, "final output_text w/ residual connection")
 
         output_audio = self.att2(audio_encoded, img_encoded, extended_image_attention_mask)
         output_audio = self.att2_drop_norm1(output_audio)
@@ -306,45 +329,62 @@ class Bert_Model(nn.Module):
         output_audio = self.att2_drop_norm2(output_audio)
         
         output_audio = output_audio + audio_encoded
-        dprint(f"Output Audio")
-        dprint(f"NaN? : {torch.isnan(output_audio.sum())}")
+        #dprint(f"Output Audio")
+        #dprint(f"NaN? : {torch.isnan(output_audio.sum())}")
+        dprint_nan_percentage(output_audio, "output_audio")
 
-        output_image = self.att3(img_encoded, text_encoded, extended_text_attention_mask)
+        output_image = self.att3(img_encoded, audio_encoded, extended_audio_attention_mask)
         output_image = self.att3_drop_norm1(output_image)
-        output_image = self.att3(output_image, audio_encoded, extended_audio_attention_mask)
+        output_image = self.att3(img_encoded, text_encoded, extended_text_attention_mask)
         output_image = self.att3_drop_norm2(output_image)
         
         output_image = output_image + img_encoded
-        dprint(f"Output Image")
-        dprint(f"NaN? : {torch.isnan(output_image.sum())}")
+
+        #dprint(f"Output Image")
+        #dprint(f"NaN? : {torch.isnan(output_image.sum())}")
+        dprint_nan_percentage(output_image, "output_image")
 
         # why are there new masks here?
-        mask = torch.tensor(np.array([1]*output_text.size()[1])).to(next(self.parameters()).device) # cuda()
+        # could the issues come from here?
+        text_mask = torch.tensor(np.array([1]*output_text.size()[1])).to(next(self.parameters()).device) # cuda()
         audio_mask = torch.tensor(np.array([1]*output_audio.size()[1])).to(next(self.parameters()).device) # cuda()
         image_mask = torch.tensor(np.array([1]*output_image.size()[1])).to(next(self.parameters()).device) # cuda()
 
+        # Somehow we get NaNs in this attention step, not in BERT like for Arnold
+        # Look more into how I do attention, cause I have a feeling that there may be an issue here.
+
         #dprint("TEXT BEFORE SELF ATTENTION:", output_text.shape)
-        output_text, attention_weights = self.attention(output_text, mask.float())
+        output_text, attention_weights = self.attention(output_text, text_mask.float(), debug=debug)
         output_text = self.attention_drop_norm(output_text)
 
-        dprint(f"Post Attetion Output Text NaN? : {torch.isnan(output_text.sum())}")
+        # dprint(f"Post Attention Output Text NaN? : {torch.isnan(output_text.sum())}")
+        dprint_nan_percentage(output_text, "output_text self attention")
 
         #dprint("TEXT AFTER SELF ATTENTION:", output_text.shape)
-        output_audio, attention_weights = self.attention_audio(output_audio, audio_mask.float())
+        output_audio, attention_weights = self.attention_audio(output_audio, audio_mask.float(), debug=debug)
         output_audio = self.attention_audio_drop_norm(output_audio)
 
-        dprint(f"Post Attetion Output Audio NaN? : {torch.isnan(output_audio.sum())}")
+        #dprint(f"Post Attention Output Audio NaN? : {torch.isnan(output_audio.sum())}")
+        dprint_nan_percentage(output_audio, "output_audio")
 
         #dprint("IMAGE BEFORE SELF ATTENTION", output_image.shape)
-        output_image, attention_weights = self.attention_image(output_image, image_mask.float())
+        output_image, attention_weights = self.attention_image(output_image, image_mask.float(), debug=debug)
         output_image = self.attention_image_drop_norm(output_image)
 
-        dprint(f"Post Attetion Output Image NaN? : {torch.isnan(output_image.sum())}")
+        #dprint(f"Post Attention Output Image NaN? : {torch.isnan(output_image.sum())}")
         #dprint("IMAGE AFTER SELF ATTENTION", output_image.shape)
-
-        dprint("Final Concat")
+        dprint_nan_percentage(output_image, "output_image")
 
         text_audio_image_cat = torch.cat([output_text, output_audio, output_image], dim=-1)
-        dprint(f"Is final cat NaN? {torch.isnan(text_audio_image_cat.sum())}")
+        #dprint(f"Final cat NaN? {torch.isnan(text_audio_image_cat.sum())}")
+        dprint_nan_percentage(text_audio_image_cat, "text_audio_image_cat")
+
+        # Brute Force solution
+        # sometimes we get NaNs from self attention it seems
+        text_audio_image_cat = torch.nan_to_num(text_audio_image_cat, nan=0)
+
+        dprint(f'CPU Memory Usage At End Of Forward Pass: {get_memory_usage()} MB') # goes to around 3000, sometimes higher up to 9000 not sure why
+        dprint(f'Allocated: {torch.cuda.memory_allocated() / 1024**2} MB')
+        dprint(f'Cached: {torch.cuda.memory_reserved() / 1024**2} MB')
 
         return text_audio_image_cat

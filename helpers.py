@@ -21,12 +21,23 @@ def compute_l2_reg_val(model):
     return l2_lambda * l2_reg.item()
 
 # the below are used in the dataloader to process the data
+# this creates a mask with 1s at beginning and 0s at end
+# this assumes that tokens are in the beginning
 def mask_vector(max_size, arr):
     if arr.shape[0] > max_size:
         output = [1] * max_size
     else:
         len_zero_value = max_size - arr.shape[0]
         output = [1] * arr.shape[0] + [0] * len_zero_value
+    return torch.tensor(output)
+
+# this assumes tokens are at end and is used for text
+def mask_vector_reverse(max_size, arr):
+    if arr.shape[0] > max_size:
+        output = [1] * max_size
+    else:
+        len_zero_value = max_size - arr.shape[0]
+        output = [0] * len_zero_value + [1] * arr.shape[0]
     return torch.tensor(output)
 
 def pad_segment(feature, max_feature_len):
@@ -38,6 +49,8 @@ def pad_segment(feature, max_feature_len):
         pad_segment = torch.zeros((pad_l, D))
         feature = torch.concatenate((feature, pad_segment), axis=0)
     return feature
+
+
 
 # NOTE: BELOW MODIFIED FROM ORIGINAL CODE TO PAD ENDING
 # BEFORE IT ADDED PAD VALUES TO THE BEGINNING

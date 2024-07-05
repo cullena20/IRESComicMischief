@@ -1,4 +1,5 @@
 import torch
+import torch.nn as nn
 import numpy as np
 from Model.UnifiedModel import UnifiedModel
 from Model.BaseModel import Bert_Model
@@ -115,9 +116,9 @@ def initiate_pretrained_model(verbose=False):
         # print the parameters and their shapes saved in the pretrained parameters
         # the model has extra task specific heads
         # simply set strict=False to deal with (this would also work if we had new task specific heads in our model - but some names might be different if we were to used UnifiedModel directly)
-        for param_tensor in pretrained_state_dict["model_state"]:
-            print(f"{param_tensor}  {pretrained_state_dict["model_state"][param_tensor].size()}") # we need to replace things like features.0 with bert - use regex
-        print()
+        # for param_tensor in pretrained_state_dict["model_state"]:
+        #     print(f"{param_tensor}  {pretrained_state_dict["model_state"][param_tensor].size()}") # we need to replace things like features.0 with bert - use regex
+        # print()
 
         # print the parameters and their shapes in our new base model
         for param_tensor in base_model.state_dict():
@@ -191,21 +192,58 @@ def dynamic_difficulty_sample_test(model, device, tasks):
 # The GPU runs out of memory with batch size greater th(despite it working on CPU)
 # Also, after a view runs you get NaN errors -> the GPU doesn't report this clearly, but I think it's the same error
 
+#### Temporary code to pinpoint NaN errors
+
+# Define a function to recursively check for NaNs
+def check_for_nan(tensor, module_name):
+    if torch.isnan(tensor).any():
+        print(f"NaN detected in {module_name}")
+
+# Define a recursive function to handle different types of outputs
+def handle_output(output, module_name):
+    if isinstance(output, torch.Tensor):
+        check_for_nan(output, module_name)
+    elif isinstance(output, (tuple, list)):
+        for i, out in enumerate(output):
+            handle_output(out, f"{module_name}[{i}]")
+    elif isinstance(output, dict):
+        for key, value in output.items():
+            handle_output(value, f"{module_name}['{key}']")
+    elif hasattr(output, '__dict__'):  # For objects with attributes
+        for attr, value in output.__dict__.items():
+            handle_output(value, f"{module_name}.{attr}")
+
+# Define the hook function
+def hook_fn(module, input, output):
+    handle_output(output, module)
+
+# Define a function to register hooks to a model
+def register_nan_hooks(model):
+    for name, module in model.named_modules():
+        if isinstance(module, nn.Module):
+            module.register_forward_hook(hook_fn)
+
+######
+
 if __name__ == "__main__":
-    print(torch.cuda.device_count())  # Number of available GPUs
-    print(torch.cuda.current_device())  # Current GPU device index
-    print(torch.cuda.get_device_name(0))  # Name of the GPU
-    print(f'Allocated: {torch.cuda.memory_allocated() / 1024**2} MB')
-    print(f'Cached: {torch.cuda.memory_reserved() / 1024**2} MB')
-    torch.cuda.empty_cache()
-    # non_pretrained_model, _ = initiate_model_new()
-    model, _ = initiate_pretrained_model()
+    if device == "cuda":
+        print(torch.cuda.device_count())  # Number of available GPUs
+        print(torch.cuda.current_device())  # Current GPU device index
+        print(torch.cuda.get_device_name(0))  # Name of the GPU
+        print(f'Allocated: {torch.cuda.memory_allocated() / 1024**2} MB')
+        print(f'Cached: {torch.cuda.memory_reserved() / 1024**2} MB')
+        torch.cuda.empty_cache()
+    model, _ = initiate_model_new()
+    # model, _ = initiate_pretrained_model()
+
+    # temporary thing to pinpoint location of NaN errors
+    # register_nan_hooks(model)
 
 
     # basic_forward_pass(model) # seems to work, including on GPU
     # basic_train_pass(model, device, binary_tasks) # loss on order of 500 when beginning because of regularization (like original model)
-    basic_train_pass(model, device, multi_tasks, loss_setting="unweighted") # loss around 2.5 when you just add loss for each task
-    # basic_train_pass(model, device, multi_tasks, loss_setting="predefined_weights") # multi task setting in paper - loss less than one beginning (no regularization)
+    # basic_train_pass(model, device, multi_tasks, loss_setting="unweighted") # loss around 2.5 when you just add loss for each task
+    basic_train_pass(model, device, multi_tasks, loss_setting="predefined_weights") # multi task setting in paper - loss less than one beginning (no regularization)
     # basic_train_pass(model, device, multi_tasks, training_method="round_robin")
     # basic_eval_pass(model, device, binary_tasks)
     # basic_eval_pass(model, device, multi_tasks)

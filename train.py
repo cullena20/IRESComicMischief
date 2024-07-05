@@ -10,7 +10,7 @@ from helpers import compute_l2_reg_val
 
 import time
 
-debug = True
+debug = False
 
 def dprint(text):
     if debug:
@@ -78,13 +78,17 @@ def train(model, optimizer, json_data_path, tasks, training_method="all_at_once"
             batch_audio = batch['audio'].float().to(device)
             batch_mask_audio = batch['audio_mask'].to(device)
 
-            # dprint(f"batch_text: {batch_text}")
-            # dprint(f"batch_text type and size {type(batch_text), batch_text.shape}") # batch_size by 500 tensor
-            # dprint(f"batch_text_mask: {batch_text_mask}")
-            # dprint(f"batch_image: {batch_image}")
-            # dprint(f"batch_mask_img: {batch_mask_img}")
-            # dprint(f"batch_audio: {batch_audio}")
-            # dprint(f"batch_mask_audio: {batch_mask_audio}")
+            dprint(f"Text Batch Item 0 : {batch_text[0]}")
+            dprint(f"Text Batch Mask Item 0 : {batch_text_mask[0]}")
+
+            # shapes align with original model
+            dprint(f"batch_text: {batch_text.shape}") # 8 500
+            dprint(f"batch_text_mask: {batch_text_mask.shape}") # 8 500
+            dprint(f"batch_image: {batch_image.shape}") # 8 36 1024
+            dprint(f"batch_mask_img: {batch_mask_img.shape}") # 8 36
+            dprint(f"batch_audio: {batch_audio.shape}") # 8 63 128
+            dprint(f"batch_mask_audio: {batch_mask_audio.shape}") # 8 63
+
 
             dprint(f'Allocated: {torch.cuda.memory_allocated() / 1024**2} MB')
             dprint(f'Cached: {torch.cuda.memory_reserved() / 1024**2} MB')
@@ -95,12 +99,16 @@ def train(model, optimizer, json_data_path, tasks, training_method="all_at_once"
 
                 out = model(batch_text, batch_text_mask, batch_image, batch_mask_img, batch_audio, batch_mask_audio, tasks)
 
+                # note that we can combined below loop with next task loop
+                # is any gradient information messed up here? Or how about when you stack the outputs
                 out_dict = {}
                 for i, task in enumerate(tasks):
                     out_dict[task] = out[:, i, :]
 
                 if batch_idx == 0 and epoch == 0:
                     print(f"Training All At Once on the following tasks: {[task for task in tasks]}")
+                
+                # again, are ther any issues using this dictionary?
                 # CURRENTLY L2 REG ONLY ON BINARY LIKE IN ORIGINAL CODE, KINDA JANK
                 task_losses = {}
                 for task in tasks:
@@ -115,21 +123,24 @@ def train(model, optimizer, json_data_path, tasks, training_method="all_at_once"
                     loss_weights = torch.ones(len(tasks))
                     loss_weights = nn.Parameter(loss_weights)
                     dprint(f"Initial Loss Weights {loss_weights}")
-                    gradnorm_optimizer = torch.optim.Adam([loss_weights], lr=0.001) # this should be an input
+                    gradnorm_optimizer = torch.optim.Adam([loss_weights], lr=0.001) 
                     
                 # TO DO - Below is pretty sloppy I think, see if we can make this nicer
                 # Note the use of regularization in one task and not in multi tasks, per the original code (probably fix later)
                             
                 # ON ONE TASK - USE THIS FOR SAME RESULT AS BINARY IN ORIGINAL CODE
-                if len(tasks) == 1:
+                elif len(tasks) == 1:
                     loss = task_losses[tasks[0]] + compute_l2_reg_val(model)
 
-                # ON 4 MULTI TASKS WITH GIVEN WEIGHTS - USE THIS FOR SAME RESULT AS MULTI IN ORIGINAL CODE
-                elif loss_setting == "predefined_weights" and "mature" in tasks and "gory" in tasks and "sarcasm" in tasks and "slapstick" in tasks and "binary" not in tasks:
+                # ON 4 MULTI TASKS WITH GIVEN WEIGHTS
+                # use this to replicate paper's experiment
+                elif loss_setting == "predefined_weights" and set(tasks) == {"mature", "gory", "sarcasm", "slapstick"}:
                      loss = mature_w*task_losses["mature"] + gory_w*task_losses["gory"] + sarcasm_w*task_losses["sarcasm"] + slap_w*task_losses["slapstick"]
 
                 # below two are untested
                 # learned loss weightings for whichever ordering of tasks
+                # might want to change this to declare the parameter right here like grad norm
+                # this shouldn't effect other optimization at all simply because these loss weights won't be used
                 elif loss_setting == "weighted":
                     loss = 0
                     for task_loss in task_losses.values():
@@ -164,10 +175,13 @@ def train(model, optimizer, json_data_path, tasks, training_method="all_at_once"
                     for task_loss in task_losses.values():
                         loss += task_loss
 
-                total_loss += loss.item()
-                loss.backward(retain_graph=True) # We get problems with retain_graph=False with GradNorm - note possible issues (code I saw does this though)
+                total_loss += loss.item() # we don't need this I think
+                loss.backward() # We get problems with retain_graph=False with GradNorm - note possible issues (code I saw does this though)
                 optimizer.step()
-                print(f"Current Loss: {loss}")
+                print(f"Current Total Loss: {loss}")
+                for task, task_loss in task_losses.items():
+                    print(f"Task {task}, Loss {task_loss}")
+                print()
 
             # CULLEN: INITIAL ROUND ROBIN IMPLEMENTATION
             # Take as input the task specific heads you wish to use

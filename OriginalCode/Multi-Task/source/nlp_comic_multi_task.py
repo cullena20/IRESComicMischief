@@ -36,6 +36,12 @@ from torch.utils.data import TensorDataset, DataLoader
 # CULLEN: Commented out, not defined or used
 # torch_helper = TorchHelper()
 
+debug = False
+
+def dprint(text):
+    if debug:
+        print(text)
+
 
 loss_weights1 = torch.Tensor([1,3])
 
@@ -46,7 +52,8 @@ criterian = nn.CrossEntropyLoss()
 # CULLEN: Minor but - some stuff in config, some stuff defined here, clean up for ourselves
 start_epoch = 0
 
-batch_size = C.batch_size
+# batch_size = C.batch_size - batch size 16
+batch_size = 8 # trying out smaller batch size
 
 max_epochs = 50
 # CULLEN: Marginally smaller learning rate for multi task 1.9 vs 1.5 e-5
@@ -113,7 +120,7 @@ print('test Loaded')
 def create_model():
 
     model =  Bert_Model()
-    model.cuda()
+    model.to(device)
     return model
 
 
@@ -218,18 +225,22 @@ def train(model, optimizer):
             continue
 
         file_path = "path_to_I3D_features/"+mid+"_rgb.npy"
+        # added this if else to make a1 and a2 zeros if file doesn't exist
         if not os.path.isfile(file_path): 
-            print(index, "  - mid:", mid)
-            continue
-        
-        path = "path_to_I3D_features/"
-        #image_vec = np.load("./deepMoji_out/"+mid+".npy")
-        a1 = np.load(path+mid+"_rgb.npy")
-        a2 = np.load(path+mid+"_flow.npy")
-        a = a1+a2
-        masked_img = mask_vector(36,a)
-        a = pad_segment(a, 36, 0)
-        image_vec = a
+            # are these sizes actually right? go into GPU and check
+            image_vec = torch.zeros((36, 1024)) 
+            masked_img = torch.zeros(36)
+            # print(index, "  - mid:", mid)
+            # continue - commented out continue
+        else:
+            path = "path_to_I3D_features/"
+            #image_vec = np.load("./deepMoji_out/"+mid+".npy")
+            a1 = np.load(path+mid+"_rgb.npy")
+            a2 = np.load(path+mid+"_flow.npy")
+            a = a1+a2
+            masked_img = mask_vector(36,a)
+            a = pad_segment(a, 36, 0)
+            image_vec = a
         #masked_img = mask_vector(36,a)
 
         path = "path_to_VGGish_features/"
@@ -254,27 +265,38 @@ def train(model, optimizer):
         batch_sarcasm.append(sh_train_set[i]['sarcasm'])
 
         if (len(batch_x) == batch_size) and len(batch_x)>0:
+            print("Training Batch")
 
             optimizer.zero_grad()
 
             mask = masking(batch_x)
             batch_x = pad_features(batch_x)
             batch_x = np.array(batch_x)
-            batch_x = torch.tensor(batch_x).cuda()
+            batch_x = torch.tensor(batch_x).to(device)
+
+            dprint(f"Text Batch Item 0 : {batch_x[0]}")
+            dprint(f"Text Batch Mask Item 0 : {mask[0]}")
 
             batch_image = np.array(batch_image)
-            batch_image = torch.tensor(batch_image).cuda()
+            batch_image = torch.tensor(batch_image).to(device)
 
             batch_mask_img = np.array(batch_mask_img)
-            batch_mask_img = torch.tensor(batch_mask_img).cuda()
+            batch_mask_img = torch.tensor(batch_mask_img).to(device)
 
             batch_audio = np.array(batch_audio)
-            batch_audio = torch.tensor(batch_audio).cuda()
+            batch_audio = torch.tensor(batch_audio).to(device)
 
             batch_mask_audio = np.array(batch_mask_audio)
-            batch_mask_audio = torch.tensor(batch_mask_audio).cuda()
+            batch_mask_audio = torch.tensor(batch_mask_audio).to(device)
 
-            out, mid = model(batch_x, torch.tensor(mask).cuda(),batch_image.float(),batch_mask_img, batch_audio.float(),batch_mask_audio)
+            dprint(f"batch_text: {batch_x.shape}") # 8 500
+            dprint(f"batch_text_mask: {torch.tensor(mask).shape}") # 8 500
+            dprint(f"batch_image: {batch_image.shape}") # 8 36 1024
+            dprint(f"batch_mask_img: {batch_mask_img.shape}") # 8 36
+            dprint(f"batch_audio: {batch_audio.shape}") # 8 63 128
+            dprint(f"batch_mask_audio: {batch_mask_audio.shape}") # 8 63
+
+            out, mid = model(batch_x, torch.tensor(mask).to(device),batch_image.float(),batch_mask_img, batch_audio.float(),batch_mask_audio)
 
             # Cullen: below has things being done differently, but this should be able to be modularizable
             mature_pred = out[0].cpu()
@@ -294,6 +316,14 @@ def train(model, optimizer):
 
 
             optimizer.step()
+
+            # added below to compare to updated code
+            print(f"Current Total Loss: {loss}")
+            print(f"Task mature, Loss {loss1}")
+            print(f"Task gory, Loss {loss2}")
+            print(f"Task slapstick, Loss {loss3}")
+            print(f"Task sarcasm, Loss {loss4}")
+            print()
 
             # torch_helper.show_progress(batch_idx, np.ceil(len(sh_train_set) / batch_size), start_time, round(total_loss / (index + 1), 4))
             batch_idx += 1
@@ -323,6 +353,8 @@ def hamming_score(y_true, y_pred, normalize=True, sample_weight=None):
 # The only asterix is that we should be able to use same model for both, this may not work as is
 def evaluate(model, dataset, division):
     model.eval()
+
+    count_loop = 0
 
     total_loss = 0
     total_loss1, total_loss2, total_loss3 = 0, 0, 0
@@ -366,7 +398,7 @@ def evaluate(model, dataset, division):
             image_vec = a
             batch_image.append(image_vec)
             #masked_img = mask_vector(36,a)
-            batch_mask_img .append(masked_img)
+            batch_mask_img.append(masked_img)
 
 
             path = "path_to_VGGish_features/"
@@ -405,21 +437,21 @@ def evaluate(model, dataset, division):
                 #print (mask)
                 batch_x = pad_features(batch_x)
                 batch_x = np.array(batch_x)
-                batch_x = torch.tensor(batch_x).cuda()
+                batch_x = torch.tensor(batch_x).to(device)
 
                 batch_image = np.array(batch_image)
-                batch_image = torch.tensor(batch_image).cuda()
+                batch_image = torch.tensor(batch_image).to(device)
 
                 batch_mask_img = np.array(batch_mask_img )
-                batch_mask_img = torch.tensor(batch_mask_img ).cuda()
+                batch_mask_img = torch.tensor(batch_mask_img ).to(device)
 
                 batch_audio = np.array(batch_audio)
-                batch_audio = torch.tensor(batch_audio).cuda()
+                batch_audio = torch.tensor(batch_audio).to(device)
  
                 batch_mask_audio = np.array(batch_mask_audio)
-                batch_mask_audio = torch.tensor(batch_mask_audio).cuda()
+                batch_mask_audio = torch.tensor(batch_mask_audio).to(device)
 
-                out, mid_level_out = model(batch_x, torch.tensor(mask).cuda(),batch_image.float(),batch_mask_img,batch_audio.float(),batch_mask_audio)
+                out, mid_level_out = model(batch_x, torch.tensor(mask).to(device),batch_image.float(),batch_mask_img,batch_audio.float(),batch_mask_audio)
 
                 #mature_pred = out[0].cpu()
                 mature_pred = out[0].cpu()
@@ -583,6 +615,8 @@ def training_loop():
 
         model = train(model, optimizer)
 
+        print("TRAINED")
+
         val_pred, val_loss1, val_F1_mature, val_F1_gory, val_F1_slap, val_F1_sarcasm, val_avg_F1, confusion_matrix_all, label_true, predictions_all = evaluate(model, validation_set,"val")
         
 
@@ -593,8 +627,8 @@ def training_loop():
         if lr_schedule_active:
             lr_scheduler.step(val_avg_F1)
 
-        is_best = torch_helper.checkpoint_model(model, optimizer, output_dir_path, test_avg_F1, epoch + 1,
-                                                'max')
+        # is_best = torch_helper.checkpoint_model(model, optimizer, output_dir_path, test_avg_F1, epoch + 1,
+         #                                        'max')
         f.close()
         
 

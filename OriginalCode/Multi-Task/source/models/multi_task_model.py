@@ -5,8 +5,9 @@ sys.path.append('../../')
 import torch
 from torch import nn
 from torch.nn import functional as F
-from source.models.attention import *
-from source import config as C
+from models.attention import Attention
+# from source.models.attention import *
+# from source import config as C
 import pprint
 import numpy as np
 from transformers import BertTokenizer, BertModel
@@ -269,9 +270,9 @@ class Bert_Model(nn.Module):
         
         output_image = output_image + self.features[6](rnn_img_encoded)
 
-        mask = torch.tensor(np.array([1]*output_text.size()[1])).to(C.device) # cuda()
-        audio_mask = torch.tensor(np.array([1]*output_audio.size()[1])).to(C.device) # cuda()
-        image_mask = torch.tensor(np.array([1]*output_image.size()[1])).to(C.device) # cuda()
+        mask = torch.tensor(np.array([1]*output_text.size()[1])).to(dtype=next(self.parameters()).dtype) # cuda()
+        audio_mask = torch.tensor(np.array([1]*output_audio.size()[1])).to(dtype=next(self.parameters()).dtype) # cuda()
+        image_mask = torch.tensor(np.array([1]*output_image.size()[1])).to(dtype=next(self.parameters()).dtype) # cuda()
 
         output_text, attention_weights = self.features[16](output_text, mask.float())
         output_text = self.features[17](output_text)
