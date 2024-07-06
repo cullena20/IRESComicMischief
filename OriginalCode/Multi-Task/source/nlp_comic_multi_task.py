@@ -13,6 +13,8 @@ if torch.cuda. \
     torch.cuda.manual_seed_all(7)
 torch.backends.cudnn.enabled = False
 
+# JUST USE CPU FOR NOW
+device = torch.device("cpu")
 
 from torch import nn
 import time
@@ -36,7 +38,7 @@ from torch.utils.data import TensorDataset, DataLoader
 # CULLEN: Commented out, not defined or used
 # torch_helper = TorchHelper()
 
-debug = False
+debug = True
 
 def dprint(text):
     if debug:
@@ -224,16 +226,18 @@ def train(model, optimizer):
         if sh_train_set[i]['label'] == 0:
             continue
 
-        file_path = "path_to_I3D_features/"+mid+"_rgb.npy"
+        # brute forcing file path for testing
+        file_path = "/home/cander24/Main/ComicMischief/i3D-vggish-features/i3d_vecs_extended_merged/"+mid+"_rgb.npy"
         # added this if else to make a1 and a2 zeros if file doesn't exist
         if not os.path.isfile(file_path): 
+            dprint("Image Not Found")
             # are these sizes actually right? go into GPU and check
             image_vec = torch.zeros((36, 1024)) 
             masked_img = torch.zeros(36)
             # print(index, "  - mid:", mid)
             # continue - commented out continue
         else:
-            path = "path_to_I3D_features/"
+            path = "/home/cander24/Main/ComicMischief/i3D-vggish-features/i3d_vecs_extended_merged/"
             #image_vec = np.load("./deepMoji_out/"+mid+".npy")
             a1 = np.load(path+mid+"_rgb.npy")
             a2 = np.load(path+mid+"_flow.npy")
@@ -243,10 +247,11 @@ def train(model, optimizer):
             image_vec = a
         #masked_img = mask_vector(36,a)
 
-        path = "path_to_VGGish_features/"
+        path = "/home/cander24/Main/ComicMischief/i3D-vggish-features/vgg_vecs_extended_merged/"
         try:
            audio_arr = np.load(path+mid+"_vggish.npy")
         except:
+           dprint("Audio Not Found")
            audio_arr = np.array([128*[0.0]])
         masked_audio = mask_vector(63,audio_arr)
         #print (masked_audio)
@@ -283,11 +288,17 @@ def train(model, optimizer):
             batch_mask_img = np.array(batch_mask_img)
             batch_mask_img = torch.tensor(batch_mask_img).to(device)
 
+            dprint(f"Image Batch Item 0 : {batch_image[0]}")
+            dprint(f"Image Batch Mask Item 0 : {batch_mask_img[0]}")
+
             batch_audio = np.array(batch_audio)
             batch_audio = torch.tensor(batch_audio).to(device)
 
             batch_mask_audio = np.array(batch_mask_audio)
             batch_mask_audio = torch.tensor(batch_mask_audio).to(device)
+
+            dprint(f"Audio Batch Item 0 : {batch_audio[0]}")
+            dprint(f"Audio Batch Mask Item 0 : {batch_mask_audio[0]}")
 
             dprint(f"batch_text: {batch_x.shape}") # 8 500
             dprint(f"batch_text_mask: {torch.tensor(mask).shape}") # 8 500

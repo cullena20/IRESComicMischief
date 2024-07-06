@@ -5,7 +5,7 @@ from torch.utils.data import Dataset, DataLoader
 import torch.nn.functional as F
 import time
 import json
-from helpers import pad_segment, mask_vector, pad_features, mask_vector_reverse
+from helpers import pad_segment, pad_features, mask_vector, mask_vector_reverse
 
 debug = False
 

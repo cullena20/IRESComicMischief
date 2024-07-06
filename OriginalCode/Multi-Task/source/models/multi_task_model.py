@@ -225,6 +225,7 @@ class Bert_Model(nn.Module):
         
         
         hidden, _ = self.features[0](sentences)[-2:]
+        print(f"Text Encoded First Entry Of Batch: {hidden[-1]}")
         
         rnn_img_encoded, (hid, ct) = self.features[1](image)
         rnn_img_encoded = self.features[2](rnn_img_encoded)

@@ -26,3 +26,27 @@ To Do Otherwise:
 * Implement PCGrad
 * Further clean up training code as I realize our demands
 * Keep brainstorming new possible ideas
+
+## 7/5/24
+
+Spent some time this week dealing with debugging and getting code running on the GPU. I figured out the
+source of NaN issues (misalligned text padding and mask). This took much longer than it should have but
+was a good lesson in debugging and helped me get a better understanding of what is going on in the 
+model. I also added and tested a bunch of validation code and incorporated this into the training loop.
+Now we should be able to run experiments and return what we need!
+
+* Sorted out NaN issue and verified with proper GPU configs things work. The model works now!
+* Added extensive validation code to return more valuable information.
+* Incorporated validation code into training loop - training loop now returns a lot of valuable information
+* After some cleaning, we are now ready to run extensive experiments.
+
+To Do:
+* Log into Arnold's GPU cluster and run experiments. Reach out to Elaheh about the UH cluster.
+* Build further experimental infrastructure - add matplotlib plotting functions to plot task loss history, total loss history, validation stuff, etc.. Take the time to have code for pickling and unpickling!
+* By Monday I should have main experiment replicated with plots using this. It shouldn't be that
+hard to additionally run some other experiments I have (GradNorm and some baselines particularly)
+* Spend some time cleaning up and documenting code. This will help during the week as I wish to run
+more experiments.
+* With code cleaned up, implement PCGrad, run more experiments, work on presentation!
+
+Also note that I have checked all the code I have run so far so things look good. But I should be really careful that everything is indeed running as expected.

@@ -245,8 +245,9 @@ class Bert_Model(nn.Module):
         dprint("\nInside Forward Pass")
         dprint(f'CPU Memory Usage: {get_memory_usage()} MB') # goes to around 8000 with batch size 8
         # encode text tokens using BERT
-        hidden, _ = self.bert(text)[-2:] 
-        text_encoded = hidden[-1] # MOVED [-1] here because it is the only thing used
+        hidden, _ = self.bert(text)[-2:] # BERT returns hidden states, attention, loss, and logits. This grabs the logits
+        text_encoded = hidden[-1] # MOVED [-1] here because it is the only thing used - this is the embedding of all the text (0 padded elements do not have 0 outputs)
+        # print(f"Text Encoded Shape: {text_encoded.shape}") # this is just 8 by 500 by 768 (batch size by max padding length by embedding dimension)
 
         # after a few runs this seems to happen every run - so something when you keep training it probably messes this up
         # in general after training a few iterations, everything will have NaNs, even when you remove them from here
@@ -254,8 +255,8 @@ class Bert_Model(nn.Module):
        # dprint(f"Text Encoded Is NaN? {torch.isnan(text_encoded.sum())}")
         dprint_nan_percentage(text_encoded, "text_encoded")
         
-        # sometimes the error comes from here which propogates into everything else - comes from unknown tokens I think
-        # Brute Force solution
+        # Arnold says unknown tokens cause error
+        # Since this is rare, just replace with 0
         text_encoded = torch.nan_to_num(text_encoded, nan=0)
 
         # dprint(f'CPU Memory Usage After BERT: {get_memory_usage()} MB') # went to 3000
@@ -381,7 +382,7 @@ class Bert_Model(nn.Module):
 
         # Brute Force solution
         # sometimes we get NaNs from self attention it seems
-        text_audio_image_cat = torch.nan_to_num(text_audio_image_cat, nan=0)
+        # text_audio_image_cat = torch.nan_to_num(text_audio_image_cat, nan=0)
 
         dprint(f'CPU Memory Usage At End Of Forward Pass: {get_memory_usage()} MB') # goes to around 3000, sometimes higher up to 9000 not sure why
         dprint(f'Allocated: {torch.cuda.memory_allocated() / 1024**2} MB')
