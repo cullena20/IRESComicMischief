@@ -5,10 +5,18 @@ import torch.nn as nn
 from finetuning_dataloader import CustomDataset
 from gradnorm import gradnorm
 import math
+from transformers import AdamW, get_linear_schedule_with_warmup # can probably delete, should be elsewhere anyway
+from evaluate import evaluate
 
 from helpers import compute_l2_reg_val
 
 import time
+
+# TO DO:
+# this should be better modularized
+# I don't like that the scheduler is deifned inside the model like this
+# also should scheduler step at every batch or every epoch
+# also how validation results are handled is terrible right now
 
 debug = False
 
@@ -49,26 +57,45 @@ sarcasm_w = 0.2
 # ["binary", "mature", "gory", "sarcasm", "slapstick"]
 
 # double check placement of zero_grad makes sense
-def train(model, optimizer, json_data_path, tasks, training_method="all_at_once", loss_setting="unweighted", batch_size=32, num_epochs=1, text_pad_length=500, img_pad_length=36, audio_pad_length=63, shuffle=True, device=torch.device("cuda" if torch.cuda.is_available() else "cpu")):
+def train(model, optimizer, json_train_path, tasks, scheduler=None, json_val_path=None, training_method="all_at_once", loss_setting="unweighted", batch_size=16, num_epochs=1, text_pad_length=500, img_pad_length=36, audio_pad_length=63, shuffle=True, device=torch.device("cuda" if torch.cuda.is_available() else "cpu")):
     # the dataset has x values: 
     # text, text_mask, image, image_mask, audio, audio_maxk
     # and y value (deal with depending on task)
-    dataset = CustomDataset(json_data_path, text_pad_length, img_pad_length, audio_pad_length)
+    dataset = CustomDataset(json_train_path, text_pad_length, img_pad_length, audio_pad_length)
     dataloader = DataLoader(dataset, batch_size=batch_size, shuffle=shuffle)
     print("CREATED DATASET AND DATALOADER")
     print()
 
-    model.train()
+    # Total number of training steps (epochs * batches)
+    total_steps = len(dataloader) * num_epochs
+
+    # alternate scheduler below - probably no need for
+    # scheduler = get_linear_schedule_with_warmup(optimizer,
+    #                                             num_warmup_steps=0,
+    #                                             num_training_steps=total_steps,
+    #                                             last_epoch=-1)
+
+    loss_history = torch.zeros(total_steps) # track the total loss at every step
+    task_loss_history = {task : torch.zeros(total_steps) for task in tasks} # track the loss for every task
+
+    validation_results = {
+        "accuracies": {},
+        "f1_scores": {},
+        "average_accuracy": [],
+        "average_f1_score": [],
+        "val_average_total_loss": [],
+        "val_average_task_loss": {}
+    }
+
+    steps = 0 # a step is one batch aka one training step
     for epoch in range(num_epochs):
+        model.train() # here or above ? - here matches original code
         print(f"EPOCH: {epoch}")
         start_time = time.time() 
-        total_loss = 0
 
         # dynamic stop and go would be kind of like all in one (and don't weight losses)
 
         for batch_idx, batch in enumerate(dataloader):
-            # print(f"BATCH NUMBER: {batch_idx}")
-            # each batch is a dictionary and contains tensors for everything
 
             dprint(f"DEVICE {device}")
             batch_text = batch['text'].to(device)
@@ -175,20 +202,27 @@ def train(model, optimizer, json_data_path, tasks, training_method="all_at_once"
                     for task_loss in task_losses.values():
                         loss += task_loss
 
-                total_loss += loss.item() # we don't need this I think
-                loss.backward() # We get problems with retain_graph=False with GradNorm - note possible issues (code I saw does this though)
+
+                loss.backward()
                 optimizer.step()
-                print(f"Current Total Loss: {loss}")
+
+                loss_history[steps] = loss
+
+                print(f"Batch {batch_idx} Total Loss: {loss}")
                 for task, task_loss in task_losses.items():
                     print(f"Task {task}, Loss {task_loss}")
+                    task_loss_history[task][steps] = task_loss
                 print()
+
+                steps += 1
+
 
             # CULLEN: INITIAL ROUND ROBIN IMPLEMENTATION
             # Take as input the task specific heads you wish to use
             # Iterate through each task and get the loss just for that output
             # Currently this assumes the dataset where each item has every output so we reuse batches
 
-            # NOTE - THIS DOES 4 * MORE BACKPASSES THAN THE ORIGINAL MODEL
+            # NOTE - THIS DOES 4 * MORE BACKPASSES THAN THE ORIGINAL MODEL - careful of this
             # the only difference with original is we call backward here instead of adding up losses
             elif training_method == "round_robin":
                 if batch_idx == 0 and epoch == 0:
@@ -226,25 +260,96 @@ def train(model, optimizer, json_data_path, tasks, training_method="all_at_once"
                     optimizer.step()
                     print(f"Task: {task}, Current Loss {loss}")
 
+                    task_loss_history[task][total_steps] = loss # update the task loss history with the current loss
+                    # WARNING: There are 4 * more steps here because each training example is used for four backprop steps
+
+                total_steps += 1 # WARNING - UPDATE STEP AFTER EVERY TASK IS STEPPED THROUGH - but really there are 4 gradient updates
+
             # IDEA - could loss reweighting have a roll here at all?
             # combined idea - Loss reweighting on round robin instead of
             # We would train one task at a time but weight them differently
+            
+            # added below to halt early for easier testing
+            # if batch_idx == 1:
+            #     break
 
             # TO DO: This way of reporting loss doesn't make sense with round robin (have to divide total loss by 4 * batch_idx + 1)
             if (batch_idx + 1) % 10 == 0:
-                # is this a normal way to report loss?
-                print(f'Epoch [{epoch + 1}/{num_epochs}], Step [{batch_idx + 1}/{len(dataloader)}], Loss: {total_loss / (batch_idx + 1):.4f}, Time: {time.time() - start_time:.2f}s')
+                print(f'Epoch [{epoch + 1}/{num_epochs}], Step [{batch_idx + 1}/{len(dataloader)}], Total Loss: {loss:0.4f}, Time: {time.time() - start_time:.2f}s')
+                for task, task_loss in task_losses.items():
+                    print(f"Task {task}, Loss {task_loss}")
+                print()
 
-    return model
+        # finished an epoch
+       
+        # TO DO: All of this should be put in a separate function, not here
+        # validate at the end of every epoch
+        if json_val_path is not None:
+            accuracies, f1_scores, average_accuracy, average_f1_score, val_average_total_loss, val_average_task_loss, all_labels, all_true_labels = evaluate(model, json_val_path, tasks, batch_size=batch_size, shuffle=shuffle, device=device)
+            for task in tasks:
+                print(f"Task {task}")
+                # print(f"Number of items: {len(all_labels[task])}")
+                # print(f"Predictions: {all_labels[task]}")
+                # print(f"True: {all_true_labels[task]}")
+                print(f"Accuracy: {accuracies[task]}, F1 Score: {f1_scores[task]:.4f}")
+                print(f"Average Task Loss {val_average_task_loss[task]}")
+                print()
+            
+            print(f"Average Total Loss {val_average_total_loss}")
+            print(f"Average Accuracy: {average_accuracy}")
+            print(f"Average F1 Score: {average_f1_score}")
+
+            # Update the dictionary with the current epoch results
+            for task, value in accuracies.items():
+                if task not in validation_results["accuracies"]:
+                    validation_results["accuracies"][task] = []
+                validation_results["accuracies"][task].append(value)
+
+            for task, value in f1_scores.items():
+                if task not in validation_results["f1_scores"]:
+                    validation_results["f1_scores"][task] = []
+                validation_results["f1_scores"][task].append(value)
+
+            for task, value in val_average_task_loss.items():
+                if task not in validation_results["val_average_task_loss"]:
+                    validation_results["val_average_task_loss"][task] = []
+                validation_results["val_average_task_loss"][task].append(value)
+
+            validation_results["average_accuracy"].append(average_accuracy)
+            validation_results["average_f1_score"].append(average_f1_score)
+            validation_results["val_average_total_loss"].append(val_average_total_loss)
+
+            # step based on the average f1 score per the original code
+            # note this step only works for the specific scheduler
+            if scheduler is not None:
+                scheduler.step(average_f1_score)
+
+
+    # Convert lists to tensors
+    for task in validation_results["accuracies"]:
+        validation_results["accuracies"][task] = torch.tensor(validation_results["accuracies"][task])
+
+    for task in validation_results["f1_scores"]:
+        validation_results["f1_scores"][task] = torch.tensor(validation_results["f1_scores"][task])
+
+    for task in validation_results["val_average_task_loss"]:
+        validation_results["val_average_task_loss"][task] = torch.tensor(validation_results["val_average_task_loss"][task])
+
+    validation_results["average_accuracy"] = torch.tensor(validation_results["average_accuracy"])
+    validation_results["average_f1_score"] = torch.tensor(validation_results["average_f1_score"])
+    validation_results["val_average_total_loss"] = torch.tensor(validation_results["val_average_total_loss"])
+
+    return model, loss_history, task_loss_history, validation_results # note that loss_history has no meaning unless we add up loss functions
 
 
 # IDEA - GradNorm (and adjacent techniques) can also be easily combined with dynamic difficulty sampling
 # so we definetly need a modularized implementaiton
 
+# need to incorporate adamw and learning rate scheduler here
 
 # they don't normalize losses, we probably should
 # k should be 100, but 3 here for speed
-def dynamic_difficulty_sampling(model, optimizer, json_data_path, tasks, k=2, loss_setting="unweighted", batch_size=32, num_epochs=1, text_pad_length=500, img_pad_length=36, audio_pad_length=63, shuffle=True, device=torch.device("cuda" if torch.cuda.is_available() else "cpu")):
+def dynamic_difficulty_sampling(model, optimizer, json_train_path, tasks, k=2, loss_setting="unweighted", batch_size=32, num_epochs=1, text_pad_length=500, img_pad_length=36, audio_pad_length=63, shuffle=True, device=torch.device("cuda" if torch.cuda.is_available() else "cpu")):
     # Dynamic Difficulty Sampling
     # Create a dataset for every individual task (here just four from the same data source)
     # We have to manually create every batch for dynamic difficulty sampling (I don't see how to do with DataLoader)
@@ -259,7 +364,7 @@ def dynamic_difficulty_sampling(model, optimizer, json_data_path, tasks, k=2, lo
     datasets = {} # store the dataset for every task
     sample_weights = {} # controls weight of each dataset in the batch
     for task in tasks:
-        datasets[task] = CustomDataset(json_data_path, text_pad_length, img_pad_length, audio_pad_length)
+        datasets[task] = CustomDataset(json_train_path, text_pad_length, img_pad_length, audio_pad_length)
 
         # TO DO Probably want to implement shuffling here, or implement it as a method of the dataset
         
