@@ -73,6 +73,7 @@ def recreate_multitask_experiment(epochs=1):
 
 
 if __name__ == "__main__":
+    # total loss of original experiment does not use loss weightings used - must perform again
     filename = 'recreate_multitask_1epoch.pkl'
     model, loss_history, task_loss_history, validation_results = recreate_multitask_experiment()
     print(f"Loss History {loss_history}")

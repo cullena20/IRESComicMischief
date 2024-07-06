@@ -162,7 +162,8 @@ def train(model, optimizer, json_train_path, tasks, scheduler=None, json_val_pat
                 # ON 4 MULTI TASKS WITH GIVEN WEIGHTS
                 # use this to replicate paper's experiment
                 elif loss_setting == "predefined_weights" and set(tasks) == {"mature", "gory", "sarcasm", "slapstick"}:
-                     loss = mature_w*task_losses["mature"] + gory_w*task_losses["gory"] + sarcasm_w*task_losses["sarcasm"] + slap_w*task_losses["slapstick"]
+                    loss_weights = [mature_w, gory_w, sarcasm_w, slap_w]
+                    loss = mature_w*task_losses["mature"] + gory_w*task_losses["gory"] + sarcasm_w*task_losses["sarcasm"] + slap_w*task_losses["slapstick"]
 
                 # below two are untested
                 # learned loss weightings for whichever ordering of tasks
@@ -175,10 +176,12 @@ def train(model, optimizer, json_train_path, tasks, scheduler=None, json_val_pat
                         dprint(f"Loss Weight: {model.loss_weights[i]}")
                         dprint(f"Weighted Task Loss: {model.loss_weights[i] * task_loss}")
                         loss += model.loss_weights[i] * task_loss
+                    loss_weights = model.loss_weights[i] # FIX HOW LOSS WEIGHTS IS HANDLED
                 
                 # CAN PUT GRADNORM HERE (THOUGH IT NEEDS STUFF EARLIER)
                 # if i were to modularize, this would take in task losses as values - but it might not be that simple
                 # It might be better to do this and training together in case of issues in optimization
+                # TO DO: Also return method specific parameters - in this case loss weight history
                 elif loss_setting == "gradnorm":
                     dprint("Beginning Grad Norm")
                     loss = 0
@@ -186,14 +189,14 @@ def train(model, optimizer, json_train_path, tasks, scheduler=None, json_val_pat
                     # can enforce these task specific hyperparameters using **kwargs maybe?
                     # Make consistent the way we handle loss weights would be better
                     # Currently this returns weigts and does not update model.loss_weights
-                    weights = gradnorm(task_losses, initial_task_losses, model, model.base_model, gradnorm_optimizer, loss_weights) # update model weights using grad norm
-                    dprint(f"Updated Weights {weights}")
+                    loss_weights = model.loss_weights[i] = gradnorm(task_losses, initial_task_losses, model, model.base_model, gradnorm_optimizer, loss_weights) # update model weights using grad norm
+                    dprint(f"Updated Weights {loss_weights = model.loss_weights[i]}")
                     for i, task_loss in enumerate(task_losses.values()):
                         dprint(f"Task {i}")
                         dprint(f"Unweighted Task Loss {task_loss}")
-                        dprint(f"Loss Weight: {weights[i]}")
-                        dprint(f"Weighted Task Loss: {weights[i] * task_loss}\n\n")
-                        loss += weights[i] * task_loss # currently weights just come from gradnorm and are aliged based on gradnorm implemetation
+                        dprint(f"Loss Weight: {loss_weights = model.loss_weights[i][i]}")
+                        dprint(f"Weighted Task Loss: {loss_weights = model.loss_weights[i]s[i] * task_loss}\n\n")
+                        loss += loss_weights = model.loss_weights[i]s[i] * task_loss # currently weights just come from gradnorm and are aliged based on gradnorm implemetation
                     # then backward step like before
 
                 # don't weight losses
@@ -285,7 +288,7 @@ def train(model, optimizer, json_train_path, tasks, scheduler=None, json_val_pat
         # TO DO: All of this should be put in a separate function, not here
         # validate at the end of every epoch
         if json_val_path is not None:
-            accuracies, f1_scores, average_accuracy, average_f1_score, val_average_total_loss, val_average_task_loss, all_labels, all_true_labels = evaluate(model, json_val_path, tasks, batch_size=batch_size, shuffle=shuffle, device=device)
+            accuracies, f1_scores, average_accuracy, average_f1_score, val_average_total_loss, val_average_task_loss, all_labels, all_true_labels = evaluate(model, json_val_path, tasks, loss_weights=loss_weights, batch_size=batch_size, shuffle=shuffle, device=device)
             for task in tasks:
                 print(f"Task {task}")
                 # print(f"Number of items: {len(all_labels[task])}")
@@ -340,6 +343,7 @@ def train(model, optimizer, json_train_path, tasks, scheduler=None, json_val_pat
     validation_results["val_average_total_loss"] = torch.tensor(validation_results["val_average_total_loss"])
 
     return model, loss_history, task_loss_history, validation_results # note that loss_history has no meaning unless we add up loss functions
+    # this should return another variable which contains model specific stuff (like loss histories, or sampling percentages of each task, etc.)
 
 
 # IDEA - GradNorm (and adjacent techniques) can also be easily combined with dynamic difficulty sampling
