@@ -22,7 +22,7 @@ def gradnorm(task_losses_dict, initial_task_losses_dict, model, layer, optimizer
 
     T = len(task_losses) # we normalize to this quantity
 
-    dprint(f"INITIAL MODEL LOSS WEIGHTS: {model.loss_weights}")
+    dprint(f"INITIAL MODEL LOSS WEIGHTS: {loss_weights}")
 
     # first compute gradients for each task
 
