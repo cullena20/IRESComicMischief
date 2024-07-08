@@ -147,9 +147,9 @@ if __name__ == "__main__":
     model.to(device)
 
     # basic_updated_train_pass(model, device, multi_tasks, loss_setting="predefined_weights")
-    basic_updated_train_pass(model, device, multi_tasks, loss_setting="gradnorm")
-    basic_updated_train_pass(model, device, multi_tasks, training_method="dynamic_difficulty_sampling")
-    basic_updated_train_pass(model, device, multi_tasks, training_method="dynamic_difficulty_sampling", loss_setting="predefined_weights")
+    # basic_updated_train_pass(model, device, multi_tasks, loss_setting="gradnorm") # this is a good amount slower, maybe slower than it should be?
+    # basic_updated_train_pass(model, device, multi_tasks, training_method="dynamic_difficulty_sampling")
+    basic_updated_train_pass(model, device, multi_tasks, training_method="dynamic_difficulty_sampling", loss_setting="gradnorm")
 
     # basic_forward_pass(model) # seems to work, including on GPU
     # basic_train_pass(model, device, binary_tasks) # loss on order of 500 when beginning because of regularization (like original model)

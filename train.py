@@ -67,14 +67,14 @@ def train_loop(model, optimizer, json_train_path, tasks, scheduler=None, json_va
             datasets[task] = CustomDataset(json_train_path, text_pad_length, img_pad_length, audio_pad_length)
             # TO DO Probably want to implement shuffling here, or implement it as a method of the dataset
             sample_weights[task] = 1/len(tasks) # initialize so all tasks are weighted the same
+        total_steps = len(datasets[tasks[0]]) // batch_size # weird and asumes dataset same size for everything
     else:
         dataset = CustomDataset(json_train_path, text_pad_length, img_pad_length, audio_pad_length)
         dataloader = DataLoader(dataset, batch_size=batch_size, shuffle=shuffle) 
+        total_steps = len(dataloader) * num_epochs # Total number of training steps (epochs * batches)
     
-    print("Created Datasets\n")
-
-    # Total number of training steps (epochs * batches)
-    total_steps = len(dataloader) * num_epochs
+    print("Created Datasets")
+    print(f"Total Steps {total_steps}")
 
     # alternate scheduler below - probably no need for
     # scheduler = get_linear_schedule_with_warmup(optimizer,
@@ -104,10 +104,12 @@ def train_loop(model, optimizer, json_train_path, tasks, scheduler=None, json_va
     for epoch in range(num_epochs):
         # first train for an epoch
         # currently returns the updated loss histories and model is trained in place (but maybe the losses are too)
+        # I don't like how we need all these extra variables just for gradnorm -> can be solved using a class that saves these values
+        initial_task_losses, gradnorm_optimizer = None, None
         if training_method == "dynamic_difficulty_sampling":
-            loss_history, task_loss_history, steps = dynamic_difficulty_sampling_one_step(model, optimizer, datasets, tasks, loss_weights, epoch, steps, loss_history, task_loss_history, k=2, loss_setting="unweighted", batch_size=32, text_pad_length=500, img_pad_length=36, audio_pad_length=63, shuffle=True, device=torch.device("cuda" if torch.cuda.is_available() else "cpu"))
+            loss_history, task_loss_history, steps, initial_task_losses, gradnorm_optimizer = dynamic_difficulty_sampling_one_step(model, optimizer, datasets, tasks, loss_weights, epoch, steps, loss_history, task_loss_history, sample_weights=sample_weights, k=2, loss_setting=loss_setting, batch_size=batch_size, text_pad_length=text_pad_length, img_pad_length=img_pad_length, audio_pad_length=audio_pad_length, shuffle=shuffle, device=device, initial_task_losses=initial_task_losses, gradnorm_optimizer=gradnorm_optimizer)
         else:
-            loss_history, task_loss_history, steps = train_one_step(model, optimizer, dataloader, tasks, loss_weights, epoch, steps, loss_history, task_loss_history, training_method=training_method, loss_setting=loss_setting, device=device)
+            loss_history, task_loss_history, steps, initial_task_losses, gradnorm_optimizer = train_one_step(model, optimizer, dataloader, tasks, loss_weights, epoch, steps, loss_history, task_loss_history, training_method=training_method, loss_setting=loss_setting, device=device, initial_task_losses=initial_task_losses, gradnorm_optimizer=gradnorm_optimizer)
         
         # print(loss_history)
         # print(task_loss_history)
@@ -173,7 +175,7 @@ def train_loop(model, optimizer, json_train_path, tasks, scheduler=None, json_va
     return model, loss_history, task_loss_history, validation_results # note that loss_history has no meaning unless we add up loss functions
     # this should return another variable which contains model specific stuff (like loss histories, or sampling percentages of each task, etc.)
 
-def train_one_step(model, optimizer, dataloader, tasks, loss_weights, curr_epoch, steps, curr_loss_history, curr_task_loss_history, training_method="all_at_once", loss_setting="unweighted", device=torch.device("cuda" if torch.cuda.is_available() else "cpu")):
+def train_one_step(model, optimizer, dataloader, tasks, loss_weights, curr_epoch, steps, curr_loss_history, curr_task_loss_history, training_method="all_at_once", loss_setting="unweighted", device=torch.device("cuda" if torch.cuda.is_available() else "cpu"), initial_task_losses=None, gradnorm_optimizer=None):
 
         model.train() # here because we evaluate at the end of every epoch
         start_time = time.time() 
@@ -236,9 +238,6 @@ def train_one_step(model, optimizer, dataloader, tasks, loss_weights, curr_epoch
                     # we need initial task losses for gradnorm - for each epoch or for total?
                     initial_task_losses = {key: loss.detach() for key, loss in task_losses.items()} # initial code detaches these
                     gradnorm_optimizer = torch.optim.Adam([loss_weights], lr=0.001)
-                else:
-                    initial_task_losses = None
-                    gradnorm_optimizer = None
     
                 # Weight losses appropriately
                 # given a dictionary of losses for every task, handle the loss reweigthing
@@ -309,13 +308,13 @@ def train_one_step(model, optimizer, dataloader, tasks, loss_weights, curr_epoch
             if steps == 5:
                 break
 
-        return curr_loss_history, curr_task_loss_history, steps
+        return curr_loss_history, curr_task_loss_history, steps, initial_task_losses, gradnorm_optimizer
         # return model, task specific losses, final losses, model specificstuff
 
 # the main part here is how batching is done
 # this can probably best be handled using a custom data loader ? 
 # this is done in a way that only works for the one dataset multiple tasks method and is pretty model specific
-def dynamic_difficulty_sampling_one_step(model, optimizer, datasets, tasks, loss_weights, curr_epoch, steps, curr_loss_history, curr_task_loss_history, k=2, loss_setting="unweighted", batch_size=32, text_pad_length=500, img_pad_length=36, audio_pad_length=63, shuffle=True, device=torch.device("cuda" if torch.cuda.is_available() else "cpu")):
+def dynamic_difficulty_sampling_one_step(model, optimizer, datasets, tasks, loss_weights, curr_epoch, steps, curr_loss_history, curr_task_loss_history, sample_weights, k=2, loss_setting="unweighted", batch_size=32, text_pad_length=500, img_pad_length=36, audio_pad_length=63, shuffle=True, device=torch.device("cuda" if torch.cuda.is_available() else "cpu"), initial_task_losses=None, gradnorm_optimizer=None):
     # Dynamic Difficulty Sampling
     # Create a dataset for every individual task (here just four from the same data source)
     # We have to manually create every batch for dynamic difficulty sampling (I don't see how to do with DataLoader)
@@ -326,7 +325,6 @@ def dynamic_difficulty_sampling_one_step(model, optimizer, datasets, tasks, loss
     if steps == 0:
         print(f"Dynamic Difficulty Sampling on the following tasks: {[task for task in tasks]}")
         
-
     # keep track of where in the dataset we are
     dataset_indices = {}
     for task in tasks:
@@ -337,6 +335,7 @@ def dynamic_difficulty_sampling_one_step(model, optimizer, datasets, tasks, loss
     for task in tasks:
         accumulated_task_loss[task] = 0
 
+    num_batches=0
     # corresponds to iterating through batches - while no batch is exhausted
     while all(dataset_indices[task] < len(datasets[task]) for task in tasks):
         # update sampling weights every k iterations - again check if these steps should count from the begining
@@ -351,17 +350,18 @@ def dynamic_difficulty_sampling_one_step(model, optimizer, datasets, tasks, loss
             dprint(f"Updated Sample Weights {sample_weights}")
 
         dprint(f"Dataset Indices: {dataset_indices}")
+        dprint(f"Sampling Weights {sample_weights}")
 
         # determine how many data points to get from each task
         num_datas = {}
         for task in tasks:
-            num_datas[task] = max(math.ceil(sample_weights[task] * batch_size), 2)
+            num_datas[task] = max(math.ceil(sample_weights[task] * batch_size), 4) # minimum of 4 per batch
 
         true_batch_size = sum(num_datas.values()) # sum of number of samples from each task
         dprint(f"True Batch Size {true_batch_size}, Original {batch_size}")
 
         # using true batch size because enforcing minimum 4 samples may make batch size not equal to the true value
-        batch_text = torch.zeros((true_batch_size, text_pad_length))
+        batch_text = torch.zeros((true_batch_size, text_pad_length), dtype=torch.int)
         batch_text_mask = torch.zeros((true_batch_size, text_pad_length))
         batch_image = torch.zeros((true_batch_size, img_pad_length, 1024))
         batch_mask_img = torch.zeros((true_batch_size, img_pad_length))
@@ -374,6 +374,7 @@ def dynamic_difficulty_sampling_one_step(model, optimizer, datasets, tasks, loss
             start_idx = dataset_indices[task] # this is the first piece of data not used yet
             dataset_indices[task] += num_datas[task] # update start index
             batch_true_labels[task] = torch.zeros((num_datas[task], 2)) # store true y values for each task
+            dprint(f"Batch idx: {batch_idx}, Task start idx: {start_idx}, Updated start idx (after here): {dataset_indices[task]}")
             for i in range(num_datas[task]):
                 batch_text[batch_idx+i] = datasets[task][start_idx+i]["text"]
                 batch_text_mask[batch_idx+i] = datasets[task][start_idx+i]["text_mask"]
@@ -382,8 +383,8 @@ def dynamic_difficulty_sampling_one_step(model, optimizer, datasets, tasks, loss
                 batch_audio[batch_idx+i] = datasets[task][start_idx+i]["audio"]
                 batch_mask_audio[batch_idx+i] = datasets[task][start_idx+i]["audio_mask"]
                 batch_true_labels[task][i] = datasets[task][start_idx+i][task]
-                batch_idx += num_datas[task]
-        
+            
+            batch_idx += num_datas[task]
             # handle true labels separately because it is a dictionary
             batch_true_labels[task] = batch_true_labels[task].to(device)
 
@@ -443,9 +444,6 @@ def dynamic_difficulty_sampling_one_step(model, optimizer, datasets, tasks, loss
             # we need initial task losses for gradnorm - for each epoch or for total?
             initial_task_losses = {key: loss.detach() for key, loss in task_losses.items()} # initial code detaches these
             gradnorm_optimizer = torch.optim.Adam([loss_weights], lr=0.001) 
-        else:
-            initial_task_losses = None
-            gradnorm_optimizer = None
 
         # Remember that task_losses is unweighted - weight it when we need to
         loss, loss_weights = handle_losses(task_losses, loss_setting, loss_weights, steps, tasks, initial_task_losses=initial_task_losses, loss_optimizer=gradnorm_optimizer, model=model)
@@ -454,22 +452,23 @@ def dynamic_difficulty_sampling_one_step(model, optimizer, datasets, tasks, loss
         optimizer.step()
 
         curr_loss_history[steps] = loss # just the naive sum of losses for now
-        accumulated_total_loss[task] += task_losses[task]
+        accumulated_total_loss += loss
 
-        print(f"Batch {batch_idx} Total Loss: {loss}")
+        print(f"Batch {num_batches} Total Loss: {loss}")
         for i, task in enumerate(task_losses):
             print(f"Task {task}, Loss {task_losses[task]}")
             curr_task_loss_history[task][steps] = loss_weights[i] * task_losses[task]
             accumulated_task_loss[task] += loss_weights[i] * task_losses[task] # accumulate weighted losses
         print()
 
-        steps += 1
+        steps += 1 # steps from beginning
+        num_batches +=1 # batches for this epoch
 
         # halt early for testing
         if steps == 5:
             break
 
-    return model, curr_loss_history, curr_task_loss_history, steps
+    return curr_loss_history, curr_task_loss_history, steps, initial_task_losses, gradnorm_optimizer
 
 # this grad norm step should not be here
 def handle_losses(task_losses, loss_setting, loss_weights, steps, tasks, initial_task_losses=None, loss_optimizer=None, model=None):
