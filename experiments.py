@@ -1,10 +1,10 @@
-from helpers import initiate_pretrained_model
-from Model.TaskHeads import BinaryClassification
+from helpers import initiate_pretrained_model, initiate_model_new, multi_task_heads, multi_tasks
 import os
 import torch
 from torch import optim
 from train import train
 from transformers import AdamW, get_linear_schedule_with_warmup
+import pickle
 
 os.environ['CUDA_VISIBLE_DEVICES'] = '5'
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
@@ -17,7 +17,6 @@ torch.backends.cudnn.enabled = False
 
 # not sure why GPU doesn't work
 device = "cpu"
-
 
 # Define input shapes 
 batch_size = 16
@@ -43,25 +42,16 @@ lr_schedule_active = False
 reduce_on_plateau_lr_schdlr = torch.optim.lr_scheduler.ReduceLROnPlateau
 
 
-# Main Two Task Splits to recreate original code
-binary_tasks = ["binary"]
-multi_tasks = ["mature", "gory", "sarcasm", "slapstick"]
-
-multi_task_heads = {
-        "mature": BinaryClassification(),
-        "gory": BinaryClassification(),
-        "sarcasm": BinaryClassification(),
-        "slapstick": BinaryClassification()
-    }
-
-def recreate_multitask_experiment(epochs=1):
+def recreate_multitask_experiment(epochs=1, pretrained=True):
     # first initiate a pretrained (not finetuned model) with the proper multi task heads
-    model, _ = initiate_pretrained_model(multi_task_heads)
+    if pretrained:
+        model, _ = initiate_pretrained_model(multi_task_heads)
+    else:
+        model, _ = initiate_model_new(multi_task_heads)
     model.to(device)
 
     # AdamW optimizer with weight decay
     optimizer = AdamW(model.parameters(), lr=2e-5, betas=(0.9, 0.999), eps=1e-8, weight_decay=0.02)
-
 
     # using scheduler described in the paper (variables described in paper -> code has different variables)
     # we need val data to use the below, if it is not provided it is equivalent to no scheduler
@@ -75,7 +65,7 @@ def recreate_multitask_experiment(epochs=1):
 if __name__ == "__main__":
     # total loss of original experiment does not use loss weightings used - must perform again
     filename = 'recreate_multitask_1epoch.pkl'
-    model, loss_history, task_loss_history, validation_results = recreate_multitask_experiment()
+    model, loss_history, task_loss_history, validation_results = recreate_multitask_experiment(pretrained=False)
     print(f"Loss History {loss_history}")
     print(f"Task Loss History {task_loss_history}")
     print(f"Validation Results: {validation_results}")

@@ -2,7 +2,7 @@ import torch
 import torch.nn as nn
 import numpy as np
 
-debug = True
+debug = False
 
 def dprint(text):
     if debug:
@@ -84,7 +84,7 @@ def gradnorm(task_losses_dict, initial_task_losses_dict, model, layer, optimizer
     # Update model.loss_weights from backward pass
     optimizer.step() # we get gradients from grad norm here, and then we backprop them just to model weights
     
-    dprint(f"LOSS WEIGHTS AFTER OPTIMIZATION:", loss_weights)
+    dprint(f"LOSS WEIGHTS AFTER OPTIMIZATION:{loss_weights}")
 
     with torch.no_grad():
         loss_weights = loss_weights / loss_weights.sum() * T
