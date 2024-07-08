@@ -114,6 +114,16 @@ def transform_key(input_key):
             return f'{key_mapping[base_key]}.{y}'
     return input_key
 
+binary_tasks = ["binary"]
+multi_tasks = ["mature", "gory", "sarcasm", "slapstick"]
+
+multi_task_heads = {
+        "mature": BinaryClassification(),
+        "gory": BinaryClassification(),
+        "sarcasm": BinaryClassification(),
+        "slapstick": BinaryClassification()
+    }
+
 def initiate_pretrained_model(task_heads, debug=False):
     base_path = os.path.dirname(os.path.abspath(__file__))
     pretrained_weights_path = os.path.join(base_path, "checkpoint-pretraining/best_pretrain_matching.pth")
@@ -159,6 +169,16 @@ def initiate_pretrained_model(task_heads, debug=False):
 
     unified_model = UnifiedModel(base_model, task_heads)
     return unified_model, base_model
+
+# initiate model from scratch
+def initiate_model_new(task_heads):
+    base_model = Bert_Model()
+    unified_model = UnifiedModel(base_model, task_heads)
+    return unified_model, base_model
+
+
+# THE BELOW IS CURRENTLY NOT USED BUT COULD NEED HELP
+
 
 import sys
 import time

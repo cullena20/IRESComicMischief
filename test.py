@@ -10,6 +10,7 @@ from evaluate import evaluate
 import os
 import re # needed to load the state dict into the slightly modified model
 import psutil
+from transformers import AdamW
 
 
 os.environ['CUDA_VISIBLE_DEVICES'] = '5'
@@ -33,7 +34,7 @@ def get_memory_usage():
 
 
 # Define input shapes 
-batch_size = 8
+batch_size = 16
 sequence_length_text = 500 # these are what are currently used
 sequence_length_image = 36 # but model should work without
 sequence_length_audio = 63
@@ -117,13 +118,14 @@ def dynamic_difficulty_sample_test(model, device, tasks):
     dynamic_difficulty_sampling(model, optimizer, "train_features_lrec_camera.json", tasks, loss_setting="unweighted", batch_size=32, num_epochs=1, text_pad_length=500, img_pad_length=36, audio_pad_length=63, shuffle=True, device=device)
 
 # REFACTORED TRAINING PASS
+# also with optimizer and scheduler
 def basic_updated_train_pass(model, device, tasks, training_method="all_at_once", loss_setting="unweighted"):
-    optimizer = torch.optim.Adam(model.parameters(), lr=0.001)
-    train_loop(model, optimizer, "train_features_lrec_camera.json", tasks, loss_setting=loss_setting, training_method=training_method, batch_size=batch_size, num_epochs=1, shuffle=False, device=device)
-
-def updated_dynamic_difficulty_sample(model, device, tasks, training_method="all_at_once", loss_setting="unweighted"):
-    optimizer = torch.optim.Adam(model.parameters(), lr=0.001)
-    train_loop(model, optimizer, "train_features_lrec_camera.json", tasks, loss_setting=loss_setting, training_method=training_method, batch_size=batch_size, num_epochs=1, shuffle=False, device=device)
+    optimizer = AdamW(model.parameters(), lr=2e-5, betas=(0.9, 0.999), eps=1e-8, weight_decay=0.02)
+    scheduler = torch.optim.lr_scheduler.ReduceLROnPlateau(optimizer, factor=0.5, min_lr=1e-8)
+    model, loss_history, task_loss_history, validation_results = train_loop(model, optimizer, "train_features_lrec_camera.json", tasks, scheduler=scheduler, loss_setting=loss_setting, training_method=training_method, batch_size=batch_size, num_epochs=1, shuffle=False, device=device)
+    print(f"Loss History {loss_history}")
+    print(f"Task Loss History {task_loss_history}")
+    # print(f"Validation Results: {validation_results}")
 
 
 # GPU ISSUES
@@ -140,11 +142,14 @@ if __name__ == "__main__":
         torch.cuda.empty_cache()
 
     # add if statement depending on whether directory has file
-    # model, _ = initiate_model_new()
-    model, _ = initiate_pretrained_model(multi_task_heads)
+    model, _ = initiate_model_new()
+    # model, _ = initiate_pretrained_model(multi_task_heads) cA6587!@
     model.to(device)
 
-    basic_updated_train_pass(model, device, multi_tasks, loss_setting="predefined_weights")
+    # basic_updated_train_pass(model, device, multi_tasks, loss_setting="predefined_weights")
+    basic_updated_train_pass(model, device, multi_tasks, loss_setting="gradnorm")
+    basic_updated_train_pass(model, device, multi_tasks, training_method="dynamic_difficulty_sampling")
+    basic_updated_train_pass(model, device, multi_tasks, training_method="dynamic_difficulty_sampling", loss_setting="predefined_weights")
 
     # basic_forward_pass(model) # seems to work, including on GPU
     # basic_train_pass(model, device, binary_tasks) # loss on order of 500 when beginning because of regularization (like original model)
