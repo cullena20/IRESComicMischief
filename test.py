@@ -4,7 +4,7 @@ import numpy as np
 from Model.UnifiedModel import UnifiedModel
 from Model.BaseModel import Bert_Model
 from Model.TaskHeads import BinaryClassification, MultiTaskClassification
-from train import train, dynamic_difficulty_sampling # are these names an issue
+from train import train, dynamic_difficulty_sampling, train_loop 
 from helpers import initiate_pretrained_model
 from evaluate import evaluate
 import os
@@ -116,6 +116,16 @@ def dynamic_difficulty_sample_test(model, device, tasks):
     optimizer = torch.optim.Adam(model.parameters(), lr=0.001).to(device)
     dynamic_difficulty_sampling(model, optimizer, "train_features_lrec_camera.json", tasks, loss_setting="unweighted", batch_size=32, num_epochs=1, text_pad_length=500, img_pad_length=36, audio_pad_length=63, shuffle=True, device=device)
 
+# REFACTORED TRAINING PASS
+def basic_updated_train_pass(model, device, tasks, training_method="all_at_once", loss_setting="unweighted"):
+    optimizer = torch.optim.Adam(model.parameters(), lr=0.001)
+    train_loop(model, optimizer, "train_features_lrec_camera.json", tasks, loss_setting=loss_setting, training_method=training_method, batch_size=batch_size, num_epochs=1, shuffle=False, device=device)
+
+def updated_dynamic_difficulty_sample(model, device, tasks, training_method="all_at_once", loss_setting="unweighted"):
+    optimizer = torch.optim.Adam(model.parameters(), lr=0.001)
+    train_loop(model, optimizer, "train_features_lrec_camera.json", tasks, loss_setting=loss_setting, training_method=training_method, batch_size=batch_size, num_epochs=1, shuffle=False, device=device)
+
+
 # GPU ISSUES
 # The GPU runs out of memory with batch size greater th(despite it working on CPU)
 # Also, after a view runs you get NaN errors -> the GPU doesn't report this clearly, but I think it's the same error
@@ -134,9 +144,7 @@ if __name__ == "__main__":
     model, _ = initiate_pretrained_model(multi_task_heads)
     model.to(device)
 
-    # temporary thing to pinpoint location of NaN errors
-    # register_nan_hooks(model)
-
+    basic_updated_train_pass(model, device, multi_tasks, loss_setting="predefined_weights")
 
     # basic_forward_pass(model) # seems to work, including on GPU
     # basic_train_pass(model, device, binary_tasks) # loss on order of 500 when beginning because of regularization (like original model)
@@ -144,7 +152,7 @@ if __name__ == "__main__":
     # basic_train_pass(model, device, multi_tasks, loss_setting="predefined_weights") # multi task setting in paper - loss less than one beginning (no regularization)
     # basic_train_pass(model, device, multi_tasks, training_method="round_robin")
     # basic_eval_pass(model, device, binary_tasks)
-    basic_eval_pass(model, device, multi_tasks)
+    # basic_eval_pass(model, device, multi_tasks)
     # dynamic_difficulty_sample_test(model, device, multi_tasks) # loss starts around 2.5, same as unweighted as it should be
     # print(model.base_model.named_parameters)
     # basic_train_pass(model, device, multi_tasks, loss_setting="gradnorm")
