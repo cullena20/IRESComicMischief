@@ -2,3 +2,7 @@ __pycache__/
 Model/__pycache__/
 i3D-vggish-features/
 checkpoint-pretraining/
+
+Results/Test/Test.pkl
+recreate_multitask_1epoch.pkl
+recreate_multitask_10epoch.pkl
