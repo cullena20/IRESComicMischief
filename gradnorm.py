@@ -22,7 +22,7 @@ def gradnorm(task_losses_dict, initial_task_losses_dict, model, layer, optimizer
 
     T = len(task_losses) # we normalize to this quantity
 
-    # print(f"Initial Model Weights: {loss_weights}")
+    dprint(f"INITIAL MODEL LOSS WEIGHTS: {loss_weights}")
 
     # first compute gradients for each task
 
@@ -93,7 +93,7 @@ def gradnorm(task_losses_dict, initial_task_losses_dict, model, layer, optimizer
     with torch.no_grad():
         loss_weights = loss_weights / loss_weights.sum() * T
 
-    # print(f"Updated Loss Weights {loss_weights}")
+    dprint(f"LOSS WEIGHTS AFTER NORMALIZING {loss_weights}")
 
     # we might also want to return loss ratios to track progress later on
     return loss_weights

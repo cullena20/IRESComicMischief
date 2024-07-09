@@ -5,8 +5,6 @@ import torch.nn as nn
 from finetuning_dataloader import CustomDataset
 from gradnorm import gradnorm
 import math
-from transformers import AdamW, get_linear_schedule_with_warmup # can probably delete, should be elsewhere anyway
-from evaluate import evaluate
 
 from helpers import compute_l2_reg_val
 
@@ -599,6 +597,7 @@ def train(model, optimizer, json_train_path, tasks, scheduler=None, json_val_pat
 
     steps = 0 # a step is one batch aka one training step
     for epoch in range(num_epochs):
+        model.train() # here because we evaluate at the end of every epoch
         model.train() # here because we evaluate at the end of every epoch
         print(f"EPOCH: {epoch}")
         start_time = time.time() 

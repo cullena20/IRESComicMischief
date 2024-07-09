@@ -416,3 +416,5 @@ def register_nan_hooks(model):
             module.register_forward_hook(hook_fn)
 
 ######
+
+#    return features

@@ -98,7 +98,19 @@ def basic_train_pass(model, device, tasks, training_method="all_at_once", loss_s
     train(model, optimizer, "train_features_lrec_camera.json", tasks, loss_setting=loss_setting, training_method=training_method, batch_size=batch_size, num_epochs=1, shuffle=False, device=device)
 
 def basic_eval_pass(model, device, tasks):
-    accuracies, f1_scores, average_accuracy, average_f1_score, val_average_total_loss, val_average_task_loss, all_labels, all_true_labels = evaluate(model, "test_features_lrec_camera.json", tasks, batch_size=batch_size, shuffle=False, device=device)
+    accuracies, f1_scores, average_accuracy, average_f1_score, val_average_total_loss, val_average_task_loss, all_labels, all_true_labels = accuracies, f1_scores, average_accuracy, average_f1_score, val_average_total_loss, val_average_task_loss, all_labels, all_true_labels = evaluate(model, "test_features_lrec_camera.json", tasks, batch_size=batch_size, shuffle=False, device=device)
+    for task in tasks:
+        print(f"Task {task}")
+        print(f"Number of items: {len(all_labels[task])}")
+        print(f"Predictions: {all_labels[task]}")
+        print(f"True: {all_true_labels[task]}")
+        print(f"Accuracy: {accuracies[task]}, F1 Score: {f1_scores[task]:.4f}")
+        print(f"Average Task Loss {val_average_task_loss[task]}")
+        print()
+    
+    print(f"Average Total Loss {val_average_total_loss}")
+    print(f"Average Accuracy: {average_accuracy}")
+    print(f"Average F1 Score: {average_f1_score}")
     for task in tasks:
         print(f"Task {task}")
         print(f"Number of items: {len(all_labels[task])}")
