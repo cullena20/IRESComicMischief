@@ -7,6 +7,7 @@ from Model.TaskHeads import BinaryClassification, MultiTaskClassification
 import os
 import re
 
+machine = "INAOE" # used for identifying pretrained weights directory
 
 # NOTE ON PADDING AND MASKING:
 # Text: pad 0s at beginning (so final result is of form [0, 0, ..., 12, 15]) and perform mask accordingly
@@ -125,9 +126,14 @@ multi_task_heads = {
     }
 
 def initiate_pretrained_model(task_heads, debug=False):
-    base_path = os.path.dirname(os.path.abspath(__file__))
-    pretrained_weights_path = os.path.join(base_path, "checkpoint-pretraining/best_pretrain_matching.pth")
+    if machine == "INAOE":
+        pretrained_weights_path = os.path.join("/usuarios/arnold.moralem/Data/", "checkpoint-pretraining/best_pretrain_matching.pth")
+    else:
+        base_path = os.path.dirname(os.path.abspath(__file__))
+        pretrained_weights_path = os.path.join(base_path, "checkpoint-pretraining/best_pretrain_matching.pth")
+    
     base_model = Bert_Model()
+
     pretrained_state_dict = torch.load(pretrained_weights_path)
     pretrained_model_state = {transform_key(k): v for k, v in pretrained_state_dict["model_state"].items()}
 

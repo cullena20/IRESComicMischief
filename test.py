@@ -10,7 +10,6 @@ from evaluate import evaluate
 import os
 import re # needed to load the state dict into the slightly modified model
 import psutil
-from transformers import AdamW
 
 
 os.environ['CUDA_VISIBLE_DEVICES'] = '5'
@@ -23,7 +22,7 @@ if torch.cuda. \
 torch.backends.cudnn.enabled = False
 
 # not sure why GPU doesn't work
-device = "cpu"
+# device = "cpu"
 
 ## TEMPORARY
 # Function to get the memory usage in MB
@@ -120,12 +119,12 @@ def dynamic_difficulty_sample_test(model, device, tasks):
 # REFACTORED TRAINING PASS
 # also with optimizer and scheduler
 def basic_updated_train_pass(model, device, tasks, training_method="all_at_once", loss_setting="unweighted"):
-    optimizer = AdamW(model.parameters(), lr=2e-5, betas=(0.9, 0.999), eps=1e-8, weight_decay=0.02)
+    optimizer = torch.optim.AdamW(model.parameters(), lr=2e-5, betas=(0.9, 0.999), eps=1e-8, weight_decay=0.02)
     scheduler = torch.optim.lr_scheduler.ReduceLROnPlateau(optimizer, factor=0.5, min_lr=1e-8)
-    model, loss_history, task_loss_history, validation_results = train_loop(model, optimizer, "train_features_lrec_camera.json", tasks, scheduler=scheduler, loss_setting=loss_setting, training_method=training_method, batch_size=batch_size, num_epochs=1, shuffle=False, device=device)
+    model, loss_history, task_loss_history, validation_results = train_loop(model, optimizer, "train_features_lrec_camera.json", tasks, json_val_path="val_features_lrec_camera.json", scheduler=scheduler, loss_setting=loss_setting, training_method=training_method, batch_size=batch_size, num_epochs=1, shuffle=False, device=device)
     print(f"Loss History {loss_history}")
     print(f"Task Loss History {task_loss_history}")
-    # print(f"Validation Results: {validation_results}")
+    print(f"Validation Results: {validation_results}")
 
 
 # GPU ISSUES
@@ -142,14 +141,14 @@ if __name__ == "__main__":
         torch.cuda.empty_cache()
 
     # add if statement depending on whether directory has file
-    model, _ = initiate_model_new()
-    # model, _ = initiate_pretrained_model(multi_task_heads) cA6587!@
+    # model, _ = initiate_model_new()
+    model, _ = initiate_pretrained_model(multi_task_heads)
     model.to(device)
 
-    # basic_updated_train_pass(model, device, multi_tasks, loss_setting="predefined_weights")
+    basic_updated_train_pass(model, device, multi_tasks, loss_setting="predefined_weights")
     # basic_updated_train_pass(model, device, multi_tasks, loss_setting="gradnorm") # this is a good amount slower, maybe slower than it should be?
     # basic_updated_train_pass(model, device, multi_tasks, training_method="dynamic_difficulty_sampling")
-    basic_updated_train_pass(model, device, multi_tasks, training_method="dynamic_difficulty_sampling", loss_setting="gradnorm")
+    # basic_updated_train_pass(model, device, multi_tasks, training_method="dynamic_difficulty_sampling", loss_setting="gradnorm")
 
     # basic_forward_pass(model) # seems to work, including on GPU
     # basic_train_pass(model, device, binary_tasks) # loss on order of 500 when beginning because of regularization (like original model)

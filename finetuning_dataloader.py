@@ -13,6 +13,8 @@ def dprint(text):
     if debug:
         print(text)
 
+machine = "INAOE" # adjust this to control the location from which data is loaded
+
 # I think there's issues with the padding and masking (also doesn't padding set to -infinity)
 
 # so here is the data we need to load
@@ -58,7 +60,10 @@ class CustomDataset(Dataset):
         
         # FIX THIS
         # NOTE THAT ORIGINAL CODE DOES ERROR HANDLING HERE
-        image_path = os.path.join(self.base_dir, "i3D-vggish-features/i3d_vecs_extended_merged")
+        if machine == "INAOE":
+            image_path = os.path.join("/usuarios/arnold.moralem/Data/", "i3D-vggish-features/i3d_vecs_extended_merged")
+        else:
+            image_path = os.path.join(self.base_dir, "i3D-vggish-features/i3d_vecs_extended_merged")
 
         # ERROR HANDLING BELOW NEEDS UNIFYING
 
@@ -75,6 +80,7 @@ class CustomDataset(Dataset):
                 image_vec = a1 + a2
                 masked_img = mask_vector(self.img_pad_length, image_vec)
                 image_vec = pad_segment(image_vec, self.img_pad_length)
+                dprint("Image found")
             except:
                 dprint("Image not found")
                 image_vec = torch.zeros((self.img_pad_length, 1024)) 
@@ -89,12 +95,17 @@ class CustomDataset(Dataset):
         dprint(f"IMAGE Masked {masked_img}")
 
         # Load audio features
-        audio_path = os.path.join(self.base_dir, "i3D-vggish-features/vgg_vecs_extended_merged/")
+        if machine == "INAOE":
+            audio_path = os.path.join("/usuarios/arnold.moralem/Data/", "i3D-vggish-features/vgg_vecs_extended_merged/")
+        else:
+            audio_path = os.path.join(self.base_dir, "i3D-vggish-features/vgg_vecs_extended_merged/")
+
         audio_path = audio_path+key+"_vggish.npy"
 
         try:
             audio_vec = np.load(audio_path)
             audio_vec = torch.tensor(audio_vec)
+            dprint("Audio found")
         except FileNotFoundError:
             dprint("Audio not found")
             audio_vec = torch.zeros((1, 128))

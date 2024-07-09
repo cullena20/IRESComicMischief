@@ -55,7 +55,7 @@ def evaluate(model, json_data, tasks, loss_weights=None, batch_size=16, text_pad
                 # NOTE: for now this assumes loss weights are handed in as a parameter and not part of the model
                 total_loss += loss_weights[i] * temp_loss
                 
-                val_task_loss_history[task][steps] = temp_loss
+                val_task_loss_history[task][steps] = loss_weights[i] * temp_loss
 
                 # each of these has labels for a batch
                 batch_label = (batch_pred[:, 1] > 0.5).cpu().numpy()  # Using the second column for binary classification
@@ -95,8 +95,8 @@ def evaluate(model, json_data, tasks, loss_weights=None, batch_size=16, text_pad
     # return average loss. I think this makes sense
     # using [:steps] is only important when we halt validation early for debugging
     # otherwise steps should equal len(dataloader)
-    val_average_total_loss = val_total_loss_history[:steps].mean()
-    val_average_task_loss = {task: loss_history[:steps].mean() for task, loss_history in val_task_loss_history.items()}
+    val_average_total_loss = val_total_loss_history.mean()
+    val_average_task_loss = {task: loss_history.mean() for task, loss_history in val_task_loss_history.items()}
 
     # TO RETURN
     # Accuracies and F1 Scores for every task

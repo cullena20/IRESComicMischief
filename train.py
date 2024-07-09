@@ -18,6 +18,11 @@ import time
 # also should scheduler step at every batch or every epoch
 # also how validation results are handled is terrible right now
 
+# LOSS WEIGHTS ARE NOT CURRENLY USED IN OPTIMIZATION EXCEPT FOR GRADNORM
+
+# this should really be elsewhere
+k=15
+
 debug = False
 
 def dprint(text):
@@ -67,7 +72,9 @@ def train_loop(model, optimizer, json_train_path, tasks, scheduler=None, json_va
             datasets[task] = CustomDataset(json_train_path, text_pad_length, img_pad_length, audio_pad_length)
             # TO DO Probably want to implement shuffling here, or implement it as a method of the dataset
             sample_weights[task] = 1/len(tasks) # initialize so all tasks are weighted the same
-        total_steps = len(datasets[tasks[0]]) // batch_size # weird and asumes dataset same size for everything
+        total_steps = math.ceil(len(datasets[tasks[0]]) / batch_size) * len(tasks) * num_epochs # weird and asumes dataset same size for everything
+        # the times 4 is because we really need to go through every data point from every task
+        # this needs some thinking about and can be really optimized
     else:
         dataset = CustomDataset(json_train_path, text_pad_length, img_pad_length, audio_pad_length)
         dataloader = DataLoader(dataset, batch_size=batch_size, shuffle=shuffle) 
@@ -101,15 +108,19 @@ def train_loop(model, optimizer, json_train_path, tasks, scheduler=None, json_va
 
     steps = 0 # a step is one batch aka one training step
 
+    best_f1 = 0
+    best_model_weights = None
+
+    initial_task_losses, gradnorm_optimizer = None, None
     for epoch in range(num_epochs):
         # first train for an epoch
         # currently returns the updated loss histories and model is trained in place (but maybe the losses are too)
         # I don't like how we need all these extra variables just for gradnorm -> can be solved using a class that saves these values
-        initial_task_losses, gradnorm_optimizer = None, None
+        
         if training_method == "dynamic_difficulty_sampling":
-            loss_history, task_loss_history, steps, initial_task_losses, gradnorm_optimizer = dynamic_difficulty_sampling_one_step(model, optimizer, datasets, tasks, loss_weights, epoch, steps, loss_history, task_loss_history, sample_weights=sample_weights, k=2, loss_setting=loss_setting, batch_size=batch_size, text_pad_length=text_pad_length, img_pad_length=img_pad_length, audio_pad_length=audio_pad_length, shuffle=shuffle, device=device, initial_task_losses=initial_task_losses, gradnorm_optimizer=gradnorm_optimizer)
+            loss_history, task_loss_history, steps, loss_weights, initial_task_losses, gradnorm_optimizer = dynamic_difficulty_sampling_one_step(model, optimizer, datasets, tasks, loss_weights, epoch, steps, loss_history, task_loss_history, sample_weights=sample_weights, k=k, loss_setting=loss_setting, batch_size=batch_size, text_pad_length=text_pad_length, img_pad_length=img_pad_length, audio_pad_length=audio_pad_length, shuffle=shuffle, device=device, initial_task_losses=initial_task_losses, gradnorm_optimizer=gradnorm_optimizer)
         else:
-            loss_history, task_loss_history, steps, initial_task_losses, gradnorm_optimizer = train_one_step(model, optimizer, dataloader, tasks, loss_weights, epoch, steps, loss_history, task_loss_history, training_method=training_method, loss_setting=loss_setting, device=device, initial_task_losses=initial_task_losses, gradnorm_optimizer=gradnorm_optimizer)
+            loss_history, task_loss_history, steps, loss_weights, initial_task_losses, gradnorm_optimizer = train_one_step(model, optimizer, dataloader, tasks, loss_weights, epoch, steps, loss_history, task_loss_history, training_method=training_method, loss_setting=loss_setting, device=device, initial_task_losses=initial_task_losses, gradnorm_optimizer=gradnorm_optimizer)
         
         # print(loss_history)
         # print(task_loss_history)
@@ -130,6 +141,7 @@ def train_loop(model, optimizer, json_train_path, tasks, scheduler=None, json_va
             print(f"Average Total Loss {val_average_total_loss}")
             print(f"Average Accuracy: {average_accuracy}")
             print(f"Average F1 Score: {average_f1_score}")
+            print()
 
             # Update the dictionary with the current epoch results
             for task, value in accuracies.items():
@@ -156,6 +168,9 @@ def train_loop(model, optimizer, json_train_path, tasks, scheduler=None, json_va
             if scheduler is not None:
                 scheduler.step(average_f1_score)
 
+            if average_f1_score > best_f1:
+                best_f1 = average_f1_score
+                best_model_weights = model.state_dict()
 
     # prepare final results and return
     # Convert lists to tensors
@@ -172,7 +187,7 @@ def train_loop(model, optimizer, json_train_path, tasks, scheduler=None, json_va
     validation_results["average_f1_score"] = torch.tensor(validation_results["average_f1_score"])
     validation_results["val_average_total_loss"] = torch.tensor(validation_results["val_average_total_loss"])
 
-    return model, loss_history, task_loss_history, validation_results # note that loss_history has no meaning unless we add up loss functions
+    return best_model_weights, loss_history, task_loss_history, validation_results # note that loss_history has no meaning unless we add up loss functions
     # this should return another variable which contains model specific stuff (like loss histories, or sampling percentages of each task, etc.)
 
 def train_one_step(model, optimizer, dataloader, tasks, loss_weights, curr_epoch, steps, curr_loss_history, curr_task_loss_history, training_method="all_at_once", loss_setting="unweighted", device=torch.device("cuda" if torch.cuda.is_available() else "cpu"), initial_task_losses=None, gradnorm_optimizer=None):
@@ -249,13 +264,11 @@ def train_one_step(model, optimizer, dataloader, tasks, loss_weights, curr_epoch
                 # Update Loss Histories
                 curr_loss_history[steps] = loss
 
-                print(f"Batch {batch_idx} Total Loss: {loss}")
+                #print(f"Batch {batch_idx} Total Loss: {loss}")
                 for i, task in enumerate(task_losses):
-                    print(f"Task {task}, Loss {task_losses[task]}")
+                    #print(f"Task {task}, Loss {task_losses[task]}")
                     curr_task_loss_history[task][steps] = loss_weights[i] * task_losses[task]
-                print()
-
-                steps += 1
+                #print()
 
             # CULLEN: INITIAL ROUND ROBIN IMPLEMENTATION - total loss history not used here
             # Take as input the task specific heads you wish to use
@@ -287,8 +300,6 @@ def train_one_step(model, optimizer, dataloader, tasks, loss_weights, curr_epoch
                     curr_task_loss_history[task][steps] = loss # update the task loss history with the current loss
                     # WARNING: There are 4 * more steps here because each training example is used for four backprop steps
 
-                steps += 1
-
             # IDEA - could loss reweighting have a roll here at all?
             # combined idea - Loss reweighting on round robin instead of
             # We would train one task at a time but weight them differently
@@ -299,16 +310,18 @@ def train_one_step(model, optimizer, dataloader, tasks, loss_weights, curr_epoch
 
             # TO DO: This way of reporting loss doesn't make sense with round robin (have to divide total loss by 4 * batch_idx + 1)
             if (batch_idx + 1) % 10 == 0:
-                print(f'Epoch [{curr_epoch + 1}, Step [{batch_idx + 1}/{len(dataloader)}], Total Loss: {loss:0.4f}, Time: {time.time() - start_time:.2f}s')
+                print(f'Epoch [{curr_epoch + 1}, Step [{steps+1}], Total Loss: {loss:0.4f}, Time: {time.time() - start_time:.2f}s')
                 for task, task_loss in task_losses.items():
                     print(f"Task {task}, Loss {task_loss}")
                 print()
 
+            steps += 1
+
             # halt early for testing
-            if steps == 5:
+            if debug and steps == 5:
                 break
 
-        return curr_loss_history, curr_task_loss_history, steps, initial_task_losses, gradnorm_optimizer
+        return curr_loss_history, curr_task_loss_history, steps, loss_weights, initial_task_losses, gradnorm_optimizer
         # return model, task specific losses, final losses, model specificstuff
 
 # the main part here is how batching is done
@@ -322,6 +335,9 @@ def dynamic_difficulty_sampling_one_step(model, optimizer, datasets, tasks, loss
     # Here we calculate the loss for every task, and calculate the unweighted sum
     # Every k steps we update the sampling weights by averaging out task losses and total loss and taking the ratio (task_weight = average_task_loss / average_total_loss)
     # We continue until one dataset is exhausted (maybe not the best way)
+    model.train()
+    start_time = time.time()
+    
     if steps == 0:
         print(f"Dynamic Difficulty Sampling on the following tasks: {[task for task in tasks]}")
         
@@ -335,19 +351,27 @@ def dynamic_difficulty_sampling_one_step(model, optimizer, datasets, tasks, loss
     for task in tasks:
         accumulated_task_loss[task] = 0
 
+    print(f"Number of Data Points {len(datasets[task])} / Batch Size {batch_size} = Steps {len(datasets[task]) / batch_size}")
+
     num_batches=0
     # corresponds to iterating through batches - while no batch is exhausted
     while all(dataset_indices[task] < len(datasets[task]) for task in tasks):
         # update sampling weights every k iterations - again check if these steps should count from the begining
         if steps != 0 and steps % k == 0: 
             average_loss = accumulated_total_loss / k # average total loss
-            dprint(f"Average Loss {average_loss}")
+            print(f"Average Total Loss {average_loss}")
 
             average_task_losses = {task: loss/k for task, loss in accumulated_task_loss.items()} # average loss per task
             print(f"Average Loss Per Task: {[f'{task}: {task_loss}' for task, task_loss in average_task_losses.items()]}")
 
             sample_weights = {task: average_task_losses[task]/average_loss for task in tasks}
-            dprint(f"Updated Sample Weights {sample_weights}")
+            print(f"Updated Sample Weights {sample_weights}")
+
+            # reset these values
+            accumulated_total_loss = 0
+            accumulated_task_loss = {}
+            for task in tasks:
+                accumulated_task_loss[task] = 0
 
         dprint(f"Dataset Indices: {dataset_indices}")
         dprint(f"Sampling Weights {sample_weights}")
@@ -451,24 +475,39 @@ def dynamic_difficulty_sampling_one_step(model, optimizer, datasets, tasks, loss
         loss.backward()
         optimizer.step()
 
-        curr_loss_history[steps] = loss # just the naive sum of losses for now
+        # steps can get messed up due to the reordering of stuff
+        # we want a more robust solution, but this is fine for now
+        try:
+            curr_loss_history[steps] = loss # just the naive sum of losses for now
+        except:
+            pass
         accumulated_total_loss += loss
 
-        print(f"Batch {num_batches} Total Loss: {loss}")
+        # print(f"Batch {num_batches} Total Loss: {loss}")
         for i, task in enumerate(task_losses):
-            print(f"Task {task}, Loss {task_losses[task]}")
-            curr_task_loss_history[task][steps] = loss_weights[i] * task_losses[task]
-            accumulated_task_loss[task] += loss_weights[i] * task_losses[task] # accumulate weighted losses
-        print()
+            # print(f"Task {task}, Loss {task_losses[task]}")
+            # need more robust solution to the below
+            try:
+                curr_task_loss_history[task][steps] = loss_weights[i] * task_losses[task]
+            except:
+                pass
+            accumulated_task_loss[task] += (loss_weights[i] * task_losses[task]) # accumulate weighted losses  
+
+        if (num_batches + 1) % 10 == 0:
+            print(f'Epoch [{curr_epoch + 1}, Step [{steps+1}], Total Loss: {loss:0.4f}, Time: {time.time() - start_time:.2f}s')
+            for task, task_loss in task_losses.items():
+                print(f"Task {task}, Loss {task_loss}")
+                print(f"Task {task} Current Index: {dataset_indices[task]}")
+            print()
 
         steps += 1 # steps from beginning
         num_batches +=1 # batches for this epoch
 
         # halt early for testing
-        if steps == 5:
+        if debug and steps == 5:
             break
 
-    return curr_loss_history, curr_task_loss_history, steps, initial_task_losses, gradnorm_optimizer
+    return curr_loss_history, curr_task_loss_history, steps, loss_weights, initial_task_losses, gradnorm_optimizer
 
 # this grad norm step should not be here
 def handle_losses(task_losses, loss_setting, loss_weights, steps, tasks, initial_task_losses=None, loss_optimizer=None, model=None):
@@ -803,7 +842,7 @@ def train(model, optimizer, json_train_path, tasks, scheduler=None, json_val_pat
 
 # they don't normalize losses, we probably should
 # k should be 100, but 3 here for speed
-def dynamic_difficulty_sampling(model, optimizer, json_train_path, tasks, k=2, loss_setting="unweighted", batch_size=32, num_epochs=1, text_pad_length=500, img_pad_length=36, audio_pad_length=63, shuffle=True, device=torch.device("cuda" if torch.cuda.is_available() else "cpu")):
+def dynamic_difficulty_sampling(model, optimizer, json_train_path, tasks, k=15, loss_setting="unweighted", batch_size=32, num_epochs=1, text_pad_length=500, img_pad_length=36, audio_pad_length=63, shuffle=True, device=torch.device("cuda" if torch.cuda.is_available() else "cpu")):
     # Dynamic Difficulty Sampling
     # Create a dataset for every individual task (here just four from the same data source)
     # We have to manually create every batch for dynamic difficulty sampling (I don't see how to do with DataLoader)

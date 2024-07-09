@@ -22,7 +22,7 @@ def gradnorm(task_losses_dict, initial_task_losses_dict, model, layer, optimizer
 
     T = len(task_losses) # we normalize to this quantity
 
-    dprint(f"INITIAL MODEL LOSS WEIGHTS: {loss_weights}")
+    # print(f"Initial Model Weights: {loss_weights}")
 
     # first compute gradients for each task
 
@@ -33,7 +33,11 @@ def gradnorm(task_losses_dict, initial_task_losses_dict, model, layer, optimizer
     for i in range(len(task_losses)):
         # THE BELOW IS JUST FOR TESTING - THIS SHOULD BE HANDLED BY PASSING IN THE RIGHT STUFF
         parameters = list(layer.parameters())
-        parameters = parameters[-10:]
+        parameters = parameters[-15:] # using last 15 layers - these are all the self attention layers (maybe only need some parts)
+
+        # for name, param in list(layer.named_parameters())[-15:]:
+        #     print(name)
+        # exit()
 
         # need to handle layer as input
         dprint(f"Task {i}, Loss: {task_losses[i]}, Requires Grad: {task_losses[i].requires_grad}")
@@ -89,7 +93,7 @@ def gradnorm(task_losses_dict, initial_task_losses_dict, model, layer, optimizer
     with torch.no_grad():
         loss_weights = loss_weights / loss_weights.sum() * T
 
-    dprint(f"LOSS WEIGHTS AFTER NORMALIZING {loss_weights}")
+    # print(f"Updated Loss Weights {loss_weights}")
 
     # we might also want to return loss ratios to track progress later on
     return loss_weights
