@@ -84,7 +84,7 @@ def evaluate(model, json_data, tasks, loss_weights=None, batch_size=16, text_pad
         # print(all_labels[task])
         # print(all_true_labels[task])
         accuracies[task] = accuracy_score(all_labels[task], all_true_labels[task])
-        f1_scores[task] = f1_score(all_labels[task], all_true_labels[task], average='binary')
+        f1_scores[task] = f1_score(all_labels[task], all_true_labels[task], average='macro') # macro
 
         # print(f"Accuracy: {accuracies[task]}, F1 Score: {f1_scores[task]:.4f}")
 

@@ -2,7 +2,7 @@ import torch
 import torch.nn as nn
 import numpy as np
 
-debug = False
+debug = True
 
 def dprint(text):
     if debug:
@@ -31,7 +31,6 @@ def gradnorm(task_losses_dict, initial_task_losses_dict, model, layer, optimizer
 
     gradient_norms = [] # G_W^i(t) in paper
     for i in range(len(task_losses)):
-        # THE BELOW IS JUST FOR TESTING - THIS SHOULD BE HANDLED BY PASSING IN THE RIGHT STUFF
         parameters = list(layer.parameters())
         parameters = parameters[-15:] # using last 15 layers - these are all the self attention layers (maybe only need some parts)
 
@@ -59,12 +58,12 @@ def gradnorm(task_losses_dict, initial_task_losses_dict, model, layer, optimizer
     dprint(f"Gradient Norms: {gradient_norms}")
 
     # compute average gradient
-    gradients_norm_avg = gradient_norms.mean() # .detach() ?
+    gradients_norm_avg = gradient_norms.mean().detach()
 
     dprint(f"Gradient Norm Average: {gradients_norm_avg}")
 
     # compute these loss ratios using task_losses and initial task losses
-    loss_ratios = task_losses / initial_task_losses # \hat{L_i(t)} in paper - this is coordinate wise division since we have the same sizes
+    loss_ratios = task_losses.detach() / initial_task_losses # \hat{L_i(t)} in paper - this is coordinate wise division since we have the same sizes
     inverse_training_rates = loss_ratios / torch.mean(loss_ratios, dim=0) # take mean across tasks, presumably the first dimension but CHECK
 
     dprint(f"Loss Ratios: {loss_ratios}")
@@ -80,7 +79,7 @@ def gradnorm(task_losses_dict, initial_task_losses_dict, model, layer, optimizer
     optimizer.zero_grad() # is this right to put here -> also not necessary if we initialize optimizer every time but this probably isn't right
 
     # Backward pass the gradient norm loss
-    grad_norm_loss.backward(retain_graph=True) # POSSIBLE ISSUE: In original code, backwards on normal loss comes first, issues?
+    grad_norm_loss.backward() # POSSIBLE ISSUE: In original code, backwards on normal loss comes first, issues?
 
     # calling this backwards updates all gradients I believe
     # if we modularize we have to be careful about the effect on the other optimizer
@@ -98,6 +97,7 @@ def gradnorm(task_losses_dict, initial_task_losses_dict, model, layer, optimizer
     # we might also want to return loss ratios to track progress later on
     return loss_weights
 
+# was used to help debug, can delete
 def check_task_dependencies(task_losses_dict, model, layer):
     for task_name, task_loss in task_losses_dict.items():
         dprint(f"Checking task: {task_name}")

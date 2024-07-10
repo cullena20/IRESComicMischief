@@ -11,6 +11,9 @@ I keep track of possible errors and notes on how we implement things. If we have
 
 * After fixing how padding is done to allign with the original code, everything should truly be equivalent now.
 
+7/9
+
+
 # Training and Evaluation Loop
 * There is serious modularization that needs to be done. For example, all the validation stuff does
 not work for dynamic difficulty sampling as is. One easy work around is to have separate per epoch

@@ -50,6 +50,8 @@ class CustomDataset(Dataset):
         self.img_pad_length = img_pad_length
         self.audio_pad_length = audio_pad_length
 
+        self.count = 0 # keep track of how many times data has been accesed: used to debug images and audio found without excessive printing
+
     def __len__(self):
         return len(self.data)
 
@@ -80,13 +82,16 @@ class CustomDataset(Dataset):
                 image_vec = a1 + a2
                 masked_img = mask_vector(self.img_pad_length, image_vec)
                 image_vec = pad_segment(image_vec, self.img_pad_length)
-                dprint("Image found")
+                if self.count == 0:
+                    print("Image found")
             except:
-                dprint("Image not found")
+                if self.count == 0:
+                    print("Image not found")
                 image_vec = torch.zeros((self.img_pad_length, 1024)) 
                 masked_img = torch.zeros(self.img_pad_length)
         else:
-            dprint("Image not found")
+            if self.count == 0:
+                print("Image not found")
             image_vec = torch.zeros((self.img_pad_length, 1024)) 
             masked_img = torch.zeros(self.img_pad_length)
 
@@ -105,9 +110,11 @@ class CustomDataset(Dataset):
         try:
             audio_vec = np.load(audio_path)
             audio_vec = torch.tensor(audio_vec)
-            dprint("Audio found")
+            if self.count == 0:
+                print("Audio found")
         except FileNotFoundError:
-            dprint("Audio not found")
+            if self.count == 0:
+                print("Audio not found")
             audio_vec = torch.zeros((1, 128))
 
         masked_audio = mask_vector(self.audio_pad_length, audio_vec)
@@ -134,6 +141,8 @@ class CustomDataset(Dataset):
         gory = torch.tensor(item["gory"])
         sarcasm = torch.tensor(item["sarcasm"])
         slapstick = torch.tensor(item["slapstick"])
+
+        self.count += 1
 
         return {
             'text': text,

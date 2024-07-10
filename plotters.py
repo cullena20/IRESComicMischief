@@ -32,9 +32,12 @@ def plot_task_specific(task_history, xlabel="Steps", ylabel="Loss", show=False):
     # Create a figure and a set of subplots
     fig, axes = plt.subplots(num_rows, num_cols, figsize=(15, 10))
     
-    # Flatten the axes array for easy iteration
-    axes = axes.flatten()
-    
+    # Ensure axes is a flat array for easy iteration
+    if num_tasks == 1:
+        axes = np.array([axes])
+    else:
+        axes = axes.flatten()
+
     # Plot each task loss history
     for idx, (task_name, loss_history) in enumerate(task_history.items()):
         axes[idx].plot(loss_history)
@@ -102,7 +105,7 @@ def plot_all_validation_results(validation_results):
         'val_task_losses': task_losses_fig,
         'average_accuracy': average_accuracy_fig,
         'average_f1_score': average_f1_score_fig,
-        'total_loss': total_loss_fig
+        'val_total_loss': total_loss_fig
     }
 
 
