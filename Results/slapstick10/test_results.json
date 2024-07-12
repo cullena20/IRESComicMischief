@@ -1,0 +1,14 @@
+{
+    "accuracies": {
+        "slapstick": 0.8200692041522492
+    },
+    "f1_scores": {
+        "slapstick": 0.40909090909090917
+    },
+    "average_accuracy": 0.8200692041522492,
+    "average_f1_score": 0.40909090909090917,
+    "val_average_total_loss": 0.6632276773452759,
+    "val_average_task_loss": {
+        "slapstick": 0.6632276773452759
+    }
+}

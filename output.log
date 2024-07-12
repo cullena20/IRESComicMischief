@@ -1,0 +1,1219 @@
+nohup: no se tendrá en cuenta la entrada
+We strongly recommend passing in an `attention_mask` since your input_ids may be padded. See https://huggingface.co/docs/transformers/troubleshooting#incorrect-output-when-padding-tokens-arent-masked.
+Successfully loaded base model weights from /usuarios/arnold.moralem/Data/checkpoint-pretraining/best_pretrain_matching.pth
+Successfully loaded base model weights from /usuarios/arnold.moralem/Data/checkpoint-pretraining/best_pretrain_matching.pth
+Successfully loaded base model weights from /usuarios/arnold.moralem/Data/checkpoint-pretraining/best_pretrain_matching.pth
+Successfully loaded base model weights from /usuarios/arnold.moralem/Data/checkpoint-pretraining/best_pretrain_matching.pth
+Training Single Task Model for gory
+Created Datasets
+Total Steps 9050, Number of Epochs: 50
+Image found
+Audio found
+Unweighted
+Epoch [1, Step [10], Total Loss: 0.8342, Time: 13.22s
+Task gory, Loss 0.8342030048370361
+
+Epoch [1, Step [20], Total Loss: 0.7138, Time: 25.11s
+Task gory, Loss 0.7138219475746155
+
+Epoch [1, Step [30], Total Loss: 0.7618, Time: 36.60s
+Task gory, Loss 0.7618312835693359
+
+Epoch [1, Step [40], Total Loss: 0.7510, Time: 48.71s
+Task gory, Loss 0.7510277032852173
+
+Epoch [1, Step [50], Total Loss: 0.6650, Time: 60.61s
+Task gory, Loss 0.6650177240371704
+
+Epoch [1, Step [60], Total Loss: 0.6389, Time: 72.27s
+Task gory, Loss 0.6388990879058838
+
+Epoch [1, Step [70], Total Loss: 0.7202, Time: 84.30s
+Task gory, Loss 0.7201942205429077
+
+Epoch [1, Step [80], Total Loss: 0.6786, Time: 97.53s
+Task gory, Loss 0.6786431074142456
+
+Epoch [1, Step [90], Total Loss: 0.6558, Time: 110.50s
+Task gory, Loss 0.65577232837677
+
+Epoch [1, Step [100], Total Loss: 0.6687, Time: 122.75s
+Task gory, Loss 0.6687442064285278
+
+Epoch [1, Step [110], Total Loss: 0.6995, Time: 135.15s
+Task gory, Loss 0.6994795799255371
+
+Epoch [1, Step [120], Total Loss: 0.7018, Time: 146.62s
+Task gory, Loss 0.7017638683319092
+
+Epoch [1, Step [130], Total Loss: 0.7105, Time: 158.45s
+Task gory, Loss 0.7105076313018799
+
+Epoch [1, Step [140], Total Loss: 0.7599, Time: 170.42s
+Task gory, Loss 0.7599180340766907
+
+Epoch [1, Step [150], Total Loss: 0.7029, Time: 183.44s
+Task gory, Loss 0.7028785943984985
+
+Epoch [1, Step [160], Total Loss: 0.6710, Time: 195.25s
+Task gory, Loss 0.670971155166626
+
+Epoch [1, Step [170], Total Loss: 0.7819, Time: 207.89s
+Task gory, Loss 0.7818612456321716
+
+Epoch [1, Step [180], Total Loss: 0.7324, Time: 219.56s
+Task gory, Loss 0.7324299812316895
+
+Image found
+Audio found
+Task gory
+Accuracy: 0.6597222222222222, F1 Score: 0.4863
+Average Task Loss 0.692849338054657
+
+Average Total Loss 0.692849338054657
+Average Accuracy: 0.6597222222222222
+Average F1 Score: 0.48630918194834294
+
+Epoch [2, Step [191], Total Loss: 0.6207, Time: 13.53s
+Task gory, Loss 0.6206671595573425
+
+Epoch [2, Step [201], Total Loss: 0.6949, Time: 26.63s
+Task gory, Loss 0.6948857307434082
+
+Epoch [2, Step [211], Total Loss: 0.7730, Time: 38.50s
+Task gory, Loss 0.7729699611663818
+
+Epoch [2, Step [221], Total Loss: 0.8129, Time: 51.17s
+Task gory, Loss 0.8128688335418701
+
+Epoch [2, Step [231], Total Loss: 0.6949, Time: 63.35s
+Task gory, Loss 0.694934606552124
+
+Epoch [2, Step [241], Total Loss: 0.7359, Time: 75.30s
+Task gory, Loss 0.7358886003494263
+
+Epoch [2, Step [251], Total Loss: 0.7751, Time: 90.00s
+Task gory, Loss 0.7750706076622009
+
+Epoch [2, Step [261], Total Loss: 0.6926, Time: 102.09s
+Task gory, Loss 0.6926296949386597
+
+Epoch [2, Step [271], Total Loss: 0.7266, Time: 114.67s
+Task gory, Loss 0.7266099452972412
+
+Epoch [2, Step [281], Total Loss: 0.7341, Time: 126.60s
+Task gory, Loss 0.7341405749320984
+
+Epoch [2, Step [291], Total Loss: 0.7268, Time: 138.94s
+Task gory, Loss 0.726803183555603
+
+Epoch [2, Step [301], Total Loss: 0.7323, Time: 151.54s
+Task gory, Loss 0.7322672605514526
+
+Epoch [2, Step [311], Total Loss: 0.6990, Time: 164.36s
+Task gory, Loss 0.6990201473236084
+
+Epoch [2, Step [321], Total Loss: 0.7088, Time: 179.00s
+Task gory, Loss 0.7088267207145691
+
+Epoch [2, Step [331], Total Loss: 0.6562, Time: 190.92s
+Task gory, Loss 0.6562159061431885
+
+Epoch [2, Step [341], Total Loss: 0.7030, Time: 202.74s
+Task gory, Loss 0.703016996383667
+
+Epoch [2, Step [351], Total Loss: 0.7090, Time: 214.06s
+Task gory, Loss 0.7090234160423279
+
+Epoch [2, Step [361], Total Loss: 0.7214, Time: 225.24s
+Task gory, Loss 0.721412181854248
+
+Image found
+Audio found
+Task gory
+Accuracy: 0.6597222222222222, F1 Score: 0.4863
+Average Task Loss 0.6850054264068604
+
+Average Total Loss 0.6850054264068604
+Average Accuracy: 0.6597222222222222
+Average F1 Score: 0.48630918194834294
+
+Epoch [3, Step [372], Total Loss: 0.6363, Time: 11.32s
+Task gory, Loss 0.6362566947937012
+
+Epoch [3, Step [382], Total Loss: 0.6579, Time: 22.82s
+Task gory, Loss 0.6578890085220337
+
+Epoch [3, Step [392], Total Loss: 0.6509, Time: 34.75s
+Task gory, Loss 0.6509258151054382
+
+Epoch [3, Step [402], Total Loss: 0.6416, Time: 49.74s
+Task gory, Loss 0.6416243314743042
+
+Epoch [3, Step [412], Total Loss: 0.7009, Time: 61.60s
+Task gory, Loss 0.7008506059646606
+
+Epoch [3, Step [422], Total Loss: 0.7074, Time: 73.73s
+Task gory, Loss 0.7074085474014282
+
+Epoch [3, Step [432], Total Loss: 0.6463, Time: 85.34s
+Task gory, Loss 0.6463313102722168
+
+Epoch [3, Step [442], Total Loss: 0.6462, Time: 97.21s
+Task gory, Loss 0.6462160348892212
+
+Epoch [3, Step [452], Total Loss: 0.6695, Time: 109.35s
+Task gory, Loss 0.6695187091827393
+
+Epoch [3, Step [462], Total Loss: 0.6742, Time: 121.69s
+Task gory, Loss 0.6741946935653687
+
+Epoch [3, Step [472], Total Loss: 0.6962, Time: 134.63s
+Task gory, Loss 0.6961840391159058
+
+Epoch [3, Step [482], Total Loss: 0.7482, Time: 147.53s
+Task gory, Loss 0.7481622695922852
+
+Epoch [3, Step [492], Total Loss: 0.7396, Time: 159.30s
+Task gory, Loss 0.7396013140678406
+
+Epoch [3, Step [502], Total Loss: 0.6865, Time: 171.61s
+Task gory, Loss 0.6865330934524536
+
+Epoch [3, Step [512], Total Loss: 0.6464, Time: 187.51s
+Task gory, Loss 0.6464412212371826
+
+Epoch [3, Step [522], Total Loss: 0.6615, Time: 200.45s
+Task gory, Loss 0.6614757776260376
+
+Epoch [3, Step [532], Total Loss: 0.7100, Time: 212.83s
+Task gory, Loss 0.710023820400238
+
+Epoch [3, Step [542], Total Loss: 0.6398, Time: 225.04s
+Task gory, Loss 0.6398137807846069
+
+Image found
+Audio found
+Task gory
+Accuracy: 0.6643518518518519, F1 Score: 0.4891
+Average Task Loss 0.6651352643966675
+
+Average Total Loss 0.6651352643966675
+Average Accuracy: 0.6643518518518519
+Average F1 Score: 0.489132650980712
+
+Epoch [4, Step [553], Total Loss: 0.6667, Time: 12.49s
+Task gory, Loss 0.6667401790618896
+
+Epoch [4, Step [563], Total Loss: 0.6750, Time: 24.25s
+Task gory, Loss 0.6749649047851562
+
+Epoch [4, Step [573], Total Loss: 0.7069, Time: 36.67s
+Task gory, Loss 0.7069137096405029
+
+Epoch [4, Step [583], Total Loss: 0.7887, Time: 49.00s
+Task gory, Loss 0.7887438535690308
+
+Epoch [4, Step [593], Total Loss: 0.6941, Time: 61.11s
+Task gory, Loss 0.6941496133804321
+
+Epoch [4, Step [603], Total Loss: 0.6335, Time: 73.14s
+Task gory, Loss 0.633509635925293
+
+Epoch [4, Step [613], Total Loss: 0.6453, Time: 85.73s
+Task gory, Loss 0.6452534794807434
+
+Epoch [4, Step [623], Total Loss: 0.6747, Time: 97.97s
+Task gory, Loss 0.6747094988822937
+
+Epoch [4, Step [633], Total Loss: 0.7019, Time: 109.86s
+Task gory, Loss 0.7018879652023315
+
+Epoch [4, Step [643], Total Loss: 0.6511, Time: 127.13s
+Task gory, Loss 0.6511217355728149
+
+Epoch [4, Step [653], Total Loss: 0.6812, Time: 139.16s
+Task gory, Loss 0.6812094449996948
+
+Epoch [4, Step [663], Total Loss: 0.7042, Time: 150.76s
+Task gory, Loss 0.7042176723480225
+
+Epoch [4, Step [673], Total Loss: 0.6532, Time: 162.32s
+Task gory, Loss 0.653208315372467
+
+Epoch [4, Step [683], Total Loss: 0.6136, Time: 174.11s
+Task gory, Loss 0.6136113405227661
+
+Epoch [4, Step [693], Total Loss: 0.6666, Time: 185.72s
+Task gory, Loss 0.6666076183319092
+
+Epoch [4, Step [703], Total Loss: 0.6365, Time: 197.52s
+Task gory, Loss 0.6364973187446594
+
+Epoch [4, Step [713], Total Loss: 0.6462, Time: 208.88s
+Task gory, Loss 0.646195113658905
+
+Epoch [4, Step [723], Total Loss: 0.6834, Time: 220.58s
+Task gory, Loss 0.6834304928779602
+
+Image found
+Audio found
+Task gory
+Accuracy: 0.7847222222222222, F1 Score: 0.5531
+Average Task Loss 0.6386511921882629
+
+Average Total Loss 0.6386511921882629
+Average Accuracy: 0.7847222222222222
+Average F1 Score: 0.5531183609000813
+
+Epoch [5, Step [734], Total Loss: 0.6530, Time: 11.76s
+Task gory, Loss 0.6530399918556213
+
+Epoch [5, Step [744], Total Loss: 0.6799, Time: 24.23s
+Task gory, Loss 0.6799279451370239
+
+Epoch [5, Step [754], Total Loss: 0.7242, Time: 36.55s
+Task gory, Loss 0.7242151498794556
+
+Epoch [5, Step [764], Total Loss: 0.7642, Time: 48.70s
+Task gory, Loss 0.7641701698303223
+
+Epoch [5, Step [774], Total Loss: 0.6914, Time: 61.18s
+Task gory, Loss 0.6914324760437012
+
+Epoch [5, Step [784], Total Loss: 0.6519, Time: 73.84s
+Task gory, Loss 0.6518665552139282
+
+Epoch [5, Step [794], Total Loss: 0.6495, Time: 85.94s
+Task gory, Loss 0.6495250463485718
+
+Epoch [5, Step [804], Total Loss: 0.7320, Time: 104.21s
+Task gory, Loss 0.7320226430892944
+
+Epoch [5, Step [814], Total Loss: 0.6288, Time: 116.39s
+Task gory, Loss 0.6288319826126099
+
+Epoch [5, Step [824], Total Loss: 0.7606, Time: 127.88s
+Task gory, Loss 0.760572075843811
+
+Epoch [5, Step [834], Total Loss: 0.6405, Time: 139.82s
+Task gory, Loss 0.6405141949653625
+
+Epoch [5, Step [844], Total Loss: 0.6153, Time: 151.62s
+Task gory, Loss 0.6152994632720947
+
+Epoch [5, Step [854], Total Loss: 0.6578, Time: 163.40s
+Task gory, Loss 0.6577515006065369
+
+Epoch [5, Step [864], Total Loss: 0.6817, Time: 175.40s
+Task gory, Loss 0.6816613674163818
+
+Epoch [5, Step [874], Total Loss: 0.7101, Time: 187.56s
+Task gory, Loss 0.7100907564163208
+
+Epoch [5, Step [884], Total Loss: 0.6693, Time: 199.59s
+Task gory, Loss 0.6693032383918762
+
+Epoch [5, Step [894], Total Loss: 0.6727, Time: 211.37s
+Task gory, Loss 0.6726911067962646
+
+Epoch [5, Step [904], Total Loss: 0.6856, Time: 223.51s
+Task gory, Loss 0.6855779886245728
+
+Image found
+Audio found
+Task gory
+Accuracy: 0.6967592592592593, F1 Score: 0.5047
+Average Task Loss 0.6554849147796631
+
+Average Total Loss 0.6554849147796631
+Average Accuracy: 0.6967592592592593
+Average F1 Score: 0.5047215634107279
+
+Epoch [6, Step [915], Total Loss: 0.7057, Time: 11.95s
+Task gory, Loss 0.7056514024734497
+
+Epoch [6, Step [925], Total Loss: 0.6301, Time: 24.07s
+Task gory, Loss 0.6301422119140625
+
+Epoch [6, Step [935], Total Loss: 0.7165, Time: 36.11s
+Task gory, Loss 0.7164534330368042
+
+Epoch [6, Step [945], Total Loss: 0.6807, Time: 48.83s
+Task gory, Loss 0.6806553602218628
+
+Epoch [6, Step [955], Total Loss: 0.6486, Time: 60.64s
+Task gory, Loss 0.6486316919326782
+
+Epoch [6, Step [965], Total Loss: 0.6200, Time: 72.34s
+Task gory, Loss 0.6199644804000854
+
+Epoch [6, Step [975], Total Loss: 0.6650, Time: 84.47s
+Task gory, Loss 0.6650440692901611
+
+Epoch [6, Step [985], Total Loss: 0.6496, Time: 96.41s
+Task gory, Loss 0.6495954394340515
+
+Epoch [6, Step [995], Total Loss: 0.6665, Time: 108.28s
+Task gory, Loss 0.6664763689041138
+
+Epoch [6, Step [1005], Total Loss: 0.6379, Time: 126.47s
+Task gory, Loss 0.6379432678222656
+
+Epoch [6, Step [1015], Total Loss: 0.6461, Time: 138.37s
+Task gory, Loss 0.6460524797439575
+
+Epoch [6, Step [1025], Total Loss: 0.6419, Time: 150.87s
+Task gory, Loss 0.6419172286987305
+
+Epoch [6, Step [1035], Total Loss: 0.6558, Time: 162.58s
+Task gory, Loss 0.6557921767234802
+
+Epoch [6, Step [1045], Total Loss: 0.6416, Time: 174.39s
+Task gory, Loss 0.6415802240371704
+
+Epoch [6, Step [1055], Total Loss: 0.6429, Time: 186.42s
+Task gory, Loss 0.6429330706596375
+
+Epoch [6, Step [1065], Total Loss: 0.6700, Time: 198.77s
+Task gory, Loss 0.6699972152709961
+
+Epoch [6, Step [1075], Total Loss: 0.6847, Time: 210.66s
+Task gory, Loss 0.68474280834198
+
+Epoch [6, Step [1085], Total Loss: 0.7330, Time: 222.35s
+Task gory, Loss 0.7330487966537476
+
+Image found
+Audio found
+Task gory
+Accuracy: 0.8171296296296297, F1 Score: 0.5853
+Average Task Loss 0.6162305474281311
+
+Average Total Loss 0.6162305474281311
+Average Accuracy: 0.8171296296296297
+Average F1 Score: 0.5852967981043806
+
+Epoch [7, Step [1096], Total Loss: 0.6163, Time: 12.33s
+Task gory, Loss 0.6163069009780884
+
+Epoch [7, Step [1106], Total Loss: 0.5898, Time: 24.16s
+Task gory, Loss 0.5898160338401794
+
+Epoch [7, Step [1116], Total Loss: 0.6048, Time: 35.74s
+Task gory, Loss 0.6048272848129272
+
+Epoch [7, Step [1126], Total Loss: 0.6708, Time: 47.37s
+Task gory, Loss 0.6708236336708069
+
+Epoch [7, Step [1136], Total Loss: 0.5649, Time: 59.23s
+Task gory, Loss 0.5649187564849854
+
+Epoch [7, Step [1146], Total Loss: 0.6104, Time: 71.32s
+Task gory, Loss 0.6103583574295044
+
+Epoch [7, Step [1156], Total Loss: 0.6110, Time: 83.67s
+Task gory, Loss 0.610968828201294
+
+Epoch [7, Step [1166], Total Loss: 0.5786, Time: 95.29s
+Task gory, Loss 0.5786229968070984
+
+Epoch [7, Step [1176], Total Loss: 0.6506, Time: 106.64s
+Task gory, Loss 0.6505836248397827
+
+Epoch [7, Step [1186], Total Loss: 0.6341, Time: 118.36s
+Task gory, Loss 0.6341410279273987
+
+Epoch [7, Step [1196], Total Loss: 0.6262, Time: 130.15s
+Task gory, Loss 0.6261752843856812
+
+Epoch [7, Step [1206], Total Loss: 0.6351, Time: 141.67s
+Task gory, Loss 0.6351486444473267
+
+Epoch [7, Step [1216], Total Loss: 0.6046, Time: 153.80s
+Task gory, Loss 0.6046290993690491
+
+Epoch [7, Step [1226], Total Loss: 0.5513, Time: 165.45s
+Task gory, Loss 0.5513253808021545
+
+Epoch [7, Step [1236], Total Loss: 0.6267, Time: 176.86s
+Task gory, Loss 0.6267187595367432
+
+Epoch [7, Step [1246], Total Loss: 0.6076, Time: 196.80s
+Task gory, Loss 0.6076239347457886
+
+Epoch [7, Step [1256], Total Loss: 0.6223, Time: 208.54s
+Task gory, Loss 0.6223393082618713
+
+Epoch [7, Step [1266], Total Loss: 0.5723, Time: 220.54s
+Task gory, Loss 0.5723015069961548
+
+Image found
+Audio found
+Task gory
+Accuracy: 0.8217592592592593, F1 Score: 0.5826
+Average Task Loss 0.5854739546775818
+
+Average Total Loss 0.5854739546775818
+Average Accuracy: 0.8217592592592593
+Average F1 Score: 0.5826086956521739
+
+Epoch [8, Step [1277], Total Loss: 0.6034, Time: 11.66s
+Task gory, Loss 0.6034111976623535
+
+Epoch [8, Step [1287], Total Loss: 0.6973, Time: 22.70s
+Task gory, Loss 0.6972590684890747
+
+Epoch [8, Step [1297], Total Loss: 0.6240, Time: 34.63s
+Task gory, Loss 0.6240237951278687
+
+Epoch [8, Step [1307], Total Loss: 0.6357, Time: 46.63s
+Task gory, Loss 0.6357446908950806
+
+Epoch [8, Step [1317], Total Loss: 0.6326, Time: 59.52s
+Task gory, Loss 0.6326196193695068
+
+Epoch [8, Step [1327], Total Loss: 0.6055, Time: 71.09s
+Task gory, Loss 0.6054844856262207
+
+Epoch [8, Step [1337], Total Loss: 0.6176, Time: 82.95s
+Task gory, Loss 0.6176382303237915
+
+Epoch [8, Step [1347], Total Loss: 0.5905, Time: 94.71s
+Task gory, Loss 0.5904737710952759
+
+Epoch [8, Step [1357], Total Loss: 0.6000, Time: 106.70s
+Task gory, Loss 0.5999906063079834
+
+Epoch [8, Step [1367], Total Loss: 0.6816, Time: 118.33s
+Task gory, Loss 0.6816211938858032
+
+Epoch [8, Step [1377], Total Loss: 0.5753, Time: 130.70s
+Task gory, Loss 0.5752620100975037
+
+Epoch [8, Step [1387], Total Loss: 0.6687, Time: 142.53s
+Task gory, Loss 0.6686840057373047
+
+Epoch [8, Step [1397], Total Loss: 0.5948, Time: 153.91s
+Task gory, Loss 0.5948495864868164
+
+Epoch [8, Step [1407], Total Loss: 0.6263, Time: 166.41s
+Task gory, Loss 0.6263476610183716
+
+Epoch [8, Step [1417], Total Loss: 0.6315, Time: 177.83s
+Task gory, Loss 0.6314982771873474
+
+Epoch [8, Step [1427], Total Loss: 0.4408, Time: 189.97s
+Task gory, Loss 0.4407670199871063
+
+Epoch [8, Step [1437], Total Loss: 0.6010, Time: 201.43s
+Task gory, Loss 0.6010231375694275
+
+Epoch [8, Step [1447], Total Loss: 0.5583, Time: 213.00s
+Task gory, Loss 0.5583119988441467
+
+Image found
+Audio found
+Task gory
+Accuracy: 0.6828703703703703, F1 Score: 0.4961
+Average Task Loss 0.8413013815879822
+
+Average Total Loss 0.8413013815879822
+Average Accuracy: 0.6828703703703703
+Average F1 Score: 0.496113405133881
+
+Epoch [9, Step [1458], Total Loss: 0.5766, Time: 11.67s
+Task gory, Loss 0.576606810092926
+
+Epoch [9, Step [1468], Total Loss: 0.6320, Time: 23.33s
+Task gory, Loss 0.6319726705551147
+
+Epoch [9, Step [1478], Total Loss: 0.6601, Time: 35.56s
+Task gory, Loss 0.6601071357727051
+
+Epoch [9, Step [1488], Total Loss: 0.5070, Time: 46.95s
+Task gory, Loss 0.5070316195487976
+
+Epoch [9, Step [1498], Total Loss: 0.6002, Time: 58.92s
+Task gory, Loss 0.6001749634742737
+
+Epoch [9, Step [1508], Total Loss: 0.5162, Time: 70.31s
+Task gory, Loss 0.5161691308021545
+
+Epoch [9, Step [1518], Total Loss: 0.5829, Time: 82.16s
+Task gory, Loss 0.5829154253005981
+
+Epoch [9, Step [1528], Total Loss: 0.5796, Time: 93.66s
+Task gory, Loss 0.5795571804046631
+
+Epoch [9, Step [1538], Total Loss: 0.5927, Time: 105.30s
+Task gory, Loss 0.5927334427833557
+
+Epoch [9, Step [1548], Total Loss: 0.6809, Time: 127.42s
+Task gory, Loss 0.6808599233627319
+
+Epoch [9, Step [1558], Total Loss: 0.6481, Time: 139.17s
+Task gory, Loss 0.648101806640625
+
+Epoch [9, Step [1568], Total Loss: 0.5521, Time: 150.42s
+Task gory, Loss 0.5520594716072083
+
+Epoch [9, Step [1578], Total Loss: 0.6430, Time: 162.20s
+Task gory, Loss 0.6429696083068848
+
+Epoch [9, Step [1588], Total Loss: 0.5860, Time: 173.70s
+Task gory, Loss 0.5859781503677368
+
+Epoch [9, Step [1598], Total Loss: 0.6146, Time: 185.33s
+Task gory, Loss 0.6145834922790527
+
+Epoch [9, Step [1608], Total Loss: 0.5748, Time: 196.71s
+Task gory, Loss 0.5748028755187988
+
+Epoch [9, Step [1618], Total Loss: 0.6174, Time: 208.19s
+Task gory, Loss 0.6173520088195801
+
+Epoch [9, Step [1628], Total Loss: 0.5416, Time: 219.76s
+Task gory, Loss 0.5416288375854492
+
+Image found
+Audio found
+Task gory
+Accuracy: 0.8564814814814815, F1 Score: 0.6229
+Average Task Loss 0.5611960291862488
+
+Average Total Loss 0.5611960291862488
+Average Accuracy: 0.8564814814814815
+Average F1 Score: 0.6228880378463617
+
+Epoch [10, Step [1639], Total Loss: 0.7050, Time: 11.33s
+Task gory, Loss 0.7049655914306641
+
+Epoch [10, Step [1649], Total Loss: 0.5853, Time: 22.50s
+Task gory, Loss 0.5852698087692261
+
+Epoch [10, Step [1659], Total Loss: 0.5436, Time: 33.55s
+Task gory, Loss 0.5436255931854248
+
+Epoch [10, Step [1669], Total Loss: 0.5993, Time: 45.01s
+Task gory, Loss 0.5992827415466309
+
+Epoch [10, Step [1679], Total Loss: 0.4918, Time: 56.64s
+Task gory, Loss 0.4917517900466919
+
+Epoch [10, Step [1689], Total Loss: 0.5167, Time: 67.86s
+Task gory, Loss 0.516684353351593
+
+Epoch [10, Step [1699], Total Loss: 0.5516, Time: 79.45s
+Task gory, Loss 0.5515635013580322
+
+Epoch [10, Step [1709], Total Loss: 0.6049, Time: 91.19s
+Task gory, Loss 0.6049397587776184
+
+Epoch [10, Step [1719], Total Loss: 0.5722, Time: 103.36s
+Task gory, Loss 0.5721595287322998
+
+Epoch [10, Step [1729], Total Loss: 0.6359, Time: 115.34s
+Task gory, Loss 0.635949969291687
+
+Epoch [10, Step [1739], Total Loss: 0.5867, Time: 126.73s
+Task gory, Loss 0.5866931676864624
+
+Epoch [10, Step [1749], Total Loss: 0.5784, Time: 138.63s
+Task gory, Loss 0.5783544182777405
+
+Epoch [10, Step [1759], Total Loss: 0.6703, Time: 150.00s
+Task gory, Loss 0.6703258752822876
+
+Epoch [10, Step [1769], Total Loss: 0.5372, Time: 161.38s
+Task gory, Loss 0.5371695160865784
+
+Epoch [10, Step [1779], Total Loss: 0.5820, Time: 173.46s
+Task gory, Loss 0.5819690823554993
+
+Epoch [10, Step [1789], Total Loss: 0.5675, Time: 186.01s
+Task gory, Loss 0.5674858093261719
+
+Epoch [10, Step [1799], Total Loss: 0.6242, Time: 197.58s
+Task gory, Loss 0.624207079410553
+
+Epoch [10, Step [1809], Total Loss: 0.6119, Time: 209.26s
+Task gory, Loss 0.6118561029434204
+
+Image found
+Audio found
+Task gory
+Accuracy: 0.8356481481481481, F1 Score: 0.5950
+Average Task Loss 0.6374739408493042
+
+Average Total Loss 0.6374739408493042
+Average Accuracy: 0.8356481481481481
+Average F1 Score: 0.5950089126559714
+
+Epoch [11, Step [1820], Total Loss: 0.5812, Time: 11.28s
+Task gory, Loss 0.5812276601791382
+
+Epoch [11, Step [1830], Total Loss: 0.4891, Time: 22.68s
+Task gory, Loss 0.48909443616867065
+
+Epoch [11, Step [1840], Total Loss: 0.5979, Time: 34.11s
+Task gory, Loss 0.5979136228561401
+
+Epoch [11, Step [1850], Total Loss: 0.5895, Time: 46.68s
+Task gory, Loss 0.5895382761955261
+
+Epoch [11, Step [1860], Total Loss: 0.5171, Time: 58.56s
+Task gory, Loss 0.5170518755912781
+
+Epoch [11, Step [1870], Total Loss: 0.5491, Time: 69.87s
+Task gory, Loss 0.5490726828575134
+
+Epoch [11, Step [1880], Total Loss: 0.5932, Time: 81.72s
+Task gory, Loss 0.5932440757751465
+
+Epoch [11, Step [1890], Total Loss: 0.5609, Time: 93.18s
+Task gory, Loss 0.5609261989593506
+
+Epoch [11, Step [1900], Total Loss: 0.5631, Time: 104.50s
+Task gory, Loss 0.5630580186843872
+
+Epoch [11, Step [1910], Total Loss: 0.5655, Time: 129.61s
+Task gory, Loss 0.5654723048210144
+
+Epoch [11, Step [1920], Total Loss: 0.5390, Time: 141.54s
+Task gory, Loss 0.5390019416809082
+
+Epoch [11, Step [1930], Total Loss: 0.5382, Time: 152.98s
+Task gory, Loss 0.5382298231124878
+
+Epoch [11, Step [1940], Total Loss: 0.5642, Time: 164.53s
+Task gory, Loss 0.5642257928848267
+
+Epoch [11, Step [1950], Total Loss: 0.6065, Time: 176.06s
+Task gory, Loss 0.6064973473548889
+
+Epoch [11, Step [1960], Total Loss: 0.5469, Time: 187.77s
+Task gory, Loss 0.5468956828117371
+
+Epoch [11, Step [1970], Total Loss: 0.4838, Time: 199.41s
+Task gory, Loss 0.48384660482406616
+
+Epoch [11, Step [1980], Total Loss: 0.5390, Time: 211.18s
+Task gory, Loss 0.5390334129333496
+
+Epoch [11, Step [1990], Total Loss: 0.6128, Time: 222.89s
+Task gory, Loss 0.6127930283546448
+
+Image found
+Audio found
+Task gory
+Accuracy: 0.8587962962962963, F1 Score: 0.6179
+Average Task Loss 0.5398248434066772
+
+Average Total Loss 0.5398248434066772
+Average Accuracy: 0.8587962962962963
+Average F1 Score: 0.6179485320768394
+
+Epoch [12, Step [2001], Total Loss: 0.5894, Time: 11.33s
+Task gory, Loss 0.5893951654434204
+
+Epoch [12, Step [2011], Total Loss: 0.4564, Time: 22.39s
+Task gory, Loss 0.45642876625061035
+
+Epoch [12, Step [2021], Total Loss: 0.5863, Time: 33.82s
+Task gory, Loss 0.5862964391708374
+
+Epoch [12, Step [2031], Total Loss: 0.5549, Time: 45.05s
+Task gory, Loss 0.5548791885375977
+
+Epoch [12, Step [2041], Total Loss: 0.5719, Time: 56.88s
+Task gory, Loss 0.5718780159950256
+
+Epoch [12, Step [2051], Total Loss: 0.5928, Time: 68.28s
+Task gory, Loss 0.5928236246109009
+
+Epoch [12, Step [2061], Total Loss: 0.6708, Time: 79.80s
+Task gory, Loss 0.6708420515060425
+
+Epoch [12, Step [2071], Total Loss: 0.6483, Time: 91.05s
+Task gory, Loss 0.6482840776443481
+
+Epoch [12, Step [2081], Total Loss: 0.5896, Time: 102.78s
+Task gory, Loss 0.5896308422088623
+
+Epoch [12, Step [2091], Total Loss: 0.5158, Time: 114.30s
+Task gory, Loss 0.5158095955848694
+
+Epoch [12, Step [2101], Total Loss: 0.5460, Time: 125.29s
+Task gory, Loss 0.5460408926010132
+
+Epoch [12, Step [2111], Total Loss: 0.4988, Time: 137.11s
+Task gory, Loss 0.4987666606903076
+
+Epoch [12, Step [2121], Total Loss: 0.5726, Time: 148.60s
+Task gory, Loss 0.5726324319839478
+
+Epoch [12, Step [2131], Total Loss: 0.5070, Time: 160.27s
+Task gory, Loss 0.5070134997367859
+
+Epoch [12, Step [2141], Total Loss: 0.5533, Time: 171.52s
+Task gory, Loss 0.5533350110054016
+
+Epoch [12, Step [2151], Total Loss: 0.6038, Time: 183.01s
+Task gory, Loss 0.6038434505462646
+
+Epoch [12, Step [2161], Total Loss: 0.5675, Time: 194.71s
+Task gory, Loss 0.5674949884414673
+
+Epoch [12, Step [2171], Total Loss: 0.5626, Time: 205.97s
+Task gory, Loss 0.5625834465026855
+
+Image found
+Audio found
+Task gory
+Accuracy: 0.8634259259259259, F1 Score: 0.6151
+Average Task Loss 0.5345168709754944
+
+Average Total Loss 0.5345168709754944
+Average Accuracy: 0.8634259259259259
+Average F1 Score: 0.6150721135694329
+
+Epoch [13, Step [2182], Total Loss: 0.5987, Time: 11.39s
+Task gory, Loss 0.5987396240234375
+
+Epoch [13, Step [2192], Total Loss: 0.5660, Time: 23.28s
+Task gory, Loss 0.5660490393638611
+
+Epoch [13, Step [2202], Total Loss: 0.5315, Time: 34.61s
+Task gory, Loss 0.5314611196517944
+
+Epoch [13, Step [2212], Total Loss: 0.6549, Time: 45.55s
+Task gory, Loss 0.6548824310302734
+
+Epoch [13, Step [2222], Total Loss: 0.5802, Time: 56.77s
+Task gory, Loss 0.580153226852417
+
+Epoch [13, Step [2232], Total Loss: 0.5826, Time: 68.43s
+Task gory, Loss 0.5825788974761963
+
+Epoch [13, Step [2242], Total Loss: 0.4478, Time: 79.74s
+Task gory, Loss 0.4478317201137543
+
+Epoch [13, Step [2252], Total Loss: 0.5408, Time: 90.70s
+Task gory, Loss 0.54078608751297
+
+Epoch [13, Step [2262], Total Loss: 0.4108, Time: 102.56s
+Task gory, Loss 0.41081562638282776
+
+Epoch [13, Step [2272], Total Loss: 0.5473, Time: 113.78s
+Task gory, Loss 0.5473405122756958
+
+Epoch [13, Step [2282], Total Loss: 0.5328, Time: 125.33s
+Task gory, Loss 0.5328048467636108
+
+Epoch [13, Step [2292], Total Loss: 0.5769, Time: 136.74s
+Task gory, Loss 0.5768510699272156
+
+Epoch [13, Step [2302], Total Loss: 0.5211, Time: 148.52s
+Task gory, Loss 0.521111011505127
+
+Epoch [13, Step [2312], Total Loss: 0.5131, Time: 159.77s
+Task gory, Loss 0.513062596321106
+
+Epoch [13, Step [2322], Total Loss: 0.4145, Time: 172.11s
+Task gory, Loss 0.4145093560218811
+
+Epoch [13, Step [2332], Total Loss: 0.5384, Time: 183.62s
+Task gory, Loss 0.5384097695350647
+
+Epoch [13, Step [2342], Total Loss: 0.4498, Time: 194.90s
+Task gory, Loss 0.44983363151550293
+
+Epoch [13, Step [2352], Total Loss: 0.6301, Time: 206.16s
+Task gory, Loss 0.6301126480102539
+
+Image found
+Audio found
+Task gory
+Accuracy: 0.7175925925925926, F1 Score: 0.5180
+Average Task Loss 0.8595929145812988
+
+Average Total Loss 0.8595929145812988
+Average Accuracy: 0.7175925925925926
+Average F1 Score: 0.5179806109383575
+
+Epoch [14, Step [2363], Total Loss: 0.5710, Time: 11.34s
+Task gory, Loss 0.5710018277168274
+
+Epoch [14, Step [2373], Total Loss: 0.6282, Time: 39.14s
+Task gory, Loss 0.6282474994659424
+
+Epoch [14, Step [2383], Total Loss: 0.4468, Time: 50.52s
+Task gory, Loss 0.4467596411705017
+
+Epoch [14, Step [2393], Total Loss: 0.5797, Time: 62.04s
+Task gory, Loss 0.5796713829040527
+
+Epoch [14, Step [2403], Total Loss: 0.4167, Time: 73.87s
+Task gory, Loss 0.41665318608283997
+
+Epoch [14, Step [2413], Total Loss: 0.5275, Time: 85.24s
+Task gory, Loss 0.5274985432624817
+
+Epoch [14, Step [2423], Total Loss: 0.5678, Time: 96.25s
+Task gory, Loss 0.567848801612854
+
+Epoch [14, Step [2433], Total Loss: 0.4114, Time: 107.84s
+Task gory, Loss 0.41139790415763855
+
+Epoch [14, Step [2443], Total Loss: 0.5535, Time: 119.48s
+Task gory, Loss 0.5534766316413879
+
+Epoch [14, Step [2453], Total Loss: 0.4874, Time: 130.88s
+Task gory, Loss 0.4873960614204407
+
+Epoch [14, Step [2463], Total Loss: 0.6186, Time: 142.54s
+Task gory, Loss 0.6186487674713135
+
+Epoch [14, Step [2473], Total Loss: 0.4614, Time: 154.10s
+Task gory, Loss 0.4614291489124298
+
+Epoch [14, Step [2483], Total Loss: 0.4871, Time: 165.59s
+Task gory, Loss 0.4870801866054535
+
+Epoch [14, Step [2493], Total Loss: 0.4354, Time: 177.59s
+Task gory, Loss 0.4353610873222351
+
+Epoch [14, Step [2503], Total Loss: 0.4882, Time: 189.20s
+Task gory, Loss 0.48818355798721313
+
+Epoch [14, Step [2513], Total Loss: 0.4095, Time: 200.61s
+Task gory, Loss 0.4094839096069336
+
+Epoch [14, Step [2523], Total Loss: 0.4106, Time: 212.50s
+Task gory, Loss 0.4106009006500244
+
+Epoch [14, Step [2533], Total Loss: 0.3482, Time: 223.87s
+Task gory, Loss 0.3482171893119812
+
+Image found
+Audio found
+Task gory
+Accuracy: 0.9120370370370371, F1 Score: 0.6794
+Average Task Loss 0.4836852550506592
+
+Average Total Loss 0.4836852550506592
+Average Accuracy: 0.9120370370370371
+Average F1 Score: 0.679375
+
+Epoch [15, Step [2544], Total Loss: 0.5419, Time: 10.82s
+Task gory, Loss 0.5418818593025208
+
+Epoch [15, Step [2554], Total Loss: 0.3911, Time: 21.79s
+Task gory, Loss 0.3910936713218689
+
+Epoch [15, Step [2564], Total Loss: 0.4465, Time: 33.15s
+Task gory, Loss 0.4464969038963318
+
+Epoch [15, Step [2574], Total Loss: 0.5226, Time: 44.65s
+Task gory, Loss 0.5225903987884521
+
+Epoch [15, Step [2584], Total Loss: 0.5680, Time: 55.99s
+Task gory, Loss 0.5679531097412109
+
+Epoch [15, Step [2594], Total Loss: 0.4356, Time: 67.80s
+Task gory, Loss 0.43557900190353394
+
+Epoch [15, Step [2604], Total Loss: 0.4417, Time: 79.32s
+Task gory, Loss 0.44168680906295776
+
+Epoch [15, Step [2614], Total Loss: 0.5971, Time: 90.97s
+Task gory, Loss 0.5970957279205322
+
+Epoch [15, Step [2624], Total Loss: 0.4834, Time: 102.51s
+Task gory, Loss 0.4833836257457733
+
+Epoch [15, Step [2634], Total Loss: 0.4029, Time: 114.43s
+Task gory, Loss 0.402892529964447
+
+Epoch [15, Step [2644], Total Loss: 0.5008, Time: 126.70s
+Task gory, Loss 0.5007908344268799
+
+Epoch [15, Step [2654], Total Loss: 0.5292, Time: 138.25s
+Task gory, Loss 0.5291637778282166
+
+Epoch [15, Step [2664], Total Loss: 0.3573, Time: 149.77s
+Task gory, Loss 0.3572714626789093
+
+Epoch [15, Step [2674], Total Loss: 0.4383, Time: 161.15s
+Task gory, Loss 0.4383041560649872
+
+Epoch [15, Step [2684], Total Loss: 0.5209, Time: 172.51s
+Task gory, Loss 0.5209351181983948
+
+Epoch [15, Step [2694], Total Loss: 0.4788, Time: 184.01s
+Task gory, Loss 0.47877639532089233
+
+Epoch [15, Step [2704], Total Loss: 0.4081, Time: 195.27s
+Task gory, Loss 0.4080590605735779
+
+Epoch [15, Step [2714], Total Loss: 0.4972, Time: 206.76s
+Task gory, Loss 0.49719879031181335
+
+Image found
+Audio found
+Task gory
+Accuracy: 0.875, F1 Score: 0.6362
+Average Task Loss 0.5807523131370544
+
+Average Total Loss 0.5807523131370544
+Average Accuracy: 0.875
+Average F1 Score: 0.6362048530971243
+
+Epoch [16, Step [2725], Total Loss: 0.5163, Time: 11.41s
+Task gory, Loss 0.5162545442581177
+
+Epoch [16, Step [2735], Total Loss: 0.4534, Time: 22.63s
+Task gory, Loss 0.4534289240837097
+
+Epoch [16, Step [2745], Total Loss: 0.5882, Time: 34.08s
+Task gory, Loss 0.5881952047348022
+
+Epoch [16, Step [2755], Total Loss: 0.5053, Time: 45.52s
+Task gory, Loss 0.5053069591522217
+
+Epoch [16, Step [2765], Total Loss: 0.5623, Time: 57.14s
+Task gory, Loss 0.5622608661651611
+
+Epoch [16, Step [2775], Total Loss: 0.4884, Time: 68.80s
+Task gory, Loss 0.48838064074516296
+
+Epoch [16, Step [2785], Total Loss: 0.5439, Time: 79.94s
+Task gory, Loss 0.5439342856407166
+
+Epoch [16, Step [2795], Total Loss: 0.3926, Time: 90.81s
+Task gory, Loss 0.392625629901886
+
+Epoch [16, Step [2805], Total Loss: 0.5559, Time: 102.66s
+Task gory, Loss 0.5558751821517944
+
+Epoch [16, Step [2815], Total Loss: 0.4407, Time: 113.96s
+Task gory, Loss 0.44067126512527466
+
+Epoch [16, Step [2825], Total Loss: 0.4690, Time: 125.99s
+Task gory, Loss 0.46902725100517273
+
+Epoch [16, Step [2835], Total Loss: 0.5277, Time: 137.82s
+Task gory, Loss 0.5277464985847473
+
+Epoch [16, Step [2845], Total Loss: 0.5372, Time: 149.43s
+Task gory, Loss 0.5372260808944702
+
+Epoch [16, Step [2855], Total Loss: 0.5427, Time: 160.78s
+Task gory, Loss 0.5426653027534485
+
+Epoch [16, Step [2865], Total Loss: 0.3392, Time: 172.15s
+Task gory, Loss 0.33917665481567383
+
+Epoch [16, Step [2875], Total Loss: 0.4291, Time: 183.93s
+Task gory, Loss 0.429103285074234
+
+Epoch [16, Step [2885], Total Loss: 0.4371, Time: 194.85s
+Task gory, Loss 0.43706196546554565
+
+Epoch [16, Step [2895], Total Loss: 0.4354, Time: 206.17s
+Task gory, Loss 0.43537360429763794
+
+Image found
+Audio found
+Task gory
+Accuracy: 0.8472222222222222, F1 Score: 0.5986
+Average Task Loss 0.6573176383972168
+
+Average Total Loss 0.6573176383972168
+Average Accuracy: 0.8472222222222222
+Average F1 Score: 0.5985582338364496
+
+Epoch [17, Step [2906], Total Loss: 0.5289, Time: 11.75s
+Task gory, Loss 0.5289419889450073
+
+Epoch [17, Step [2916], Total Loss: 0.3850, Time: 23.04s
+Task gory, Loss 0.3849967122077942
+
+Epoch [17, Step [2926], Total Loss: 0.5526, Time: 52.13s
+Task gory, Loss 0.5526201725006104
+
+Epoch [17, Step [2936], Total Loss: 0.4614, Time: 63.91s
+Task gory, Loss 0.46144407987594604
+
+Epoch [17, Step [2946], Total Loss: 0.5546, Time: 75.61s
+Task gory, Loss 0.5546438694000244
+
+Epoch [17, Step [2956], Total Loss: 0.3695, Time: 86.64s
+Task gory, Loss 0.36953067779541016
+
+Epoch [17, Step [2966], Total Loss: 0.5453, Time: 97.79s
+Task gory, Loss 0.5453239679336548
+
+Epoch [17, Step [2976], Total Loss: 0.6095, Time: 110.26s
+Task gory, Loss 0.6094639301300049
+
+Epoch [17, Step [2986], Total Loss: 0.3995, Time: 121.84s
+Task gory, Loss 0.3994595408439636
+
+Epoch [17, Step [2996], Total Loss: 0.3296, Time: 133.95s
+Task gory, Loss 0.32959625124931335
+
+Epoch [17, Step [3006], Total Loss: 0.5732, Time: 145.54s
+Task gory, Loss 0.5732061862945557
+
+Epoch [17, Step [3016], Total Loss: 0.4587, Time: 157.35s
+Task gory, Loss 0.4587094485759735
+
+Epoch [17, Step [3026], Total Loss: 0.3125, Time: 168.73s
+Task gory, Loss 0.312539279460907
+
+Epoch [17, Step [3036], Total Loss: 0.6410, Time: 180.09s
+Task gory, Loss 0.6409632563591003
+
+Epoch [17, Step [3046], Total Loss: 0.3566, Time: 191.33s
+Task gory, Loss 0.3566034138202667
+
+Epoch [17, Step [3056], Total Loss: 0.4637, Time: 203.06s
+Task gory, Loss 0.4636790156364441
+
+Epoch [17, Step [3066], Total Loss: 0.6637, Time: 214.90s
+Task gory, Loss 0.6636598706245422
+
+Epoch [17, Step [3076], Total Loss: 0.3764, Time: 226.65s
+Task gory, Loss 0.37644994258880615
+
+Image found
+Audio found
+Task gory
+/opt/conda/conda-bld/pytorch_1708025842427/work/aten/src/ATen/native/cuda/Loss.cu:94: operator(): block: [0,0,0], thread: [0,0,0] Assertion `input_val >= zero && input_val <= one` failed.
+/opt/conda/conda-bld/pytorch_1708025842427/work/aten/src/ATen/native/cuda/Loss.cu:94: operator(): block: [0,0,0], thread: [1,0,0] Assertion `input_val >= zero && input_val <= one` failed.
+/opt/conda/conda-bld/pytorch_1708025842427/work/aten/src/ATen/native/cuda/Loss.cu:94: operator(): block: [0,0,0], thread: [2,0,0] Assertion `input_val >= zero && input_val <= one` failed.
+/opt/conda/conda-bld/pytorch_1708025842427/work/aten/src/ATen/native/cuda/Loss.cu:94: operator(): block: [0,0,0], thread: [3,0,0] Assertion `input_val >= zero && input_val <= one` failed.
+/opt/conda/conda-bld/pytorch_1708025842427/work/aten/src/ATen/native/cuda/Loss.cu:94: operator(): block: [0,0,0], thread: [4,0,0] Assertion `input_val >= zero && input_val <= one` failed.
+/opt/conda/conda-bld/pytorch_1708025842427/work/aten/src/ATen/native/cuda/Loss.cu:94: operator(): block: [0,0,0], thread: [5,0,0] Assertion `input_val >= zero && input_val <= one` failed.
+/opt/conda/conda-bld/pytorch_1708025842427/work/aten/src/ATen/native/cuda/Loss.cu:94: operator(): block: [0,0,0], thread: [6,0,0] Assertion `input_val >= zero && input_val <= one` failed.
+/opt/conda/conda-bld/pytorch_1708025842427/work/aten/src/ATen/native/cuda/Loss.cu:94: operator(): block: [0,0,0], thread: [7,0,0] Assertion `input_val >= zero && input_val <= one` failed.
+/opt/conda/conda-bld/pytorch_1708025842427/work/aten/src/ATen/native/cuda/Loss.cu:94: operator(): block: [0,0,0], thread: [8,0,0] Assertion `input_val >= zero && input_val <= one` failed.
+/opt/conda/conda-bld/pytorch_1708025842427/work/aten/src/ATen/native/cuda/Loss.cu:94: operator(): block: [0,0,0], thread: [9,0,0] Assertion `input_val >= zero && input_val <= one` failed.
+/opt/conda/conda-bld/pytorch_1708025842427/work/aten/src/ATen/native/cuda/Loss.cu:94: operator(): block: [0,0,0], thread: [10,0,0] Assertion `input_val >= zero && input_val <= one` failed.
+/opt/conda/conda-bld/pytorch_1708025842427/work/aten/src/ATen/native/cuda/Loss.cu:94: operator(): block: [0,0,0], thread: [11,0,0] Assertion `input_val >= zero && input_val <= one` failed.
+/opt/conda/conda-bld/pytorch_1708025842427/work/aten/src/ATen/native/cuda/Loss.cu:94: operator(): block: [0,0,0], thread: [12,0,0] Assertion `input_val >= zero && input_val <= one` failed.
+/opt/conda/conda-bld/pytorch_1708025842427/work/aten/src/ATen/native/cuda/Loss.cu:94: operator(): block: [0,0,0], thread: [13,0,0] Assertion `input_val >= zero && input_val <= one` failed.
+/opt/conda/conda-bld/pytorch_1708025842427/work/aten/src/ATen/native/cuda/Loss.cu:94: operator(): block: [0,0,0], thread: [14,0,0] Assertion `input_val >= zero && input_val <= one` failed.
+/opt/conda/conda-bld/pytorch_1708025842427/work/aten/src/ATen/native/cuda/Loss.cu:94: operator(): block: [0,0,0], thread: [15,0,0] Assertion `input_val >= zero && input_val <= one` failed.
+/opt/conda/conda-bld/pytorch_1708025842427/work/aten/src/ATen/native/cuda/Loss.cu:94: operator(): block: [0,0,0], thread: [16,0,0] Assertion `input_val >= zero && input_val <= one` failed.
+/opt/conda/conda-bld/pytorch_1708025842427/work/aten/src/ATen/native/cuda/Loss.cu:94: operator(): block: [0,0,0], thread: [17,0,0] Assertion `input_val >= zero && input_val <= one` failed.
+/opt/conda/conda-bld/pytorch_1708025842427/work/aten/src/ATen/native/cuda/Loss.cu:94: operator(): block: [0,0,0], thread: [18,0,0] Assertion `input_val >= zero && input_val <= one` failed.
+/opt/conda/conda-bld/pytorch_1708025842427/work/aten/src/ATen/native/cuda/Loss.cu:94: operator(): block: [0,0,0], thread: [19,0,0] Assertion `input_val >= zero && input_val <= one` failed.
+/opt/conda/conda-bld/pytorch_1708025842427/work/aten/src/ATen/native/cuda/Loss.cu:94: operator(): block: [0,0,0], thread: [20,0,0] Assertion `input_val >= zero && input_val <= one` failed.
+/opt/conda/conda-bld/pytorch_1708025842427/work/aten/src/ATen/native/cuda/Loss.cu:94: operator(): block: [0,0,0], thread: [21,0,0] Assertion `input_val >= zero && input_val <= one` failed.
+/opt/conda/conda-bld/pytorch_1708025842427/work/aten/src/ATen/native/cuda/Loss.cu:94: operator(): block: [0,0,0], thread: [22,0,0] Assertion `input_val >= zero && input_val <= one` failed.
+/opt/conda/conda-bld/pytorch_1708025842427/work/aten/src/ATen/native/cuda/Loss.cu:94: operator(): block: [0,0,0], thread: [23,0,0] Assertion `input_val >= zero && input_val <= one` failed.
+/opt/conda/conda-bld/pytorch_1708025842427/work/aten/src/ATen/native/cuda/Loss.cu:94: operator(): block: [0,0,0], thread: [24,0,0] Assertion `input_val >= zero && input_val <= one` failed.
+/opt/conda/conda-bld/pytorch_1708025842427/work/aten/src/ATen/native/cuda/Loss.cu:94: operator(): block: [0,0,0], thread: [25,0,0] Assertion `input_val >= zero && input_val <= one` failed.
+/opt/conda/conda-bld/pytorch_1708025842427/work/aten/src/ATen/native/cuda/Loss.cu:94: operator(): block: [0,0,0], thread: [26,0,0] Assertion `input_val >= zero && input_val <= one` failed.
+/opt/conda/conda-bld/pytorch_1708025842427/work/aten/src/ATen/native/cuda/Loss.cu:94: operator(): block: [0,0,0], thread: [27,0,0] Assertion `input_val >= zero && input_val <= one` failed.
+/opt/conda/conda-bld/pytorch_1708025842427/work/aten/src/ATen/native/cuda/Loss.cu:94: operator(): block: [0,0,0], thread: [28,0,0] Assertion `input_val >= zero && input_val <= one` failed.
+/opt/conda/conda-bld/pytorch_1708025842427/work/aten/src/ATen/native/cuda/Loss.cu:94: operator(): block: [0,0,0], thread: [29,0,0] Assertion `input_val >= zero && input_val <= one` failed.
+/opt/conda/conda-bld/pytorch_1708025842427/work/aten/src/ATen/native/cuda/Loss.cu:94: operator(): block: [0,0,0], thread: [30,0,0] Assertion `input_val >= zero && input_val <= one` failed.
+/opt/conda/conda-bld/pytorch_1708025842427/work/aten/src/ATen/native/cuda/Loss.cu:94: operator(): block: [0,0,0], thread: [31,0,0] Assertion `input_val >= zero && input_val <= one` failed.
+/usuarios/arnold.moralem/anaconda3/envs/pytor/lib/python3.11/site-packages/torch/autograd/__init__.py:266: UserWarning: Error detected in AddBackward0. Traceback of forward call that caused the error:
+  File "/usuarios/arnold.moralem/IRESComicMischief/run_experiments.py", line 190, in <module>
+    run_save_experiment(model, "all_at_once", "unweighted", f"{name}50", [name], epochs=50) # name should be the same as the task - also expected in array form
+  File "/usuarios/arnold.moralem/IRESComicMischief/run_experiments.py", line 121, in run_save_experiment
+    model, loss_history, task_loss_history, validation_results, strategy_results = run_experiment(model, training_method, loss_setting, tasks, epochs=epochs, task_epochs=task_epochs)
+  File "/usuarios/arnold.moralem/IRESComicMischief/run_experiments.py", line 88, in run_experiment
+    model, loss_history, task_loss_history, validation_results, strategy_results = train_loop(model, optimizer, "train_features_lrec_camera.json", tasks, scheduler=scheduler, json_val_path="val_features_lrec_camera.json", loss_setting=loss_setting, training_method=training_method, batch_size=batch_size, num_epochs=epochs, task_epochs=task_epochs, shuffle=shuffle, device=device)
+  File "/usuarios/arnold.moralem/IRESComicMischief/train.py", line 227, in train_loop
+    loss_history, task_loss_history, steps, loss_weights, initial_task_losses, gradnorm_optimizer, epoch_lost_weight_history = train_one_epoch(model, optimizer, dataloader, tasks, loss_weights, epoch, steps, loss_history, task_loss_history, training_method=training_method, loss_setting=loss_setting, device=device, initial_task_losses=initial_task_losses, gradnorm_optimizer=gradnorm_optimizer)
+  File "/usuarios/arnold.moralem/IRESComicMischief/train.py", line 397, in train_one_epoch
+    loss, loss_weights = handle_losses(task_losses, loss_setting, loss_weights, steps, tasks, initial_task_losses=initial_task_losses, loss_optimizer=gradnorm_optimizer, model=model)
+  File "/usuarios/arnold.moralem/IRESComicMischief/train.py", line 737, in handle_losses
+    loss += task_loss
+ (Triggered internally at /opt/conda/conda-bld/pytorch_1708025842427/work/torch/csrc/autograd/python_anomaly_mode.cpp:113.)
+  Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+Accuracy: 0.9305555555555556, F1 Score: 0.6246
+Average Task Loss 0.3093048334121704
+
+Average Total Loss 0.3093048334121704
+Average Accuracy: 0.9305555555555556
+Average F1 Score: 0.6246089676746611
+
+Epoch [18, Step [3087], Total Loss: 0.4521, Time: 11.19s
+Task gory, Loss 0.45214155316352844
+
+Epoch [18, Step [3097], Total Loss: 0.3578, Time: 22.66s
+Task gory, Loss 0.3577912449836731
+
+Epoch [18, Step [3107], Total Loss: 0.4957, Time: 33.64s
+Task gory, Loss 0.4956984519958496
+
+Epoch [18, Step [3117], Total Loss: 0.5193, Time: 44.78s
+Task gory, Loss 0.5192519426345825
+
+Epoch [18, Step [3127], Total Loss: 0.6568, Time: 56.49s
+Task gory, Loss 0.6568031907081604
+
+Epoch [18, Step [3137], Total Loss: 0.5924, Time: 67.50s
+Task gory, Loss 0.5924345254898071
+
+Epoch [18, Step [3147], Total Loss: 0.4820, Time: 79.00s
+Task gory, Loss 0.4819962978363037
+
+Epoch [18, Step [3157], Total Loss: 0.4621, Time: 90.10s
+Task gory, Loss 0.46207743883132935
+
+Epoch [18, Step [3167], Total Loss: 0.4390, Time: 101.52s
+Task gory, Loss 0.4389713406562805
+
+Training Single Task Model for sarcasm
+Created Datasets
+Total Steps 9050, Number of Epochs: 50
+Image found
+Audio found
+Training Single Task Model for slapstick
+Created Datasets
+Total Steps 9050, Number of Epochs: 50
+Image found
+Audio found
+Traceback (most recent call last):
+  File "/usuarios/arnold.moralem/IRESComicMischief/run_experiments.py", line 194, in <module>
+    model = init_model(heads=multi_task_heads, pretrained=True)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usuarios/arnold.moralem/IRESComicMischief/run_experiments.py", line 59, in init_model
+    model, _ = initiate_pretrained_model(heads)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usuarios/arnold.moralem/IRESComicMischief/helpers.py", line 137, in initiate_pretrained_model
+    pretrained_state_dict = torch.load(pretrained_weights_path)
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usuarios/arnold.moralem/anaconda3/envs/pytor/lib/python3.11/site-packages/torch/serialization.py", line 1026, in load
+    return _load(opened_zipfile,
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/usuarios/arnold.moralem/anaconda3/envs/pytor/lib/python3.11/site-packages/torch/serialization.py", line 1438, in _load
+    result = unpickler.load()
+             ^^^^^^^^^^^^^^^^
+  File "/usuarios/arnold.moralem/anaconda3/envs/pytor/lib/python3.11/site-packages/torch/serialization.py", line 1408, in persistent_load
+    typed_storage = load_tensor(dtype, nbytes, key, _maybe_decode_ascii(location))
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usuarios/arnold.moralem/anaconda3/envs/pytor/lib/python3.11/site-packages/torch/serialization.py", line 1382, in load_tensor
+    wrap_storage=restore_location(storage, location),
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usuarios/arnold.moralem/anaconda3/envs/pytor/lib/python3.11/site-packages/torch/serialization.py", line 391, in default_restore_location
+    result = fn(storage, location)
+             ^^^^^^^^^^^^^^^^^^^^^
+  File "/usuarios/arnold.moralem/anaconda3/envs/pytor/lib/python3.11/site-packages/torch/serialization.py", line 271, in _cuda_deserialize
+    return obj.cuda(device)
+           ^^^^^^^^^^^^^^^^
+  File "/usuarios/arnold.moralem/anaconda3/envs/pytor/lib/python3.11/site-packages/torch/_utils.py", line 118, in _cuda
+    untyped_storage.copy_(self, non_blocking)
+RuntimeError: CUDA error: device-side assert triggered
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1.
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+

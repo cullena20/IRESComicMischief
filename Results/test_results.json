@@ -1,0 +1,23 @@
+{
+    "accuracies": {
+        "mature": 0.19982698961937717,
+        "gory": 0.9688581314878892,
+        "sarcasm": 0.8408304498269896,
+        "slapstick": 0.08564013840830449
+    },
+    "f1_scores": {
+        "mature": 0.33309300648882484,
+        "gory": 0.0,
+        "sarcasm": 0.0,
+        "slapstick": 0.15776892430278883
+    },
+    "average_accuracy": 0.5237889273356401,
+    "average_f1_score": 0.12271548269790342,
+    "val_average_total_loss": 2.764658212661743,
+    "val_average_task_loss": {
+        "mature": 0.7649609446525574,
+        "gory": 0.5975948572158813,
+        "sarcasm": 0.673733115196228,
+        "slapstick": 0.7283695340156555
+    }
+}

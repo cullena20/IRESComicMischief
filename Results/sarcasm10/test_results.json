@@ -1,0 +1,14 @@
+{
+    "accuracies": {
+        "sarcasm": 0.8650519031141869
+    },
+    "f1_scores": {
+        "sarcasm": 0.5593220338983049
+    },
+    "average_accuracy": 0.8650519031141869,
+    "average_f1_score": 0.5593220338983049,
+    "val_average_total_loss": 0.44210973381996155,
+    "val_average_task_loss": {
+        "sarcasm": 0.44210973381996155
+    }
+}

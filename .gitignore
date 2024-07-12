@@ -21,6 +21,14 @@ Results/slapstick10/slapstick.pkl
 Results/TEST_gory/TEST_gory.pkl
 Results/2EpochsRecreate/Test2.pkl
 
+Results/DynamicDifficultySampling5/checkpoints_DynamicDifficultySampling5.pkl
+Results/DynamicDifficultySampling5/DynamicDifficultySampling5.pkl
+Results/NotPretrainedRecreate10/NotPretrainedRecreate10.pkl
+Results/Recreate10-Part2/Recreate10-Part2.pkl
+Results/Unweighted10/Unweighted10.pkl
+
+Old/
+
 initialize_INAOE.sh
 
 old_train.py

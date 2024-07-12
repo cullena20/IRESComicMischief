@@ -5,6 +5,7 @@ from Model.UnifiedModel import UnifiedModel
 from Model.BaseModel import Bert_Model
 from Model.TaskHeads import BinaryClassification, MultiTaskClassification
 import os
+import pickle
 import re
 
 machine = "INAOE" # used for identifying pretrained weights directory
@@ -182,17 +183,65 @@ def initiate_model_new(task_heads):
     unified_model = UnifiedModel(base_model, task_heads)
     return unified_model, base_model
 
+def save_checkpoint(epoch, best_model_state_dict, optimizer, scheduler, loss_history, task_loss_history, validation_results, strategy_results, name, list_to_tensor=False, training_method=False):
+    # try:
+    dir_path = f"Results/{name}"
+    os.makedirs(dir_path, exist_ok=True)
+
+    pickle_path = f"{dir_path}/checkpoints_{name}.pkl"
+
+    if list_to_tensor:
+        loss_history_tensor, task_loss_history_tensor, validation_results_tensor, strategy_results_tensor = convert_results_to_tensors(loss_history, task_loss_history, validation_results, strategy_results, training_method)
+
+    # Save the results to a file
+    with open(pickle_path, 'wb') as f:
+        pickle.dump({
+            "epoch": epoch,
+            'model_state_dict': best_model_state_dict,
+            'optimizer_state_dict': optimizer.state_dict(),
+            'scheduler_state_dict': scheduler.state_dict(),
+            'loss_history': loss_history_tensor,
+            'task_loss_history': task_loss_history_tensor,
+            'validation_results': validation_results_tensor,
+            'strategy_results': strategy_results_tensor
+        }, f)
+    print(f"Checkpoint results saved to {pickle_path}")
+
+    # except Exception as e:
+    # print(f"Failed to save checkpoint at epoch {epoch}")
+
+def convert_results_to_tensors(loss_history, task_loss_history, validation_results, strategy_results, training_method=None):
+    # results are currently stored as lists to allow for easy appending, this turns them into tensors
+    # this may overly complicate things 
+    # convert these lists/dictionaries of lists back into tensors
+    loss_history_tensor = torch.tensor(loss_history)
+    task_loss_history_tensor = {task: torch.tensor(loss) for task, loss in task_loss_history.items()}
+
+    validation_results_tensor = {
+        "accuracies": {task: torch.tensor(acc) for task, acc in validation_results["accuracies"].items()},
+        "f1_scores": {task: torch.tensor(f1) for task, f1 in validation_results["f1_scores"].items()},
+        "val_average_task_loss": {task: torch.tensor(task_loss) for task, task_loss in validation_results["val_average_task_loss"].items()},
+        "average_accuracy": torch.tensor(validation_results["average_accuracy"]),
+        "average_f1_score": torch.tensor(validation_results["average_f1_score"]),
+        "val_average_total_loss": torch.tensor(validation_results["val_average_total_loss"])
+    }
+
+    strategy_results_tensor = {
+        "loss_weight_history": {task: torch.tensor(loss) for task, loss in strategy_results["loss_weight_history"].items()}
+    }
+
+    if training_method == "dynamic_difficulty_sampling":
+        strategy_results_tensor["sample_weight_history"] = {task : torch.tensor(sample_weight) for task, sample_weight in strategy_results["sample_weight_history"].items()}
+
+    return loss_history_tensor, task_loss_history_tensor, validation_results_tensor, strategy_results_tensor
+
 
 # THE BELOW IS CURRENTLY NOT USED BUT COULD NEED HELP
-
 
 import sys
 import time
 import torch
 import numpy as np
-
-__all__ = ['TorchHelper']
-
 
 class TorchHelper:
     checkpoint_history = []

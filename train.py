@@ -6,7 +6,7 @@ from finetuning_dataloader import CustomDataset
 from gradnorm import gradnorm
 import math
 from evaluate import evaluate
-from helpers import compute_l2_reg_val
+from helpers import compute_l2_reg_val, convert_results_to_tensors, save_checkpoint
 
 import time
 
@@ -24,16 +24,17 @@ def extend_mixed_results_dict(init_results, new_results):
     results = {}
     for (metric, init), new in zip(init_results.items(), new_results.values()):
         if type(init) == dict:
-            results[metric] = extend_task_history(init, new)
+            results[metric] = extend_task_history(init, new) # this isn't here right now
         else:
-            # results[metric] = torch.cat((init, new), dim=0)
             results[metric] = init + new
     return results
 
 # this should really be elsewhere
 k=20
 
-debug = False
+debug = False # controls printing messages
+
+stop_epoch_early = False # if true stops each epoch after 5 steps
 
 def dprint(text):
     if debug:
@@ -71,7 +72,7 @@ sarcasm_w = 0.2
 # input list of tasks
 # ["binary", "mature", "gory", "sarcasm", "slapstick"]
 
-def train_loop(model, optimizer, json_train_path, tasks, scheduler=None, json_val_path=None, training_method="all_at_once", loss_setting="unweighted", task_epochs=None, batch_size=16, num_epochs=1, text_pad_length=500, img_pad_length=36, audio_pad_length=63, shuffle=True, device=torch.device("cuda" if torch.cuda.is_available() else "cpu")):
+def train_loop(model, optimizer, json_train_path, tasks, scheduler=None, json_val_path=None, training_method="all_at_once", loss_setting="unweighted", task_epochs=None, batch_size=16, num_epochs=1, text_pad_length=500, img_pad_length=36, audio_pad_length=63, shuffle=True, device=torch.device("cuda" if torch.cuda.is_available() else "cpu"), name="Test"):
     # the dataset has x values: 
     # text, text_mask, image, image_mask, audio, audio_maxk
     # and y value (deal with depending on task)
@@ -100,7 +101,8 @@ def train_loop(model, optimizer, json_train_path, tasks, scheduler=None, json_va
         total_steps = len(dataloader) * num_epochs # Total number of training steps (epochs * batches)
     
     print("Created Datasets")
-    print(f"Total Steps {total_steps}") # sometimes this is wrong
+    print(f"Total Steps {total_steps}, Number of Epochs: {num_epochs}") # sometimes this is wrong
+
 
     # alternate scheduler below - probably no need for
     # scheduler = get_linear_schedule_with_warmup(optimizer,
@@ -133,11 +135,14 @@ def train_loop(model, optimizer, json_train_path, tasks, scheduler=None, json_va
  
     if training_method == "dynamic_difficulty_sampling":
         sample_weight_history = {task : [] for task in tasks} # we get new loss weights at every step with gradnorm -> track this here
- 
+    
+    # a little weird how strategy results is handled
+    strategy_results = {}
+
     steps = 0 # a step is one batch aka one training step
 
     best_f1 = 0
-    best_model_weights = None
+    best_model_state_dict = None
 
     initial_task_losses, gradnorm_optimizer = None, None
 
@@ -210,7 +215,9 @@ def train_loop(model, optimizer, json_train_path, tasks, scheduler=None, json_va
 
                     if average_f1_score > best_f1:
                         best_f1 = average_f1_score
-                        best_model_weights = model.state_dict()
+                        best_model_state_dict = model.state_dict()
+                    
+                    save_checkpoint(epoch, best_model_state_dict, optimizer, scheduler, loss_history, task_loss_history, validation_results, strategy_results, name)
 
     else:
         for epoch in range(num_epochs): 
@@ -233,9 +240,11 @@ def train_loop(model, optimizer, json_train_path, tasks, scheduler=None, json_va
             for i, task in enumerate(tasks):
                 # loss_weight_history[task][steps] = loss_weights[i] # keep track of the loss history
                 loss_weight_history = extend_mixed_results_dict(loss_weight_history, epoch_lost_weight_history)
+                strategy_results["loss_weight_history"] = loss_weight_history
 
                 if training_method == "dynamic_difficulty_sampling":
                     sample_weight_history = extend_mixed_results_dict(sample_weight_history, epoch_sample_weight_history)
+                    strategy_results["sample_weight_history"] = sample_weight_history
 
             # then perform validation
             if json_val_path is not None:
@@ -281,37 +290,13 @@ def train_loop(model, optimizer, json_train_path, tasks, scheduler=None, json_va
 
                 if average_f1_score > best_f1:
                     best_f1 = average_f1_score
-                    best_model_weights = model.state_dict()
+                    best_model_state_dict = model.state_dict()
 
-    # prepare final results and return
-    # Convert lists to tensors
-    for task in validation_results["accuracies"]:
-        validation_results["accuracies"][task] = torch.tensor(validation_results["accuracies"][task])
+                save_checkpoint(epoch, best_model_state_dict, optimizer, scheduler, loss_history, task_loss_history, validation_results, strategy_results, name, list_to_tensor=True, training_method=training_method)
 
-    for task in validation_results["f1_scores"]:
-        validation_results["f1_scores"][task] = torch.tensor(validation_results["f1_scores"][task])
+    loss_history, task_loss_history, validation_results, strategy_results = convert_results_to_tensors(loss_history, task_loss_history, validation_results, strategy_results, training_method)
 
-    for task in validation_results["val_average_task_loss"]:
-        validation_results["val_average_task_loss"][task] = torch.tensor(validation_results["val_average_task_loss"][task])
-
-    validation_results["average_accuracy"] = torch.tensor(validation_results["average_accuracy"])
-    validation_results["average_f1_score"] = torch.tensor(validation_results["average_f1_score"])
-    validation_results["val_average_total_loss"] = torch.tensor(validation_results["val_average_total_loss"])
-
-    # convert these lists/dictionaries of lists back into tensors
-    loss_history = torch.tensor(loss_history)
-    task_loss_history = {task: torch.tensor(loss) for task, loss in task_loss_history.items()}
-    loss_weight_history = {task: torch.tensor(loss_weight) for task, loss_weight in loss_weight_history.items()}
-
-     # also get strategy specific results
-    strategy_results = {}
-    strategy_results["loss_weight_history"] = loss_weight_history
-
-    if training_method == "dynamic_difficulty_sampling":
-        sample_weight_history = {task : torch.tensor(sample_weight) for task, sample_weight in sample_weight_history.items()}
-        strategy_results["sample_weight_history"] = sample_weight_history
-
-    return best_model_weights, loss_history, task_loss_history, validation_results, strategy_results # note that loss_history has no meaning unless we add up loss functions
+    return best_model_state_dict, loss_history, task_loss_history, validation_results, strategy_results, optimizer.state_dict(), scheduler.state_dict() # note that loss_history has no meaning unless we add up loss functions
     # this should return another variable which contains model specific stuff (like loss histories, or sampling percentages of each task, etc.)
 
 # One task at a time
@@ -394,7 +379,7 @@ def train_one_epoch(model, optimizer, dataloader, tasks, loss_weights, curr_epoc
                 # Weight losses appropriately
                 # given a dictionary of losses for every task, handle the loss reweigthing
                 loss, loss_weights = handle_losses(task_losses, loss_setting, loss_weights, steps, tasks, initial_task_losses=initial_task_losses, loss_optimizer=gradnorm_optimizer, model=model)
-                
+
                 # optimizer.zero_grad() # moved it here just in case with gradnorm shouldn't make a difference
 
                 # if loss setting is grad norm, this has already been called
@@ -460,16 +445,15 @@ def train_one_epoch(model, optimizer, dataloader, tasks, loss_weights, curr_epoc
             # TO DO: This way of reporting loss doesn't make sense with round robin (have to divide total loss by 4 * batch_idx + 1)
             if (batch_idx + 1) % 10 == 0:
                 print(f'Epoch [{curr_epoch + 1}, Step [{steps+1}], Total Loss: {loss:0.4f}, Time: {time.time() - start_time:.2f}s')
-                for task, task_loss in task_losses.items():
-                    print(f"Task {task}, Loss {task_loss}")
+                for i, (task, task_loss) in enumerate(task_losses.items()):
+                    print(f"Task {task}, Loss {loss_weights[i] * task_loss}")
                 if loss_setting == "gradnorm":
                     print(f"Loss Weights: {loss_weights}")
                 print()
 
             steps += 1
 
-            # halt early for testing
-            if debug and steps == 5:
+            if stop_epoch_early and batch_idx == 5:
                 break
 
         return curr_loss_history, curr_task_loss_history, steps, loss_weights, initial_task_losses, gradnorm_optimizer, loss_weight_history
@@ -679,7 +663,7 @@ def dynamic_difficulty_sampling_one_epoch(model, optimizer, datasets, tasks, los
         num_batches +=1 # batches for this epoch
 
         # halt early for testing
-        if debug and steps == 5:
+        if stop_epoch_early and num_batches == 5:
             break
 
     return curr_loss_history, curr_task_loss_history, steps, loss_weights, initial_task_losses, gradnorm_optimizer, loss_weight_history, sample_weights, sample_weight_history
@@ -695,16 +679,15 @@ def handle_losses(task_losses, loss_setting, loss_weights, steps, tasks, initial
         loss_weights = [mature_w, gory_w, sarcasm_w, slap_w] # for consistency
         loss = mature_w*task_losses["mature"] + gory_w*task_losses["gory"] + sarcasm_w*task_losses["sarcasm"] + slap_w*task_losses["slapstick"]
 
-    # below two are untested
-    # learned loss weightings for whichever ordering of tasks
-    # might want to change this to declare the parameter right here like grad norm
-    # this shouldn't effect other optimization at all simply because these loss weights won't be used
-    elif loss_setting == "weighted":
+    elif loss_setting == "naive_learnable":
         if steps == 0:
-            print("Learnable Weights")
+            print("Naive Learnable Weights")
+        if steps % 50 == 0: # not the cleanest but does the job for easy debugging
+            print(f"Loss Weights: {model.loss_weights}")
         loss = 0
-        for task_loss in task_losses.values():
-            loss += loss_weights[i] * task_loss
+        for i, task_loss in enumerate(task_losses.values()):
+            loss += model.loss_weights[i] * task_loss # this should factor directly into the loss function since it is a model parameter
+        loss_weights = model.loss_weights # for consistency
     
     # CAN PUT GRADNORM HERE (THOUGH IT NEEDS STUFF EARLIER)
     # if i were to modularize, this would take in task losses as values - but it might not be that simple
@@ -713,6 +696,8 @@ def handle_losses(task_losses, loss_setting, loss_weights, steps, tasks, initial
     elif loss_setting == "gradnorm": # won't work if initial_task_losses and loss_optimizer is None, which should be fine
         if steps == 0:
             print("Gradnorm Weights")
+        if steps % 50 == 0:
+            print(f"Loss Weights: {model.loss_weights}")
         loss = 0
         # passing in model.base_model here should be put elsewhere since it makes the training loop model_specific
         # can enforce these task specific hyperparameters using **kwargs maybe?

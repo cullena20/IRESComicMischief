@@ -84,7 +84,7 @@ def evaluate(model, json_data, tasks, loss_weights=None, batch_size=16, text_pad
         # print(all_labels[task])
         # print(all_true_labels[task])
         accuracies[task] = accuracy_score(all_labels[task], all_true_labels[task])
-        f1_scores[task] = f1_score(all_labels[task], all_true_labels[task], average='macro') # macro
+        f1_scores[task] = f1_score(all_labels[task], all_true_labels[task], average='binary') # macro
 
         # print(f"Accuracy: {accuracies[task]}, F1 Score: {f1_scores[task]:.4f}")
 
@@ -95,8 +95,8 @@ def evaluate(model, json_data, tasks, loss_weights=None, batch_size=16, text_pad
     # return average loss. I think this makes sense
     # using [:steps] is only important when we halt validation early for debugging
     # otherwise steps should equal len(dataloader)
-    val_average_total_loss = val_total_loss_history.mean()
-    val_average_task_loss = {task: loss_history.mean() for task, loss_history in val_task_loss_history.items()}
+    val_average_total_loss = val_total_loss_history.mean().item()
+    val_average_task_loss = {task: loss_history.mean().item() for task, loss_history in val_task_loss_history.items()}
 
     # TO RETURN
     # Accuracies and F1 Scores for every task

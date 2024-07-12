@@ -11,8 +11,12 @@ I keep track of possible errors and notes on how we implement things. If we have
 
 * After fixing how padding is done to allign with the original code, everything should truly be equivalent now.
 
-7/9
+# Style Issues - 7/11
 
+* I let my code get a bit sloppy and have some weird conversions with whether to use tensors or lists. There are some unnecessary conversions because of this. Avoid in the future.
+* How epoch is written (0 or 1 indexed) is not totally consistent
+* Functions are kind of all over the place now (and again a lot of the functions are not necessary)
+* Training loop is messy
 
 # Training and Evaluation Loop
 * There is serious modularization that needs to be done. For example, all the validation stuff does

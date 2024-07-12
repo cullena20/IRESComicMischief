@@ -4,13 +4,16 @@ import numpy as np
 from Model.UnifiedModel import UnifiedModel
 from Model.BaseModel import Bert_Model
 from Model.TaskHeads import BinaryClassification, MultiTaskClassification
-from train import train, dynamic_difficulty_sampling, train_loop 
+from train import train_loop
 from helpers import initiate_pretrained_model
 from evaluate import evaluate
 import os
 import re # needed to load the state dict into the slightly modified model
 import psutil
+import pickle
 
+# used in previous train loop
+from old_train import train, dynamic_difficulty_sampling
 
 os.environ['CUDA_VISIBLE_DEVICES'] = '5'
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
@@ -138,12 +141,34 @@ def basic_updated_train_pass(model, device, tasks, training_method="all_at_once"
     print(f"Task Loss History {task_loss_history}")
     print(f"Validation Results: {validation_results}")
 
+def test_checkpoint_loader(checkpoint_path):
+    with open(checkpoint_path, "rb") as f:
+        checkpoint = pickle.load(f)
+    # Access the data
+    epoch = checkpoint['epoch']
+    model_state_dict = checkpoint['model_state_dict']
+    optimizer_state_dict = checkpoint['optimizer_state_dict']
+    scheduler_state_dict = checkpoint['scheduler_state_dict']
+    loss_history = checkpoint['loss_history']
+    task_loss_history = checkpoint['task_loss_history']
+    validation_results = checkpoint['validation_results']
+    strategy_results = checkpoint['strategy_results']
+
+    # Example: Printing some of the loaded data
+    print(f"Epoch: {epoch}")
+    print(f"Loss history: {loss_history}")
+    print(f"Task Loss history: {task_loss_history}")
+    print(f"Validation results: {validation_results}")
+    print(f"Strategy results: {strategy_results}")
 
 # GPU ISSUES
 # The GPU runs out of memory with batch size greater th(despite it working on CPU)
 # Also, after a view runs you get NaN errors -> the GPU doesn't report this clearly, but I think it's the same error
 
 if __name__ == "__main__":
+    test_checkpoint_loader("Results/Test/checkpoints_Test.pkl")
+    test_checkpoint_loader("Results/NaiveLearnableWeights5/checkpoints_NaiveLearnableWeights5.pkl")
+
     if device == "cuda":
         print(torch.cuda.device_count())  # Number of available GPUs
         print(torch.cuda.current_device())  # Current GPU device index
@@ -154,11 +179,11 @@ if __name__ == "__main__":
 
     # add if statement depending on whether directory has file
     # model, _ = initiate_model_new()
-    model, _ = initiate_pretrained_model(multi_task_heads)
-    model.to(device)
+    # model, _ = initiate_pretrained_model(multi_task_heads)
+    # model.to(device)
 
-    basic_updated_train_pass(model, device, multi_tasks, loss_setting="predefined_weights")
-    # basic_updated_train_pass(model, device, multi_tasks, loss_setting="gradnorm") # this is a good amount slower, maybe slower than it should be?
+    # basic_updated_train_pass(model, device, multi_tasks, loss_setting="predefined_weights")
+    # # basic_updated_train_pass(model, device, multi_tasks, loss_setting="gradnorm") # this is a good amount slower, maybe slower than it should be?
     # basic_updated_train_pass(model, device, multi_tasks, training_method="dynamic_difficulty_sampling")
     # basic_updated_train_pass(model, device, multi_tasks, training_method="dynamic_difficulty_sampling", loss_setting="gradnorm")
 
