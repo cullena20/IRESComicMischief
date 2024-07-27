@@ -1,0 +1,1759 @@
+We strongly recommend passing in an `attention_mask` since your input_ids may be padded. See https://huggingface.co/docs/transformers/troubleshooting#incorrect-output-when-padding-tokens-arent-masked.
+BertSdpaSelfAttention is used but `torch.nn.functional.scaled_dot_product_attention` does not support non-absolute `position_embedding_type` or `output_attentions=True` or `head_mask`. Falling back to the manual attention implementation, but specifying the manual implementation will be required from Transformers version v5.0.0 onwards. This warning can be removed using the argument `attn_implementation="eager"` when loading the model.
+python: can't open file '/storage/home/cander24/Main/ComicMischief/run_experiments/home/cander24/anaconda3/envs/ires/bin/python': [Errno 2] No such file or directory
+Successfully loaded base model weights from /storage/home/cander24/Main/ComicMischief/checkpoint-pretraining/best_pretrain_matching.pth
+Created Datasets
+Total Steps 1810, Number of Epochs: 10
+Image found
+Audio found
+Gradnorm Weights
+Loss Weights: Parameter containing:
+tensor([1., 1., 1., 1.], device='cuda:0', requires_grad=True)
+Epoch [1, Step [10], Total Loss: 3.2101, Time: 35.29s
+Task mature, Loss 0.6912866234779358
+Task gory, Loss 0.850809633731842
+Task sarcasm, Loss 0.9160296320915222
+Task slapstick, Loss 0.7523162364959717
+Loss Weights: Parameter containing:
+tensor([0.9069, 1.0423, 1.0515, 0.9992], requires_grad=True)
+
+Epoch [1, Step [20], Total Loss: 3.1540, Time: 70.15s
+Task mature, Loss 0.6181829571723938
+Task gory, Loss 0.9973251819610596
+Task sarcasm, Loss 0.7393149137496948
+Task slapstick, Loss 0.7996615767478943
+Loss Weights: Parameter containing:
+tensor([0.8145, 1.0662, 1.0753, 1.0440], requires_grad=True)
+
+Epoch [1, Step [30], Total Loss: 3.0948, Time: 104.92s
+Task mature, Loss 0.6282466053962708
+Task gory, Loss 0.9368008971214294
+Task sarcasm, Loss 0.7393752932548523
+Task slapstick, Loss 0.7904738187789917
+Loss Weights: Parameter containing:
+tensor([0.7611, 1.1071, 1.0517, 1.0801], requires_grad=True)
+
+Epoch [1, Step [40], Total Loss: 3.0314, Time: 139.52s
+Task mature, Loss 0.5337678790092468
+Task gory, Loss 0.9494216442108154
+Task sarcasm, Loss 0.708288848400116
+Task slapstick, Loss 0.8404722213745117
+Loss Weights: Parameter containing:
+tensor([0.7277, 1.1462, 1.0146, 1.1115], requires_grad=True)
+
+Epoch [1, Step [50], Total Loss: 3.2195, Time: 174.50s
+Task mature, Loss 0.5660115480422974
+Task gory, Loss 1.0883921384811401
+Task sarcasm, Loss 0.6863165497779846
+Task slapstick, Loss 0.8789768218994141
+Loss Weights: Parameter containing:
+tensor([0.7074, 1.1701, 1.0096, 1.1129], requires_grad=True)
+
+Loss Weights: Parameter containing:
+tensor([1., 1., 1., 1.], device='cuda:0', requires_grad=True)
+Epoch [1, Step [60], Total Loss: 3.0161, Time: 209.13s
+Task mature, Loss 0.5638229250907898
+Task gory, Loss 1.0252538919448853
+Task sarcasm, Loss 0.6627638936042786
+Task slapstick, Loss 0.7639796137809753
+Loss Weights: Parameter containing:
+tensor([0.7182, 1.1798, 0.9981, 1.1039], requires_grad=True)
+
+Epoch [1, Step [70], Total Loss: 3.0243, Time: 244.21s
+Task mature, Loss 0.4810387194156647
+Task gory, Loss 0.9815302491188049
+Task sarcasm, Loss 0.681094229221344
+Task slapstick, Loss 0.8808587193489075
+Loss Weights: Parameter containing:
+tensor([0.7120, 1.1865, 1.0021, 1.0994], requires_grad=True)
+
+Epoch [1, Step [80], Total Loss: 2.9424, Time: 278.86s
+Task mature, Loss 0.4833603501319885
+Task gory, Loss 0.9100678563117981
+Task sarcasm, Loss 0.7038392424583435
+Task slapstick, Loss 0.8449925780296326
+Loss Weights: Parameter containing:
+tensor([0.6862, 1.1872, 1.0347, 1.0919], requires_grad=True)
+
+Epoch [1, Step [90], Total Loss: 3.0249, Time: 313.53s
+Task mature, Loss 0.5296266078948975
+Task gory, Loss 0.9713954925537109
+Task sarcasm, Loss 0.6602970361709595
+Task slapstick, Loss 0.8633158206939697
+Loss Weights: Parameter containing:
+tensor([0.6774, 1.1739, 1.0563, 1.0924], requires_grad=True)
+
+Epoch [1, Step [100], Total Loss: 3.2257, Time: 348.77s
+Task mature, Loss 0.5340355038642883
+Task gory, Loss 0.9625083804130554
+Task sarcasm, Loss 0.8870523571968079
+Task slapstick, Loss 0.8416200876235962
+Loss Weights: Parameter containing:
+tensor([0.7016, 1.1472, 1.0307, 1.1205], requires_grad=True)
+
+Loss Weights: Parameter containing:
+tensor([1., 1., 1., 1.], device='cuda:0', requires_grad=True)
+Epoch [1, Step [110], Total Loss: 3.2936, Time: 383.45s
+Task mature, Loss 0.5183340311050415
+Task gory, Loss 0.9947824478149414
+Task sarcasm, Loss 0.8298778533935547
+Task slapstick, Loss 0.9503263235092163
+Loss Weights: Parameter containing:
+tensor([0.6997, 1.1346, 1.0329, 1.1327], requires_grad=True)
+
+Epoch [1, Step [120], Total Loss: 2.9396, Time: 418.12s
+Task mature, Loss 0.48282796144485474
+Task gory, Loss 0.928145706653595
+Task sarcasm, Loss 0.6701095104217529
+Task slapstick, Loss 0.8582390546798706
+Loss Weights: Parameter containing:
+tensor([0.7222, 1.1065, 1.0194, 1.1519], requires_grad=True)
+
+Epoch [1, Step [130], Total Loss: 2.8817, Time: 452.84s
+Task mature, Loss 0.5408030152320862
+Task gory, Loss 0.8486565351486206
+Task sarcasm, Loss 0.6478835344314575
+Task slapstick, Loss 0.8441269397735596
+Loss Weights: Parameter containing:
+tensor([0.7503, 1.0882, 1.0135, 1.1480], requires_grad=True)
+
+Epoch [1, Step [140], Total Loss: 3.0111, Time: 488.23s
+Task mature, Loss 0.4547652304172516
+Task gory, Loss 0.9108863472938538
+Task sarcasm, Loss 0.6435218453407288
+Task slapstick, Loss 1.002260446548462
+Loss Weights: Parameter containing:
+tensor([0.7236, 1.0932, 1.0219, 1.1613], requires_grad=True)
+
+Epoch [1, Step [150], Total Loss: 3.0010, Time: 523.03s
+Task mature, Loss 0.46354830265045166
+Task gory, Loss 0.999231219291687
+Task sarcasm, Loss 0.6205890774726868
+Task slapstick, Loss 0.9186632633209229
+Loss Weights: Parameter containing:
+tensor([0.7161, 1.1094, 1.0229, 1.1516], requires_grad=True)
+
+Loss Weights: Parameter containing:
+tensor([1., 1., 1., 1.], device='cuda:0', requires_grad=True)
+Epoch [1, Step [160], Total Loss: 2.9942, Time: 557.81s
+Task mature, Loss 0.5644994974136353
+Task gory, Loss 0.9623066186904907
+Task sarcasm, Loss 0.5851973295211792
+Task slapstick, Loss 0.8819646835327148
+Loss Weights: Parameter containing:
+tensor([0.7157, 1.1316, 1.0284, 1.1243], requires_grad=True)
+
+Epoch [1, Step [170], Total Loss: 3.2423, Time: 592.64s
+Task mature, Loss 0.5577700138092041
+Task gory, Loss 1.0332539081573486
+Task sarcasm, Loss 0.7448017597198486
+Task slapstick, Loss 0.9067531228065491
+Loss Weights: Parameter containing:
+tensor([0.7105, 1.1480, 1.0188, 1.1227], requires_grad=True)
+
+Epoch [1, Step [180], Total Loss: 2.9892, Time: 628.39s
+Task mature, Loss 0.45481619238853455
+Task gory, Loss 0.9568844437599182
+Task sarcasm, Loss 0.6900455355644226
+Task slapstick, Loss 0.8869332075119019
+Loss Weights: Parameter containing:
+tensor([0.7209, 1.1429, 1.0060, 1.1302], requires_grad=True)
+
+Image found
+Audio found
+Task mature
+Accuracy: 0.4027777777777778, F1 Score: 0.3027
+Average Task Loss 0.5105301737785339
+
+Task gory
+Accuracy: 0.0787037037037037, F1 Score: 0.1156
+Average Task Loss 1.0035256147384644
+
+Task sarcasm
+Accuracy: 0.7777777777777778, F1 Score: 0.0204
+Average Task Loss 0.6316453218460083
+
+Task slapstick
+Accuracy: 0.34953703703703703, F1 Score: 0.3196
+Average Task Loss 0.8744677305221558
+
+Average Total Loss 3.0201690196990967
+Average Accuracy: 0.40219907407407407
+Average F1 Score: 0.18956975308064897
+
+Checkpoint results saved to Results/GradNormTest/checkpoints_GradNormTest.pkl
+Epoch [2, Step [191], Total Loss: 2.9833, Time: 34.80s
+Task mature, Loss 0.525922417640686
+Task gory, Loss 1.0073691606521606
+Task sarcasm, Loss 0.6514871716499329
+Task slapstick, Loss 0.7983363270759583
+Loss Weights: Parameter containing:
+tensor([0.7585, 1.1178, 1.0057, 1.1179], requires_grad=True)
+
+Loss Weights: Parameter containing:
+tensor([1., 1., 1., 1.], device='cuda:0', requires_grad=True)
+Epoch [2, Step [201], Total Loss: 3.0836, Time: 69.58s
+Task mature, Loss 0.5659173727035522
+Task gory, Loss 1.0292803049087524
+Task sarcasm, Loss 0.6136963367462158
+Task slapstick, Loss 0.8746656179428101
+Loss Weights: Parameter containing:
+tensor([0.7768, 1.1154, 1.0019, 1.1059], requires_grad=True)
+
+Epoch [2, Step [211], Total Loss: 2.8728, Time: 105.16s
+Task mature, Loss 0.5155441761016846
+Task gory, Loss 0.9220095276832581
+Task sarcasm, Loss 0.5583698153495789
+Task slapstick, Loss 0.8778492212295532
+Loss Weights: Parameter containing:
+tensor([0.7725, 1.1166, 0.9899, 1.1209], requires_grad=True)
+
+Epoch [2, Step [221], Total Loss: 3.0182, Time: 139.78s
+Task mature, Loss 0.48702800273895264
+Task gory, Loss 0.9030683636665344
+Task sarcasm, Loss 0.646056592464447
+Task slapstick, Loss 0.9824498891830444
+Loss Weights: Parameter containing:
+tensor([0.7378, 1.1360, 0.9895, 1.1367], requires_grad=True)
+
+Epoch [2, Step [231], Total Loss: 3.1884, Time: 175.62s
+Task mature, Loss 0.6150704622268677
+Task gory, Loss 1.000741958618164
+Task sarcasm, Loss 0.7240368127822876
+Task slapstick, Loss 0.8483932018280029
+Loss Weights: Parameter containing:
+tensor([0.7107, 1.1295, 1.0035, 1.1563], requires_grad=True)
+
+Epoch [2, Step [241], Total Loss: 2.9977, Time: 210.31s
+Task mature, Loss 0.5438833236694336
+Task gory, Loss 0.964824914932251
+Task sarcasm, Loss 0.5589494705200195
+Task slapstick, Loss 0.9308629035949707
+Loss Weights: Parameter containing:
+tensor([0.7060, 1.1225, 0.9999, 1.1716], requires_grad=True)
+
+Loss Weights: Parameter containing:
+tensor([1., 1., 1., 1.], device='cuda:0', requires_grad=True)
+Epoch [2, Step [251], Total Loss: 3.2239, Time: 245.10s
+Task mature, Loss 0.5172478556632996
+Task gory, Loss 0.9882811307907104
+Task sarcasm, Loss 0.7319055199623108
+Task slapstick, Loss 0.9863760471343994
+Loss Weights: Parameter containing:
+tensor([0.7016, 1.1529, 0.9866, 1.1589], requires_grad=True)
+
+Epoch [2, Step [261], Total Loss: 3.0762, Time: 279.87s
+Task mature, Loss 0.5693283677101135
+Task gory, Loss 1.0715720653533936
+Task sarcasm, Loss 0.5857763886451721
+Task slapstick, Loss 0.8497788906097412
+Loss Weights: Parameter containing:
+tensor([0.7125, 1.1748, 0.9891, 1.1236], requires_grad=True)
+
+Epoch [2, Step [271], Total Loss: 2.9175, Time: 314.65s
+Task mature, Loss 0.4521200954914093
+Task gory, Loss 0.9928996562957764
+Task sarcasm, Loss 0.6275376081466675
+Task slapstick, Loss 0.8451881408691406
+Loss Weights: Parameter containing:
+tensor([0.7085, 1.1788, 0.9993, 1.1134], requires_grad=True)
+
+Epoch [2, Step [281], Total Loss: 3.0226, Time: 349.32s
+Task mature, Loss 0.5380384922027588
+Task gory, Loss 0.9401021003723145
+Task sarcasm, Loss 0.7021102905273438
+Task slapstick, Loss 0.8423523306846619
+Loss Weights: Parameter containing:
+tensor([0.7077, 1.1701, 0.9991, 1.1230], requires_grad=True)
+
+Epoch [2, Step [291], Total Loss: 2.9722, Time: 385.70s
+Task mature, Loss 0.48247405886650085
+Task gory, Loss 1.0452519655227661
+Task sarcasm, Loss 0.6251022815704346
+Task slapstick, Loss 0.820003092288971
+Loss Weights: Parameter containing:
+tensor([0.7127, 1.1765, 0.9912, 1.1197], requires_grad=True)
+
+Loss Weights: Parameter containing:
+tensor([1., 1., 1., 1.], device='cuda:0', requires_grad=True)
+Epoch [2, Step [301], Total Loss: 3.1529, Time: 420.49s
+Task mature, Loss 0.479226291179657
+Task gory, Loss 1.1276264190673828
+Task sarcasm, Loss 0.6462875008583069
+Task slapstick, Loss 0.8997247219085693
+Loss Weights: Parameter containing:
+tensor([0.7057, 1.1858, 0.9839, 1.1246], requires_grad=True)
+
+Epoch [2, Step [311], Total Loss: 2.9553, Time: 455.28s
+Task mature, Loss 0.5357481837272644
+Task gory, Loss 1.023392915725708
+Task sarcasm, Loss 0.574496865272522
+Task slapstick, Loss 0.8217287063598633
+Loss Weights: Parameter containing:
+tensor([0.7129, 1.1690, 0.9761, 1.1420], requires_grad=True)
+
+Epoch [2, Step [321], Total Loss: 3.1033, Time: 490.02s
+Task mature, Loss 0.501846432685852
+Task gory, Loss 1.0110743045806885
+Task sarcasm, Loss 0.6992266774177551
+Task slapstick, Loss 0.8909726142883301
+Loss Weights: Parameter containing:
+tensor([0.7324, 1.1491, 0.9763, 1.1422], requires_grad=True)
+
+Epoch [2, Step [331], Total Loss: 2.9562, Time: 524.74s
+Task mature, Loss 0.5443347096443176
+Task gory, Loss 0.8456701636314392
+Task sarcasm, Loss 0.7486925721168518
+Task slapstick, Loss 0.8176048994064331
+Loss Weights: Parameter containing:
+tensor([0.7372, 1.1499, 0.9657, 1.1473], requires_grad=True)
+
+Epoch [2, Step [341], Total Loss: 3.0629, Time: 559.49s
+Task mature, Loss 0.5192999243736267
+Task gory, Loss 1.0052629709243774
+Task sarcasm, Loss 0.7123987078666687
+Task slapstick, Loss 0.8262073397636414
+Loss Weights: Parameter containing:
+tensor([0.7361, 1.1530, 0.9749, 1.1360], requires_grad=True)
+
+Loss Weights: Parameter containing:
+tensor([1., 1., 1., 1.], device='cuda:0', requires_grad=True)
+Epoch [2, Step [351], Total Loss: 3.2505, Time: 594.28s
+Task mature, Loss 0.5293524265289307
+Task gory, Loss 1.0905187129974365
+Task sarcasm, Loss 0.7476742267608643
+Task slapstick, Loss 0.8829132318496704
+Loss Weights: Parameter containing:
+tensor([0.7175, 1.1598, 1.0091, 1.1136], requires_grad=True)
+
+Epoch [2, Step [361], Total Loss: 2.9661, Time: 629.05s
+Task mature, Loss 0.48953962326049805
+Task gory, Loss 0.9833109974861145
+Task sarcasm, Loss 0.6418498754501343
+Task slapstick, Loss 0.8515285849571228
+Loss Weights: Parameter containing:
+tensor([0.7117, 1.1559, 1.0302, 1.1022], requires_grad=True)
+
+Image found
+Audio found
+Task mature
+Accuracy: 0.3888888888888889, F1 Score: 0.3053
+Average Task Loss 0.5139185786247253
+
+Task gory
+Accuracy: 0.06018518518518518, F1 Score: 0.1135
+Average Task Loss 1.0296603441238403
+
+Task sarcasm
+Accuracy: 0.6041666666666666, F1 Score: 0.2400
+Average Task Loss 0.6521967649459839
+
+Task slapstick
+Accuracy: 0.6412037037037037, F1 Score: 0.3404
+Average Task Loss 0.8095564246177673
+
+Average Total Loss 3.0053317546844482
+Average Accuracy: 0.4236111111111111
+Average F1 Score: 0.24980645192839013
+
+Checkpoint results saved to Results/GradNormTest/checkpoints_GradNormTest.pkl
+Epoch [3, Step [372], Total Loss: 3.1711, Time: 36.69s
+Task mature, Loss 0.48214948177337646
+Task gory, Loss 1.0913968086242676
+Task sarcasm, Loss 0.7211479544639587
+Task slapstick, Loss 0.8763979077339172
+Loss Weights: Parameter containing:
+tensor([0.7237, 1.1636, 1.0000, 1.1128], requires_grad=True)
+
+Epoch [3, Step [382], Total Loss: 2.9726, Time: 71.42s
+Task mature, Loss 0.45304015278816223
+Task gory, Loss 0.9970079660415649
+Task sarcasm, Loss 0.6150880455970764
+Task slapstick, Loss 0.907745897769928
+Loss Weights: Parameter containing:
+tensor([0.7287, 1.1645, 0.9703, 1.1364], requires_grad=True)
+
+Epoch [3, Step [392], Total Loss: 3.0404, Time: 106.23s
+Task mature, Loss 0.4993528127670288
+Task gory, Loss 0.9567915797233582
+Task sarcasm, Loss 0.7097744941711426
+Task slapstick, Loss 0.8745392560958862
+Loss Weights: Parameter containing:
+tensor([0.7109, 1.1707, 0.9754, 1.1429], requires_grad=True)
+
+Loss Weights: Parameter containing:
+tensor([1., 1., 1., 1.], device='cuda:0', requires_grad=True)
+Epoch [3, Step [402], Total Loss: 3.0248, Time: 140.97s
+Task mature, Loss 0.4887932538986206
+Task gory, Loss 0.9834157824516296
+Task sarcasm, Loss 0.5529904365539551
+Task slapstick, Loss 0.9996716976165771
+Loss Weights: Parameter containing:
+tensor([0.7021, 1.1582, 0.9728, 1.1669], requires_grad=True)
+
+Epoch [3, Step [412], Total Loss: 3.0118, Time: 175.75s
+Task mature, Loss 0.49941807985305786
+Task gory, Loss 1.0128648281097412
+Task sarcasm, Loss 0.5899377465248108
+Task slapstick, Loss 0.9096616506576538
+Loss Weights: Parameter containing:
+tensor([0.7022, 1.1580, 0.9713, 1.1684], requires_grad=True)
+
+Epoch [3, Step [422], Total Loss: 3.0807, Time: 210.45s
+Task mature, Loss 0.4738616347312927
+Task gory, Loss 0.9802802801132202
+Task sarcasm, Loss 0.7106538414955139
+Task slapstick, Loss 0.9158000349998474
+Loss Weights: Parameter containing:
+tensor([0.6875, 1.1742, 0.9716, 1.1666], requires_grad=True)
+
+Epoch [3, Step [432], Total Loss: 2.9857, Time: 245.21s
+Task mature, Loss 0.43095043301582336
+Task gory, Loss 0.9772815108299255
+Task sarcasm, Loss 0.6485158801078796
+Task slapstick, Loss 0.9284236431121826
+Loss Weights: Parameter containing:
+tensor([0.6897, 1.1723, 1.0073, 1.1306], requires_grad=True)
+
+Epoch [3, Step [442], Total Loss: 3.0964, Time: 280.03s
+Task mature, Loss 0.4653204381465912
+Task gory, Loss 0.9372931122779846
+Task sarcasm, Loss 0.7781302332878113
+Task slapstick, Loss 0.9157373309135437
+Loss Weights: Parameter containing:
+tensor([0.6888, 1.1492, 1.0367, 1.1253], requires_grad=True)
+
+Loss Weights: Parameter containing:
+tensor([1., 1., 1., 1.], device='cuda:0', requires_grad=True)
+Epoch [3, Step [452], Total Loss: 3.1382, Time: 314.81s
+Task mature, Loss 0.4428218901157379
+Task gory, Loss 1.0342495441436768
+Task sarcasm, Loss 0.7575189471244812
+Task slapstick, Loss 0.9038946628570557
+Loss Weights: Parameter containing:
+tensor([0.6952, 1.1500, 1.0164, 1.1383], requires_grad=True)
+
+Epoch [3, Step [462], Total Loss: 2.8550, Time: 352.06s
+Task mature, Loss 0.42167043685913086
+Task gory, Loss 1.004290223121643
+Task sarcasm, Loss 0.6771427989006042
+Task slapstick, Loss 0.7526248693466187
+Loss Weights: Parameter containing:
+tensor([0.6846, 1.1575, 1.0026, 1.1553], requires_grad=True)
+
+Epoch [3, Step [472], Total Loss: 2.6464, Time: 386.90s
+Task mature, Loss 0.3930191099643707
+Task gory, Loss 0.9509380459785461
+Task sarcasm, Loss 0.52308189868927
+Task slapstick, Loss 0.7797458171844482
+Loss Weights: Parameter containing:
+tensor([0.6765, 1.1603, 1.0037, 1.1596], requires_grad=True)
+
+Epoch [3, Step [482], Total Loss: 2.7923, Time: 421.73s
+Task mature, Loss 0.47717735171318054
+Task gory, Loss 0.8873758316040039
+Task sarcasm, Loss 0.606828510761261
+Task slapstick, Loss 0.820963978767395
+Loss Weights: Parameter containing:
+tensor([0.6758, 1.1554, 0.9907, 1.1780], requires_grad=True)
+
+Epoch [3, Step [492], Total Loss: 2.9005, Time: 456.53s
+Task mature, Loss 0.4410295784473419
+Task gory, Loss 0.8715727925300598
+Task sarcasm, Loss 0.7436794638633728
+Task slapstick, Loss 0.8441541790962219
+Loss Weights: Parameter containing:
+tensor([0.6908, 1.1539, 1.0031, 1.1522], requires_grad=True)
+
+Loss Weights: Parameter containing:
+tensor([1., 1., 1., 1.], device='cuda:0', requires_grad=True)
+Epoch [3, Step [502], Total Loss: 3.0477, Time: 491.34s
+Task mature, Loss 0.48781895637512207
+Task gory, Loss 0.9399524927139282
+Task sarcasm, Loss 0.6660943627357483
+Task slapstick, Loss 0.9535544514656067
+Loss Weights: Parameter containing:
+tensor([0.7150, 1.1421, 0.9918, 1.1510], requires_grad=True)
+
+Epoch [3, Step [512], Total Loss: 2.9964, Time: 526.10s
+Task mature, Loss 0.4729557931423187
+Task gory, Loss 1.010179042816162
+Task sarcasm, Loss 0.6570496559143066
+Task slapstick, Loss 0.8562186360359192
+Loss Weights: Parameter containing:
+tensor([0.7419, 1.1124, 0.9708, 1.1748], requires_grad=True)
+
+Epoch [3, Step [522], Total Loss: 2.8326, Time: 560.88s
+Task mature, Loss 0.5475896596908569
+Task gory, Loss 0.9218260049819946
+Task sarcasm, Loss 0.5117518901824951
+Task slapstick, Loss 0.8517950177192688
+Loss Weights: Parameter containing:
+tensor([0.7418, 1.1227, 0.9697, 1.1658], requires_grad=True)
+
+Epoch [3, Step [532], Total Loss: 3.0769, Time: 595.64s
+Task mature, Loss 0.5914961695671082
+Task gory, Loss 0.9416468143463135
+Task sarcasm, Loss 0.6880823969841003
+Task slapstick, Loss 0.8555505871772766
+Loss Weights: Parameter containing:
+tensor([0.7317, 1.1363, 0.9782, 1.1537], requires_grad=True)
+
+Epoch [3, Step [542], Total Loss: 2.7568, Time: 630.43s
+Task mature, Loss 0.5346086025238037
+Task gory, Loss 0.9220344424247742
+Task sarcasm, Loss 0.5127222537994385
+Task slapstick, Loss 0.7870336174964905
+Loss Weights: Parameter containing:
+tensor([0.7043, 1.1593, 0.9914, 1.1450], requires_grad=True)
+
+Image found
+Audio found
+Task mature
+Accuracy: 0.3888888888888889, F1 Score: 0.3053
+Average Task Loss 0.5350866913795471
+
+Task gory
+Accuracy: 0.06018518518518518, F1 Score: 0.1135
+Average Task Loss 0.9937535524368286
+
+Task sarcasm
+Accuracy: 0.5995370370370371, F1 Score: 0.2379
+Average Task Loss 0.6283693909645081
+
+Task slapstick
+Accuracy: 0.6481481481481481, F1 Score: 0.3448
+Average Task Loss 0.8250868320465088
+
+Average Total Loss 2.9822964668273926
+Average Accuracy: 0.4241898148148148
+Average F1 Score: 0.2503783311401574
+
+Checkpoint results saved to Results/GradNormTest/checkpoints_GradNormTest.pkl
+Loss Weights: Parameter containing:
+tensor([1., 1., 1., 1.], device='cuda:0', requires_grad=True)
+Epoch [4, Step [553], Total Loss: 3.1271, Time: 34.79s
+Task mature, Loss 0.5063166618347168
+Task gory, Loss 1.0220212936401367
+Task sarcasm, Loss 0.636481523513794
+Task slapstick, Loss 0.9618919491767883
+Loss Weights: Parameter containing:
+tensor([0.6908, 1.1747, 0.9951, 1.1394], requires_grad=True)
+
+Epoch [4, Step [563], Total Loss: 2.8483, Time: 69.61s
+Task mature, Loss 0.3740493357181549
+Task gory, Loss 0.992146909236908
+Task sarcasm, Loss 0.7064142227172852
+Task slapstick, Loss 0.7749834060668945
+Loss Weights: Parameter containing:
+tensor([0.7025, 1.1609, 1.0022, 1.1344], requires_grad=True)
+
+Epoch [4, Step [573], Total Loss: 3.0423, Time: 104.42s
+Task mature, Loss 0.5311987996101379
+Task gory, Loss 0.8779146075248718
+Task sarcasm, Loss 0.8092406988143921
+Task slapstick, Loss 0.8238699436187744
+Loss Weights: Parameter containing:
+tensor([0.7103, 1.1374, 0.9942, 1.1581], requires_grad=True)
+
+Epoch [4, Step [583], Total Loss: 2.8064, Time: 142.32s
+Task mature, Loss 0.40878573060035706
+Task gory, Loss 0.8571332693099976
+Task sarcasm, Loss 0.756382942199707
+Task slapstick, Loss 0.7847763895988464
+Loss Weights: Parameter containing:
+tensor([0.6970, 1.1466, 0.9959, 1.1605], requires_grad=True)
+
+Epoch [4, Step [593], Total Loss: 2.9348, Time: 177.17s
+Task mature, Loss 0.4889358878135681
+Task gory, Loss 0.8754549026489258
+Task sarcasm, Loss 0.5881367921829224
+Task slapstick, Loss 0.9823384284973145
+Loss Weights: Parameter containing:
+tensor([0.6770, 1.1458, 0.9991, 1.1782], requires_grad=True)
+
+Loss Weights: Parameter containing:
+tensor([1., 1., 1., 1.], device='cuda:0', requires_grad=True)
+Epoch [4, Step [603], Total Loss: 2.8955, Time: 211.98s
+Task mature, Loss 0.4332260191440582
+Task gory, Loss 0.9884267449378967
+Task sarcasm, Loss 0.6024516820907593
+Task slapstick, Loss 0.8714181184768677
+Loss Weights: Parameter containing:
+tensor([0.6931, 1.1488, 1.0057, 1.1524], requires_grad=True)
+
+Epoch [4, Step [613], Total Loss: 3.0403, Time: 246.77s
+Task mature, Loss 0.430175244808197
+Task gory, Loss 0.9451908469200134
+Task sarcasm, Loss 0.6792217493057251
+Task slapstick, Loss 0.9862305521965027
+Loss Weights: Parameter containing:
+tensor([0.6955, 1.1638, 1.0042, 1.1365], requires_grad=True)
+
+Epoch [4, Step [623], Total Loss: 2.8802, Time: 281.57s
+Task mature, Loss 0.49365508556365967
+Task gory, Loss 0.9485839009284973
+Task sarcasm, Loss 0.5802908539772034
+Task slapstick, Loss 0.8575772047042847
+Loss Weights: Parameter containing:
+tensor([0.7105, 1.1684, 0.9914, 1.1297], requires_grad=True)
+
+Epoch [4, Step [633], Total Loss: 3.1183, Time: 316.38s
+Task mature, Loss 0.5740864276885986
+Task gory, Loss 0.9178613424301147
+Task sarcasm, Loss 0.7875876426696777
+Task slapstick, Loss 0.8386183381080627
+Loss Weights: Parameter containing:
+tensor([0.6988, 1.1621, 0.9893, 1.1498], requires_grad=True)
+
+Epoch [4, Step [643], Total Loss: 3.1264, Time: 351.18s
+Task mature, Loss 0.6218268871307373
+Task gory, Loss 1.0365402698516846
+Task sarcasm, Loss 0.6096286773681641
+Task slapstick, Loss 0.8585824966430664
+Loss Weights: Parameter containing:
+tensor([0.7075, 1.1708, 0.9876, 1.1341], requires_grad=True)
+
+Loss Weights: Parameter containing:
+tensor([1., 1., 1., 1.], device='cuda:0', requires_grad=True)
+Epoch [4, Step [653], Total Loss: 2.9659, Time: 385.95s
+Task mature, Loss 0.5565670132637024
+Task gory, Loss 0.9087656140327454
+Task sarcasm, Loss 0.5996442437171936
+Task slapstick, Loss 0.9008198380470276
+Loss Weights: Parameter containing:
+tensor([0.7088, 1.1625, 0.9960, 1.1327], requires_grad=True)
+
+Epoch [4, Step [663], Total Loss: 2.7868, Time: 420.73s
+Task mature, Loss 0.4646588861942291
+Task gory, Loss 0.975997805595398
+Task sarcasm, Loss 0.5549761652946472
+Task slapstick, Loss 0.7911777496337891
+Loss Weights: Parameter containing:
+tensor([0.7176, 1.1475, 1.0127, 1.1222], requires_grad=True)
+
+Epoch [4, Step [673], Total Loss: 2.8681, Time: 455.57s
+Task mature, Loss 0.46290072798728943
+Task gory, Loss 0.8489183187484741
+Task sarcasm, Loss 0.6324995756149292
+Task slapstick, Loss 0.9241992235183716
+Loss Weights: Parameter containing:
+tensor([0.6919, 1.1535, 1.0196, 1.1350], requires_grad=True)
+
+Epoch [4, Step [683], Total Loss: 2.8604, Time: 490.30s
+Task mature, Loss 0.49908825755119324
+Task gory, Loss 0.9672777652740479
+Task sarcasm, Loss 0.6038328409194946
+Task slapstick, Loss 0.7904090285301208
+Loss Weights: Parameter containing:
+tensor([0.6864, 1.1523, 0.9964, 1.1649], requires_grad=True)
+
+Epoch [4, Step [693], Total Loss: 2.7584, Time: 525.13s
+Task mature, Loss 0.488264262676239
+Task gory, Loss 0.8574530482292175
+Task sarcasm, Loss 0.4954877495765686
+Task slapstick, Loss 0.9177231788635254
+Loss Weights: Parameter containing:
+tensor([0.6989, 1.1373, 0.9764, 1.1873], requires_grad=True)
+
+Loss Weights: Parameter containing:
+tensor([1., 1., 1., 1.], device='cuda:0', requires_grad=True)
+Epoch [4, Step [703], Total Loss: 2.8237, Time: 559.95s
+Task mature, Loss 0.4319950044155121
+Task gory, Loss 0.9263032674789429
+Task sarcasm, Loss 0.578660786151886
+Task slapstick, Loss 0.8870018720626831
+Loss Weights: Parameter containing:
+tensor([0.7090, 1.1299, 0.9666, 1.1946], requires_grad=True)
+
+Epoch [4, Step [713], Total Loss: 2.8098, Time: 594.79s
+Task mature, Loss 0.48872798681259155
+Task gory, Loss 0.8882537484169006
+Task sarcasm, Loss 0.5253618955612183
+Task slapstick, Loss 0.9074655175209045
+Loss Weights: Parameter containing:
+tensor([0.7109, 1.1316, 0.9644, 1.1931], requires_grad=True)
+
+Epoch [4, Step [723], Total Loss: 2.9287, Time: 629.62s
+Task mature, Loss 0.4446221590042114
+Task gory, Loss 0.9781129360198975
+Task sarcasm, Loss 0.6559091210365295
+Task slapstick, Loss 0.8502797484397888
+Loss Weights: Parameter containing:
+tensor([0.6962, 1.1399, 0.9770, 1.1870], requires_grad=True)
+
+Image found
+Audio found
+Task mature
+Accuracy: 0.3888888888888889, F1 Score: 0.3053
+Average Task Loss 0.5435472130775452
+
+Task gory
+Accuracy: 0.06018518518518518, F1 Score: 0.1135
+Average Task Loss 0.9880692958831787
+
+Task sarcasm
+Accuracy: 0.5995370370370371, F1 Score: 0.2379
+Average Task Loss 0.5934705138206482
+
+Task slapstick
+Accuracy: 0.1875, F1 Score: 0.3104
+Average Task Loss 0.8541668057441711
+
+Average Total Loss 2.9792537689208984
+Average Accuracy: 0.3090277777777778
+Average F1 Score: 0.24177457800690083
+
+Checkpoint results saved to Results/GradNormTest/checkpoints_GradNormTest.pkl
+Epoch [5, Step [734], Total Loss: 2.8838, Time: 34.88s
+Task mature, Loss 0.4804709553718567
+Task gory, Loss 0.9464939832687378
+Task sarcasm, Loss 0.5807380080223083
+Task slapstick, Loss 0.8760697841644287
+Loss Weights: Parameter containing:
+tensor([0.6998, 1.1415, 0.9797, 1.1790], requires_grad=True)
+
+Epoch [5, Step [744], Total Loss: 2.9249, Time: 69.76s
+Task mature, Loss 0.46675941348075867
+Task gory, Loss 0.9088988304138184
+Task sarcasm, Loss 0.673402726650238
+Task slapstick, Loss 0.8757579326629639
+Loss Weights: Parameter containing:
+tensor([0.7222, 1.1484, 0.9750, 1.1545], requires_grad=True)
+
+Loss Weights: Parameter containing:
+tensor([1., 1., 1., 1.], device='cuda:0', requires_grad=True)
+Epoch [5, Step [754], Total Loss: 2.7190, Time: 104.57s
+Task mature, Loss 0.5794898867607117
+Task gory, Loss 0.848067045211792
+Task sarcasm, Loss 0.5125926733016968
+Task slapstick, Loss 0.7783463597297668
+Loss Weights: Parameter containing:
+tensor([0.7313, 1.1639, 0.9996, 1.1052], requires_grad=True)
+
+Epoch [5, Step [764], Total Loss: 3.0611, Time: 139.39s
+Task mature, Loss 0.561194658279419
+Task gory, Loss 0.9066267609596252
+Task sarcasm, Loss 0.7477460503578186
+Task slapstick, Loss 0.8454912900924683
+Loss Weights: Parameter containing:
+tensor([0.7356, 1.1495, 1.0160, 1.0989], requires_grad=True)
+
+Epoch [5, Step [774], Total Loss: 2.7111, Time: 174.23s
+Task mature, Loss 0.3422938287258148
+Task gory, Loss 0.8569552898406982
+Task sarcasm, Loss 0.6150733828544617
+Task slapstick, Loss 0.897613525390625
+Loss Weights: Parameter containing:
+tensor([0.7184, 1.1470, 1.0036, 1.1310], requires_grad=True)
+
+Epoch [5, Step [784], Total Loss: 2.9744, Time: 209.06s
+Task mature, Loss 0.4322097599506378
+Task gory, Loss 0.8630134463310242
+Task sarcasm, Loss 0.7686142325401306
+Task slapstick, Loss 0.9109330177307129
+Loss Weights: Parameter containing:
+tensor([0.7209, 1.1321, 1.0044, 1.1427], requires_grad=True)
+
+Epoch [5, Step [794], Total Loss: 3.0424, Time: 243.89s
+Task mature, Loss 0.4915078580379486
+Task gory, Loss 0.8716394901275635
+Task sarcasm, Loss 0.8177658915519714
+Task slapstick, Loss 0.861305296421051
+Loss Weights: Parameter containing:
+tensor([0.7185, 1.1161, 1.0021, 1.1633], requires_grad=True)
+
+Loss Weights: Parameter containing:
+tensor([1., 1., 1., 1.], device='cuda:0', requires_grad=True)
+Epoch [5, Step [804], Total Loss: 2.9396, Time: 278.73s
+Task mature, Loss 0.5001600384712219
+Task gory, Loss 0.8973873853683472
+Task sarcasm, Loss 0.7192215919494629
+Task slapstick, Loss 0.8229681253433228
+Loss Weights: Parameter containing:
+tensor([0.7210, 1.1015, 1.0284, 1.1491], requires_grad=True)
+
+Epoch [5, Step [814], Total Loss: 2.8113, Time: 313.55s
+Task mature, Loss 0.4509221017360687
+Task gory, Loss 0.9344580173492432
+Task sarcasm, Loss 0.5426096320152283
+Task slapstick, Loss 0.8835921287536621
+Loss Weights: Parameter containing:
+tensor([0.7107, 1.1170, 1.0346, 1.1377], requires_grad=True)
+
+Epoch [5, Step [824], Total Loss: 2.9900, Time: 348.40s
+Task mature, Loss 0.5368688702583313
+Task gory, Loss 0.8242624998092651
+Task sarcasm, Loss 0.7627187371253967
+Task slapstick, Loss 0.8660205602645874
+Loss Weights: Parameter containing:
+tensor([0.7303, 1.1388, 1.0229, 1.1080], requires_grad=True)
+
+Epoch [5, Step [834], Total Loss: 2.8514, Time: 383.23s
+Task mature, Loss 0.524591863155365
+Task gory, Loss 0.9464582204818726
+Task sarcasm, Loss 0.623988687992096
+Task slapstick, Loss 0.7564210891723633
+Loss Weights: Parameter containing:
+tensor([0.7392, 1.1623, 1.0110, 1.0875], requires_grad=True)
+
+Epoch [5, Step [844], Total Loss: 2.9241, Time: 418.05s
+Task mature, Loss 0.5251954793930054
+Task gory, Loss 0.9303441643714905
+Task sarcasm, Loss 0.6278973817825317
+Task slapstick, Loss 0.8407904505729675
+Loss Weights: Parameter containing:
+tensor([0.7471, 1.1738, 0.9906, 1.0884], requires_grad=True)
+
+Loss Weights: Parameter containing:
+tensor([1., 1., 1., 1.], device='cuda:0', requires_grad=True)
+Epoch [5, Step [854], Total Loss: 2.7844, Time: 452.87s
+Task mature, Loss 0.47981786727905273
+Task gory, Loss 0.8715909123420715
+Task sarcasm, Loss 0.65861976146698
+Task slapstick, Loss 0.77433180809021
+Loss Weights: Parameter containing:
+tensor([0.7364, 1.1812, 0.9805, 1.1019], requires_grad=True)
+
+Epoch [5, Step [864], Total Loss: 2.9462, Time: 487.73s
+Task mature, Loss 0.6002081632614136
+Task gory, Loss 0.8873521089553833
+Task sarcasm, Loss 0.7008619904518127
+Task slapstick, Loss 0.7580328583717346
+Loss Weights: Parameter containing:
+tensor([0.7432, 1.1706, 0.9937, 1.0925], requires_grad=True)
+
+Epoch [5, Step [874], Total Loss: 2.8592, Time: 522.58s
+Task mature, Loss 0.5150614976882935
+Task gory, Loss 0.932016134262085
+Task sarcasm, Loss 0.622362494468689
+Task slapstick, Loss 0.7895007133483887
+Loss Weights: Parameter containing:
+tensor([0.7478, 1.1487, 1.0065, 1.0970], requires_grad=True)
+
+Epoch [5, Step [884], Total Loss: 2.8171, Time: 557.40s
+Task mature, Loss 0.5022198557853699
+Task gory, Loss 0.9113274812698364
+Task sarcasm, Loss 0.5925253033638
+Task slapstick, Loss 0.8110794425010681
+Loss Weights: Parameter containing:
+tensor([0.7329, 1.1489, 1.0005, 1.1177], requires_grad=True)
+
+Epoch [5, Step [894], Total Loss: 2.8050, Time: 592.23s
+Task mature, Loss 0.5737294554710388
+Task gory, Loss 0.8219574689865112
+Task sarcasm, Loss 0.5895488858222961
+Task slapstick, Loss 0.8198804259300232
+Loss Weights: Parameter containing:
+tensor([0.7248, 1.1575, 1.0065, 1.1111], requires_grad=True)
+
+Loss Weights: Parameter containing:
+tensor([1., 1., 1., 1.], device='cuda:0', requires_grad=True)
+Epoch [5, Step [904], Total Loss: 2.6361, Time: 631.88s
+Task mature, Loss 0.4506256580352783
+Task gory, Loss 0.9710176587104797
+Task sarcasm, Loss 0.4948454797267914
+Task slapstick, Loss 0.7197197675704956
+Loss Weights: Parameter containing:
+tensor([0.7385, 1.1489, 1.0020, 1.1106], requires_grad=True)
+
+Image found
+Audio found
+Task mature
+Accuracy: 0.3888888888888889, F1 Score: 0.3053
+Average Task Loss 0.5839771032333374
+
+Task gory
+Accuracy: 0.06018518518518518, F1 Score: 0.1135
+Average Task Loss 0.946256697177887
+
+Task sarcasm
+Accuracy: 0.5995370370370371, F1 Score: 0.2379
+Average Task Loss 0.6093912720680237
+
+Task slapstick
+Accuracy: 0.6481481481481481, F1 Score: 0.3448
+Average Task Loss 0.7798453569412231
+
+Average Total Loss 2.9194703102111816
+Average Accuracy: 0.4241898148148148
+Average F1 Score: 0.2503783311401574
+
+Checkpoint results saved to Results/GradNormTest/checkpoints_GradNormTest.pkl
+Epoch [6, Step [915], Total Loss: 2.8928, Time: 34.87s
+Task mature, Loss 0.4767386019229889
+Task gory, Loss 0.8529338836669922
+Task sarcasm, Loss 0.7569727301597595
+Task slapstick, Loss 0.8061423897743225
+Loss Weights: Parameter containing:
+tensor([0.7281, 1.1358, 1.0076, 1.1285], requires_grad=True)
+
+Epoch [6, Step [925], Total Loss: 2.9447, Time: 69.69s
+Task mature, Loss 0.46179133653640747
+Task gory, Loss 0.9587539434432983
+Task sarcasm, Loss 0.6635513305664062
+Task slapstick, Loss 0.8606083393096924
+Loss Weights: Parameter containing:
+tensor([0.7226, 1.1287, 1.0066, 1.1422], requires_grad=True)
+
+Epoch [6, Step [935], Total Loss: 2.8671, Time: 104.51s
+Task mature, Loss 0.4514854848384857
+Task gory, Loss 0.9899469614028931
+Task sarcasm, Loss 0.6287214756011963
+Task slapstick, Loss 0.7968162298202515
+Loss Weights: Parameter containing:
+tensor([0.7081, 1.1298, 1.0173, 1.1448], requires_grad=True)
+
+Epoch [6, Step [945], Total Loss: 2.9553, Time: 139.30s
+Task mature, Loss 0.5602846741676331
+Task gory, Loss 0.915462076663971
+Task sarcasm, Loss 0.7754782438278198
+Task slapstick, Loss 0.7041304707527161
+Loss Weights: Parameter containing:
+tensor([0.7056, 1.1397, 1.0245, 1.1302], requires_grad=True)
+
+Loss Weights: Parameter containing:
+tensor([1., 1., 1., 1.], device='cuda:0', requires_grad=True)
+Epoch [6, Step [955], Total Loss: 3.1520, Time: 174.12s
+Task mature, Loss 0.5908193588256836
+Task gory, Loss 0.9331765174865723
+Task sarcasm, Loss 0.7982304692268372
+Task slapstick, Loss 0.8298949599266052
+Loss Weights: Parameter containing:
+tensor([0.7007, 1.1531, 1.0184, 1.1278], requires_grad=True)
+
+Epoch [6, Step [965], Total Loss: 2.8547, Time: 208.93s
+Task mature, Loss 0.398014098405838
+Task gory, Loss 0.9250458478927612
+Task sarcasm, Loss 0.7560685276985168
+Task slapstick, Loss 0.7758016586303711
+Loss Weights: Parameter containing:
+tensor([0.6958, 1.1781, 0.9894, 1.1367], requires_grad=True)
+
+Epoch [6, Step [975], Total Loss: 2.8441, Time: 243.72s
+Task mature, Loss 0.369167298078537
+Task gory, Loss 0.9053509831428528
+Task sarcasm, Loss 0.6982249617576599
+Task slapstick, Loss 0.871900737285614
+Loss Weights: Parameter containing:
+tensor([0.6756, 1.1952, 0.9775, 1.1516], requires_grad=True)
+
+Epoch [6, Step [985], Total Loss: 2.5643, Time: 278.52s
+Task mature, Loss 0.37846383452415466
+Task gory, Loss 0.8859423995018005
+Task sarcasm, Loss 0.5036009550094604
+Task slapstick, Loss 0.7952938079833984
+Loss Weights: Parameter containing:
+tensor([0.6731, 1.1792, 0.9926, 1.1550], requires_grad=True)
+
+Epoch [6, Step [995], Total Loss: 2.9848, Time: 313.30s
+Task mature, Loss 0.6142451763153076
+Task gory, Loss 0.9074643850326538
+Task sarcasm, Loss 0.597529947757721
+Task slapstick, Loss 0.8659623265266418
+Loss Weights: Parameter containing:
+tensor([0.6897, 1.1824, 0.9882, 1.1397], requires_grad=True)
+
+Loss Weights: Parameter containing:
+tensor([1., 1., 1., 1.], device='cuda:0', requires_grad=True)
+Epoch [6, Step [1005], Total Loss: 2.9550, Time: 348.05s
+Task mature, Loss 0.551298201084137
+Task gory, Loss 0.9327448606491089
+Task sarcasm, Loss 0.6853449940681458
+Task slapstick, Loss 0.7854642271995544
+Loss Weights: Parameter containing:
+tensor([0.7037, 1.1854, 0.9896, 1.1212], requires_grad=True)
+
+Epoch [6, Step [1015], Total Loss: 2.7016, Time: 382.77s
+Task mature, Loss 0.40325385332107544
+Task gory, Loss 0.9159347414970398
+Task sarcasm, Loss 0.5330901741981506
+Task slapstick, Loss 0.8489550948143005
+Loss Weights: Parameter containing:
+tensor([0.7043, 1.1641, 1.0074, 1.1242], requires_grad=True)
+
+Epoch [6, Step [1025], Total Loss: 2.9074, Time: 417.52s
+Task mature, Loss 0.5339063405990601
+Task gory, Loss 0.8999910950660706
+Task sarcasm, Loss 0.6114431619644165
+Task slapstick, Loss 0.8619646430015564
+Loss Weights: Parameter containing:
+tensor([0.7076, 1.1361, 1.0232, 1.1331], requires_grad=True)
+
+Epoch [6, Step [1035], Total Loss: 2.7770, Time: 452.26s
+Task mature, Loss 0.4473671019077301
+Task gory, Loss 0.9509313106536865
+Task sarcasm, Loss 0.5909799337387085
+Task slapstick, Loss 0.788102924823761
+Loss Weights: Parameter containing:
+tensor([0.7107, 1.1366, 1.0183, 1.1344], requires_grad=True)
+
+Epoch [6, Step [1045], Total Loss: 3.1572, Time: 486.99s
+Task mature, Loss 0.5172253847122192
+Task gory, Loss 0.998284637928009
+Task sarcasm, Loss 0.7476046085357666
+Task slapstick, Loss 0.8939778804779053
+Loss Weights: Parameter containing:
+tensor([0.7037, 1.1630, 1.0033, 1.1300], requires_grad=True)
+
+Loss Weights: Parameter containing:
+tensor([1., 1., 1., 1.], device='cuda:0', requires_grad=True)
+Epoch [6, Step [1055], Total Loss: 2.7760, Time: 521.70s
+Task mature, Loss 0.44539758563041687
+Task gory, Loss 0.9046153426170349
+Task sarcasm, Loss 0.5955740213394165
+Task slapstick, Loss 0.8304510712623596
+Loss Weights: Parameter containing:
+tensor([0.7106, 1.1665, 1.0121, 1.1108], requires_grad=True)
+
+Epoch [6, Step [1065], Total Loss: 2.8020, Time: 556.45s
+Task mature, Loss 0.41975274682044983
+Task gory, Loss 0.9327031970024109
+Task sarcasm, Loss 0.6580682396888733
+Task slapstick, Loss 0.7917968034744263
+Loss Weights: Parameter containing:
+tensor([0.7165, 1.1629, 1.0034, 1.1171], requires_grad=True)
+
+Epoch [6, Step [1075], Total Loss: 2.9274, Time: 591.16s
+Task mature, Loss 0.5241636037826538
+Task gory, Loss 0.8857541680335999
+Task sarcasm, Loss 0.6367431879043579
+Task slapstick, Loss 0.8807337284088135
+Loss Weights: Parameter containing:
+tensor([0.7039, 1.1760, 0.9851, 1.1350], requires_grad=True)
+
+Epoch [6, Step [1085], Total Loss: 2.8225, Time: 625.85s
+Task mature, Loss 0.4161296486854553
+Task gory, Loss 1.0202841758728027
+Task sarcasm, Loss 0.5652800798416138
+Task slapstick, Loss 0.821132242679596
+Loss Weights: Parameter containing:
+tensor([0.7030, 1.1679, 0.9789, 1.1503], requires_grad=True)
+
+Image found
+Audio found
+Task mature
+Accuracy: 0.3888888888888889, F1 Score: 0.3053
+Average Task Loss 0.5580335259437561
+
+Task gory
+Accuracy: 0.06018518518518518, F1 Score: 0.1135
+Average Task Loss 0.9583234190940857
+
+Task sarcasm
+Accuracy: 0.5995370370370371, F1 Score: 0.2379
+Average Task Loss 0.5872247815132141
+
+Task slapstick
+Accuracy: 0.6481481481481481, F1 Score: 0.3448
+Average Task Loss 0.7915403842926025
+
+Average Total Loss 2.8951220512390137
+Average Accuracy: 0.4241898148148148
+Average F1 Score: 0.2503783311401574
+
+Checkpoint results saved to Results/GradNormTest/checkpoints_GradNormTest.pkl
+Epoch [7, Step [1096], Total Loss: 2.7230, Time: 34.76s
+Task mature, Loss 0.43274450302124023
+Task gory, Loss 0.9369410276412964
+Task sarcasm, Loss 0.5560702681541443
+Task slapstick, Loss 0.7974454164505005
+Loss Weights: Parameter containing:
+tensor([0.7016, 1.1641, 0.9644, 1.1700], requires_grad=True)
+
+Loss Weights: Parameter containing:
+tensor([1., 1., 1., 1.], device='cuda:0', requires_grad=True)
+Epoch [7, Step [1106], Total Loss: 2.7945, Time: 69.50s
+Task mature, Loss 0.5474585294723511
+Task gory, Loss 0.878373384475708
+Task sarcasm, Loss 0.656394898891449
+Task slapstick, Loss 0.7122687101364136
+Loss Weights: Parameter containing:
+tensor([0.6865, 1.1737, 0.9641, 1.1757], requires_grad=True)
+
+Epoch [7, Step [1116], Total Loss: 2.8297, Time: 104.21s
+Task mature, Loss 0.44484567642211914
+Task gory, Loss 0.9175167679786682
+Task sarcasm, Loss 0.6729982495307922
+Task slapstick, Loss 0.7942454218864441
+Loss Weights: Parameter containing:
+tensor([0.6843, 1.1763, 0.9824, 1.1570], requires_grad=True)
+
+Epoch [7, Step [1126], Total Loss: 2.8100, Time: 144.97s
+Task mature, Loss 0.48002344369888306
+Task gory, Loss 0.9238948822021484
+Task sarcasm, Loss 0.5994084477424622
+Task slapstick, Loss 0.8068588972091675
+Loss Weights: Parameter containing:
+tensor([0.7035, 1.1758, 0.9898, 1.1310], requires_grad=True)
+
+Epoch [7, Step [1136], Total Loss: 2.9543, Time: 179.75s
+Task mature, Loss 0.4798259437084198
+Task gory, Loss 0.9331979155540466
+Task sarcasm, Loss 0.7315837144851685
+Task slapstick, Loss 0.8096311092376709
+Loss Weights: Parameter containing:
+tensor([0.7168, 1.1795, 0.9763, 1.1274], requires_grad=True)
+
+Epoch [7, Step [1146], Total Loss: 2.8288, Time: 214.50s
+Task mature, Loss 0.4650717079639435
+Task gory, Loss 0.901004433631897
+Task sarcasm, Loss 0.6126856803894043
+Task slapstick, Loss 0.8497434854507446
+Loss Weights: Parameter containing:
+tensor([0.7182, 1.1678, 0.9825, 1.1316], requires_grad=True)
+
+Loss Weights: Parameter containing:
+tensor([1., 1., 1., 1.], device='cuda:0', requires_grad=True)
+Epoch [7, Step [1156], Total Loss: 2.7914, Time: 249.27s
+Task mature, Loss 0.49185284972190857
+Task gory, Loss 0.8852819800376892
+Task sarcasm, Loss 0.6305876970291138
+Task slapstick, Loss 0.7833747863769531
+Loss Weights: Parameter containing:
+tensor([0.7199, 1.1396, 0.9867, 1.1538], requires_grad=True)
+
+Epoch [7, Step [1166], Total Loss: 2.8575, Time: 284.02s
+Task mature, Loss 0.5160214900970459
+Task gory, Loss 0.9237995147705078
+Task sarcasm, Loss 0.5657519698143005
+Task slapstick, Loss 0.8520920276641846
+Loss Weights: Parameter containing:
+tensor([0.7026, 1.1349, 0.9774, 1.1851], requires_grad=True)
+
+Epoch [7, Step [1176], Total Loss: 2.8806, Time: 318.77s
+Task mature, Loss 0.4929424226284027
+Task gory, Loss 0.8712107539176941
+Task sarcasm, Loss 0.6537674069404602
+Task slapstick, Loss 0.8627523183822632
+Loss Weights: Parameter containing:
+tensor([0.6868, 1.1415, 0.9793, 1.1923], requires_grad=True)
+
+Epoch [7, Step [1186], Total Loss: 2.7591, Time: 353.52s
+Task mature, Loss 0.4468148946762085
+Task gory, Loss 0.8733505010604858
+Task sarcasm, Loss 0.5831974148750305
+Task slapstick, Loss 0.8558839559555054
+Loss Weights: Parameter containing:
+tensor([0.6800, 1.1576, 0.9748, 1.1877], requires_grad=True)
+
+Epoch [7, Step [1196], Total Loss: 2.6763, Time: 388.28s
+Task mature, Loss 0.36722439527511597
+Task gory, Loss 0.9170560240745544
+Task sarcasm, Loss 0.5928971171379089
+Task slapstick, Loss 0.7989634275436401
+Loss Weights: Parameter containing:
+tensor([0.6961, 1.1523, 0.9869, 1.1647], requires_grad=True)
+
+Loss Weights: Parameter containing:
+tensor([1., 1., 1., 1.], device='cuda:0', requires_grad=True)
+Epoch [7, Step [1206], Total Loss: 2.8932, Time: 422.99s
+Task mature, Loss 0.5220133066177368
+Task gory, Loss 0.8982768654823303
+Task sarcasm, Loss 0.6245622038841248
+Task slapstick, Loss 0.8480486273765564
+Loss Weights: Parameter containing:
+tensor([0.6970, 1.1435, 1.0050, 1.1546], requires_grad=True)
+
+Epoch [7, Step [1216], Total Loss: 2.6000, Time: 457.69s
+Task mature, Loss 0.41841816902160645
+Task gory, Loss 0.8293540477752686
+Task sarcasm, Loss 0.5289024710655212
+Task slapstick, Loss 0.8233885169029236
+Loss Weights: Parameter containing:
+tensor([0.6839, 1.1254, 1.0170, 1.1737], requires_grad=True)
+
+Epoch [7, Step [1226], Total Loss: 2.7492, Time: 492.41s
+Task mature, Loss 0.40267473459243774
+Task gory, Loss 0.8733803033828735
+Task sarcasm, Loss 0.6330902576446533
+Task slapstick, Loss 0.8397679924964905
+Loss Weights: Parameter containing:
+tensor([0.6766, 1.1366, 1.0268, 1.1600], requires_grad=True)
+
+Epoch [7, Step [1236], Total Loss: 2.9438, Time: 527.17s
+Task mature, Loss 0.4995313882827759
+Task gory, Loss 0.8461087942123413
+Task sarcasm, Loss 0.6876102089881897
+Task slapstick, Loss 0.9105947017669678
+Loss Weights: Parameter containing:
+tensor([0.6745, 1.1445, 1.0371, 1.1438], requires_grad=True)
+
+Epoch [7, Step [1246], Total Loss: 3.0071, Time: 561.92s
+Task mature, Loss 0.5281702876091003
+Task gory, Loss 0.9518003463745117
+Task sarcasm, Loss 0.645140528678894
+Task slapstick, Loss 0.8823001980781555
+Loss Weights: Parameter containing:
+tensor([0.6749, 1.1638, 1.0237, 1.1376], requires_grad=True)
+
+Loss Weights: Parameter containing:
+tensor([1., 1., 1., 1.], device='cuda:0', requires_grad=True)
+Epoch [7, Step [1256], Total Loss: 2.7502, Time: 596.68s
+Task mature, Loss 0.4181288182735443
+Task gory, Loss 0.8848470449447632
+Task sarcasm, Loss 0.7005615830421448
+Task slapstick, Loss 0.7468274831771851
+Loss Weights: Parameter containing:
+tensor([0.6753, 1.1678, 1.0269, 1.1300], requires_grad=True)
+
+Epoch [7, Step [1266], Total Loss: 2.7982, Time: 631.43s
+Task mature, Loss 0.448992520570755
+Task gory, Loss 0.8915661573410034
+Task sarcasm, Loss 0.7043558359146118
+Task slapstick, Loss 0.7529892325401306
+Loss Weights: Parameter containing:
+tensor([0.6904, 1.1590, 1.0289, 1.1217], requires_grad=True)
+
+Image found
+Audio found
+Task mature
+Accuracy: 0.3888888888888889, F1 Score: 0.3053
+Average Task Loss 0.5371183753013611
+
+Task gory
+Accuracy: 0.06018518518518518, F1 Score: 0.1135
+Average Task Loss 0.947736382484436
+
+Task sarcasm
+Accuracy: 0.5995370370370371, F1 Score: 0.2379
+Average Task Loss 0.6253064274787903
+
+Task slapstick
+Accuracy: 0.1875, F1 Score: 0.3104
+Average Task Loss 0.7980853319168091
+
+Average Total Loss 2.9082462787628174
+Average Accuracy: 0.3090277777777778
+Average F1 Score: 0.24177457800690083
+
+Checkpoint results saved to Results/GradNormTest/checkpoints_GradNormTest.pkl
+Epoch [8, Step [1277], Total Loss: 2.8564, Time: 34.76s
+Task mature, Loss 0.4115864634513855
+Task gory, Loss 0.9586246609687805
+Task sarcasm, Loss 0.7256089448928833
+Task slapstick, Loss 0.7600870728492737
+Loss Weights: Parameter containing:
+tensor([0.6843, 1.1404, 1.0487, 1.1266], requires_grad=True)
+
+Epoch [8, Step [1287], Total Loss: 2.9003, Time: 69.52s
+Task mature, Loss 0.4904337227344513
+Task gory, Loss 0.9126203060150146
+Task sarcasm, Loss 0.6606902480125427
+Task slapstick, Loss 0.8365073800086975
+Loss Weights: Parameter containing:
+tensor([0.6739, 1.1255, 1.0458, 1.1548], requires_grad=True)
+
+Epoch [8, Step [1297], Total Loss: 2.9302, Time: 104.27s
+Task mature, Loss 0.3892679214477539
+Task gory, Loss 0.9293420314788818
+Task sarcasm, Loss 0.7297049164772034
+Task slapstick, Loss 0.8822171688079834
+Loss Weights: Parameter containing:
+tensor([0.6623, 1.1234, 1.0400, 1.1743], requires_grad=True)
+
+Loss Weights: Parameter containing:
+tensor([1., 1., 1., 1.], device='cuda:0', requires_grad=True)
+Epoch [8, Step [1307], Total Loss: 2.7895, Time: 139.03s
+Task mature, Loss 0.44512850046157837
+Task gory, Loss 0.8603928089141846
+Task sarcasm, Loss 0.6316981315612793
+Task slapstick, Loss 0.8521044850349426
+Loss Weights: Parameter containing:
+tensor([0.6637, 1.1176, 1.0359, 1.1828], requires_grad=True)
+
+Epoch [8, Step [1317], Total Loss: 2.7465, Time: 173.77s
+Task mature, Loss 0.4474087059497833
+Task gory, Loss 0.79524165391922
+Task sarcasm, Loss 0.6405783295631409
+Task slapstick, Loss 0.8631958961486816
+Loss Weights: Parameter containing:
+tensor([0.6755, 1.1180, 1.0431, 1.1634], requires_grad=True)
+
+Epoch [8, Step [1327], Total Loss: 2.7836, Time: 208.54s
+Task mature, Loss 0.4548782706260681
+Task gory, Loss 0.9116390347480774
+Task sarcasm, Loss 0.6078925728797913
+Task slapstick, Loss 0.8098482489585876
+Loss Weights: Parameter containing:
+tensor([0.7015, 1.1324, 1.0212, 1.1448], requires_grad=True)
+
+Epoch [8, Step [1337], Total Loss: 3.0302, Time: 243.28s
+Task mature, Loss 0.442918598651886
+Task gory, Loss 0.9773278832435608
+Task sarcasm, Loss 0.6786523461341858
+Task slapstick, Loss 0.9313517212867737
+Loss Weights: Parameter containing:
+tensor([0.6959, 1.1460, 0.9911, 1.1669], requires_grad=True)
+
+Epoch [8, Step [1347], Total Loss: 2.7664, Time: 278.03s
+Task mature, Loss 0.4758387506008148
+Task gory, Loss 0.8925945162773132
+Task sarcasm, Loss 0.482196569442749
+Task slapstick, Loss 0.9158195853233337
+Loss Weights: Parameter containing:
+tensor([0.6803, 1.1532, 0.9927, 1.1738], requires_grad=True)
+
+Loss Weights: Parameter containing:
+tensor([1., 1., 1., 1.], device='cuda:0', requires_grad=True)
+Epoch [8, Step [1357], Total Loss: 2.7815, Time: 312.75s
+Task mature, Loss 0.497722327709198
+Task gory, Loss 0.8146127462387085
+Task sarcasm, Loss 0.6346004009246826
+Task slapstick, Loss 0.834494411945343
+Loss Weights: Parameter containing:
+tensor([0.6969, 1.1424, 0.9935, 1.1672], requires_grad=True)
+
+Epoch [8, Step [1367], Total Loss: 2.7589, Time: 347.43s
+Task mature, Loss 0.37756985425949097
+Task gory, Loss 0.8960393667221069
+Task sarcasm, Loss 0.6951041221618652
+Task slapstick, Loss 0.7905284762382507
+Loss Weights: Parameter containing:
+tensor([0.6999, 1.1260, 0.9916, 1.1825], requires_grad=True)
+
+Epoch [8, Step [1377], Total Loss: 3.0985, Time: 382.07s
+Task mature, Loss 0.5768728852272034
+Task gory, Loss 0.9263951182365417
+Task sarcasm, Loss 0.7170127034187317
+Task slapstick, Loss 0.878085732460022
+Loss Weights: Parameter containing:
+tensor([0.6907, 1.1303, 1.0123, 1.1667], requires_grad=True)
+
+Epoch [8, Step [1387], Total Loss: 2.7596, Time: 424.17s
+Task mature, Loss 0.4381018877029419
+Task gory, Loss 0.9199880957603455
+Task sarcasm, Loss 0.5485693216323853
+Task slapstick, Loss 0.8531118035316467
+Loss Weights: Parameter containing:
+tensor([0.6750, 1.1449, 1.0118, 1.1683], requires_grad=True)
+
+Epoch [8, Step [1397], Total Loss: 2.8694, Time: 458.95s
+Task mature, Loss 0.5126132369041443
+Task gory, Loss 0.8922361135482788
+Task sarcasm, Loss 0.5653305053710938
+Task slapstick, Loss 0.8996131420135498
+Loss Weights: Parameter containing:
+tensor([0.6832, 1.1604, 0.9907, 1.1656], requires_grad=True)
+
+Loss Weights: Parameter containing:
+tensor([1., 1., 1., 1.], device='cuda:0', requires_grad=True)
+Epoch [8, Step [1407], Total Loss: 2.9594, Time: 493.69s
+Task mature, Loss 0.5108383893966675
+Task gory, Loss 0.8822275400161743
+Task sarcasm, Loss 0.7266409993171692
+Task slapstick, Loss 0.8396731019020081
+Loss Weights: Parameter containing:
+tensor([0.6942, 1.1507, 0.9802, 1.1748], requires_grad=True)
+
+Epoch [8, Step [1417], Total Loss: 2.7536, Time: 528.39s
+Task mature, Loss 0.4645655155181885
+Task gory, Loss 0.8705238699913025
+Task sarcasm, Loss 0.5919417142868042
+Task slapstick, Loss 0.8261978030204773
+Loss Weights: Parameter containing:
+tensor([0.6885, 1.1512, 1.0018, 1.1585], requires_grad=True)
+
+Epoch [8, Step [1427], Total Loss: 2.7981, Time: 563.13s
+Task mature, Loss 0.46959370374679565
+Task gory, Loss 0.9066514372825623
+Task sarcasm, Loss 0.6211948394775391
+Task slapstick, Loss 0.8008487820625305
+Loss Weights: Parameter containing:
+tensor([0.6799, 1.1455, 1.0148, 1.1597], requires_grad=True)
+
+Epoch [8, Step [1437], Total Loss: 2.9726, Time: 597.89s
+Task mature, Loss 0.4706788659095764
+Task gory, Loss 0.8876628875732422
+Task sarcasm, Loss 0.8200454711914062
+Task slapstick, Loss 0.7942981719970703
+Loss Weights: Parameter containing:
+tensor([0.6781, 1.1493, 1.0182, 1.1544], requires_grad=True)
+
+Epoch [8, Step [1447], Total Loss: 2.9238, Time: 632.64s
+Task mature, Loss 0.4741666316986084
+Task gory, Loss 0.9655799865722656
+Task sarcasm, Loss 0.6119392514228821
+Task slapstick, Loss 0.8720569610595703
+Loss Weights: Parameter containing:
+tensor([0.6722, 1.1439, 1.0305, 1.1533], requires_grad=True)
+
+Image found
+Audio found
+Task mature
+Accuracy: 0.3888888888888889, F1 Score: 0.3053
+Average Task Loss 0.5305051207542419
+
+Task gory
+Accuracy: 0.06018518518518518, F1 Score: 0.1135
+Average Task Loss 0.9136698842048645
+
+Task sarcasm
+Accuracy: 0.5995370370370371, F1 Score: 0.2379
+Average Task Loss 0.6170063018798828
+
+Task slapstick
+Accuracy: 0.18287037037037038, F1 Score: 0.3092
+Average Task Loss 0.8183765411376953
+
+Average Total Loss 2.8795578479766846
+Average Accuracy: 0.3078703703703704
+Average F1 Score: 0.24147084750428452
+
+Checkpoint results saved to Results/GradNormTest/checkpoints_GradNormTest.pkl
+Loss Weights: Parameter containing:
+tensor([1., 1., 1., 1.], device='cuda:0', requires_grad=True)
+Epoch [9, Step [1458], Total Loss: 2.7512, Time: 34.74s
+Task mature, Loss 0.42879077792167664
+Task gory, Loss 0.9286596179008484
+Task sarcasm, Loss 0.6139812469482422
+Task slapstick, Loss 0.779962956905365
+Loss Weights: Parameter containing:
+tensor([0.6691, 1.1443, 1.0345, 1.1521], requires_grad=True)
+
+Epoch [9, Step [1468], Total Loss: 2.7806, Time: 69.51s
+Task mature, Loss 0.46133390069007874
+Task gory, Loss 0.899729311466217
+Task sarcasm, Loss 0.6364021897315979
+Task slapstick, Loss 0.7829343676567078
+Loss Weights: Parameter containing:
+tensor([0.6513, 1.1417, 1.0468, 1.1602], requires_grad=True)
+
+Epoch [9, Step [1478], Total Loss: 2.7497, Time: 104.26s
+Task mature, Loss 0.41046828031539917
+Task gory, Loss 0.8963444828987122
+Task sarcasm, Loss 0.626438558101654
+Task slapstick, Loss 0.8165727853775024
+Loss Weights: Parameter containing:
+tensor([0.6513, 1.1430, 1.0395, 1.1662], requires_grad=True)
+
+Epoch [9, Step [1488], Total Loss: 2.8585, Time: 138.99s
+Task mature, Loss 0.5772730112075806
+Task gory, Loss 0.8406314849853516
+Task sarcasm, Loss 0.6224037408828735
+Task slapstick, Loss 0.818665087223053
+Loss Weights: Parameter containing:
+tensor([0.6648, 1.1486, 1.0321, 1.1546], requires_grad=True)
+
+Epoch [9, Step [1498], Total Loss: 2.8668, Time: 173.72s
+Task mature, Loss 0.46625879406929016
+Task gory, Loss 0.8670583367347717
+Task sarcasm, Loss 0.7739907503128052
+Task slapstick, Loss 0.7594311833381653
+Loss Weights: Parameter containing:
+tensor([0.6874, 1.1470, 1.0230, 1.1426], requires_grad=True)
+
+Loss Weights: Parameter containing:
+tensor([1., 1., 1., 1.], device='cuda:0', requires_grad=True)
+Epoch [9, Step [1508], Total Loss: 2.8257, Time: 208.39s
+Task mature, Loss 0.5304192304611206
+Task gory, Loss 0.8363309502601624
+Task sarcasm, Loss 0.6036672592163086
+Task slapstick, Loss 0.8551727533340454
+Loss Weights: Parameter containing:
+tensor([0.7021, 1.1448, 1.0263, 1.1268], requires_grad=True)
+
+Epoch [9, Step [1518], Total Loss: 2.7696, Time: 242.72s
+Task mature, Loss 0.4426592290401459
+Task gory, Loss 0.8377479314804077
+Task sarcasm, Loss 0.6475861668586731
+Task slapstick, Loss 0.8415680527687073
+Loss Weights: Parameter containing:
+tensor([0.7019, 1.1439, 1.0303, 1.1239], requires_grad=True)
+
+Epoch [9, Step [1528], Total Loss: 2.8611, Time: 277.44s
+Task mature, Loss 0.4513416290283203
+Task gory, Loss 0.9248706698417664
+Task sarcasm, Loss 0.6058813333511353
+Task slapstick, Loss 0.8789792060852051
+Loss Weights: Parameter containing:
+tensor([0.6808, 1.1221, 1.0353, 1.1617], requires_grad=True)
+
+Epoch [9, Step [1538], Total Loss: 2.7184, Time: 312.16s
+Task mature, Loss 0.3972042500972748
+Task gory, Loss 0.8879199624061584
+Task sarcasm, Loss 0.5995151400566101
+Task slapstick, Loss 0.8344718217849731
+Loss Weights: Parameter containing:
+tensor([0.6626, 1.1221, 1.0151, 1.2001], requires_grad=True)
+
+Epoch [9, Step [1548], Total Loss: 2.8380, Time: 346.90s
+Task mature, Loss 0.500983476638794
+Task gory, Loss 0.8769615292549133
+Task sarcasm, Loss 0.6383389830589294
+Task slapstick, Loss 0.821854293346405
+Loss Weights: Parameter containing:
+tensor([0.6397, 1.1543, 0.9930, 1.2130], requires_grad=True)
+
+Loss Weights: Parameter containing:
+tensor([1., 1., 1., 1.], device='cuda:0', requires_grad=True)
+Epoch [9, Step [1558], Total Loss: 2.6588, Time: 381.43s
+Task mature, Loss 0.4002602696418762
+Task gory, Loss 0.9008228182792664
+Task sarcasm, Loss 0.5656738877296448
+Task slapstick, Loss 0.7919114232063293
+Loss Weights: Parameter containing:
+tensor([0.6368, 1.1629, 0.9954, 1.2049], requires_grad=True)
+
+Epoch [9, Step [1568], Total Loss: 2.6502, Time: 416.05s
+Task mature, Loss 0.4546326994895935
+Task gory, Loss 0.8048132061958313
+Task sarcasm, Loss 0.542255163192749
+Task slapstick, Loss 0.8483565449714661
+Loss Weights: Parameter containing:
+tensor([0.6452, 1.1530, 0.9956, 1.2062], requires_grad=True)
+
+Epoch [9, Step [1578], Total Loss: 2.7446, Time: 450.76s
+Task mature, Loss 0.44135981798171997
+Task gory, Loss 0.9319876432418823
+Task sarcasm, Loss 0.593992292881012
+Task slapstick, Loss 0.7772835493087769
+Loss Weights: Parameter containing:
+tensor([0.6432, 1.1497, 1.0140, 1.1931], requires_grad=True)
+
+Epoch [9, Step [1588], Total Loss: 2.8899, Time: 485.44s
+Task mature, Loss 0.38924020528793335
+Task gory, Loss 0.9020540118217468
+Task sarcasm, Loss 0.7158680558204651
+Task slapstick, Loss 0.88258957862854
+Loss Weights: Parameter containing:
+tensor([0.6540, 1.1439, 1.0437, 1.1584], requires_grad=True)
+
+Epoch [9, Step [1598], Total Loss: 2.8626, Time: 520.15s
+Task mature, Loss 0.43871229887008667
+Task gory, Loss 0.9120195508003235
+Task sarcasm, Loss 0.7021189332008362
+Task slapstick, Loss 0.8095272779464722
+Loss Weights: Parameter containing:
+tensor([0.6630, 1.1345, 1.0813, 1.1212], requires_grad=True)
+
+Loss Weights: Parameter containing:
+tensor([1., 1., 1., 1.], device='cuda:0', requires_grad=True)
+Epoch [9, Step [1608], Total Loss: 2.9515, Time: 554.77s
+Task mature, Loss 0.48127877712249756
+Task gory, Loss 0.8388353586196899
+Task sarcasm, Loss 0.7889425754547119
+Task slapstick, Loss 0.842418372631073
+Loss Weights: Parameter containing:
+tensor([0.6787, 1.1165, 1.0718, 1.1329], requires_grad=True)
+
+Epoch [9, Step [1618], Total Loss: 2.8121, Time: 589.37s
+Task mature, Loss 0.47093233466148376
+Task gory, Loss 0.7686834931373596
+Task sarcasm, Loss 0.7936453223228455
+Task slapstick, Loss 0.7786338329315186
+Loss Weights: Parameter containing:
+tensor([0.6835, 1.1037, 1.0512, 1.1616], requires_grad=True)
+
+Epoch [9, Step [1628], Total Loss: 2.8597, Time: 624.10s
+Task mature, Loss 0.5238990783691406
+Task gory, Loss 0.8693070411682129
+Task sarcasm, Loss 0.5441465973854065
+Task slapstick, Loss 0.9232513904571533
+Loss Weights: Parameter containing:
+tensor([0.6847, 1.0996, 1.0204, 1.1953], requires_grad=True)
+
+Image found
+Audio found
+Task mature
+Accuracy: 0.3888888888888889, F1 Score: 0.3053
+Average Task Loss 0.5283324718475342
+
+Task gory
+Accuracy: 0.06018518518518518, F1 Score: 0.1135
+Average Task Loss 0.865081250667572
+
+Task sarcasm
+Accuracy: 0.5995370370370371, F1 Score: 0.2379
+Average Task Loss 0.6196153163909912
+
+Task slapstick
+Accuracy: 0.6342592592592593, F1 Score: 0.3361
+Average Task Loss 0.83674556016922
+
+Average Total Loss 2.8497745990753174
+Average Accuracy: 0.4207175925925926
+Average F1 Score: 0.2482050480338114
+
+Checkpoint results saved to Results/GradNormTest/checkpoints_GradNormTest.pkl
+Epoch [10, Step [1639], Total Loss: 2.8316, Time: 34.74s
+Task mature, Loss 0.4455724060535431
+Task gory, Loss 0.8304967880249023
+Task sarcasm, Loss 0.6464343070983887
+Task slapstick, Loss 0.9093426465988159
+Loss Weights: Parameter containing:
+tensor([0.6859, 1.0847, 1.0093, 1.2201], requires_grad=True)
+
+Epoch [10, Step [1649], Total Loss: 2.7459, Time: 69.42s
+Task mature, Loss 0.4703787863254547
+Task gory, Loss 0.8170202970504761
+Task sarcasm, Loss 0.6035190224647522
+Task slapstick, Loss 0.8551124930381775
+Loss Weights: Parameter containing:
+tensor([0.6703, 1.0921, 1.0093, 1.2283], requires_grad=True)
+
+Loss Weights: Parameter containing:
+tensor([1., 1., 1., 1.], device='cuda:0', requires_grad=True)
+Epoch [10, Step [1659], Total Loss: 2.7281, Time: 104.10s
+Task mature, Loss 0.5014099478721619
+Task gory, Loss 0.8154358863830566
+Task sarcasm, Loss 0.6005140542984009
+Task slapstick, Loss 0.811069130897522
+Loss Weights: Parameter containing:
+tensor([0.6541, 1.1166, 1.0052, 1.2241], requires_grad=True)
+
+Epoch [10, Step [1669], Total Loss: 2.7409, Time: 138.80s
+Task mature, Loss 0.4590021073818207
+Task gory, Loss 0.8327609300613403
+Task sarcasm, Loss 0.6466861963272095
+Task slapstick, Loss 0.802504301071167
+Loss Weights: Parameter containing:
+tensor([0.6679, 1.1204, 1.0125, 1.1993], requires_grad=True)
+
+Epoch [10, Step [1679], Total Loss: 2.8188, Time: 173.49s
+Task mature, Loss 0.47637590765953064
+Task gory, Loss 0.873665452003479
+Task sarcasm, Loss 0.5887384414672852
+Task slapstick, Loss 0.8798643350601196
+Loss Weights: Parameter containing:
+tensor([0.6781, 1.1210, 1.0245, 1.1764], requires_grad=True)
+
+Epoch [10, Step [1689], Total Loss: 2.8882, Time: 208.23s
+Task mature, Loss 0.49715667963027954
+Task gory, Loss 0.8442198038101196
+Task sarcasm, Loss 0.6487125754356384
+Task slapstick, Loss 0.8981254696846008
+Loss Weights: Parameter containing:
+tensor([0.6710, 1.1455, 1.0163, 1.1672], requires_grad=True)
+
+Epoch [10, Step [1699], Total Loss: 2.6717, Time: 242.96s
+Task mature, Loss 0.4315910339355469
+Task gory, Loss 0.8690831065177917
+Task sarcasm, Loss 0.591192364692688
+Task slapstick, Loss 0.7796093225479126
+Loss Weights: Parameter containing:
+tensor([0.6618, 1.1524, 1.0104, 1.1753], requires_grad=True)
+
+Loss Weights: Parameter containing:
+tensor([1., 1., 1., 1.], device='cuda:0', requires_grad=True)
+Epoch [10, Step [1709], Total Loss: 2.8116, Time: 277.69s
+Task mature, Loss 0.4265020191669464
+Task gory, Loss 0.8949654698371887
+Task sarcasm, Loss 0.6768875122070312
+Task slapstick, Loss 0.8130163550376892
+Loss Weights: Parameter containing:
+tensor([0.6775, 1.1347, 1.0171, 1.1706], requires_grad=True)
+
+Epoch [10, Step [1719], Total Loss: 2.8637, Time: 321.63s
+Task mature, Loss 0.5081724524497986
+Task gory, Loss 0.9257739782333374
+Task sarcasm, Loss 0.6771392226219177
+Task slapstick, Loss 0.752109169960022
+Loss Weights: Parameter containing:
+tensor([0.6691, 1.1114, 1.0382, 1.1813], requires_grad=True)
+
+Epoch [10, Step [1729], Total Loss: 2.7209, Time: 356.44s
+Task mature, Loss 0.44958198070526123
+Task gory, Loss 0.8501142263412476
+Task sarcasm, Loss 0.5324896574020386
+Task slapstick, Loss 0.8890683054924011
+Loss Weights: Parameter containing:
+tensor([0.6559, 1.1032, 1.0369, 1.2040], requires_grad=True)
+
+Epoch [10, Step [1739], Total Loss: 2.8679, Time: 391.21s
+Task mature, Loss 0.4796110689640045
+Task gory, Loss 0.8330240249633789
+Task sarcasm, Loss 0.6550920009613037
+Task slapstick, Loss 0.9000892639160156
+Loss Weights: Parameter containing:
+tensor([0.6657, 1.0967, 1.0178, 1.2198], requires_grad=True)
+
+Epoch [10, Step [1749], Total Loss: 2.7809, Time: 425.87s
+Task mature, Loss 0.37048834562301636
+Task gory, Loss 0.8590021729469299
+Task sarcasm, Loss 0.6722917556762695
+Task slapstick, Loss 0.8793867826461792
+Loss Weights: Parameter containing:
+tensor([0.6684, 1.1014, 1.0050, 1.2252], requires_grad=True)
+
+Loss Weights: Parameter containing:
+tensor([1., 1., 1., 1.], device='cuda:0', requires_grad=True)
+Epoch [10, Step [1759], Total Loss: 2.8097, Time: 460.60s
+Task mature, Loss 0.4328700602054596
+Task gory, Loss 0.8758004903793335
+Task sarcasm, Loss 0.6990780234336853
+Task slapstick, Loss 0.8021966814994812
+Loss Weights: Parameter containing:
+tensor([0.6662, 1.1228, 0.9950, 1.2159], requires_grad=True)
+
+Epoch [10, Step [1769], Total Loss: 2.7394, Time: 495.83s
+Task mature, Loss 0.39940786361694336
+Task gory, Loss 0.8598095178604126
+Task sarcasm, Loss 0.5870071053504944
+Task slapstick, Loss 0.8933131098747253
+Loss Weights: Parameter containing:
+tensor([0.6334, 1.1395, 1.0120, 1.2151], requires_grad=True)
+
+Epoch [10, Step [1779], Total Loss: 2.8006, Time: 530.62s
+Task mature, Loss 0.45814579725265503
+Task gory, Loss 0.8932211995124817
+Task sarcasm, Loss 0.6488868594169617
+Task slapstick, Loss 0.8006716370582581
+Loss Weights: Parameter containing:
+tensor([0.6225, 1.1490, 1.0176, 1.2109], requires_grad=True)
+
+Epoch [10, Step [1789], Total Loss: 2.8781, Time: 565.36s
+Task mature, Loss 0.38448548316955566
+Task gory, Loss 0.9061639904975891
+Task sarcasm, Loss 0.726313591003418
+Task slapstick, Loss 0.8609263300895691
+Loss Weights: Parameter containing:
+tensor([0.6356, 1.1638, 1.0125, 1.1882], requires_grad=True)
+
+Epoch [10, Step [1799], Total Loss: 2.8453, Time: 600.07s
+Task mature, Loss 0.49839797616004944
+Task gory, Loss 0.8571792244911194
+Task sarcasm, Loss 0.7341088056564331
+Task slapstick, Loss 0.755820631980896
+Loss Weights: Parameter containing:
+tensor([0.6545, 1.1607, 1.0074, 1.1774], requires_grad=True)
+
+Loss Weights: Parameter containing:
+tensor([1., 1., 1., 1.], device='cuda:0', requires_grad=True)
+Epoch [10, Step [1809], Total Loss: 2.9342, Time: 634.81s
+Task mature, Loss 0.4111306071281433
+Task gory, Loss 0.9126107096672058
+Task sarcasm, Loss 0.7467259764671326
+Task slapstick, Loss 0.8636754751205444
+Loss Weights: Parameter containing:
+tensor([0.6532, 1.1464, 1.0193, 1.1810], requires_grad=True)
+
+Image found
+Audio found
+Task mature
+Accuracy: 0.3888888888888889, F1 Score: 0.3053
+Average Task Loss 0.4885457456111908
+
+Task gory
+Accuracy: 0.06018518518518518, F1 Score: 0.1135
+Average Task Loss 0.873834490776062
+
+Task sarcasm
+Accuracy: 0.5995370370370371, F1 Score: 0.2379
+Average Task Loss 0.6257190704345703
+
+Task slapstick
+Accuracy: 0.5949074074074074, F1 Score: 0.3243
+Average Task Loss 0.8243495225906372
+
+Average Total Loss 2.812448740005493
+Average Accuracy: 0.41087962962962965
+Average F1 Score: 0.24525251566951434
+
+Checkpoint results saved to Results/GradNormTest/checkpoints_GradNormTest.pkl
+Experiment results saved to Results/GradNormTest/GradNormTest.pkl
+All plots saved to Results/GradNormTest
+Model Loaded
+Image found
+Audio found
+{'accuracies': {'mature': 0.7370242214532872, 'gory': 0.031141868512110725, 'sarcasm': 0.39013840830449825, 'slapstick': 0.3070934256055363}, 'f1_scores': {'mature': 0.5112540192926045, 'gory': 0.06040268456375839, 'sarcasm': 0.23783783783783785, 'slapstick': 0.10901001112347053}, 'average_accuracy': 0.3663494809688581, 'average_f1_score': 0.22962613820441782, 'val_average_total_loss': 2.7960333824157715, 'val_average_task_loss': {'mature': 0.35644304752349854, 'gory': 0.8958922028541565, 'sarcasm': 0.7029591202735901, 'slapstick': 0.8407391905784607}}

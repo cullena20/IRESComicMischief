@@ -13,7 +13,8 @@ def dprint(text):
     if debug:
         print(text)
 
-machine = "INAOE" # adjust this to control the location from which data is loaded
+# machine = "INAOE" # adjust this to control the location from which data is loaded
+machine = "UH"
 
 # I think there's issues with the padding and masking (also doesn't padding set to -infinity)
 

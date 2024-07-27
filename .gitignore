@@ -27,6 +27,18 @@ Results/NotPretrainedRecreate10/NotPretrainedRecreate10.pkl
 Results/Recreate10-Part2/Recreate10-Part2.pkl
 Results/Unweighted10/Unweighted10.pkl
 
+Results/DynamicDifficultySampling20/checkpoints_DynamicDifficultySampling20.pkl
+Results/gory30/checkpoints_gory30.pkl
+Results/gory30/gory30.pkl
+Results/GradNormTest/checkpoints_GradNormTest.pkl
+Results/GradNormTest/GradNormTest.pkl
+Results/mature30/checkpoints_mature30.pkl
+Results/mature30/mature30.pkl
+Results/Recreate30/Recreate30.pkl
+Results/Recreate30/checkpoints_Recreate30.pkl
+Results/sarcasm30/checkpoints_sarcasm30.pkl
+Results/slapstick30/checkpoints_slapstick30.pkl
+
 Old/
 
 initialize_INAOE.sh

@@ -8,7 +8,7 @@ from plot_results import plot_results
 from evaluate import evaluate
 import json
 
-os.environ['CUDA_VISIBLE_DEVICES'] = '5'
+os.environ['CUDA_VISIBLE_DEVICES'] = '7'
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
 torch.manual_seed(7)
@@ -218,7 +218,7 @@ def continue_training(pickle_path, training_method, loss_setting, name, tasks, e
     init_strategy_results = results["strategy_results"]
 
     # load a random model with the appropriate heads and initialize with the appropriate weights
-    model, _ = initiate_model_new(heads)
+    model, _ = initiate_model_new(tasks)
     model.load_state_dict(model_state_dict)
 
     # simply run the experiment building off the initial model
@@ -237,13 +237,12 @@ def continue_training(pickle_path, training_method, loss_setting, name, tasks, e
 if __name__ == "__main__":
 
     # testing models that have already been trained before updating run_save_experiment function
-    # model = init_model(heads=multi_task_heads, pretrained=False)
-    # single_task_models = init_single_task_models(heads=multi_task_heads, pretrained=True)
+    single_task_models = init_single_task_models(heads=multi_task_heads, pretrained=True)
 
     # test_model(model, multi_task_heads, save_dir="Results/")
-    # # Single Task Models
+    # Single Task Models
     # for task, single_task_model in single_task_models.items():
-    #     test_model(single_task_model, [task], results_pickle_path=f"Results/{task}10/{task}.pkl", save_dir=f"Results/{task}10")
+    #     test_model(single_task_model, [task], results_pickle_path=f"Results/{task}0/{task}.pkl", save_dir=f"Results/{task}10")
 
     # # Original Experiment (predefined weights) - pretrained and not
     # test_model(model, multi_task_heads, results_pickle_path="Results/Recreate10-Part2/Recreate10-Part2.pkl", save_dir="Results/Recreate10-Part2")
@@ -261,18 +260,31 @@ if __name__ == "__main__":
 
     # single_task_models = init_single_task_models(heads=multi_task_heads, pretrained=True)
 
-    # # run each single task model
-    # for name, model in single_task_models.items():
-    #     print(f"Training Single Task Model for {name}")
-    #     try:
-    #         # run_save_experiment(model, "all_at_once", "unweighted", f"TEST2_{name}", [name], 1)
-    #         run_save_experiment(model, "all_at_once", "unweighted", f"{name}50", [name], epochs=50) # name should be the same as the task - also expected in array form
-    #     except:
-    #         pass
-
     model = init_model(heads=multi_task_heads, pretrained=True)
 
+    # Grad Norm - error check and if it seems to woork do it from scratch
+    #run_save_experiment(model, "all_at_once", "gradnorm", "GradNormTest", multi_tasks, epochs=10)
+
     not_pretrained = init_model(heads=multi_task_heads, pretrained=False)
+
+    # try:
+    # print("Naive Learnable Weights")
+    # run_save_experiment(model, "all_at_once", "naive_learnable", "NaiveLearnableWeights5", multi_tasks, epochs=5)
+
+    # run each single task model
+    # for task, model in single_task_models.items():
+    #     print(f"Training Single Task Model for {task}")
+    #     try:
+    #         # run_save_experiment(model, "all_at_once", "unweighted", f"TEST2_{name}", [name], 1)
+    #         run_save_experiment(model, "all_at_once", "unweighted", f"{task}30", [task], epochs=30) # name should be the same as the task - also expected in array form
+    #     except Exception as e:
+    #         print(f"Single Task on {task} failed with Exception: {e}")
+    
+    # except Exception as e:
+    #     print(f"Naive Learnable Weights Crashed {e}")
+    #     pass 
+
+    # run_save_experiment(model, "dynamic_difficulty_sampling", "unweighted", "TestDynamicDifficultySampling", multi_tasks, epochs=2)
 
     # One At A Time Experiment
     # a better implementation might train til each converges rather than just prespecified epohcs, buit probably fine for now
@@ -280,45 +292,46 @@ if __name__ == "__main__":
     # not the most robust way to do it but works fine for a baseline
     # task_epochs = {"slapstick": 10, "gory": 10, "sarcasm": 10, "mature": 10}
     # try:
+    #     print("Running One At At A Time")
     #     run_save_experiment(model, "one_at_a_time", "unweighted", "One_At_A_Time10Each", multi_tasks, epochs=None, task_epochs=task_epochs)
-    # except:
+    # except Exception as e:
+    #     print(f"One At At A Time Crashed with Exception: {e}")
+    # run above again, crashed
+
+
+    # Replicate paper's multi task experiment - restart from scratch with 30 epochs overnight
+    try:
+        print("Pretrained Recreate 30")
+        # run_save_experiment(model, "all_at_once", "predefined_weights", "Recreate50", multi_tasks, epochs=50)
+        run_save_experiment(model, "all_at_once", "predefined_weights", "Recreate30", multi_tasks, epochs=30)
+    except Exception as e:
+        print(f"Pretrained Recreate Crashed {e}")
+        pass
+
+    #Dynamic difficulty sampling - crashed at 5 epochs! What happened?? 
+    try:
+        print("Running Dynamic Difficulty Sampling")
+        run_save_experiment(model, "dynamic_difficulty_sampling", "unweighted", "DynamicDifficultySampling30", multi_tasks, epochs=30)
+    except Exception as e:
+        print(f"Dynamic Difficulty Sampling Crashed with Exception: {e}")
+
+    # run below after for some error checking and to compare to different stuff 
+
+    # try:
+    #     print("Pretrained Unweighted 30")
+    #     # run_save_experiment(model, "all_at_once", "predefined_weights", "Recreate50", multi_tasks, epochs=50)
+    #     run_save_experiment(model, "all_at_once", "unweighted", "MultiUnweighted30", multi_tasks, epochs=30)
+    # except Exception as e:
+    #     print(f"Pretrained Unweighted Crashed {e}")
     #     pass
 
     # try:
-    # print("Naive Learnable Weights")
-    # run_save_experiment(model, "all_at_once", "naive_learnable", "NaiveLearnableWeights5", multi_tasks, epochs=5)
-    
-    print("Dynamic Pretraining")
-    run_save_experiment(model, "dynamic_difficulty_sampling", "unweighted", "DynamicDifficultySampling5", multi_tasks, epochs=5)
-    
-    # except Exception as e:
-    #     print(f"Naive Learnable Weights Crashed {e}")
-    #     pass 
-
-    # Dynamic difficulty sampling - crashed at 5 epochs! What happened?? 
-    # try:
-    #     print("Running Dynamic Difficulty Sampling")
-    #     run_save_experiment(model, "dynamic_difficulty_sampling", "unweighted", "DynamicDifficultySampling5", multi_tasks, epochs=5)
-    # except Exception as e:
-    #     print(f"Dynamic Difficulty Sampling Crashed {e}")
-    #     pass
-    #run_save_experiment(model, "dynamic_difficulty_sampling", "unweighted", "TestDynamicDifficultySampling", multi_tasks, epochs=2)
-
-    # try:
-    #     print("Running Not Pretrained Recreate 10")
-    #     run_save_experiment(not_pretrained, "all_at_once", "predefined_weights", "NotPretrainedRecreate10", multi_tasks, epochs=10)
+    #     print("Running Not Pretrained Recreate 30")
+    #     run_save_experiment(not_pretrained, "all_at_once", "predefined_weights", "NotPretrainedRecreate30", multi_tasks, epochs=10)
     # except Exception as e:
     #     print(f"Not Pretrained Recreate Crashed {e}")
     #     pass
 
-    # # Replicate paper's multi task experiment - restart from scratch with 30 epochs overnight
-    # try:
-    #     print("Pretrained Recreate 10")
-    #     # run_save_experiment(model, "all_at_once", "predefined_weights", "Recreate50", multi_tasks, epochs=50)
-    #     run_save_experiment(model, "all_at_once", "predefined_weights", "Recreate10-Part2", multi_tasks, epochs=10)
-    # except Exception as e:
-    #     print(f"Pretrained Recreate Crashed {e}")
-    #     pass
 
     # Dynamic difficulty sampling - continue more overnight
     # try:
@@ -333,9 +346,6 @@ if __name__ == "__main__":
     #     run_save_experiment(model, "all_at_once", "unweighted", "Unweighted10", multi_tasks, epochs=10)
     # except:
     #     pass
-
-    # Grad Norm - error check and if it seems to woork do it from scratch
-    # run_save_experiment(model, "all_at_once", "gradnorm", "GradNorm10", multi_tasks, epochs=2)
 
 
     # Dynamic difficulty sampling with Grad Norm

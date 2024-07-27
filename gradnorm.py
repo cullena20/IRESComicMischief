@@ -2,7 +2,7 @@ import torch
 import torch.nn as nn
 import numpy as np
 
-debug = True
+debug = False
 
 def dprint(text):
     if debug:
@@ -11,7 +11,7 @@ def dprint(text):
 # naively this seems to work - it runs and weights are indeed adjusted, losses are at a similar scale as expected
 # be wary that there may be issues here related to the optimization
 # also this code needs to be cleaned up a lot (e.g. how layer is handled)
-def gradnorm(task_losses_dict, initial_task_losses_dict, model, layer, optimizer, loss_weights, alpha=1.5):
+def gradnorm(task_losses_dict, initial_task_losses_dict, layer, optimizer, loss_weights, alpha=1.5):
     # task_losses and inital_task_losses are dictionaries of task losses (pytorch tensors)
     # Convert to tensors to enable efficient computation
     # test below

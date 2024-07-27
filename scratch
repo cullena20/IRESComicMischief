@@ -1,0 +1,79 @@
+# old oe at a time code to check errors
+    
+# # MAJOR ISSUE: This copy pasing is awful, for now whatever, but should really be changed
+# if training_method == "one_at_a_time":
+#     for task, num_task_epochs in task_epochs.items(): # order of dictionary defines order that tasks are trained
+#         print(f"Training On Task {task}")
+#         curr_task = [task]
+#         for epoch in range(num_task_epochs):
+#             dataloader = dataloaders[task]
+
+#             # we train a model for one epoch just on the current task (this should work fine)
+#             # again note that loss history and task loss history are not helpful here
+#             loss_history, task_loss_history, steps, loss_weights, initial_task_losses, gradnorm_optimizer, epoch_lost_weight_history = train_one_epoch(model, optimizer, dataloader, curr_task, loss_weights, epoch, steps, loss_history, task_loss_history, training_method=training_method, loss_setting=loss_setting, device=device, initial_task_losses=initial_task_losses, gradnorm_optimizer=gradnorm_optimizer)
+            
+#             # print(loss_history)
+#             # print(task_loss_history)
+#             # print(steps)
+
+#             # track the loss weight history here, different then how other histories are handled but whatever for now
+#             for i, task in enumerate(curr_task):
+#                 # loss_weight_history[task][steps] = loss_weights[i] # keep track of the loss history
+#                 loss_weight_history = extend_mixed_results_dict(loss_weight_history, epoch_lost_weight_history)
+
+#             # then perform validation - this is done over all tasks which I think makes sense for us
+#             if json_val_path is not None:
+#                 accuracies, f1_scores, average_accuracy, average_f1_score, val_average_total_loss, val_average_task_loss, all_labels, all_true_labels = evaluate(model, json_val_path, tasks, loss_weights=loss_weights, batch_size=batch_size, shuffle=shuffle, device=device)
+#                 for task in tasks:
+#                     print(f"Task {task}")
+#                     # print(f"Number of items: {len(all_labels[task])}")
+#                     # print(f"Predictions: {all_labels[task]}")
+#                     # print(f"True: {all_true_labels[task]}")
+#                     print(f"Accuracy: {accuracies[task]}, F1 Score: {f1_scores[task]:.4f}")
+#                     print(f"Average Task Loss {val_average_task_loss[task]}")
+#                     print()
+                
+#                 print(f"Average Total Loss {val_average_total_loss}")
+#                 print(f"Average Accuracy: {average_accuracy}")
+#                 print(f"Average F1 Score: {average_f1_score}")
+#                 print()
+
+#                 # Update the dictionary with the current epoch results
+#                 for task, value in accuracies.items():
+#                     if task not in validation_results["accuracies"]:
+#                         validation_results["accuracies"][task] = []
+#                     validation_results["accuracies"][task].append(value)
+
+#                 for task, value in f1_scores.items():
+#                     if task not in validation_results["f1_scores"]:
+#                         validation_results["f1_scores"][task] = []
+#                     validation_results["f1_scores"][task].append(value)
+
+#                 for task, value in val_average_task_loss.items():
+#                     if task not in validation_results["val_average_task_loss"]:
+#                         validation_results["val_average_task_loss"][task] = []
+#                     validation_results["val_average_task_loss"][task].append(value)
+
+#                 validation_results["average_accuracy"].append(average_accuracy)
+#                 validation_results["average_f1_score"].append(average_f1_score)
+#                 validation_results["val_average_total_loss"].append(val_average_total_loss)
+
+#                 # step based on the average f1 score per the original code
+#                 # note this step only works for the specific scheduler
+#                 if scheduler is not None:
+#                     scheduler.step(average_f1_score)
+
+#                 if average_f1_score > best_f1:
+#                     best_f1 = average_f1_score
+#                     best_model_state_dict = model.state_dict()
+                
+#                 save_checkpoint(epoch, best_model_state_dict, optimizer, scheduler, loss_history, task_loss_history, validation_results, strategy_results, name)
+
+
+# One task at a time
+# take in an ordering of tasks and train those tasks completely
+# method 1: generate 4 datasets, one for every task and train one after another, but within one epoch
+# method 2: train each task for a specified number of epochs
+    # second method allows us to call train_one_epoch on a set number of epochs for each class
+    # let's implement it this way first
+    # first, create a dataset

@@ -1,0 +1,14 @@
+{
+    "accuracies": {
+        "gory": 0.9619377162629758
+    },
+    "f1_scores": {
+        "gory": 0.3333333333333333
+    },
+    "average_accuracy": 0.9619377162629758,
+    "average_f1_score": 0.3333333333333333,
+    "val_average_total_loss": 0.25085416436195374,
+    "val_average_task_loss": {
+        "gory": 0.25085416436195374
+    }
+}

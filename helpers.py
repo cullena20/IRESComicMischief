@@ -8,7 +8,9 @@ import os
 import pickle
 import re
 
-machine = "INAOE" # used for identifying pretrained weights directory
+# machine = "INAOE" # used for identifying pretrained weights directory
+
+machine = "UH"
 
 # NOTE ON PADDING AND MASKING:
 # Text: pad 0s at beginning (so final result is of form [0, 0, ..., 12, 15]) and perform mask accordingly

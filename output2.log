@@ -1,0 +1,3993 @@
+nohup: ignoring input
+We strongly recommend passing in an `attention_mask` since your input_ids may be padded. See https://huggingface.co/docs/transformers/troubleshooting#incorrect-output-when-padding-tokens-arent-masked.
+BertSdpaSelfAttention is used but `torch.nn.functional.scaled_dot_product_attention` does not support non-absolute `position_embedding_type` or `output_attentions=True` or `head_mask`. Falling back to the manual attention implementation, but specifying the manual implementation will be required from Transformers version v5.0.0 onwards. This warning can be removed using the argument `attn_implementation="eager"` when loading the model.
+Successfully loaded base model weights from /storage/home/cander24/Main/ComicMischief/checkpoint-pretraining/best_pretrain_matching.pth
+Successfully loaded base model weights from /storage/home/cander24/Main/ComicMischief/checkpoint-pretraining/best_pretrain_matching.pth
+Successfully loaded base model weights from /storage/home/cander24/Main/ComicMischief/checkpoint-pretraining/best_pretrain_matching.pth
+Successfully loaded base model weights from /storage/home/cander24/Main/ComicMischief/checkpoint-pretraining/best_pretrain_matching.pth
+Successfully loaded base model weights from /storage/home/cander24/Main/ComicMischief/checkpoint-pretraining/best_pretrain_matching.pth
+Running One At At A Time
+Created Datasets
+Total Steps 7240, Number of Epochs: None
+One At At A Time Crashed with Exception: 0
+Pretrained Recreate 30
+Created Datasets
+Total Steps 5430, Number of Epochs: 30
+Image found
+Audio found
+Predefined Weights
+Epoch [1, Step [10], Total Loss: 0.7069, Time: 25.37s
+Task mature, Loss 0.6155731678009033
+Task gory, Loss 0.9261208772659302
+Task sarcasm, Loss 0.6464951038360596
+Task slapstick, Loss 0.7279995083808899
+
+Epoch [1, Step [20], Total Loss: 0.7109, Time: 51.25s
+Task mature, Loss 0.6270382404327393
+Task gory, Loss 0.8792278170585632
+Task sarcasm, Loss 0.7866616249084473
+Task slapstick, Loss 0.6958237886428833
+
+Epoch [1, Step [30], Total Loss: 0.6965, Time: 77.07s
+Task mature, Loss 0.7714066505432129
+Task gory, Loss 0.8830270767211914
+Task sarcasm, Loss 0.5909206867218018
+Task slapstick, Loss 0.7400592565536499
+
+Epoch [1, Step [40], Total Loss: 0.6603, Time: 103.18s
+Task mature, Loss 0.6859447956085205
+Task gory, Loss 0.8844716548919678
+Task sarcasm, Loss 0.5074758529663086
+Task slapstick, Loss 0.6819171905517578
+
+Epoch [1, Step [50], Total Loss: 0.6627, Time: 128.57s
+Task mature, Loss 0.7311820983886719
+Task gory, Loss 0.8023430109024048
+Task sarcasm, Loss 0.5729012489318848
+Task slapstick, Loss 0.7701240181922913
+
+Epoch [1, Step [60], Total Loss: 0.6684, Time: 154.12s
+Task mature, Loss 0.6558526754379272
+Task gory, Loss 0.7699441909790039
+Task sarcasm, Loss 0.7337121367454529
+Task slapstick, Loss 0.740665078163147
+
+Epoch [1, Step [70], Total Loss: 0.7364, Time: 179.58s
+Task mature, Loss 0.7082104086875916
+Task gory, Loss 0.8998167514801025
+Task sarcasm, Loss 0.7720845937728882
+Task slapstick, Loss 0.7559743523597717
+
+Epoch [1, Step [80], Total Loss: 0.6621, Time: 204.70s
+Task mature, Loss 0.7113224864006042
+Task gory, Loss 0.7866272926330566
+Task sarcasm, Loss 0.7351868152618408
+Task slapstick, Loss 0.6461488008499146
+
+Epoch [1, Step [90], Total Loss: 0.7457, Time: 230.31s
+Task mature, Loss 0.8048845529556274
+Task gory, Loss 0.888619065284729
+Task sarcasm, Loss 0.7938075065612793
+Task slapstick, Loss 0.7548550367355347
+
+Epoch [1, Step [100], Total Loss: 0.6973, Time: 256.16s
+Task mature, Loss 0.6998929977416992
+Task gory, Loss 0.8808512687683105
+Task sarcasm, Loss 0.7241635918617249
+Task slapstick, Loss 0.6507432460784912
+
+Epoch [1, Step [110], Total Loss: 0.7106, Time: 281.33s
+Task mature, Loss 0.7368966937065125
+Task gory, Loss 0.8524537086486816
+Task sarcasm, Loss 0.750686526298523
+Task slapstick, Loss 0.7288362979888916
+
+Epoch [1, Step [120], Total Loss: 0.6477, Time: 307.16s
+Task mature, Loss 0.6332987546920776
+Task gory, Loss 0.7737116813659668
+Task sarcasm, Loss 0.7242134809494019
+Task slapstick, Loss 0.6499767899513245
+
+Epoch [1, Step [130], Total Loss: 0.7091, Time: 332.59s
+Task mature, Loss 0.555855393409729
+Task gory, Loss 0.8880112171173096
+Task sarcasm, Loss 0.7847840189933777
+Task slapstick, Loss 0.7066643238067627
+
+Epoch [1, Step [140], Total Loss: 0.6371, Time: 357.60s
+Task mature, Loss 0.7675989270210266
+Task gory, Loss 0.7351521849632263
+Task sarcasm, Loss 0.5563188195228577
+Task slapstick, Loss 0.7748504877090454
+
+Epoch [1, Step [150], Total Loss: 0.6554, Time: 383.36s
+Task mature, Loss 0.68882817029953
+Task gory, Loss 0.8188167214393616
+Task sarcasm, Loss 0.6564220190048218
+Task slapstick, Loss 0.6383432149887085
+
+Epoch [1, Step [160], Total Loss: 0.6728, Time: 409.54s
+Task mature, Loss 0.8798331022262573
+Task gory, Loss 0.8020399212837219
+Task sarcasm, Loss 0.64126056432724
+Task slapstick, Loss 0.6786178350448608
+
+Epoch [1, Step [170], Total Loss: 0.6948, Time: 434.88s
+Task mature, Loss 0.683493435382843
+Task gory, Loss 0.850152850151062
+Task sarcasm, Loss 0.6946513652801514
+Task slapstick, Loss 0.7372557520866394
+
+Epoch [1, Step [180], Total Loss: 0.6677, Time: 460.36s
+Task mature, Loss 0.7247411012649536
+Task gory, Loss 0.8534321784973145
+Task sarcasm, Loss 0.6008819341659546
+Task slapstick, Loss 0.6683562994003296
+
+Image found
+Audio found
+Task mature
+Accuracy: 0.7615740740740741, F1 Score: 0.0000
+Average Task Loss 0.6121394634246826
+
+Task gory
+Accuracy: 0.06018518518518518, F1 Score: 0.1135
+Average Task Loss 0.805169939994812
+
+Task sarcasm
+Accuracy: 0.21296296296296297, F1 Score: 0.2946
+Average Task Loss 0.8612728714942932
+
+Task slapstick
+Accuracy: 0.8148148148148148, F1 Score: 0.0000
+Average Task Loss 0.6805500388145447
+
+Average Total Loss 2.959132194519043
+Average Accuracy: 0.4623842592592593
+Average F1 Score: 0.10203573175814021
+
+Checkpoint results saved to Results/Recreate30/checkpoints_Recreate30.pkl
+Epoch [2, Step [191], Total Loss: 0.6697, Time: 25.13s
+Task mature, Loss 0.6070927381515503
+Task gory, Loss 0.8363954424858093
+Task sarcasm, Loss 0.6982059478759766
+Task slapstick, Loss 0.6740036010742188
+
+Epoch [2, Step [201], Total Loss: 0.6647, Time: 51.82s
+Task mature, Loss 0.6518005132675171
+Task gory, Loss 0.8089642524719238
+Task sarcasm, Loss 0.7096831798553467
+Task slapstick, Loss 0.6698979139328003
+
+Epoch [2, Step [211], Total Loss: 0.6928, Time: 77.12s
+Task mature, Loss 0.6537388563156128
+Task gory, Loss 0.8795034885406494
+Task sarcasm, Loss 0.6839848756790161
+Task slapstick, Loss 0.6939315795898438
+
+Epoch [2, Step [221], Total Loss: 0.6629, Time: 102.89s
+Task mature, Loss 0.6950980424880981
+Task gory, Loss 0.8451616168022156
+Task sarcasm, Loss 0.6059083342552185
+Task slapstick, Loss 0.6706228256225586
+
+Epoch [2, Step [231], Total Loss: 0.6750, Time: 128.81s
+Task mature, Loss 0.7047829031944275
+Task gory, Loss 0.8172184824943542
+Task sarcasm, Loss 0.6602961421012878
+Task slapstick, Loss 0.7277630567550659
+
+Epoch [2, Step [241], Total Loss: 0.6187, Time: 154.83s
+Task mature, Loss 0.7627617120742798
+Task gory, Loss 0.7081997394561768
+Task sarcasm, Loss 0.6415532827377319
+Task slapstick, Loss 0.6540917158126831
+
+Epoch [2, Step [251], Total Loss: 0.6953, Time: 180.57s
+Task mature, Loss 0.6125238537788391
+Task gory, Loss 0.8887825012207031
+Task sarcasm, Loss 0.7210029363632202
+Task slapstick, Loss 0.6716333031654358
+
+Epoch [2, Step [261], Total Loss: 0.6991, Time: 206.88s
+Task mature, Loss 0.6248114109039307
+Task gory, Loss 0.8466672897338867
+Task sarcasm, Loss 0.855017900466919
+Task slapstick, Loss 0.6349601745605469
+
+Epoch [2, Step [271], Total Loss: 0.6544, Time: 232.34s
+Task mature, Loss 0.660210371017456
+Task gory, Loss 0.7939050197601318
+Task sarcasm, Loss 0.6307996511459351
+Task slapstick, Loss 0.7232801914215088
+
+Epoch [2, Step [281], Total Loss: 0.6133, Time: 257.50s
+Task mature, Loss 0.7091082334518433
+Task gory, Loss 0.6899308562278748
+Task sarcasm, Loss 0.6203355193138123
+Task slapstick, Loss 0.7119190692901611
+
+Epoch [2, Step [291], Total Loss: 0.6526, Time: 282.57s
+Task mature, Loss 0.6429930925369263
+Task gory, Loss 0.7381460666656494
+Task sarcasm, Loss 0.7511671781539917
+Task slapstick, Loss 0.7138944864273071
+
+Epoch [2, Step [301], Total Loss: 0.6518, Time: 308.00s
+Task mature, Loss 0.7011014223098755
+Task gory, Loss 0.7984358072280884
+Task sarcasm, Loss 0.6261013746261597
+Task slapstick, Loss 0.6853530406951904
+
+Epoch [2, Step [311], Total Loss: 0.6348, Time: 333.28s
+Task mature, Loss 0.6734715700149536
+Task gory, Loss 0.7933050394058228
+Task sarcasm, Loss 0.6268909573554993
+Task slapstick, Loss 0.6239943504333496
+
+Epoch [2, Step [321], Total Loss: 0.6167, Time: 358.46s
+Task mature, Loss 0.6090227961540222
+Task gory, Loss 0.7901597619056702
+Task sarcasm, Loss 0.5215798020362854
+Task slapstick, Loss 0.6770147085189819
+
+Epoch [2, Step [331], Total Loss: 0.6534, Time: 383.50s
+Task mature, Loss 0.811689019203186
+Task gory, Loss 0.7645668983459473
+Task sarcasm, Loss 0.628046989440918
+Task slapstick, Loss 0.7038591504096985
+
+Epoch [2, Step [341], Total Loss: 0.6657, Time: 410.27s
+Task mature, Loss 0.7524932026863098
+Task gory, Loss 0.8053663372993469
+Task sarcasm, Loss 0.6872367858886719
+Task slapstick, Loss 0.6542597413063049
+
+Epoch [2, Step [351], Total Loss: 0.6400, Time: 435.24s
+Task mature, Loss 0.6350739002227783
+Task gory, Loss 0.8185955286026001
+Task sarcasm, Loss 0.5332238674163818
+Task slapstick, Loss 0.7121099233627319
+
+Epoch [2, Step [361], Total Loss: 0.6282, Time: 460.94s
+Task mature, Loss 0.6776627898216248
+Task gory, Loss 0.7904437780380249
+Task sarcasm, Loss 0.5651382207870483
+Task slapstick, Loss 0.6559427976608276
+
+Image found
+Audio found
+Task mature
+Accuracy: 0.6828703703703703, F1 Score: 0.1491
+Average Task Loss 0.6473424434661865
+
+Task gory
+Accuracy: 0.2523148148148148, F1 Score: 0.1340
+Average Task Loss 0.7654827833175659
+
+Task sarcasm
+Accuracy: 0.4444444444444444, F1 Score: 0.3407
+Average Task Loss 0.7548905611038208
+
+Task slapstick
+Accuracy: 0.6689814814814815, F1 Score: 0.3587
+Average Task Loss 0.6638709306716919
+
+Average Total Loss 2.8315868377685547
+Average Accuracy: 0.5121527777777778
+Average F1 Score: 0.24563007890804883
+
+Checkpoint results saved to Results/Recreate30/checkpoints_Recreate30.pkl
+Epoch [3, Step [372], Total Loss: 0.6353, Time: 24.79s
+Task mature, Loss 0.6170941591262817
+Task gory, Loss 0.7690559029579163
+Task sarcasm, Loss 0.6123307347297668
+Task slapstick, Loss 0.7175346612930298
+
+Epoch [3, Step [382], Total Loss: 0.6182, Time: 50.25s
+Task mature, Loss 0.6385663747787476
+Task gory, Loss 0.7899990081787109
+Task sarcasm, Loss 0.5257144570350647
+Task slapstick, Loss 0.6661014556884766
+
+Epoch [3, Step [392], Total Loss: 0.5912, Time: 75.56s
+Task mature, Loss 0.6352232694625854
+Task gory, Loss 0.7500706911087036
+Task sarcasm, Loss 0.5259777903556824
+Task slapstick, Loss 0.6122751832008362
+
+Epoch [3, Step [402], Total Loss: 0.6211, Time: 100.43s
+Task mature, Loss 0.6262261867523193
+Task gory, Loss 0.8101305961608887
+Task sarcasm, Loss 0.5485849380493164
+Task slapstick, Loss 0.6233397722244263
+
+Epoch [3, Step [412], Total Loss: 0.6596, Time: 125.99s
+Task mature, Loss 0.6554011106491089
+Task gory, Loss 0.7857105731964111
+Task sarcasm, Loss 0.6972095966339111
+Task slapstick, Loss 0.7018912434577942
+
+Epoch [3, Step [422], Total Loss: 0.6628, Time: 151.17s
+Task mature, Loss 0.5923362374305725
+Task gory, Loss 0.8393368721008301
+Task sarcasm, Loss 0.6732907891273499
+Task slapstick, Loss 0.6656419634819031
+
+Epoch [3, Step [432], Total Loss: 0.6126, Time: 178.14s
+Task mature, Loss 0.7095812559127808
+Task gory, Loss 0.6763321161270142
+Task sarcasm, Loss 0.6910626888275146
+Task slapstick, Loss 0.6643067002296448
+
+Epoch [3, Step [442], Total Loss: 0.6638, Time: 203.89s
+Task mature, Loss 0.7590614557266235
+Task gory, Loss 0.8074853420257568
+Task sarcasm, Loss 0.6680080890655518
+Task slapstick, Loss 0.6565030813217163
+
+Epoch [3, Step [452], Total Loss: 0.6524, Time: 229.03s
+Task mature, Loss 0.6807568669319153
+Task gory, Loss 0.8042091727256775
+Task sarcasm, Loss 0.6060055494308472
+Task slapstick, Loss 0.7070648670196533
+
+Epoch [3, Step [462], Total Loss: 0.6092, Time: 254.28s
+Task mature, Loss 0.7178319692611694
+Task gory, Loss 0.8232436776161194
+Task sarcasm, Loss 0.4536759853363037
+Task slapstick, Loss 0.5867034196853638
+
+Epoch [3, Step [472], Total Loss: 0.6014, Time: 279.21s
+Task mature, Loss 0.6718804240226746
+Task gory, Loss 0.7329730987548828
+Task sarcasm, Loss 0.5173517465591431
+Task slapstick, Loss 0.687702476978302
+
+Epoch [3, Step [482], Total Loss: 0.6485, Time: 304.94s
+Task mature, Loss 0.5706438422203064
+Task gory, Loss 0.7890135645866394
+Task sarcasm, Loss 0.6857600212097168
+Task slapstick, Loss 0.6935391426086426
+
+Epoch [3, Step [492], Total Loss: 0.5880, Time: 330.00s
+Task mature, Loss 0.6018668413162231
+Task gory, Loss 0.7116922736167908
+Task sarcasm, Loss 0.6336200833320618
+Task slapstick, Loss 0.5818668603897095
+
+Epoch [3, Step [502], Total Loss: 0.6482, Time: 355.03s
+Task mature, Loss 0.6701450943946838
+Task gory, Loss 0.7640500068664551
+Task sarcasm, Loss 0.6828197240829468
+Task slapstick, Loss 0.6948187351226807
+
+Epoch [3, Step [512], Total Loss: 0.6574, Time: 380.41s
+Task mature, Loss 0.5961461067199707
+Task gory, Loss 0.8650984764099121
+Task sarcasm, Loss 0.6339075565338135
+Task slapstick, Loss 0.6250308752059937
+
+Epoch [3, Step [522], Total Loss: 0.6741, Time: 405.72s
+Task mature, Loss 0.6748403310775757
+Task gory, Loss 0.8419325947761536
+Task sarcasm, Loss 0.6712032556533813
+Task slapstick, Loss 0.6779730916023254
+
+Epoch [3, Step [532], Total Loss: 0.6336, Time: 430.73s
+Task mature, Loss 0.696977436542511
+Task gory, Loss 0.8005527853965759
+Task sarcasm, Loss 0.5341785550117493
+Task slapstick, Loss 0.684383749961853
+
+Epoch [3, Step [542], Total Loss: 0.6424, Time: 458.37s
+Task mature, Loss 0.6663268804550171
+Task gory, Loss 0.8378139138221741
+Task sarcasm, Loss 0.5612826347351074
+Task slapstick, Loss 0.6420098543167114
+
+Image found
+Audio found
+Task mature
+Accuracy: 0.6226851851851852, F1 Score: 0.2419
+Average Task Loss 0.6523204445838928
+
+Task gory
+Accuracy: 0.37962962962962965, F1 Score: 0.1572
+Average Task Loss 0.7433464527130127
+
+Task sarcasm
+Accuracy: 0.7615740740740741, F1 Score: 0.3439
+Average Task Loss 0.5525502562522888
+
+Task slapstick
+Accuracy: 0.6388888888888888, F1 Score: 0.3217
+Average Task Loss 0.6591963171958923
+
+Average Total Loss 2.6074132919311523
+Average Accuracy: 0.6006944444444444
+Average F1 Score: 0.26619533613489116
+
+Checkpoint results saved to Results/Recreate30/checkpoints_Recreate30.pkl
+Epoch [4, Step [553], Total Loss: 0.6049, Time: 24.88s
+Task mature, Loss 0.6411424279212952
+Task gory, Loss 0.7993084192276001
+Task sarcasm, Loss 0.4371345639228821
+Task slapstick, Loss 0.6683750748634338
+
+Epoch [4, Step [563], Total Loss: 0.6341, Time: 50.47s
+Task mature, Loss 0.682099461555481
+Task gory, Loss 0.7950243353843689
+Task sarcasm, Loss 0.5975987911224365
+Task slapstick, Loss 0.6419038772583008
+
+Epoch [4, Step [573], Total Loss: 0.5481, Time: 75.83s
+Task mature, Loss 0.7172458171844482
+Task gory, Loss 0.6705814003944397
+Task sarcasm, Loss 0.3846791386604309
+Task slapstick, Loss 0.6559191942214966
+
+Epoch [4, Step [583], Total Loss: 0.6058, Time: 101.20s
+Task mature, Loss 0.6502204537391663
+Task gory, Loss 0.7968822717666626
+Task sarcasm, Loss 0.5371546745300293
+Task slapstick, Loss 0.572873055934906
+
+Epoch [4, Step [593], Total Loss: 0.5905, Time: 126.12s
+Task mature, Loss 0.7199782729148865
+Task gory, Loss 0.7731662392616272
+Task sarcasm, Loss 0.48671963810920715
+Task slapstick, Loss 0.5593227744102478
+
+Epoch [4, Step [603], Total Loss: 0.6034, Time: 151.57s
+Task mature, Loss 0.7104195356369019
+Task gory, Loss 0.7887036204338074
+Task sarcasm, Loss 0.44885289669036865
+Task slapstick, Loss 0.6353790760040283
+
+Epoch [4, Step [613], Total Loss: 0.6243, Time: 176.77s
+Task mature, Loss 0.6543606519699097
+Task gory, Loss 0.7345945835113525
+Task sarcasm, Loss 0.6665389537811279
+Task slapstick, Loss 0.6583693027496338
+
+Epoch [4, Step [623], Total Loss: 0.6203, Time: 202.00s
+Task mature, Loss 0.7407899498939514
+Task gory, Loss 0.7371953725814819
+Task sarcasm, Loss 0.5674228668212891
+Task slapstick, Loss 0.6894872188568115
+
+Epoch [4, Step [633], Total Loss: 0.6791, Time: 227.06s
+Task mature, Loss 0.6554646492004395
+Task gory, Loss 0.7440465688705444
+Task sarcasm, Loss 0.9043715000152588
+Task slapstick, Loss 0.6752371788024902
+
+Epoch [4, Step [643], Total Loss: 0.5684, Time: 252.73s
+Task mature, Loss 0.6568669080734253
+Task gory, Loss 0.6988141536712646
+Task sarcasm, Loss 0.3621531128883362
+Task slapstick, Loss 0.7538152933120728
+
+Epoch [4, Step [653], Total Loss: 0.6158, Time: 277.84s
+Task mature, Loss 0.5605977773666382
+Task gory, Loss 0.7637544870376587
+Task sarcasm, Loss 0.5756677389144897
+Task slapstick, Loss 0.6953620910644531
+
+Epoch [4, Step [663], Total Loss: 0.5711, Time: 302.91s
+Task mature, Loss 0.6238486766815186
+Task gory, Loss 0.7415592670440674
+Task sarcasm, Loss 0.48048558831214905
+Task slapstick, Loss 0.5798803567886353
+
+Epoch [4, Step [673], Total Loss: 0.6051, Time: 331.45s
+Task mature, Loss 0.559492826461792
+Task gory, Loss 0.6987696886062622
+Task sarcasm, Loss 0.7413816452026367
+Task slapstick, Loss 0.6069051027297974
+
+Epoch [4, Step [683], Total Loss: 0.6124, Time: 356.87s
+Task mature, Loss 0.6423925757408142
+Task gory, Loss 0.7666419148445129
+Task sarcasm, Loss 0.5527346730232239
+Task slapstick, Loss 0.6548007726669312
+
+Epoch [4, Step [693], Total Loss: 0.6027, Time: 382.54s
+Task mature, Loss 0.617708683013916
+Task gory, Loss 0.7838302254676819
+Task sarcasm, Loss 0.5333163738250732
+Task slapstick, Loss 0.6038511395454407
+
+Epoch [4, Step [703], Total Loss: 0.6032, Time: 407.69s
+Task mature, Loss 0.5856679677963257
+Task gory, Loss 0.7555359601974487
+Task sarcasm, Loss 0.521490752696991
+Task slapstick, Loss 0.6907147169113159
+
+Epoch [4, Step [713], Total Loss: 0.5861, Time: 433.23s
+Task mature, Loss 0.6110978126525879
+Task gory, Loss 0.7437574863433838
+Task sarcasm, Loss 0.4332679510116577
+Task slapstick, Loss 0.7042208313941956
+
+Epoch [4, Step [723], Total Loss: 0.5945, Time: 458.27s
+Task mature, Loss 0.5912444591522217
+Task gory, Loss 0.7593620419502258
+Task sarcasm, Loss 0.4308564066886902
+Task slapstick, Loss 0.7271840572357178
+
+Image found
+Audio found
+Task mature
+Accuracy: 0.5324074074074074, F1 Score: 0.2937
+Average Task Loss 0.6669352054595947
+
+Task gory
+Accuracy: 0.6064814814814815, F1 Score: 0.2130
+Average Task Loss 0.7053776979446411
+
+Task sarcasm
+Accuracy: 0.6064814814814815, F1 Score: 0.4138
+Average Task Loss 0.8013790845870972
+
+Task slapstick
+Accuracy: 0.7291666666666666, F1 Score: 0.3676
+Average Task Loss 0.6145527362823486
+
+Average Total Loss 2.7882447242736816
+Average Accuracy: 0.6186342592592592
+Average F1 Score: 0.32200748192127504
+
+Checkpoint results saved to Results/Recreate30/checkpoints_Recreate30.pkl
+Epoch [5, Step [734], Total Loss: 0.6069, Time: 24.74s
+Task mature, Loss 0.6657314896583557
+Task gory, Loss 0.7454618215560913
+Task sarcasm, Loss 0.5233702063560486
+Task slapstick, Loss 0.6872563362121582
+
+Epoch [5, Step [744], Total Loss: 0.6070, Time: 50.16s
+Task mature, Loss 0.6544820070266724
+Task gory, Loss 0.7792266607284546
+Task sarcasm, Loss 0.4720792770385742
+Task slapstick, Loss 0.677017867565155
+
+Epoch [5, Step [754], Total Loss: 0.5952, Time: 75.25s
+Task mature, Loss 0.6356999278068542
+Task gory, Loss 0.7368485927581787
+Task sarcasm, Loss 0.5449414253234863
+Task slapstick, Loss 0.6394579410552979
+
+Epoch [5, Step [764], Total Loss: 0.5653, Time: 100.31s
+Task mature, Loss 0.6484869122505188
+Task gory, Loss 0.7401943206787109
+Task sarcasm, Loss 0.47895291447639465
+Task slapstick, Loss 0.542894721031189
+
+Epoch [5, Step [774], Total Loss: 0.6731, Time: 125.65s
+Task mature, Loss 0.625980019569397
+Task gory, Loss 0.7814411520957947
+Task sarcasm, Loss 0.7908148765563965
+Task slapstick, Loss 0.6988933086395264
+
+Epoch [5, Step [784], Total Loss: 0.6003, Time: 151.09s
+Task mature, Loss 0.6624618172645569
+Task gory, Loss 0.7350597381591797
+Task sarcasm, Loss 0.5270602107048035
+Task slapstick, Loss 0.6729463934898376
+
+Epoch [5, Step [794], Total Loss: 0.5977, Time: 176.39s
+Task mature, Loss 0.6840604543685913
+Task gory, Loss 0.7734834551811218
+Task sarcasm, Loss 0.594384491443634
+Task slapstick, Loss 0.5049843192100525
+
+Epoch [5, Step [804], Total Loss: 0.5897, Time: 201.51s
+Task mature, Loss 0.6337952613830566
+Task gory, Loss 0.6825665831565857
+Task sarcasm, Loss 0.6666886806488037
+Task slapstick, Loss 0.5996972918510437
+
+Epoch [5, Step [814], Total Loss: 0.5606, Time: 226.79s
+Task mature, Loss 0.5782783031463623
+Task gory, Loss 0.7288278341293335
+Task sarcasm, Loss 0.4084170460700989
+Task slapstick, Loss 0.6475427150726318
+
+Epoch [5, Step [824], Total Loss: 0.6021, Time: 252.48s
+Task mature, Loss 0.6118314266204834
+Task gory, Loss 0.7938377857208252
+Task sarcasm, Loss 0.5561089515686035
+Task slapstick, Loss 0.5607110261917114
+
+Epoch [5, Step [834], Total Loss: 0.6221, Time: 277.64s
+Task mature, Loss 0.6154596209526062
+Task gory, Loss 0.7691531777381897
+Task sarcasm, Loss 0.6180239915847778
+Task slapstick, Loss 0.6462383270263672
+
+Epoch [5, Step [844], Total Loss: 0.6162, Time: 307.08s
+Task mature, Loss 0.6024247407913208
+Task gory, Loss 0.8154247403144836
+Task sarcasm, Loss 0.5812087059020996
+Task slapstick, Loss 0.5678339600563049
+
+Epoch [5, Step [854], Total Loss: 0.5851, Time: 332.26s
+Task mature, Loss 0.6603657007217407
+Task gory, Loss 0.7845388650894165
+Task sarcasm, Loss 0.3612107038497925
+Task slapstick, Loss 0.6649014949798584
+
+Epoch [5, Step [864], Total Loss: 0.5925, Time: 357.34s
+Task mature, Loss 0.6764934659004211
+Task gory, Loss 0.7936926484107971
+Task sarcasm, Loss 0.4346008896827698
+Task slapstick, Loss 0.6023457050323486
+
+Epoch [5, Step [874], Total Loss: 0.5632, Time: 382.56s
+Task mature, Loss 0.6337921619415283
+Task gory, Loss 0.7368952631950378
+Task sarcasm, Loss 0.4107177257537842
+Task slapstick, Loss 0.6147946715354919
+
+Epoch [5, Step [884], Total Loss: 0.5905, Time: 408.41s
+Task mature, Loss 0.626919150352478
+Task gory, Loss 0.788714587688446
+Task sarcasm, Loss 0.47335731983184814
+Task slapstick, Loss 0.5881983637809753
+
+Epoch [5, Step [894], Total Loss: 0.5227, Time: 433.64s
+Task mature, Loss 0.6152174472808838
+Task gory, Loss 0.6472494602203369
+Task sarcasm, Loss 0.4210418462753296
+Task slapstick, Loss 0.5902719497680664
+
+Epoch [5, Step [904], Total Loss: 0.5729, Time: 458.96s
+Task mature, Loss 0.5845364928245544
+Task gory, Loss 0.67535400390625
+Task sarcasm, Loss 0.6033340096473694
+Task slapstick, Loss 0.6184176206588745
+
+Image found
+Audio found
+Task mature
+Accuracy: 0.5925925925925926, F1 Score: 0.3125
+Average Task Loss 0.6547893285751343
+
+Task gory
+Accuracy: 0.5277777777777778, F1 Score: 0.2031
+Average Task Loss 0.7617390751838684
+
+Task sarcasm
+Accuracy: 0.7916666666666666, F1 Score: 0.3571
+Average Task Loss 0.4854981601238251
+
+Task slapstick
+Accuracy: 0.7013888888888888, F1 Score: 0.4215
+Average Task Loss 0.6661791205406189
+
+Average Total Loss 2.5682055950164795
+Average Accuracy: 0.6533564814814814
+Average F1 Score: 0.3235731302049968
+
+Checkpoint results saved to Results/Recreate30/checkpoints_Recreate30.pkl
+Epoch [6, Step [915], Total Loss: 0.5950, Time: 25.02s
+Task mature, Loss 0.5961949825286865
+Task gory, Loss 0.75811767578125
+Task sarcasm, Loss 0.6140179634094238
+Task slapstick, Loss 0.5467311143875122
+
+Epoch [6, Step [925], Total Loss: 0.5621, Time: 50.36s
+Task mature, Loss 0.6426290273666382
+Task gory, Loss 0.7074260711669922
+Task sarcasm, Loss 0.49171486496925354
+Task slapstick, Loss 0.5828391313552856
+
+Epoch [6, Step [935], Total Loss: 0.6071, Time: 75.43s
+Task mature, Loss 0.6361718773841858
+Task gory, Loss 0.751862645149231
+Task sarcasm, Loss 0.6453098058700562
+Task slapstick, Loss 0.5683743953704834
+
+Epoch [6, Step [945], Total Loss: 0.6534, Time: 100.90s
+Task mature, Loss 0.5390967726707458
+Task gory, Loss 0.7937524318695068
+Task sarcasm, Loss 0.7155557870864868
+Task slapstick, Loss 0.6943061351776123
+
+Epoch [6, Step [955], Total Loss: 0.6018, Time: 126.24s
+Task mature, Loss 0.6555529832839966
+Task gory, Loss 0.7840638756752014
+Task sarcasm, Loss 0.47979384660720825
+Task slapstick, Loss 0.6334156394004822
+
+Epoch [6, Step [965], Total Loss: 0.5564, Time: 151.21s
+Task mature, Loss 0.6078057289123535
+Task gory, Loss 0.7088818550109863
+Task sarcasm, Loss 0.38153332471847534
+Task slapstick, Loss 0.6786261200904846
+
+Epoch [6, Step [975], Total Loss: 0.5952, Time: 176.59s
+Task mature, Loss 0.7070019841194153
+Task gory, Loss 0.7435590624809265
+Task sarcasm, Loss 0.5619980096817017
+Task slapstick, Loss 0.5731452703475952
+
+Epoch [6, Step [985], Total Loss: 0.5617, Time: 202.41s
+Task mature, Loss 0.5859227180480957
+Task gory, Loss 0.7092174291610718
+Task sarcasm, Loss 0.46733373403549194
+Task slapstick, Loss 0.6299329996109009
+
+Epoch [6, Step [995], Total Loss: 0.5894, Time: 227.92s
+Task mature, Loss 0.6165977120399475
+Task gory, Loss 0.7906442880630493
+Task sarcasm, Loss 0.508051335811615
+Task slapstick, Loss 0.5491495728492737
+
+Epoch [6, Step [1005], Total Loss: 0.6140, Time: 253.41s
+Task mature, Loss 0.5714852809906006
+Task gory, Loss 0.787259578704834
+Task sarcasm, Loss 0.5430912375450134
+Task slapstick, Loss 0.6668843030929565
+
+Epoch [6, Step [1015], Total Loss: 0.6042, Time: 278.60s
+Task mature, Loss 0.6248200535774231
+Task gory, Loss 0.7502711415290833
+Task sarcasm, Loss 0.5244937539100647
+Task slapstick, Loss 0.6833407878875732
+
+Epoch [6, Step [1025], Total Loss: 0.5197, Time: 303.85s
+Task mature, Loss 0.6206422448158264
+Task gory, Loss 0.6801755428314209
+Task sarcasm, Loss 0.322602778673172
+Task slapstick, Loss 0.6051766276359558
+
+Epoch [6, Step [1035], Total Loss: 0.5736, Time: 329.52s
+Task mature, Loss 0.6217246651649475
+Task gory, Loss 0.7422024011611938
+Task sarcasm, Loss 0.47873640060424805
+Task slapstick, Loss 0.5940408706665039
+
+Epoch [6, Step [1045], Total Loss: 0.5970, Time: 354.73s
+Task mature, Loss 0.665713906288147
+Task gory, Loss 0.7971620559692383
+Task sarcasm, Loss 0.4287738800048828
+Task slapstick, Loss 0.6289613246917725
+
+Epoch [6, Step [1055], Total Loss: 0.5369, Time: 385.29s
+Task mature, Loss 0.5248392224311829
+Task gory, Loss 0.7492502927780151
+Task sarcasm, Loss 0.3729470372200012
+Task slapstick, Loss 0.5506191849708557
+
+Epoch [6, Step [1065], Total Loss: 0.5693, Time: 410.32s
+Task mature, Loss 0.6337161064147949
+Task gory, Loss 0.7074906826019287
+Task sarcasm, Loss 0.442089319229126
+Task slapstick, Loss 0.6725515127182007
+
+Epoch [6, Step [1075], Total Loss: 0.5798, Time: 436.06s
+Task mature, Loss 0.678553581237793
+Task gory, Loss 0.6555014848709106
+Task sarcasm, Loss 0.7094529867172241
+Task slapstick, Loss 0.5390228033065796
+
+Epoch [6, Step [1085], Total Loss: 0.5661, Time: 461.77s
+Task mature, Loss 0.5843345522880554
+Task gory, Loss 0.7585904598236084
+Task sarcasm, Loss 0.44200921058654785
+Task slapstick, Loss 0.5790159702301025
+
+Image found
+Audio found
+Task mature
+Accuracy: 0.5925925925925926, F1 Score: 0.3333
+Average Task Loss 0.665381133556366
+
+Task gory
+Accuracy: 0.5648148148148148, F1 Score: 0.2167
+Average Task Loss 0.7578648328781128
+
+Task sarcasm
+Accuracy: 0.8171296296296297, F1 Score: 0.3130
+Average Task Loss 0.47601452469825745
+
+Task slapstick
+Accuracy: 0.7129629629629629, F1 Score: 0.4464
+Average Task Loss 0.6504344940185547
+
+Average Total Loss 2.5496950149536133
+Average Accuracy: 0.671875
+Average F1 Score: 0.32736801242236024
+
+Checkpoint results saved to Results/Recreate30/checkpoints_Recreate30.pkl
+Epoch [7, Step [1096], Total Loss: 0.5211, Time: 24.84s
+Task mature, Loss 0.614227294921875
+Task gory, Loss 0.6821295619010925
+Task sarcasm, Loss 0.3930094838142395
+Task slapstick, Loss 0.5413390398025513
+
+Epoch [7, Step [1106], Total Loss: 0.5487, Time: 50.43s
+Task mature, Loss 0.569624662399292
+Task gory, Loss 0.738024115562439
+Task sarcasm, Loss 0.33481287956237793
+Task slapstick, Loss 0.6479832530021667
+
+Epoch [7, Step [1116], Total Loss: 0.5727, Time: 75.61s
+Task mature, Loss 0.6408225297927856
+Task gory, Loss 0.7406579256057739
+Task sarcasm, Loss 0.49207398295402527
+Task slapstick, Loss 0.5698345899581909
+
+Epoch [7, Step [1126], Total Loss: 0.5867, Time: 100.92s
+Task mature, Loss 0.6190328598022461
+Task gory, Loss 0.8197726011276245
+Task sarcasm, Loss 0.33347535133361816
+Task slapstick, Loss 0.6507824659347534
+
+Epoch [7, Step [1136], Total Loss: 0.5588, Time: 126.01s
+Task mature, Loss 0.659490704536438
+Task gory, Loss 0.7410396933555603
+Task sarcasm, Loss 0.46799248456954956
+Task slapstick, Loss 0.514424741268158
+
+Epoch [7, Step [1146], Total Loss: 0.6120, Time: 151.87s
+Task mature, Loss 0.6670641899108887
+Task gory, Loss 0.74152672290802
+Task sarcasm, Loss 0.577041745185852
+Task slapstick, Loss 0.6663905382156372
+
+Epoch [7, Step [1156], Total Loss: 0.5696, Time: 177.07s
+Task mature, Loss 0.6060092449188232
+Task gory, Loss 0.7537462711334229
+Task sarcasm, Loss 0.47085899114608765
+Task slapstick, Loss 0.5664182901382446
+
+Epoch [7, Step [1166], Total Loss: 0.6857, Time: 202.39s
+Task mature, Loss 0.6525961756706238
+Task gory, Loss 0.7540374994277954
+Task sarcasm, Loss 0.988771915435791
+Task slapstick, Loss 0.6051642894744873
+
+Epoch [7, Step [1176], Total Loss: 0.5558, Time: 227.51s
+Task mature, Loss 0.6195281744003296
+Task gory, Loss 0.6724680662155151
+Task sarcasm, Loss 0.40879133343696594
+Task slapstick, Loss 0.7153462171554565
+
+Epoch [7, Step [1186], Total Loss: 0.5753, Time: 253.07s
+Task mature, Loss 0.5673986673355103
+Task gory, Loss 0.8078088164329529
+Task sarcasm, Loss 0.4331088960170746
+Task slapstick, Loss 0.5439150929450989
+
+Epoch [7, Step [1196], Total Loss: 0.5750, Time: 278.88s
+Task mature, Loss 0.6228538751602173
+Task gory, Loss 0.7942878603935242
+Task sarcasm, Loss 0.5132925510406494
+Task slapstick, Loss 0.46194905042648315
+
+Epoch [7, Step [1206], Total Loss: 0.5132, Time: 303.98s
+Task mature, Loss 0.6052020788192749
+Task gory, Loss 0.6641250848770142
+Task sarcasm, Loss 0.4425358176231384
+Task slapstick, Loss 0.4928033649921417
+
+Epoch [7, Step [1216], Total Loss: 0.5686, Time: 329.45s
+Task mature, Loss 0.5548543334007263
+Task gory, Loss 0.7374780774116516
+Task sarcasm, Loss 0.47524386644363403
+Task slapstick, Loss 0.6152076721191406
+
+Epoch [7, Step [1226], Total Loss: 0.5830, Time: 354.49s
+Task mature, Loss 0.6547644138336182
+Task gory, Loss 0.779860258102417
+Task sarcasm, Loss 0.529462456703186
+Task slapstick, Loss 0.4986661374568939
+
+Epoch [7, Step [1236], Total Loss: 0.5477, Time: 380.04s
+Task mature, Loss 0.6633278727531433
+Task gory, Loss 0.7307567596435547
+Task sarcasm, Loss 0.3833637535572052
+Task slapstick, Loss 0.5620679259300232
+
+Epoch [7, Step [1246], Total Loss: 0.5405, Time: 405.25s
+Task mature, Loss 0.6254808902740479
+Task gory, Loss 0.6423085927963257
+Task sarcasm, Loss 0.4388696253299713
+Task slapstick, Loss 0.6664291024208069
+
+Epoch [7, Step [1256], Total Loss: 0.5827, Time: 430.33s
+Task mature, Loss 0.5554712414741516
+Task gory, Loss 0.7549206614494324
+Task sarcasm, Loss 0.4470011591911316
+Task slapstick, Loss 0.678924560546875
+
+Epoch [7, Step [1266], Total Loss: 0.5126, Time: 455.51s
+Task mature, Loss 0.5899131298065186
+Task gory, Loss 0.6877945065498352
+Task sarcasm, Loss 0.4560664892196655
+Task slapstick, Loss 0.43637460470199585
+
+Image found
+Audio found
+Task mature
+Accuracy: 0.6412037037037037, F1 Score: 0.3348
+Average Task Loss 0.632248044013977
+
+Task gory
+Accuracy: 0.6203703703703703, F1 Score: 0.2336
+Average Task Loss 0.748628556728363
+
+Task sarcasm
+Accuracy: 0.8240740740740741, F1 Score: 0.2549
+Average Task Loss 0.44821828603744507
+
+Task slapstick
+Accuracy: 0.7199074074074074, F1 Score: 0.3858
+Average Task Loss 0.6478083729743958
+
+Average Total Loss 2.476902961730957
+Average Accuracy: 0.7013888888888888
+Average F1 Score: 0.3022743927814272
+
+Checkpoint results saved to Results/Recreate30/checkpoints_Recreate30.pkl
+Epoch [8, Step [1277], Total Loss: 0.6078, Time: 24.75s
+Task mature, Loss 0.5534003973007202
+Task gory, Loss 0.7105817198753357
+Task sarcasm, Loss 0.7608813047409058
+Task slapstick, Loss 0.5801647901535034
+
+Epoch [8, Step [1287], Total Loss: 0.5115, Time: 50.16s
+Task mature, Loss 0.5290409922599792
+Task gory, Loss 0.7599738836288452
+Task sarcasm, Loss 0.300123929977417
+Task slapstick, Loss 0.47281718254089355
+
+Epoch [8, Step [1297], Total Loss: 0.5326, Time: 75.78s
+Task mature, Loss 0.615043580532074
+Task gory, Loss 0.6684830188751221
+Task sarcasm, Loss 0.3980688452720642
+Task slapstick, Loss 0.6201987862586975
+
+Epoch [8, Step [1307], Total Loss: 0.5404, Time: 107.50s
+Task mature, Loss 0.6224461793899536
+Task gory, Loss 0.6916059255599976
+Task sarcasm, Loss 0.48778077960014343
+Task slapstick, Loss 0.5196660757064819
+
+Epoch [8, Step [1317], Total Loss: 0.5560, Time: 133.19s
+Task mature, Loss 0.6112077236175537
+Task gory, Loss 0.7207901477813721
+Task sarcasm, Loss 0.4283806085586548
+Task slapstick, Loss 0.6042425036430359
+
+Epoch [8, Step [1327], Total Loss: 0.5276, Time: 158.45s
+Task mature, Loss 0.5757842063903809
+Task gory, Loss 0.6947852373123169
+Task sarcasm, Loss 0.4684154987335205
+Task slapstick, Loss 0.4918974041938782
+
+Epoch [8, Step [1337], Total Loss: 0.5267, Time: 183.64s
+Task mature, Loss 0.5440243482589722
+Task gory, Loss 0.6951349973678589
+Task sarcasm, Loss 0.4758477807044983
+Task slapstick, Loss 0.4952693283557892
+
+Epoch [8, Step [1347], Total Loss: 0.5667, Time: 208.66s
+Task mature, Loss 0.5783911943435669
+Task gory, Loss 0.7153741121292114
+Task sarcasm, Loss 0.5132936835289001
+Task slapstick, Loss 0.6001781225204468
+
+Epoch [8, Step [1357], Total Loss: 0.5407, Time: 234.56s
+Task mature, Loss 0.6049168109893799
+Task gory, Loss 0.6068582534790039
+Task sarcasm, Loss 0.48925426602363586
+Task slapstick, Loss 0.6980644464492798
+
+Epoch [8, Step [1367], Total Loss: 0.6416, Time: 260.37s
+Task mature, Loss 0.7269541025161743
+Task gory, Loss 0.7059635519981384
+Task sarcasm, Loss 0.9515606164932251
+Task slapstick, Loss 0.48088788986206055
+
+Epoch [8, Step [1377], Total Loss: 0.5475, Time: 285.43s
+Task mature, Loss 0.5518271923065186
+Task gory, Loss 0.6165990829467773
+Task sarcasm, Loss 0.5573784112930298
+Task slapstick, Loss 0.6707971096038818
+
+Epoch [8, Step [1387], Total Loss: 0.5261, Time: 310.46s
+Task mature, Loss 0.5591443181037903
+Task gory, Loss 0.7287029027938843
+Task sarcasm, Loss 0.3672218918800354
+Task slapstick, Loss 0.5260951519012451
+
+Epoch [8, Step [1397], Total Loss: 0.5544, Time: 335.64s
+Task mature, Loss 0.6339321136474609
+Task gory, Loss 0.7225940823554993
+Task sarcasm, Loss 0.46729540824890137
+Task slapstick, Loss 0.5427184104919434
+
+Epoch [8, Step [1407], Total Loss: 0.5808, Time: 361.41s
+Task mature, Loss 0.5442146062850952
+Task gory, Loss 0.703087568283081
+Task sarcasm, Loss 0.6556353569030762
+Task slapstick, Loss 0.5699439644813538
+
+Epoch [8, Step [1417], Total Loss: 0.5398, Time: 386.51s
+Task mature, Loss 0.5730224847793579
+Task gory, Loss 0.7421775460243225
+Task sarcasm, Loss 0.3911726176738739
+Task slapstick, Loss 0.5369844436645508
+
+Epoch [8, Step [1427], Total Loss: 0.4791, Time: 411.62s
+Task mature, Loss 0.5425541400909424
+Task gory, Loss 0.599018931388855
+Task sarcasm, Loss 0.3394187092781067
+Task slapstick, Loss 0.586963951587677
+
+Epoch [8, Step [1437], Total Loss: 0.5749, Time: 436.84s
+Task mature, Loss 0.6587637662887573
+Task gory, Loss 0.728779673576355
+Task sarcasm, Loss 0.3844575881958008
+Task slapstick, Loss 0.703149676322937
+
+Epoch [8, Step [1447], Total Loss: 0.6260, Time: 462.07s
+Task mature, Loss 0.6177802085876465
+Task gory, Loss 0.7440165281295776
+Task sarcasm, Loss 0.6888477802276611
+Task slapstick, Loss 0.6442686915397644
+
+Image found
+Audio found
+Task mature
+Accuracy: 0.4375, F1 Score: 0.4000
+Average Task Loss 0.7779163122177124
+
+Task gory
+Accuracy: 0.4166666666666667, F1 Score: 0.1711
+Average Task Loss 0.7888953685760498
+
+Task sarcasm
+Accuracy: 0.7708333333333334, F1 Score: 0.3613
+Average Task Loss 0.579717755317688
+
+Task slapstick
+Accuracy: 0.6041666666666666, F1 Score: 0.4281
+Average Task Loss 0.7779831886291504
+
+Average Total Loss 2.9245128631591797
+Average Accuracy: 0.5572916666666666
+Average F1 Score: 0.34010914991113556
+
+Checkpoint results saved to Results/Recreate30/checkpoints_Recreate30.pkl
+Epoch [9, Step [1458], Total Loss: 0.5815, Time: 25.12s
+Task mature, Loss 0.598982572555542
+Task gory, Loss 0.6756826043128967
+Task sarcasm, Loss 0.583791971206665
+Task slapstick, Loss 0.6728965640068054
+
+Epoch [9, Step [1468], Total Loss: 0.5479, Time: 50.23s
+Task mature, Loss 0.5757700204849243
+Task gory, Loss 0.7108278274536133
+Task sarcasm, Loss 0.591101348400116
+Task slapstick, Loss 0.4390999972820282
+
+Epoch [9, Step [1478], Total Loss: 0.5518, Time: 75.93s
+Task mature, Loss 0.6162513494491577
+Task gory, Loss 0.718451738357544
+Task sarcasm, Loss 0.3740014433860779
+Task slapstick, Loss 0.6400057673454285
+
+Epoch [9, Step [1488], Total Loss: 0.5341, Time: 101.05s
+Task mature, Loss 0.5303656458854675
+Task gory, Loss 0.6481496095657349
+Task sarcasm, Loss 0.46158474683761597
+Task slapstick, Loss 0.6472764015197754
+
+Epoch [9, Step [1498], Total Loss: 0.4968, Time: 126.41s
+Task mature, Loss 0.5528391599655151
+Task gory, Loss 0.6609041094779968
+Task sarcasm, Loss 0.37527182698249817
+Task slapstick, Loss 0.5107284784317017
+
+Epoch [9, Step [1508], Total Loss: 0.5355, Time: 152.28s
+Task mature, Loss 0.45634302496910095
+Task gory, Loss 0.7067543268203735
+Task sarcasm, Loss 0.5407795906066895
+Task slapstick, Loss 0.4952354431152344
+
+Epoch [9, Step [1518], Total Loss: 0.5217, Time: 177.65s
+Task mature, Loss 0.7080318927764893
+Task gory, Loss 0.5928630232810974
+Task sarcasm, Loss 0.4771762788295746
+Task slapstick, Loss 0.5917041301727295
+
+Epoch [9, Step [1528], Total Loss: 0.5304, Time: 203.19s
+Task mature, Loss 0.5308886170387268
+Task gory, Loss 0.6295042037963867
+Task sarcasm, Loss 0.450397789478302
+Task slapstick, Loss 0.6772683262825012
+
+Epoch [9, Step [1538], Total Loss: 0.4975, Time: 228.29s
+Task mature, Loss 0.4958311915397644
+Task gory, Loss 0.68143630027771
+Task sarcasm, Loss 0.4243314266204834
+Task slapstick, Loss 0.45254379510879517
+
+Epoch [9, Step [1548], Total Loss: 0.4912, Time: 253.63s
+Task mature, Loss 0.6493290066719055
+Task gory, Loss 0.6433239579200745
+Task sarcasm, Loss 0.383637398481369
+Task slapstick, Loss 0.461199551820755
+
+Epoch [9, Step [1558], Total Loss: 0.5188, Time: 279.43s
+Task mature, Loss 0.5791110992431641
+Task gory, Loss 0.7055680751800537
+Task sarcasm, Loss 0.3258151710033417
+Task slapstick, Loss 0.5673611164093018
+
+Epoch [9, Step [1568], Total Loss: 0.5532, Time: 304.95s
+Task mature, Loss 0.6291295289993286
+Task gory, Loss 0.6252474784851074
+Task sarcasm, Loss 0.6245472431182861
+Task slapstick, Loss 0.5762938261032104
+
+Epoch [9, Step [1578], Total Loss: 0.5246, Time: 330.11s
+Task mature, Loss 0.5645233392715454
+Task gory, Loss 0.7454277276992798
+Task sarcasm, Loss 0.3675236105918884
+Task slapstick, Loss 0.4825494587421417
+
+Epoch [9, Step [1588], Total Loss: 0.5403, Time: 355.24s
+Task mature, Loss 0.614675760269165
+Task gory, Loss 0.7190535664558411
+Task sarcasm, Loss 0.3994896113872528
+Task slapstick, Loss 0.556362509727478
+
+Epoch [9, Step [1598], Total Loss: 0.5212, Time: 380.54s
+Task mature, Loss 0.597438633441925
+Task gory, Loss 0.6225997805595398
+Task sarcasm, Loss 0.46247297525405884
+Task slapstick, Loss 0.5994864106178284
+
+Epoch [9, Step [1608], Total Loss: 0.5069, Time: 406.44s
+Task mature, Loss 0.6495857238769531
+Task gory, Loss 0.6452903151512146
+Task sarcasm, Loss 0.36568906903266907
+Task slapstick, Loss 0.5534505844116211
+
+Epoch [9, Step [1618], Total Loss: 0.5571, Time: 431.95s
+Task mature, Loss 0.592195451259613
+Task gory, Loss 0.703545331954956
+Task sarcasm, Loss 0.527921736240387
+Task slapstick, Loss 0.5543074011802673
+
+Epoch [9, Step [1628], Total Loss: 0.5768, Time: 465.17s
+Task mature, Loss 0.5212860107421875
+Task gory, Loss 0.7673351168632507
+Task sarcasm, Loss 0.5607935190200806
+Task slapstick, Loss 0.5279988646507263
+
+Image found
+Audio found
+Task mature
+Accuracy: 0.5601851851851852, F1 Score: 0.3987
+Average Task Loss 0.6735569834709167
+
+Task gory
+Accuracy: 0.6828703703703703, F1 Score: 0.2595
+Average Task Loss 0.7236536741256714
+
+Task sarcasm
+Accuracy: 0.7476851851851852, F1 Score: 0.3842
+Average Task Loss 0.6386359930038452
+
+Task slapstick
+Accuracy: 0.6944444444444444, F1 Score: 0.4054
+Average Task Loss 0.7014315724372864
+
+Average Total Loss 2.7372782230377197
+Average Accuracy: 0.6712962962962963
+Average F1 Score: 0.3619449582601267
+
+Checkpoint results saved to Results/Recreate30/checkpoints_Recreate30.pkl
+Epoch [10, Step [1639], Total Loss: 0.4767, Time: 25.46s
+Task mature, Loss 0.5666801929473877
+Task gory, Loss 0.6787042617797852
+Task sarcasm, Loss 0.180690735578537
+Task slapstick, Loss 0.5619426965713501
+
+Epoch [10, Step [1649], Total Loss: 0.5525, Time: 50.92s
+Task mature, Loss 0.746433675289154
+Task gory, Loss 0.5578803420066833
+Task sarcasm, Loss 0.682521402835846
+Task slapstick, Loss 0.591131329536438
+
+Epoch [10, Step [1659], Total Loss: 0.5802, Time: 76.26s
+Task mature, Loss 0.6984221935272217
+Task gory, Loss 0.6451324224472046
+Task sarcasm, Loss 0.6944504976272583
+Task slapstick, Loss 0.5669394731521606
+
+Epoch [10, Step [1669], Total Loss: 0.4833, Time: 101.29s
+Task mature, Loss 0.6092900037765503
+Task gory, Loss 0.6262333393096924
+Task sarcasm, Loss 0.3110401928424835
+Task slapstick, Loss 0.5482795238494873
+
+Epoch [10, Step [1679], Total Loss: 0.4901, Time: 126.53s
+Task mature, Loss 0.5416722297668457
+Task gory, Loss 0.6461460590362549
+Task sarcasm, Loss 0.2946518659591675
+Task slapstick, Loss 0.5928188562393188
+
+Epoch [10, Step [1689], Total Loss: 0.5297, Time: 152.00s
+Task mature, Loss 0.6266933083534241
+Task gory, Loss 0.7157669067382812
+Task sarcasm, Loss 0.40326520800590515
+Task slapstick, Loss 0.5004268288612366
+
+Epoch [10, Step [1699], Total Loss: 0.4985, Time: 177.10s
+Task mature, Loss 0.5731762051582336
+Task gory, Loss 0.6475004553794861
+Task sarcasm, Loss 0.4501803517341614
+Task slapstick, Loss 0.4605933427810669
+
+Epoch [10, Step [1709], Total Loss: 0.5341, Time: 202.00s
+Task mature, Loss 0.5830878615379333
+Task gory, Loss 0.6986418962478638
+Task sarcasm, Loss 0.4707646369934082
+Task slapstick, Loss 0.5109236240386963
+
+Epoch [10, Step [1719], Total Loss: 0.5533, Time: 227.45s
+Task mature, Loss 0.6158602833747864
+Task gory, Loss 0.6829659938812256
+Task sarcasm, Loss 0.5692576169967651
+Task slapstick, Loss 0.5235587358474731
+
+Epoch [10, Step [1729], Total Loss: 0.4759, Time: 252.59s
+Task mature, Loss 0.493086576461792
+Task gory, Loss 0.6584622859954834
+Task sarcasm, Loss 0.19683627784252167
+Task slapstick, Loss 0.6193161010742188
+
+Epoch [10, Step [1739], Total Loss: 0.5215, Time: 277.49s
+Task mature, Loss 0.5762604475021362
+Task gory, Loss 0.6218653917312622
+Task sarcasm, Loss 0.545638918876648
+Task slapstick, Loss 0.5300741195678711
+
+Epoch [10, Step [1749], Total Loss: 0.6025, Time: 302.83s
+Task mature, Loss 0.5082153081893921
+Task gory, Loss 0.6360639929771423
+Task sarcasm, Loss 0.8790538311004639
+Task slapstick, Loss 0.6072791814804077
+
+Epoch [10, Step [1759], Total Loss: 0.5210, Time: 328.29s
+Task mature, Loss 0.5609948039054871
+Task gory, Loss 0.6560393571853638
+Task sarcasm, Loss 0.513346791267395
+Task slapstick, Loss 0.49894100427627563
+
+Epoch [10, Step [1769], Total Loss: 0.5046, Time: 353.64s
+Task mature, Loss 0.618156909942627
+Task gory, Loss 0.6227254271507263
+Task sarcasm, Loss 0.4177936911582947
+Task slapstick, Loss 0.550856351852417
+
+Epoch [10, Step [1779], Total Loss: 0.4779, Time: 379.82s
+Task mature, Loss 0.5690279603004456
+Task gory, Loss 0.6250002384185791
+Task sarcasm, Loss 0.33066409826278687
+Task slapstick, Loss 0.5240940451622009
+
+Epoch [10, Step [1789], Total Loss: 0.5486, Time: 405.50s
+Task mature, Loss 0.5015491247177124
+Task gory, Loss 0.6630314588546753
+Task sarcasm, Loss 0.5350842475891113
+Task slapstick, Loss 0.6308805346488953
+
+Epoch [10, Step [1799], Total Loss: 0.5281, Time: 430.59s
+Task mature, Loss 0.4693361520767212
+Task gory, Loss 0.6312448382377625
+Task sarcasm, Loss 0.6011343002319336
+Task slapstick, Loss 0.5424203872680664
+
+Epoch [10, Step [1809], Total Loss: 0.4990, Time: 455.92s
+Task mature, Loss 0.42677780985832214
+Task gory, Loss 0.6605345010757446
+Task sarcasm, Loss 0.42597082257270813
+Task slapstick, Loss 0.5345980525016785
+
+Image found
+Audio found
+Task mature
+Accuracy: 0.7013888888888888, F1 Score: 0.3768
+Average Task Loss 0.5951062440872192
+
+Task gory
+Accuracy: 0.7060185185185185, F1 Score: 0.2485
+Average Task Loss 0.6876046061515808
+
+Task sarcasm
+Accuracy: 0.7569444444444444, F1 Score: 0.3137
+Average Task Loss 0.623737096786499
+
+Task slapstick
+Accuracy: 0.6504629629629629, F1 Score: 0.3837
+Average Task Loss 0.7096890211105347
+
+Average Total Loss 2.6161367893218994
+Average Accuracy: 0.7037037037037037
+Average F1 Score: 0.3306828159614759
+
+Checkpoint results saved to Results/Recreate30/checkpoints_Recreate30.pkl
+Epoch [11, Step [1820], Total Loss: 0.4243, Time: 25.09s
+Task mature, Loss 0.5500439405441284
+Task gory, Loss 0.5065321922302246
+Task sarcasm, Loss 0.19826367497444153
+Task slapstick, Loss 0.6350477337837219
+
+Epoch [11, Step [1830], Total Loss: 0.4826, Time: 50.47s
+Task mature, Loss 0.6337630748748779
+Task gory, Loss 0.5837334990501404
+Task sarcasm, Loss 0.2664908170700073
+Task slapstick, Loss 0.6621422171592712
+
+Epoch [11, Step [1840], Total Loss: 0.5308, Time: 76.32s
+Task mature, Loss 0.6541875600814819
+Task gory, Loss 0.6750067472457886
+Task sarcasm, Loss 0.5240890979766846
+Task slapstick, Loss 0.4526328444480896
+
+Epoch [11, Step [1850], Total Loss: 0.4920, Time: 102.23s
+Task mature, Loss 0.5023840665817261
+Task gory, Loss 0.7191354632377625
+Task sarcasm, Loss 0.30633485317230225
+Task slapstick, Loss 0.46442803740501404
+
+Epoch [11, Step [1860], Total Loss: 0.4707, Time: 127.85s
+Task mature, Loss 0.6599700450897217
+Task gory, Loss 0.6184331178665161
+Task sarcasm, Loss 0.35336461663246155
+Task slapstick, Loss 0.43339163064956665
+
+Epoch [11, Step [1870], Total Loss: 0.4741, Time: 153.15s
+Task mature, Loss 0.5922338366508484
+Task gory, Loss 0.5943509340286255
+Task sarcasm, Loss 0.3945143222808838
+Task slapstick, Loss 0.49133193492889404
+
+Epoch [11, Step [1880], Total Loss: 0.5367, Time: 178.60s
+Task mature, Loss 0.750718355178833
+Task gory, Loss 0.6130226850509644
+Task sarcasm, Loss 0.6717662215232849
+Task slapstick, Loss 0.41052359342575073
+
+Epoch [11, Step [1890], Total Loss: 0.4964, Time: 203.64s
+Task mature, Loss 0.5533095598220825
+Task gory, Loss 0.6375437378883362
+Task sarcasm, Loss 0.4252334535121918
+Task slapstick, Loss 0.5052109956741333
+
+Epoch [11, Step [1900], Total Loss: 0.4778, Time: 229.30s
+Task mature, Loss 0.43971675634384155
+Task gory, Loss 0.5198523998260498
+Task sarcasm, Loss 0.5255405902862549
+Task slapstick, Loss 0.6040092706680298
+
+Epoch [11, Step [1910], Total Loss: 0.5227, Time: 254.66s
+Task mature, Loss 0.6001501679420471
+Task gory, Loss 0.5836189985275269
+Task sarcasm, Loss 0.42465880513191223
+Task slapstick, Loss 0.7216796875
+
+Epoch [11, Step [1920], Total Loss: 0.4792, Time: 279.91s
+Task mature, Loss 0.4812306761741638
+Task gory, Loss 0.6883448362350464
+Task sarcasm, Loss 0.2098005712032318
+Task slapstick, Loss 0.5689654350280762
+
+Epoch [11, Step [1930], Total Loss: 0.5590, Time: 305.01s
+Task mature, Loss 0.5290855169296265
+Task gory, Loss 0.6508572101593018
+Task sarcasm, Loss 0.6340100765228271
+Task slapstick, Loss 0.5949806571006775
+
+Epoch [11, Step [1940], Total Loss: 0.4904, Time: 330.46s
+Task mature, Loss 0.5912829041481018
+Task gory, Loss 0.6317788362503052
+Task sarcasm, Loss 0.3918760418891907
+Task slapstick, Loss 0.5008969306945801
+
+Epoch [11, Step [1950], Total Loss: 0.5140, Time: 355.88s
+Task mature, Loss 0.5461959838867188
+Task gory, Loss 0.5982134342193604
+Task sarcasm, Loss 0.5525957942008972
+Task slapstick, Loss 0.548028290271759
+
+Epoch [11, Step [1960], Total Loss: 0.4926, Time: 381.18s
+Task mature, Loss 0.5356127023696899
+Task gory, Loss 0.5845837593078613
+Task sarcasm, Loss 0.5301599502563477
+Task slapstick, Loss 0.4958137273788452
+
+Epoch [11, Step [1970], Total Loss: 0.5884, Time: 406.28s
+Task mature, Loss 0.49880892038345337
+Task gory, Loss 0.6442298889160156
+Task sarcasm, Loss 0.8729445934295654
+Task slapstick, Loss 0.5313835740089417
+
+Epoch [11, Step [1980], Total Loss: 0.4836, Time: 431.60s
+Task mature, Loss 0.5344271659851074
+Task gory, Loss 0.6515437364578247
+Task sarcasm, Loss 0.38370460271835327
+Task slapstick, Loss 0.4641464948654175
+
+Epoch [11, Step [1990], Total Loss: 0.5080, Time: 457.37s
+Task mature, Loss 0.6358922719955444
+Task gory, Loss 0.6253978610038757
+Task sarcasm, Loss 0.3118060231208801
+Task slapstick, Loss 0.6595263481140137
+
+Image found
+Audio found
+Task mature
+Accuracy: 0.5694444444444444, F1 Score: 0.4076
+Average Task Loss 0.7101151347160339
+
+Task gory
+Accuracy: 0.6944444444444444, F1 Score: 0.2048
+Average Task Loss 0.6956889033317566
+
+Task sarcasm
+Accuracy: 0.7777777777777778, F1 Score: 0.3766
+Average Task Loss 0.6215224266052246
+
+Task slapstick
+Accuracy: 0.7685185185185185, F1 Score: 0.4382
+Average Task Loss 0.5775974988937378
+
+Average Total Loss 2.604923963546753
+Average Accuracy: 0.7025462962962963
+Average F1 Score: 0.3568220532561831
+
+Checkpoint results saved to Results/Recreate30/checkpoints_Recreate30.pkl
+Epoch [12, Step [2001], Total Loss: 0.5216, Time: 24.79s
+Task mature, Loss 0.3298632800579071
+Task gory, Loss 0.6825479865074158
+Task sarcasm, Loss 0.5072160363197327
+Task slapstick, Loss 0.5708209276199341
+
+Epoch [12, Step [2011], Total Loss: 0.4351, Time: 60.71s
+Task mature, Loss 0.7109820246696472
+Task gory, Loss 0.6093152761459351
+Task sarcasm, Loss 0.26624953746795654
+Task slapstick, Loss 0.3350791335105896
+
+Epoch [12, Step [2021], Total Loss: 0.5092, Time: 85.98s
+Task mature, Loss 0.4134036898612976
+Task gory, Loss 0.6643456220626831
+Task sarcasm, Loss 0.3552471399307251
+Task slapstick, Loss 0.6552735567092896
+
+Epoch [12, Step [2031], Total Loss: 0.4929, Time: 111.27s
+Task mature, Loss 0.6030292510986328
+Task gory, Loss 0.6006136536598206
+Task sarcasm, Loss 0.3908965289592743
+Task slapstick, Loss 0.5708605051040649
+
+Epoch [12, Step [2041], Total Loss: 0.4928, Time: 136.37s
+Task mature, Loss 0.5974892377853394
+Task gory, Loss 0.636173665523529
+Task sarcasm, Loss 0.21991989016532898
+Task slapstick, Loss 0.672816812992096
+
+Epoch [12, Step [2051], Total Loss: 0.5929, Time: 162.06s
+Task mature, Loss 0.5005788803100586
+Task gory, Loss 0.6776208281517029
+Task sarcasm, Loss 0.8110185861587524
+Task slapstick, Loss 0.548072874546051
+
+Epoch [12, Step [2061], Total Loss: 0.4993, Time: 187.78s
+Task mature, Loss 0.44427597522735596
+Task gory, Loss 0.6897990107536316
+Task sarcasm, Loss 0.39583659172058105
+Task slapstick, Loss 0.4990953803062439
+
+Epoch [12, Step [2071], Total Loss: 0.4968, Time: 212.95s
+Task mature, Loss 0.5230813026428223
+Task gory, Loss 0.6179574728012085
+Task sarcasm, Loss 0.4818746745586395
+Task slapstick, Loss 0.5047735571861267
+
+Epoch [12, Step [2081], Total Loss: 0.5253, Time: 238.39s
+Task mature, Loss 0.582337498664856
+Task gory, Loss 0.6881528496742249
+Task sarcasm, Loss 0.49460405111312866
+Task slapstick, Loss 0.464322030544281
+
+Epoch [12, Step [2091], Total Loss: 0.4810, Time: 263.45s
+Task mature, Loss 0.5488477945327759
+Task gory, Loss 0.69051194190979
+Task sarcasm, Loss 0.34448614716529846
+Task slapstick, Loss 0.4048316478729248
+
+Epoch [12, Step [2101], Total Loss: 0.4800, Time: 289.07s
+Task mature, Loss 0.5188509225845337
+Task gory, Loss 0.5113413333892822
+Task sarcasm, Loss 0.5487370491027832
+Task slapstick, Loss 0.5691878199577332
+
+Epoch [12, Step [2111], Total Loss: 0.4900, Time: 314.80s
+Task mature, Loss 0.5627932548522949
+Task gory, Loss 0.6190440654754639
+Task sarcasm, Loss 0.4179012179374695
+Task slapstick, Loss 0.5125381946563721
+
+Epoch [12, Step [2121], Total Loss: 0.5066, Time: 339.95s
+Task mature, Loss 0.5405629277229309
+Task gory, Loss 0.624826192855835
+Task sarcasm, Loss 0.3872566819190979
+Task slapstick, Loss 0.6256214380264282
+
+Epoch [12, Step [2131], Total Loss: 0.5196, Time: 365.33s
+Task mature, Loss 0.5968843698501587
+Task gory, Loss 0.5993741750717163
+Task sarcasm, Loss 0.4409067630767822
+Task slapstick, Loss 0.6599094271659851
+
+Epoch [12, Step [2141], Total Loss: 0.4502, Time: 390.37s
+Task mature, Loss 0.4999634623527527
+Task gory, Loss 0.6613427400588989
+Task sarcasm, Loss 0.24789837002754211
+Task slapstick, Loss 0.4304947555065155
+
+Epoch [12, Step [2151], Total Loss: 0.4691, Time: 416.15s
+Task mature, Loss 0.5113109946250916
+Task gory, Loss 0.7240707278251648
+Task sarcasm, Loss 0.2892029881477356
+Task slapstick, Loss 0.3527335524559021
+
+Epoch [12, Step [2161], Total Loss: 0.4572, Time: 441.30s
+Task mature, Loss 0.5835385322570801
+Task gory, Loss 0.6161932945251465
+Task sarcasm, Loss 0.3132737874984741
+Task slapstick, Loss 0.4485592842102051
+
+Epoch [12, Step [2171], Total Loss: 0.4656, Time: 466.67s
+Task mature, Loss 0.4558750092983246
+Task gory, Loss 0.522531270980835
+Task sarcasm, Loss 0.4287402927875519
+Task slapstick, Loss 0.626043438911438
+
+Image found
+Audio found
+Task mature
+Accuracy: 0.5300925925925926, F1 Score: 0.3976
+Average Task Loss 0.7810431718826294
+
+Task gory
+Accuracy: 0.8217592592592593, F1 Score: 0.3186
+Average Task Loss 0.6618359088897705
+
+Task sarcasm
+Accuracy: 0.75, F1 Score: 0.3647
+Average Task Loss 0.7210373878479004
+
+Task slapstick
+Accuracy: 0.7800925925925926, F1 Score: 0.3448
+Average Task Loss 0.5396890640258789
+
+Average Total Loss 2.7036054134368896
+Average Accuracy: 0.7204861111111112
+Average F1 Score: 0.3564359130289855
+
+Checkpoint results saved to Results/Recreate30/checkpoints_Recreate30.pkl
+Epoch [13, Step [2182], Total Loss: 0.4893, Time: 25.06s
+Task mature, Loss 0.40741580724716187
+Task gory, Loss 0.6751904487609863
+Task sarcasm, Loss 0.5098921656608582
+Task slapstick, Loss 0.3826185464859009
+
+Epoch [13, Step [2192], Total Loss: 0.5632, Time: 50.22s
+Task mature, Loss 0.5923111438751221
+Task gory, Loss 0.6650750041007996
+Task sarcasm, Loss 0.6544132232666016
+Task slapstick, Loss 0.5353600978851318
+
+Epoch [13, Step [2202], Total Loss: 0.4487, Time: 75.15s
+Task mature, Loss 0.5890744924545288
+Task gory, Loss 0.6367172002792358
+Task sarcasm, Loss 0.216714546084404
+Task slapstick, Loss 0.4587002694606781
+
+Epoch [13, Step [2212], Total Loss: 0.5000, Time: 100.96s
+Task mature, Loss 0.4915804862976074
+Task gory, Loss 0.661171555519104
+Task sarcasm, Loss 0.3403207063674927
+Task slapstick, Loss 0.5917655229568481
+
+Epoch [13, Step [2222], Total Loss: 0.4470, Time: 126.90s
+Task mature, Loss 0.640107274055481
+Task gory, Loss 0.5667866468429565
+Task sarcasm, Loss 0.3699110150337219
+Task slapstick, Loss 0.4113443195819855
+
+Epoch [13, Step [2232], Total Loss: 0.4599, Time: 152.78s
+Task mature, Loss 0.38737809658050537
+Task gory, Loss 0.6643145680427551
+Task sarcasm, Loss 0.33043646812438965
+Task slapstick, Loss 0.44695964455604553
+
+Epoch [13, Step [2242], Total Loss: 0.4985, Time: 178.69s
+Task mature, Loss 0.4143638014793396
+Task gory, Loss 0.606922447681427
+Task sarcasm, Loss 0.6608800888061523
+Task slapstick, Loss 0.4106367826461792
+
+Epoch [13, Step [2252], Total Loss: 0.4665, Time: 204.52s
+Task mature, Loss 0.4075748920440674
+Task gory, Loss 0.5643151998519897
+Task sarcasm, Loss 0.5654512643814087
+Task slapstick, Loss 0.43466323614120483
+
+Epoch [13, Step [2262], Total Loss: 0.4318, Time: 229.87s
+Task mature, Loss 0.36164069175720215
+Task gory, Loss 0.5669119358062744
+Task sarcasm, Loss 0.27811795473098755
+Task slapstick, Loss 0.5662322044372559
+
+Epoch [13, Step [2272], Total Loss: 0.5166, Time: 255.59s
+Task mature, Loss 0.5791091918945312
+Task gory, Loss 0.6576241254806519
+Task sarcasm, Loss 0.5603833198547363
+Task slapstick, Loss 0.4176340103149414
+
+Epoch [13, Step [2282], Total Loss: 0.4935, Time: 281.41s
+Task mature, Loss 0.5359206795692444
+Task gory, Loss 0.5358706712722778
+Task sarcasm, Loss 0.5241504907608032
+Task slapstick, Loss 0.6036919951438904
+
+Epoch [13, Step [2292], Total Loss: 0.4223, Time: 306.50s
+Task mature, Loss 0.5229552984237671
+Task gory, Loss 0.6181414127349854
+Task sarcasm, Loss 0.16767147183418274
+Task slapstick, Loss 0.4460265636444092
+
+Epoch [13, Step [2302], Total Loss: 0.4043, Time: 331.54s
+Task mature, Loss 0.46969085931777954
+Task gory, Loss 0.5517584085464478
+Task sarcasm, Loss 0.2588009536266327
+Task slapstick, Loss 0.4245606064796448
+
+Epoch [13, Step [2312], Total Loss: 0.3968, Time: 356.54s
+Task mature, Loss 0.46470770239830017
+Task gory, Loss 0.549608588218689
+Task sarcasm, Loss 0.25885942578315735
+Task slapstick, Loss 0.39359432458877563
+
+Epoch [13, Step [2322], Total Loss: 0.4637, Time: 381.45s
+Task mature, Loss 0.48717164993286133
+Task gory, Loss 0.5983842611312866
+Task sarcasm, Loss 0.4409444332122803
+Task slapstick, Loss 0.43697530031204224
+
+Epoch [13, Step [2332], Total Loss: 0.4710, Time: 406.39s
+Task mature, Loss 0.6547779440879822
+Task gory, Loss 0.6203107833862305
+Task sarcasm, Loss 0.36521950364112854
+Task slapstick, Loss 0.42159324884414673
+
+Epoch [13, Step [2342], Total Loss: 0.4449, Time: 431.30s
+Task mature, Loss 0.6829488277435303
+Task gory, Loss 0.6515180468559265
+Task sarcasm, Loss 0.2763054668903351
+Task slapstick, Loss 0.30345016717910767
+
+Epoch [13, Step [2352], Total Loss: 0.4565, Time: 456.26s
+Task mature, Loss 0.41865918040275574
+Task gory, Loss 0.6259632110595703
+Task sarcasm, Loss 0.30166369676589966
+Task slapstick, Loss 0.5198078751564026
+
+Image found
+Audio found
+Task mature
+Accuracy: 0.5925925925925926, F1 Score: 0.3759
+Average Task Loss 0.7079123258590698
+
+Task gory
+Accuracy: 0.7314814814814815, F1 Score: 0.2750
+Average Task Loss 0.694694995880127
+
+Task sarcasm
+Accuracy: 0.7777777777777778, F1 Score: 0.3600
+Average Task Loss 0.6500211358070374
+
+Task slapstick
+Accuracy: 0.7152777777777778, F1 Score: 0.4171
+Average Task Loss 0.6300686001777649
+
+Average Total Loss 2.68269681930542
+Average Accuracy: 0.7042824074074073
+Average F1 Score: 0.3569870340492757
+
+Checkpoint results saved to Results/Recreate30/checkpoints_Recreate30.pkl
+Epoch [14, Step [2363], Total Loss: 0.5139, Time: 24.81s
+Task mature, Loss 0.49126869440078735
+Task gory, Loss 0.6028354167938232
+Task sarcasm, Loss 0.5581071376800537
+Task slapstick, Loss 0.5601398348808289
+
+Epoch [14, Step [2373], Total Loss: 0.5310, Time: 49.72s
+Task mature, Loss 0.4848037362098694
+Task gory, Loss 0.5867586731910706
+Task sarcasm, Loss 0.8281154632568359
+Task slapstick, Loss 0.41083425283432007
+
+Epoch [14, Step [2383], Total Loss: 0.5068, Time: 74.67s
+Task mature, Loss 0.9294654726982117
+Task gory, Loss 0.5569586157798767
+Task sarcasm, Loss 0.36979275941848755
+Task slapstick, Loss 0.5853325724601746
+
+Epoch [14, Step [2393], Total Loss: 0.4530, Time: 99.66s
+Task mature, Loss 0.5109893083572388
+Task gory, Loss 0.589188814163208
+Task sarcasm, Loss 0.35880011320114136
+Task slapstick, Loss 0.4725567698478699
+
+Epoch [14, Step [2403], Total Loss: 0.4941, Time: 124.61s
+Task mature, Loss 0.6192660927772522
+Task gory, Loss 0.6453970670700073
+Task sarcasm, Loss 0.3598117232322693
+Task slapstick, Loss 0.5100457668304443
+
+Epoch [14, Step [2413], Total Loss: 0.4165, Time: 149.56s
+Task mature, Loss 0.48217839002609253
+Task gory, Loss 0.617706298828125
+Task sarcasm, Loss 0.18110617995262146
+Task slapstick, Loss 0.4247174859046936
+
+Epoch [14, Step [2423], Total Loss: 0.4869, Time: 174.57s
+Task mature, Loss 0.47273099422454834
+Task gory, Loss 0.6336784362792969
+Task sarcasm, Loss 0.38937535881996155
+Task slapstick, Loss 0.5413281321525574
+
+Epoch [14, Step [2433], Total Loss: 0.4820, Time: 199.55s
+Task mature, Loss 0.4382185935974121
+Task gory, Loss 0.6475354433059692
+Task sarcasm, Loss 0.520060658454895
+Task slapstick, Loss 0.3755890130996704
+
+Epoch [14, Step [2443], Total Loss: 0.4894, Time: 224.51s
+Task mature, Loss 0.40758460760116577
+Task gory, Loss 0.6370410919189453
+Task sarcasm, Loss 0.4116509258747101
+Task slapstick, Loss 0.5574594736099243
+
+Epoch [14, Step [2453], Total Loss: 0.4885, Time: 249.49s
+Task mature, Loss 0.6486871242523193
+Task gory, Loss 0.689229428768158
+Task sarcasm, Loss 0.26938819885253906
+Task slapstick, Loss 0.47027134895324707
+
+Epoch [14, Step [2463], Total Loss: 0.4274, Time: 274.43s
+Task mature, Loss 0.5035108327865601
+Task gory, Loss 0.6523693799972534
+Task sarcasm, Loss 0.25318852066993713
+Task slapstick, Loss 0.32719677686691284
+
+Epoch [14, Step [2473], Total Loss: 0.4346, Time: 299.45s
+Task mature, Loss 0.5370731949806213
+Task gory, Loss 0.6128188371658325
+Task sarcasm, Loss 0.3840429186820984
+Task slapstick, Loss 0.2945687770843506
+
+Epoch [14, Step [2483], Total Loss: 0.5871, Time: 324.47s
+Task mature, Loss 0.5876663327217102
+Task gory, Loss 0.6581159234046936
+Task sarcasm, Loss 0.7591177225112915
+Task slapstick, Loss 0.5661842823028564
+
+Epoch [14, Step [2493], Total Loss: 0.4308, Time: 362.02s
+Task mature, Loss 0.4302673935890198
+Task gory, Loss 0.7011548280715942
+Task sarcasm, Loss 0.18900343775749207
+Task slapstick, Loss 0.34756189584732056
+
+Epoch [14, Step [2503], Total Loss: 0.4569, Time: 387.07s
+Task mature, Loss 0.4973870813846588
+Task gory, Loss 0.5984384417533875
+Task sarcasm, Loss 0.4580085277557373
+Task slapstick, Loss 0.3809788227081299
+
+Epoch [14, Step [2513], Total Loss: 0.4315, Time: 412.96s
+Task mature, Loss 0.5968905687332153
+Task gory, Loss 0.597136378288269
+Task sarcasm, Loss 0.18090203404426575
+Task slapstick, Loss 0.4838445782661438
+
+Epoch [14, Step [2523], Total Loss: 0.4330, Time: 438.88s
+Task mature, Loss 0.5296209454536438
+Task gory, Loss 0.5176526308059692
+Task sarcasm, Loss 0.4212791323661804
+Task slapstick, Loss 0.4434499740600586
+
+Epoch [14, Step [2533], Total Loss: 0.4308, Time: 464.72s
+Task mature, Loss 0.4450685977935791
+Task gory, Loss 0.6284698843955994
+Task sarcasm, Loss 0.2395455241203308
+Task slapstick, Loss 0.43482017517089844
+
+Image found
+Audio found
+Task mature
+Accuracy: 0.6412037037037037, F1 Score: 0.3231
+Average Task Loss 0.6158760190010071
+
+Task gory
+Accuracy: 0.8032407407407407, F1 Score: 0.2609
+Average Task Loss 0.6620956659317017
+
+Task sarcasm
+Accuracy: 0.7986111111111112, F1 Score: 0.2301
+Average Task Loss 0.525567352771759
+
+Task slapstick
+Accuracy: 0.7615740740740741, F1 Score: 0.3758
+Average Task Loss 0.5703263878822327
+
+Average Total Loss 2.3738653659820557
+Average Accuracy: 0.7511574074074073
+Average F1 Score: 0.29746493533842044
+
+Checkpoint results saved to Results/Recreate30/checkpoints_Recreate30.pkl
+Epoch [15, Step [2544], Total Loss: 0.4725, Time: 25.00s
+Task mature, Loss 0.5613960027694702
+Task gory, Loss 0.6133670806884766
+Task sarcasm, Loss 0.46675944328308105
+Task slapstick, Loss 0.3883472681045532
+
+Epoch [15, Step [2554], Total Loss: 0.4633, Time: 50.47s
+Task mature, Loss 0.6195524334907532
+Task gory, Loss 0.5492792129516602
+Task sarcasm, Loss 0.6097355484962463
+Task slapstick, Loss 0.2981879711151123
+
+Epoch [15, Step [2564], Total Loss: 0.5006, Time: 76.45s
+Task mature, Loss 0.45803046226501465
+Task gory, Loss 0.6912368535995483
+Task sarcasm, Loss 0.5923523902893066
+Task slapstick, Loss 0.29923176765441895
+
+Epoch [15, Step [2574], Total Loss: 0.4649, Time: 102.37s
+Task mature, Loss 0.5050868988037109
+Task gory, Loss 0.6396471261978149
+Task sarcasm, Loss 0.27173954248428345
+Task slapstick, Loss 0.5206953287124634
+
+Epoch [15, Step [2584], Total Loss: 0.4826, Time: 128.21s
+Task mature, Loss 0.5677995681762695
+Task gory, Loss 0.5776703357696533
+Task sarcasm, Loss 0.3087654113769531
+Task slapstick, Loss 0.6650705337524414
+
+Epoch [15, Step [2594], Total Loss: 0.5100, Time: 153.75s
+Task mature, Loss 0.5078420042991638
+Task gory, Loss 0.5966082811355591
+Task sarcasm, Loss 0.5907669067382812
+Task slapstick, Loss 0.5122945308685303
+
+Epoch [15, Step [2604], Total Loss: 0.3624, Time: 179.17s
+Task mature, Loss 0.580373227596283
+Task gory, Loss 0.4778178930282593
+Task sarcasm, Loss 0.2401389628648758
+Task slapstick, Loss 0.32595282793045044
+
+Epoch [15, Step [2614], Total Loss: 0.4880, Time: 204.58s
+Task mature, Loss 0.5258247256278992
+Task gory, Loss 0.7140193581581116
+Task sarcasm, Loss 0.3117715120315552
+Task slapstick, Loss 0.43707945942878723
+
+Epoch [15, Step [2624], Total Loss: 0.4332, Time: 229.63s
+Task mature, Loss 0.4816339910030365
+Task gory, Loss 0.6030178070068359
+Task sarcasm, Loss 0.2992810606956482
+Task slapstick, Loss 0.4199117124080658
+
+Epoch [15, Step [2634], Total Loss: 0.4505, Time: 255.48s
+Task mature, Loss 0.39111894369125366
+Task gory, Loss 0.6654034852981567
+Task sarcasm, Loss 0.3295072317123413
+Task slapstick, Loss 0.3967364430427551
+
+Epoch [15, Step [2644], Total Loss: 0.3559, Time: 280.64s
+Task mature, Loss 0.4900410771369934
+Task gory, Loss 0.4277898669242859
+Task sarcasm, Loss 0.1976013481616974
+Task slapstick, Loss 0.48114249110221863
+
+Epoch [15, Step [2654], Total Loss: 0.4218, Time: 305.51s
+Task mature, Loss 0.3315325379371643
+Task gory, Loss 0.5960869789123535
+Task sarcasm, Loss 0.3145718574523926
+Task slapstick, Loss 0.43638819456100464
+
+Epoch [15, Step [2664], Total Loss: 0.5018, Time: 330.49s
+Task mature, Loss 0.5210046768188477
+Task gory, Loss 0.6039252281188965
+Task sarcasm, Loss 0.6358779668807983
+Task slapstick, Loss 0.4046642780303955
+
+Epoch [15, Step [2674], Total Loss: 0.4018, Time: 355.33s
+Task mature, Loss 0.35494479537010193
+Task gory, Loss 0.5983508825302124
+Task sarcasm, Loss 0.11431358009576797
+Task slapstick, Loss 0.520744264125824
+
+Epoch [15, Step [2684], Total Loss: 0.4622, Time: 380.45s
+Task mature, Loss 0.4958568513393402
+Task gory, Loss 0.47544580698013306
+Task sarcasm, Loss 0.6374701857566833
+Task slapstick, Loss 0.47492843866348267
+
+Epoch [15, Step [2694], Total Loss: 0.4739, Time: 405.61s
+Task mature, Loss 0.42751044034957886
+Task gory, Loss 0.6526647806167603
+Task sarcasm, Loss 0.4421895742416382
+Task slapstick, Loss 0.4082861840724945
+
+Epoch [15, Step [2704], Total Loss: 0.4292, Time: 430.77s
+Task mature, Loss 0.41704970598220825
+Task gory, Loss 0.5973477363586426
+Task sarcasm, Loss 0.37311258912086487
+Task slapstick, Loss 0.3695739507675171
+
+Epoch [15, Step [2714], Total Loss: 0.3819, Time: 456.02s
+Task mature, Loss 0.49036705493927
+Task gory, Loss 0.5759245157241821
+Task sarcasm, Loss 0.09201409667730331
+Task slapstick, Loss 0.4204854369163513
+
+Image found
+Audio found
+Task mature
+Accuracy: 0.6087962962962963, F1 Score: 0.4070
+Average Task Loss 0.7199797034263611
+
+Task gory
+Accuracy: 0.6921296296296297, F1 Score: 0.2130
+Average Task Loss 0.7506660223007202
+
+Task sarcasm
+Accuracy: 0.7847222222222222, F1 Score: 0.2791
+Average Task Loss 0.6065531969070435
+
+Task slapstick
+Accuracy: 0.8009259259259259, F1 Score: 0.3857
+Average Task Loss 0.5053755640983582
+
+Average Total Loss 2.5825746059417725
+Average Accuracy: 0.7216435185185186
+Average F1 Score: 0.3212048371237713
+
+Checkpoint results saved to Results/Recreate30/checkpoints_Recreate30.pkl
+Epoch [16, Step [2725], Total Loss: 0.3309, Time: 24.90s
+Task mature, Loss 0.5874662399291992
+Task gory, Loss 0.373318076133728
+Task sarcasm, Loss 0.2710447609424591
+Task slapstick, Loss 0.34300696849823
+
+Epoch [16, Step [2735], Total Loss: 0.3906, Time: 49.87s
+Task mature, Loss 0.36987918615341187
+Task gory, Loss 0.5763432383537292
+Task sarcasm, Loss 0.24213622510433197
+Task slapstick, Loss 0.3734791576862335
+
+Epoch [16, Step [2745], Total Loss: 0.4196, Time: 74.93s
+Task mature, Loss 0.4493905305862427
+Task gory, Loss 0.6489200592041016
+Task sarcasm, Loss 0.2806498408317566
+Task slapstick, Loss 0.2946646213531494
+
+Epoch [16, Step [2755], Total Loss: 0.4108, Time: 99.87s
+Task mature, Loss 0.43042582273483276
+Task gory, Loss 0.6123649477958679
+Task sarcasm, Loss 0.32240375876426697
+Task slapstick, Loss 0.291426420211792
+
+Epoch [16, Step [2765], Total Loss: 0.3657, Time: 124.90s
+Task mature, Loss 0.4284997284412384
+Task gory, Loss 0.5790096521377563
+Task sarcasm, Loss 0.06509851664304733
+Task slapstick, Loss 0.3913746476173401
+
+Epoch [16, Step [2775], Total Loss: 0.4928, Time: 149.88s
+Task mature, Loss 0.5564316511154175
+Task gory, Loss 0.6598496437072754
+Task sarcasm, Loss 0.4467950463294983
+Task slapstick, Loss 0.4194580912590027
+
+Epoch [16, Step [2785], Total Loss: 0.3752, Time: 174.88s
+Task mature, Loss 0.3713839054107666
+Task gory, Loss 0.48471981287002563
+Task sarcasm, Loss 0.31548404693603516
+Task slapstick, Loss 0.4055718779563904
+
+Epoch [16, Step [2795], Total Loss: 0.4648, Time: 199.86s
+Task mature, Loss 0.5283369421958923
+Task gory, Loss 0.43436571955680847
+Task sarcasm, Loss 0.6611576676368713
+Task slapstick, Loss 0.5301084518432617
+
+Epoch [16, Step [2805], Total Loss: 0.4787, Time: 224.84s
+Task mature, Loss 0.5574943423271179
+Task gory, Loss 0.6516174077987671
+Task sarcasm, Loss 0.14043499529361725
+Task slapstick, Loss 0.6708863377571106
+
+Epoch [16, Step [2815], Total Loss: 0.3949, Time: 249.83s
+Task mature, Loss 0.44185662269592285
+Task gory, Loss 0.5315456390380859
+Task sarcasm, Loss 0.3394924998283386
+Task slapstick, Loss 0.351017028093338
+
+Epoch [16, Step [2825], Total Loss: 0.4315, Time: 274.76s
+Task mature, Loss 0.40723729133605957
+Task gory, Loss 0.6699978709220886
+Task sarcasm, Loss 0.23890326917171478
+Task slapstick, Loss 0.37510430812835693
+
+Epoch [16, Step [2835], Total Loss: 0.3912, Time: 299.74s
+Task mature, Loss 0.6081534624099731
+Task gory, Loss 0.5648438334465027
+Task sarcasm, Loss 0.17868953943252563
+Task slapstick, Loss 0.34379035234451294
+
+Epoch [16, Step [2845], Total Loss: 0.4520, Time: 324.70s
+Task mature, Loss 0.38442301750183105
+Task gory, Loss 0.6587918996810913
+Task sarcasm, Loss 0.48636195063591003
+Task slapstick, Loss 0.2639952301979065
+
+Epoch [16, Step [2855], Total Loss: 0.3585, Time: 349.69s
+Task mature, Loss 0.30363738536834717
+Task gory, Loss 0.5028163194656372
+Task sarcasm, Loss 0.28250885009765625
+Task slapstick, Loss 0.35271719098091125
+
+Epoch [16, Step [2865], Total Loss: 0.4615, Time: 374.68s
+Task mature, Loss 0.6079158186912537
+Task gory, Loss 0.638377845287323
+Task sarcasm, Loss 0.34607940912246704
+Task slapstick, Loss 0.3809109926223755
+
+Epoch [16, Step [2875], Total Loss: 0.3537, Time: 399.71s
+Task mature, Loss 0.4837642014026642
+Task gory, Loss 0.4530346691608429
+Task sarcasm, Loss 0.3443731665611267
+Task slapstick, Loss 0.2759714722633362
+
+Epoch [16, Step [2885], Total Loss: 0.4049, Time: 424.73s
+Task mature, Loss 0.40915435552597046
+Task gory, Loss 0.6228172779083252
+Task sarcasm, Loss 0.24114981293678284
+Task slapstick, Loss 0.3330766260623932
+
+Epoch [16, Step [2895], Total Loss: 0.4385, Time: 449.72s
+Task mature, Loss 0.37450268864631653
+Task gory, Loss 0.6320948600769043
+Task sarcasm, Loss 0.3944368064403534
+Task slapstick, Loss 0.3464827835559845
+
+Image found
+Audio found
+Task mature
+Accuracy: 0.6689814814814815, F1 Score: 0.3024
+Average Task Loss 0.6442554593086243
+
+Task gory
+Accuracy: 0.8217592592592593, F1 Score: 0.2667
+Average Task Loss 0.6925408840179443
+
+Task sarcasm
+Accuracy: 0.7800925925925926, F1 Score: 0.3066
+Average Task Loss 0.6077941656112671
+
+Task slapstick
+Accuracy: 0.7939814814814815, F1 Score: 0.4258
+Average Task Loss 0.5728572010993958
+
+Average Total Loss 2.5174474716186523
+Average Accuracy: 0.7662037037037037
+Average F1 Score: 0.3253703714338768
+
+Checkpoint results saved to Results/Recreate30/checkpoints_Recreate30.pkl
+Epoch [17, Step [2906], Total Loss: 0.4201, Time: 24.77s
+Task mature, Loss 0.35763728618621826
+Task gory, Loss 0.6642757058143616
+Task sarcasm, Loss 0.24147658050060272
+Task slapstick, Loss 0.35146379470825195
+
+Epoch [17, Step [2916], Total Loss: 0.3901, Time: 49.74s
+Task mature, Loss 0.6035003662109375
+Task gory, Loss 0.5992053747177124
+Task sarcasm, Loss 0.21777145564556122
+Task slapstick, Loss 0.23248867690563202
+
+Epoch [17, Step [2926], Total Loss: 0.4533, Time: 74.69s
+Task mature, Loss 0.543910562992096
+Task gory, Loss 0.5471745133399963
+Task sarcasm, Loss 0.1819237470626831
+Task slapstick, Loss 0.7183431386947632
+
+Epoch [17, Step [2936], Total Loss: 0.3762, Time: 99.76s
+Task mature, Loss 0.3605785369873047
+Task gory, Loss 0.6169131398200989
+Task sarcasm, Loss 0.24699896574020386
+Task slapstick, Loss 0.219890296459198
+
+Epoch [17, Step [2946], Total Loss: 0.4228, Time: 124.85s
+Task mature, Loss 0.5379972457885742
+Task gory, Loss 0.42003488540649414
+Task sarcasm, Loss 0.41261863708496094
+Task slapstick, Loss 0.5923366546630859
+
+Epoch [17, Step [2956], Total Loss: 0.4006, Time: 149.86s
+Task mature, Loss 0.5277622938156128
+Task gory, Loss 0.6341108083724976
+Task sarcasm, Loss 0.14966554939746857
+Task slapstick, Loss 0.321044921875
+
+Epoch [17, Step [2966], Total Loss: 0.4121, Time: 174.93s
+Task mature, Loss 0.29987651109695435
+Task gory, Loss 0.5366684198379517
+Task sarcasm, Loss 0.43290409445762634
+Task slapstick, Loss 0.40432024002075195
+
+Epoch [17, Step [2976], Total Loss: 0.4147, Time: 199.97s
+Task mature, Loss 0.3959239721298218
+Task gory, Loss 0.6435021758079529
+Task sarcasm, Loss 0.30284905433654785
+Task slapstick, Loss 0.285768061876297
+
+Epoch [17, Step [2986], Total Loss: 0.4206, Time: 224.95s
+Task mature, Loss 0.7104755640029907
+Task gory, Loss 0.6091936826705933
+Task sarcasm, Loss 0.1104888767004013
+Task slapstick, Loss 0.41897517442703247
+
+Epoch [17, Step [2996], Total Loss: 0.3864, Time: 249.93s
+Task mature, Loss 0.4096177816390991
+Task gory, Loss 0.5460320711135864
+Task sarcasm, Loss 0.2654450237751007
+Task slapstick, Loss 0.369799941778183
+
+Epoch [17, Step [3006], Total Loss: 0.5198, Time: 274.93s
+Task mature, Loss 0.4895320534706116
+Task gory, Loss 0.6739031672477722
+Task sarcasm, Loss 0.40799230337142944
+Task slapstick, Loss 0.5984992980957031
+
+Epoch [17, Step [3016], Total Loss: 0.4197, Time: 299.96s
+Task mature, Loss 0.346900999546051
+Task gory, Loss 0.59572833776474
+Task sarcasm, Loss 0.3151478171348572
+Task slapstick, Loss 0.4184844493865967
+
+Epoch [17, Step [3026], Total Loss: 0.3535, Time: 325.54s
+Task mature, Loss 0.4965748190879822
+Task gory, Loss 0.544542670249939
+Task sarcasm, Loss 0.20826810598373413
+Task slapstick, Loss 0.2217828631401062
+
+Epoch [17, Step [3036], Total Loss: 0.3061, Time: 350.56s
+Task mature, Loss 0.5792548656463623
+Task gory, Loss 0.40594053268432617
+Task sarcasm, Loss 0.1868319809436798
+Task slapstick, Loss 0.242364764213562
+
+Epoch [17, Step [3046], Total Loss: 0.4710, Time: 375.58s
+Task mature, Loss 0.6566187739372253
+Task gory, Loss 0.637118935585022
+Task sarcasm, Loss 0.31971168518066406
+Task slapstick, Loss 0.43257594108581543
+
+Epoch [17, Step [3056], Total Loss: 0.3276, Time: 400.63s
+Task mature, Loss 0.3937780261039734
+Task gory, Loss 0.4783635437488556
+Task sarcasm, Loss 0.24620847404003143
+Task slapstick, Loss 0.23820427060127258
+
+Epoch [17, Step [3066], Total Loss: 0.4344, Time: 425.75s
+Task mature, Loss 0.25805264711380005
+Task gory, Loss 0.622348964214325
+Task sarcasm, Loss 0.1343211531639099
+Task slapstick, Loss 0.6641445755958557
+
+Epoch [17, Step [3076], Total Loss: 0.4230, Time: 450.85s
+Task mature, Loss 0.4759393632411957
+Task gory, Loss 0.46867749094963074
+Task sarcasm, Loss 0.2590681314468384
+Task slapstick, Loss 0.6808487772941589
+
+Image found
+Audio found
+Task mature
+Accuracy: 0.6759259259259259, F1 Score: 0.3578
+Average Task Loss 0.6191084384918213
+
+Task gory
+Accuracy: 0.8310185185185185, F1 Score: 0.2626
+Average Task Loss 0.662801206111908
+
+Task sarcasm
+Accuracy: 0.8009259259259259, F1 Score: 0.3065
+Average Task Loss 0.5549942851066589
+
+Task slapstick
+Accuracy: 0.7893518518518519, F1 Score: 0.4348
+Average Task Loss 0.5931324362754822
+
+Average Total Loss 2.4300363063812256
+Average Accuracy: 0.7743055555555556
+Average F1 Score: 0.3404146623406888
+
+Checkpoint results saved to Results/Recreate30/checkpoints_Recreate30.pkl
+Epoch [18, Step [3087], Total Loss: 0.4246, Time: 24.77s
+Task mature, Loss 0.43747636675834656
+Task gory, Loss 0.6769132614135742
+Task sarcasm, Loss 0.0879700779914856
+Task slapstick, Loss 0.46264398097991943
+
+Epoch [18, Step [3097], Total Loss: 0.4449, Time: 49.78s
+Task mature, Loss 0.4045262336730957
+Task gory, Loss 0.5713672637939453
+Task sarcasm, Loss 0.41768738627433777
+Task slapstick, Loss 0.46189171075820923
+
+Epoch [18, Step [3107], Total Loss: 0.3392, Time: 75.34s
+Task mature, Loss 0.6540811061859131
+Task gory, Loss 0.4609513580799103
+Task sarcasm, Loss 0.10402831435203552
+Task slapstick, Loss 0.3432386517524719
+
+Epoch [18, Step [3117], Total Loss: 0.4137, Time: 100.52s
+Task mature, Loss 0.5972426533699036
+Task gory, Loss 0.5622550249099731
+Task sarcasm, Loss 0.3093751072883606
+Task slapstick, Loss 0.33603063225746155
+
+Epoch [18, Step [3127], Total Loss: 0.4073, Time: 125.97s
+Task mature, Loss 0.6024521589279175
+Task gory, Loss 0.4776449203491211
+Task sarcasm, Loss 0.33687031269073486
+Task slapstick, Loss 0.44310542941093445
+
+Epoch [18, Step [3137], Total Loss: 0.3434, Time: 150.89s
+Task mature, Loss 0.47943463921546936
+Task gory, Loss 0.4666123390197754
+Task sarcasm, Loss 0.0980144813656807
+Task slapstick, Loss 0.44617676734924316
+
+Epoch [18, Step [3147], Total Loss: 0.4054, Time: 176.54s
+Task mature, Loss 0.4872073829174042
+Task gory, Loss 0.5417643785476685
+Task sarcasm, Loss 0.4180958867073059
+Task slapstick, Loss 0.2816115617752075
+
+Epoch [18, Step [3157], Total Loss: 0.3054, Time: 201.66s
+Task mature, Loss 0.3801291286945343
+Task gory, Loss 0.40579792857170105
+Task sarcasm, Loss 0.1362352967262268
+Task slapstick, Loss 0.3888716399669647
+
+Epoch [18, Step [3167], Total Loss: 0.4256, Time: 226.85s
+Task mature, Loss 0.8743218779563904
+Task gory, Loss 0.5076524019241333
+Task sarcasm, Loss 0.19198712706565857
+Task slapstick, Loss 0.4837353229522705
+
+Epoch [18, Step [3177], Total Loss: 0.3858, Time: 252.11s
+Task mature, Loss 0.37048935890197754
+Task gory, Loss 0.5233705043792725
+Task sarcasm, Loss 0.15093672275543213
+Task slapstick, Loss 0.5459955334663391
+
+Epoch [18, Step [3187], Total Loss: 0.3157, Time: 277.76s
+Task mature, Loss 0.4642210900783539
+Task gory, Loss 0.40851783752441406
+Task sarcasm, Loss 0.2048509120941162
+Task slapstick, Loss 0.32452815771102905
+
+Epoch [18, Step [3197], Total Loss: 0.2888, Time: 302.90s
+Task mature, Loss 0.4286794066429138
+Task gory, Loss 0.33638858795166016
+Task sarcasm, Loss 0.2712000012397766
+Task slapstick, Loss 0.28565841913223267
+
+Epoch [18, Step [3207], Total Loss: 0.3998, Time: 327.99s
+Task mature, Loss 0.48393070697784424
+Task gory, Loss 0.5642495155334473
+Task sarcasm, Loss 0.3890102803707123
+Task slapstick, Loss 0.2394869327545166
+
+Epoch [18, Step [3217], Total Loss: 0.3677, Time: 353.22s
+Task mature, Loss 0.49282944202423096
+Task gory, Loss 0.5729117393493652
+Task sarcasm, Loss 0.23374193906784058
+Task slapstick, Loss 0.21252915263175964
+
+Epoch [18, Step [3227], Total Loss: 0.3667, Time: 379.15s
+Task mature, Loss 0.3544240891933441
+Task gory, Loss 0.5491896867752075
+Task sarcasm, Loss 0.22905802726745605
+Task slapstick, Loss 0.32885682582855225
+
+Epoch [18, Step [3237], Total Loss: 0.3471, Time: 404.61s
+Task mature, Loss 0.32953977584838867
+Task gory, Loss 0.39068883657455444
+Task sarcasm, Loss 0.5685158371925354
+Task slapstick, Loss 0.220607191324234
+
+Epoch [18, Step [3247], Total Loss: 0.3159, Time: 429.77s
+Task mature, Loss 0.6447829008102417
+Task gory, Loss 0.3380488157272339
+Task sarcasm, Loss 0.06326551735401154
+Task slapstick, Loss 0.517647922039032
+
+Epoch [18, Step [3257], Total Loss: 0.2810, Time: 454.81s
+Task mature, Loss 0.5037251710891724
+Task gory, Loss 0.3011930584907532
+Task sarcasm, Loss 0.2877722382545471
+Task slapstick, Loss 0.26313745975494385
+
+Image found
+Audio found
+Task mature
+Accuracy: 0.6203703703703703, F1 Score: 0.3926
+Average Task Loss 0.6789520978927612
+
+Task gory
+Accuracy: 0.7685185185185185, F1 Score: 0.2308
+Average Task Loss 0.9054970741271973
+
+Task sarcasm
+Accuracy: 0.8009259259259259, F1 Score: 0.2182
+Average Task Loss 0.5791205167770386
+
+Task slapstick
+Accuracy: 0.7939814814814815, F1 Score: 0.2764
+Average Task Loss 0.504410982131958
+
+Average Total Loss 2.667980432510376
+Average Accuracy: 0.7459490740740741
+Average F1 Score: 0.279491601442821
+
+Checkpoint results saved to Results/Recreate30/checkpoints_Recreate30.pkl
+Epoch [19, Step [3268], Total Loss: 0.4261, Time: 25.03s
+Task mature, Loss 0.5579106211662292
+Task gory, Loss 0.4562225639820099
+Task sarcasm, Loss 0.4789051115512848
+Task slapstick, Loss 0.46042805910110474
+
+Epoch [19, Step [3278], Total Loss: 0.3681, Time: 50.04s
+Task mature, Loss 0.5342780351638794
+Task gory, Loss 0.6342729330062866
+Task sarcasm, Loss 0.07055807113647461
+Task slapstick, Loss 0.23417773842811584
+
+Epoch [19, Step [3288], Total Loss: 0.4987, Time: 75.40s
+Task mature, Loss 0.3747979998588562
+Task gory, Loss 0.6665826439857483
+Task sarcasm, Loss 0.591462254524231
+Task slapstick, Loss 0.38130196928977966
+
+Epoch [19, Step [3298], Total Loss: 0.3838, Time: 100.48s
+Task mature, Loss 0.4603474736213684
+Task gory, Loss 0.5985614061355591
+Task sarcasm, Loss 0.21662789583206177
+Task slapstick, Loss 0.27493715286254883
+
+Epoch [19, Step [3308], Total Loss: 0.4385, Time: 125.74s
+Task mature, Loss 0.415343701839447
+Task gory, Loss 0.5896854400634766
+Task sarcasm, Loss 0.27166205644607544
+Task slapstick, Loss 0.5339952707290649
+
+Epoch [19, Step [3318], Total Loss: 0.3330, Time: 151.17s
+Task mature, Loss 0.47169825434684753
+Task gory, Loss 0.45214128494262695
+Task sarcasm, Loss 0.15529565513134003
+Task slapstick, Loss 0.3695015609264374
+
+Epoch [19, Step [3328], Total Loss: 0.4350, Time: 177.14s
+Task mature, Loss 0.3488464653491974
+Task gory, Loss 0.6027510166168213
+Task sarcasm, Loss 0.2610388696193695
+Task slapstick, Loss 0.534064769744873
+
+Epoch [19, Step [3338], Total Loss: 0.4456, Time: 203.10s
+Task mature, Loss 0.6143941879272461
+Task gory, Loss 0.5860884189605713
+Task sarcasm, Loss 0.5095389485359192
+Task slapstick, Loss 0.23916399478912354
+
+Epoch [19, Step [3348], Total Loss: 0.5122, Time: 228.98s
+Task mature, Loss 0.45347854495048523
+Task gory, Loss 0.5824968218803406
+Task sarcasm, Loss 0.7359869480133057
+Task slapstick, Loss 0.4333326816558838
+
+Epoch [19, Step [3358], Total Loss: 0.3853, Time: 254.70s
+Task mature, Loss 0.4937199354171753
+Task gory, Loss 0.6085332632064819
+Task sarcasm, Loss 0.1473393589258194
+Task slapstick, Loss 0.31536683440208435
+
+Epoch [19, Step [3368], Total Loss: 0.3639, Time: 279.90s
+Task mature, Loss 0.43613409996032715
+Task gory, Loss 0.420856773853302
+Task sarcasm, Loss 0.18067654967308044
+Task slapstick, Loss 0.5790942907333374
+
+Epoch [19, Step [3378], Total Loss: 0.3688, Time: 305.29s
+Task mature, Loss 0.7179815769195557
+Task gory, Loss 0.36770719289779663
+Task sarcasm, Loss 0.22145122289657593
+Task slapstick, Loss 0.5283528566360474
+
+Epoch [19, Step [3388], Total Loss: 0.3442, Time: 330.36s
+Task mature, Loss 0.6997693777084351
+Task gory, Loss 0.4327702522277832
+Task sarcasm, Loss 0.27830421924591064
+Task slapstick, Loss 0.2270207405090332
+
+Epoch [19, Step [3398], Total Loss: 0.3839, Time: 356.27s
+Task mature, Loss 0.4145909547805786
+Task gory, Loss 0.5879077911376953
+Task sarcasm, Loss 0.18265876173973083
+Task slapstick, Loss 0.35361090302467346
+
+Epoch [19, Step [3408], Total Loss: 0.3814, Time: 382.23s
+Task mature, Loss 0.37450695037841797
+Task gory, Loss 0.596102237701416
+Task sarcasm, Loss 0.17841516435146332
+Task slapstick, Loss 0.3493473529815674
+
+Epoch [19, Step [3418], Total Loss: 0.3798, Time: 408.23s
+Task mature, Loss 0.290134459733963
+Task gory, Loss 0.5162967443466187
+Task sarcasm, Loss 0.278868705034256
+Task slapstick, Loss 0.44269341230392456
+
+Epoch [19, Step [3428], Total Loss: 0.3256, Time: 434.16s
+Task mature, Loss 0.42432543635368347
+Task gory, Loss 0.49144431948661804
+Task sarcasm, Loss 0.18140505254268646
+Task slapstick, Loss 0.2515672445297241
+
+Epoch [19, Step [3438], Total Loss: 0.3712, Time: 459.93s
+Task mature, Loss 0.41136571764945984
+Task gory, Loss 0.5888658165931702
+Task sarcasm, Loss 0.19971244037151337
+Task slapstick, Loss 0.2730802297592163
+
+Image found
+Audio found
+Task mature
+Accuracy: 0.6574074074074074, F1 Score: 0.3621
+Average Task Loss 0.6412604451179504
+
+Task gory
+Accuracy: 0.7546296296296297, F1 Score: 0.2206
+Average Task Loss 0.7552159428596497
+
+Task sarcasm
+Accuracy: 0.7824074074074074, F1 Score: 0.2769
+Average Task Loss 0.6285617351531982
+
+Task slapstick
+Accuracy: 0.8078703703703703, F1 Score: 0.3360
+Average Task Loss 0.5225053429603577
+
+Average Total Loss 2.547543525695801
+Average Accuracy: 0.7505787037037037
+Average F1 Score: 0.298895069433609
+
+Checkpoint results saved to Results/Recreate30/checkpoints_Recreate30.pkl
+Epoch [20, Step [3449], Total Loss: 0.3392, Time: 25.21s
+Task mature, Loss 0.45191490650177
+Task gory, Loss 0.41550785303115845
+Task sarcasm, Loss 0.11434884369373322
+Task slapstick, Loss 0.5246059894561768
+
+Epoch [20, Step [3459], Total Loss: 0.3780, Time: 50.28s
+Task mature, Loss 0.2901362180709839
+Task gory, Loss 0.5713441371917725
+Task sarcasm, Loss 0.3787399232387543
+Task slapstick, Loss 0.22362598776817322
+
+Epoch [20, Step [3469], Total Loss: 0.4082, Time: 76.17s
+Task mature, Loss 0.5864778757095337
+Task gory, Loss 0.6845119595527649
+Task sarcasm, Loss 0.11838169395923615
+Task slapstick, Loss 0.26046475768089294
+
+Epoch [20, Step [3479], Total Loss: 0.3981, Time: 102.08s
+Task mature, Loss 0.4000556766986847
+Task gory, Loss 0.599357008934021
+Task sarcasm, Loss 0.2456810176372528
+Task slapstick, Loss 0.3460856080055237
+
+Epoch [20, Step [3489], Total Loss: 0.4796, Time: 128.10s
+Task mature, Loss 0.273502379655838
+Task gory, Loss 0.6618743538856506
+Task sarcasm, Loss 0.6686182022094727
+Task slapstick, Loss 0.2687447667121887
+
+Epoch [20, Step [3499], Total Loss: 0.4585, Time: 154.04s
+Task mature, Loss 0.7097040414810181
+Task gory, Loss 0.6623857021331787
+Task sarcasm, Loss 0.24890762567520142
+Task slapstick, Loss 0.36374855041503906
+
+Epoch [20, Step [3509], Total Loss: 0.3065, Time: 179.94s
+Task mature, Loss 0.5719039440155029
+Task gory, Loss 0.3936987519264221
+Task sarcasm, Loss 0.1198609247803688
+Task slapstick, Loss 0.33931779861450195
+
+Epoch [20, Step [3519], Total Loss: 0.3954, Time: 205.92s
+Task mature, Loss 0.5237928628921509
+Task gory, Loss 0.5713345408439636
+Task sarcasm, Loss 0.21151195466518402
+Task slapstick, Loss 0.36101335287094116
+
+Epoch [20, Step [3529], Total Loss: 0.4407, Time: 231.85s
+Task mature, Loss 0.6474002599716187
+Task gory, Loss 0.6676145792007446
+Task sarcasm, Loss 0.266748309135437
+Task slapstick, Loss 0.27775460481643677
+
+Epoch [20, Step [3539], Total Loss: 0.2793, Time: 257.79s
+Task mature, Loss 0.37355750799179077
+Task gory, Loss 0.4129341244697571
+Task sarcasm, Loss 0.23929622769355774
+Task slapstick, Loss 0.14450038969516754
+
+Epoch [20, Step [3549], Total Loss: 0.4278, Time: 283.72s
+Task mature, Loss 0.611268937587738
+Task gory, Loss 0.5983133912086487
+Task sarcasm, Loss 0.08635245263576508
+Task slapstick, Loss 0.5501439571380615
+
+Epoch [20, Step [3559], Total Loss: 0.3742, Time: 309.67s
+Task mature, Loss 0.3856779634952545
+Task gory, Loss 0.6118299961090088
+Task sarcasm, Loss 0.18731459975242615
+Task slapstick, Loss 0.2673991918563843
+
+Epoch [20, Step [3569], Total Loss: 0.3831, Time: 335.65s
+Task mature, Loss 0.5078431367874146
+Task gory, Loss 0.5199680924415588
+Task sarcasm, Loss 0.10374334454536438
+Task slapstick, Loss 0.5178996324539185
+
+Epoch [20, Step [3579], Total Loss: 0.3939, Time: 361.57s
+Task mature, Loss 0.35214757919311523
+Task gory, Loss 0.6288089752197266
+Task sarcasm, Loss 0.16218149662017822
+Task slapstick, Loss 0.37368011474609375
+
+Epoch [20, Step [3589], Total Loss: 0.4126, Time: 387.54s
+Task mature, Loss 0.38621190190315247
+Task gory, Loss 0.6208046078681946
+Task sarcasm, Loss 0.2975846827030182
+Task slapstick, Loss 0.33055680990219116
+
+Epoch [20, Step [3599], Total Loss: 0.3408, Time: 413.51s
+Task mature, Loss 0.5664001703262329
+Task gory, Loss 0.2792981266975403
+Task sarcasm, Loss 0.2031964361667633
+Task slapstick, Loss 0.6589372754096985
+
+Epoch [20, Step [3609], Total Loss: 0.3219, Time: 439.45s
+Task mature, Loss 0.47835811972618103
+Task gory, Loss 0.44244658946990967
+Task sarcasm, Loss 0.30978721380233765
+Task slapstick, Loss 0.17575925588607788
+
+Epoch [20, Step [3619], Total Loss: 0.3416, Time: 465.39s
+Task mature, Loss 0.47571972012519836
+Task gory, Loss 0.5324551463127136
+Task sarcasm, Loss 0.150978222489357
+Task slapstick, Loss 0.25448063015937805
+
+Image found
+Audio found
+Task mature
+Accuracy: 0.6875, F1 Score: 0.2703
+Average Task Loss 0.5892680287361145
+
+Task gory
+Accuracy: 0.8703703703703703, F1 Score: 0.3000
+Average Task Loss 0.7016633152961731
+
+Task sarcasm
+Accuracy: 0.8032407407407407, F1 Score: 0.2735
+Average Task Loss 0.6123772859573364
+
+Task slapstick
+Accuracy: 0.8055555555555556, F1 Score: 0.2881
+Average Task Loss 0.5263083577156067
+
+Average Total Loss 2.429616928100586
+Average Accuracy: 0.7916666666666665
+Average F1 Score: 0.2829775342487207
+
+Checkpoint results saved to Results/Recreate30/checkpoints_Recreate30.pkl
+Epoch [21, Step [3630], Total Loss: 0.4372, Time: 25.35s
+Task mature, Loss 0.7614391446113586
+Task gory, Loss 0.606569766998291
+Task sarcasm, Loss 0.14225727319717407
+Task slapstick, Loss 0.4500088095664978
+
+Epoch [21, Step [3640], Total Loss: 0.3289, Time: 50.69s
+Task mature, Loss 0.3736221492290497
+Task gory, Loss 0.4934169352054596
+Task sarcasm, Loss 0.2026851773262024
+Task slapstick, Loss 0.26792505383491516
+
+Epoch [21, Step [3650], Total Loss: 0.2881, Time: 76.20s
+Task mature, Loss 0.29707789421081543
+Task gory, Loss 0.5212931036949158
+Task sarcasm, Loss 0.0496477410197258
+Task slapstick, Loss 0.19961288571357727
+
+Epoch [21, Step [3660], Total Loss: 0.4660, Time: 102.16s
+Task mature, Loss 0.336345911026001
+Task gory, Loss 0.5868615508079529
+Task sarcasm, Loss 0.34467506408691406
+Task slapstick, Loss 0.6435998678207397
+
+Epoch [21, Step [3670], Total Loss: 0.3207, Time: 128.12s
+Task mature, Loss 0.27400895953178406
+Task gory, Loss 0.5274801254272461
+Task sarcasm, Loss 0.1553460955619812
+Task slapstick, Loss 0.2562342584133148
+
+Epoch [21, Step [3680], Total Loss: 0.3661, Time: 154.07s
+Task mature, Loss 0.7243036031723022
+Task gory, Loss 0.4592098593711853
+Task sarcasm, Loss 0.3584213852882385
+Task slapstick, Loss 0.19173109531402588
+
+Epoch [21, Step [3690], Total Loss: 0.3697, Time: 179.98s
+Task mature, Loss 0.36610108613967896
+Task gory, Loss 0.5053476691246033
+Task sarcasm, Loss 0.10700756311416626
+Task slapstick, Loss 0.5478157997131348
+
+Epoch [21, Step [3700], Total Loss: 0.2591, Time: 205.98s
+Task mature, Loss 0.3890431523323059
+Task gory, Loss 0.33866891264915466
+Task sarcasm, Loss 0.2455514818429947
+Task slapstick, Loss 0.178205206990242
+
+Epoch [21, Step [3710], Total Loss: 0.3665, Time: 231.96s
+Task mature, Loss 0.4903069734573364
+Task gory, Loss 0.5344786643981934
+Task sarcasm, Loss 0.06794188916683197
+Task slapstick, Loss 0.45032036304473877
+
+Epoch [21, Step [3720], Total Loss: 0.4366, Time: 257.87s
+Task mature, Loss 0.4195445775985718
+Task gory, Loss 0.5565665364265442
+Task sarcasm, Loss 0.6171126961708069
+Task slapstick, Loss 0.2430625706911087
+
+Epoch [21, Step [3730], Total Loss: 0.3678, Time: 283.90s
+Task mature, Loss 0.5798791646957397
+Task gory, Loss 0.5778529644012451
+Task sarcasm, Loss 0.1425202637910843
+Task slapstick, Loss 0.25083422660827637
+
+Epoch [21, Step [3740], Total Loss: 0.4335, Time: 309.84s
+Task mature, Loss 0.5418100357055664
+Task gory, Loss 0.584800124168396
+Task sarcasm, Loss 0.5906262397766113
+Task slapstick, Loss 0.13635949790477753
+
+Epoch [21, Step [3750], Total Loss: 0.3889, Time: 335.77s
+Task mature, Loss 0.5295538306236267
+Task gory, Loss 0.43441808223724365
+Task sarcasm, Loss 0.3948836922645569
+Task slapstick, Loss 0.4157754182815552
+
+Epoch [21, Step [3760], Total Loss: 0.3464, Time: 361.76s
+Task mature, Loss 0.29839804768562317
+Task gory, Loss 0.5224568247795105
+Task sarcasm, Loss 0.17757970094680786
+Task slapstick, Loss 0.36022523045539856
+
+Epoch [21, Step [3770], Total Loss: 0.3070, Time: 387.70s
+Task mature, Loss 0.3675037920475006
+Task gory, Loss 0.4300858676433563
+Task sarcasm, Loss 0.1637219786643982
+Task slapstick, Loss 0.3273424506187439
+
+Epoch [21, Step [3780], Total Loss: 0.3855, Time: 413.70s
+Task mature, Loss 0.3628934621810913
+Task gory, Loss 0.5923535823822021
+Task sarcasm, Loss 0.27542421221733093
+Task slapstick, Loss 0.2859553098678589
+
+Epoch [21, Step [3790], Total Loss: 0.2655, Time: 439.59s
+Task mature, Loss 0.35835617780685425
+Task gory, Loss 0.25082385540008545
+Task sarcasm, Loss 0.41433507204055786
+Task slapstick, Loss 0.23234614729881287
+
+Epoch [21, Step [3800], Total Loss: 0.3637, Time: 465.59s
+Task mature, Loss 0.4314674735069275
+Task gory, Loss 0.5728076100349426
+Task sarcasm, Loss 0.27634918689727783
+Task slapstick, Loss 0.18070921301841736
+
+Image found
+Audio found
+Task mature
+Accuracy: 0.6458333333333334, F1 Score: 0.3755
+Average Task Loss 0.6807834506034851
+
+Task gory
+Accuracy: 0.8703703703703703, F1 Score: 0.3000
+Average Task Loss 0.7238677144050598
+
+Task sarcasm
+Accuracy: 0.7986111111111112, F1 Score: 0.2564
+Average Task Loss 0.5747891664505005
+
+Task slapstick
+Accuracy: 0.7962962962962963, F1 Score: 0.3889
+Average Task Loss 0.6463890075683594
+
+Average Total Loss 2.6258294582366943
+Average Accuracy: 0.7777777777777778
+Average F1 Score: 0.3302023373451945
+
+Checkpoint results saved to Results/Recreate30/checkpoints_Recreate30.pkl
+Epoch [22, Step [3811], Total Loss: 0.2116, Time: 46.39s
+Task mature, Loss 0.39909157156944275
+Task gory, Loss 0.1935354620218277
+Task sarcasm, Loss 0.1186222955584526
+Task slapstick, Loss 0.3527258336544037
+
+Epoch [22, Step [3821], Total Loss: 0.4058, Time: 72.33s
+Task mature, Loss 0.6077349185943604
+Task gory, Loss 0.5884813070297241
+Task sarcasm, Loss 0.14947271347045898
+Task slapstick, Loss 0.3987557888031006
+
+Epoch [22, Step [3831], Total Loss: 0.3923, Time: 98.31s
+Task mature, Loss 0.3471660017967224
+Task gory, Loss 0.56465744972229
+Task sarcasm, Loss 0.29581061005592346
+Task slapstick, Loss 0.36303770542144775
+
+Epoch [22, Step [3841], Total Loss: 0.3337, Time: 124.26s
+Task mature, Loss 0.5023837089538574
+Task gory, Loss 0.40461039543151855
+Task sarcasm, Loss 0.15995877981185913
+Task slapstick, Loss 0.4480498731136322
+
+Epoch [22, Step [3851], Total Loss: 0.3852, Time: 150.17s
+Task mature, Loss 0.3269439935684204
+Task gory, Loss 0.5355066061019897
+Task sarcasm, Loss 0.06777505576610565
+Task slapstick, Loss 0.6239348649978638
+
+Epoch [22, Step [3861], Total Loss: 0.2739, Time: 176.11s
+Task mature, Loss 0.36253321170806885
+Task gory, Loss 0.37937402725219727
+Task sarcasm, Loss 0.19489459693431854
+Task slapstick, Loss 0.23472246527671814
+
+Epoch [22, Step [3871], Total Loss: 0.3349, Time: 202.06s
+Task mature, Loss 0.3235458433628082
+Task gory, Loss 0.5156494379043579
+Task sarcasm, Loss 0.31413498520851135
+Task slapstick, Loss 0.16740825772285461
+
+Epoch [22, Step [3881], Total Loss: 0.3377, Time: 227.75s
+Task mature, Loss 0.333217591047287
+Task gory, Loss 0.5727288126945496
+Task sarcasm, Loss 0.09818416088819504
+Task slapstick, Loss 0.27837127447128296
+
+Epoch [22, Step [3891], Total Loss: 0.2552, Time: 253.12s
+Task mature, Loss 0.3337773084640503
+Task gory, Loss 0.3183220624923706
+Task sarcasm, Loss 0.12546822428703308
+Task slapstick, Loss 0.3471308648586273
+
+Epoch [22, Step [3901], Total Loss: 0.3090, Time: 278.48s
+Task mature, Loss 0.5082029700279236
+Task gory, Loss 0.4689539074897766
+Task sarcasm, Loss 0.17347663640975952
+Task slapstick, Loss 0.17949356138706207
+
+Epoch [22, Step [3911], Total Loss: 0.2855, Time: 304.42s
+Task mature, Loss 0.3246828019618988
+Task gory, Loss 0.4660770297050476
+Task sarcasm, Loss 0.1188334971666336
+Task slapstick, Loss 0.2142772674560547
+
+Epoch [22, Step [3921], Total Loss: 0.3018, Time: 330.46s
+Task mature, Loss 0.6464284658432007
+Task gory, Loss 0.3288480341434479
+Task sarcasm, Loss 0.2849852442741394
+Task slapstick, Loss 0.24292325973510742
+
+Epoch [22, Step [3931], Total Loss: 0.3260, Time: 356.35s
+Task mature, Loss 0.5573635101318359
+Task gory, Loss 0.4593196511268616
+Task sarcasm, Loss 0.2558465003967285
+Task slapstick, Loss 0.17684882879257202
+
+Epoch [22, Step [3941], Total Loss: 0.4801, Time: 382.31s
+Task mature, Loss 0.47651395201683044
+Task gory, Loss 0.8521728515625
+Task sarcasm, Loss 0.1124056801199913
+Task slapstick, Loss 0.3455818295478821
+
+Epoch [22, Step [3951], Total Loss: 0.3020, Time: 408.27s
+Task mature, Loss 0.5488460063934326
+Task gory, Loss 0.32798606157302856
+Task sarcasm, Loss 0.270334929227829
+Task slapstick, Loss 0.30923205614089966
+
+Epoch [22, Step [3961], Total Loss: 0.3181, Time: 434.23s
+Task mature, Loss 0.41769933700561523
+Task gory, Loss 0.3918370008468628
+Task sarcasm, Loss 0.3060590326786041
+Task slapstick, Loss 0.29176345467567444
+
+Epoch [22, Step [3971], Total Loss: 0.3687, Time: 459.54s
+Task mature, Loss 0.34977489709854126
+Task gory, Loss 0.5809184312820435
+Task sarcasm, Loss 0.2618710398674011
+Task slapstick, Loss 0.24497272074222565
+
+Epoch [22, Step [3981], Total Loss: 0.3186, Time: 484.71s
+Task mature, Loss 0.3352052867412567
+Task gory, Loss 0.537623405456543
+Task sarcasm, Loss 0.20777148008346558
+Task slapstick, Loss 0.14255523681640625
+
+Image found
+Audio found
+Task mature
+Accuracy: 0.5833333333333334, F1 Score: 0.4268
+Average Task Loss 0.8560180068016052
+
+Task gory
+Accuracy: 0.7106481481481481, F1 Score: 0.2038
+Average Task Loss 1.0729683637619019
+
+Task sarcasm
+Accuracy: 0.7824074074074074, F1 Score: 0.3562
+Average Task Loss 0.7307597398757935
+
+Task slapstick
+Accuracy: 0.8101851851851852, F1 Score: 0.2679
+Average Task Loss 0.5356066823005676
+
+Average Total Loss 3.195352554321289
+Average Accuracy: 0.7216435185185185
+Average F1 Score: 0.31364869370660753
+
+Checkpoint results saved to Results/Recreate30/checkpoints_Recreate30.pkl
+Epoch [23, Step [3992], Total Loss: 0.2094, Time: 24.97s
+Task mature, Loss 0.3280055522918701
+Task gory, Loss 0.24771064519882202
+Task sarcasm, Loss 0.08639141172170639
+Task slapstick, Loss 0.30136555433273315
+
+Epoch [23, Step [4002], Total Loss: 0.4379, Time: 50.08s
+Task mature, Loss 0.37644273042678833
+Task gory, Loss 0.5388940572738647
+Task sarcasm, Loss 0.376033216714859
+Task slapstick, Loss 0.5472477078437805
+
+Epoch [23, Step [4012], Total Loss: 0.3588, Time: 75.25s
+Task mature, Loss 0.30477434396743774
+Task gory, Loss 0.5509356260299683
+Task sarcasm, Loss 0.2462068647146225
+Task slapstick, Loss 0.29366984963417053
+
+Epoch [23, Step [4022], Total Loss: 0.1950, Time: 100.43s
+Task mature, Loss 0.45828479528427124
+Task gory, Loss 0.1926576942205429
+Task sarcasm, Loss 0.1179647147655487
+Task slapstick, Loss 0.24261674284934998
+
+Epoch [23, Step [4032], Total Loss: 0.3455, Time: 125.60s
+Task mature, Loss 0.37787187099456787
+Task gory, Loss 0.5438923835754395
+Task sarcasm, Loss 0.27079692482948303
+Task slapstick, Loss 0.1801254153251648
+
+Epoch [23, Step [4042], Total Loss: 0.2684, Time: 150.70s
+Task mature, Loss 0.3052530884742737
+Task gory, Loss 0.42721930146217346
+Task sarcasm, Loss 0.14373746514320374
+Task slapstick, Loss 0.1909874975681305
+
+Epoch [23, Step [4052], Total Loss: 0.3254, Time: 175.90s
+Task mature, Loss 0.4594383239746094
+Task gory, Loss 0.3298688232898712
+Task sarcasm, Loss 0.07006429135799408
+Task slapstick, Loss 0.6674991250038147
+
+Epoch [23, Step [4062], Total Loss: 0.3364, Time: 201.08s
+Task mature, Loss 0.3872910737991333
+Task gory, Loss 0.5330519676208496
+Task sarcasm, Loss 0.18528813123703003
+Task slapstick, Loss 0.23711641132831573
+
+Epoch [23, Step [4072], Total Loss: 0.5149, Time: 226.27s
+Task mature, Loss 0.20138078927993774
+Task gory, Loss 0.6031631231307983
+Task sarcasm, Loss 0.9992584586143494
+Task slapstick, Loss 0.26812613010406494
+
+Epoch [23, Step [4082], Total Loss: 0.3683, Time: 251.51s
+Task mature, Loss 0.2758004665374756
+Task gory, Loss 0.5685656070709229
+Task sarcasm, Loss 0.1987312138080597
+Task slapstick, Loss 0.36788731813430786
+
+Epoch [23, Step [4092], Total Loss: 0.3549, Time: 276.70s
+Task mature, Loss 0.4597133994102478
+Task gory, Loss 0.5803598761558533
+Task sarcasm, Loss 0.21591342985630035
+Task slapstick, Loss 0.16810834407806396
+
+Epoch [23, Step [4102], Total Loss: 0.2630, Time: 301.87s
+Task mature, Loss 0.7001134157180786
+Task gory, Loss 0.23832520842552185
+Task sarcasm, Loss 0.1875823438167572
+Task slapstick, Loss 0.3008543848991394
+
+Epoch [23, Step [4112], Total Loss: 0.3421, Time: 327.04s
+Task mature, Loss 0.375901997089386
+Task gory, Loss 0.5657326579093933
+Task sarcasm, Loss 0.1800486147403717
+Task slapstick, Loss 0.2111881673336029
+
+Epoch [23, Step [4122], Total Loss: 0.3437, Time: 352.17s
+Task mature, Loss 0.41118526458740234
+Task gory, Loss 0.5303786993026733
+Task sarcasm, Loss 0.1258205771446228
+Task slapstick, Loss 0.32633182406425476
+
+Epoch [23, Step [4132], Total Loss: 0.3638, Time: 377.37s
+Task mature, Loss 0.21890519559383392
+Task gory, Loss 0.6222525238990784
+Task sarcasm, Loss 0.24846599996089935
+Task slapstick, Loss 0.2167898416519165
+
+Epoch [23, Step [4142], Total Loss: 0.2846, Time: 402.54s
+Task mature, Loss 0.3020435571670532
+Task gory, Loss 0.5125190019607544
+Task sarcasm, Loss 0.10513283312320709
+Task slapstick, Loss 0.14193095266819
+
+Epoch [23, Step [4152], Total Loss: 0.4772, Time: 427.73s
+Task mature, Loss 0.38552209734916687
+Task gory, Loss 0.6081636548042297
+Task sarcasm, Loss 0.6652376651763916
+Task slapstick, Loss 0.31162959337234497
+
+Epoch [23, Step [4162], Total Loss: 0.2991, Time: 452.89s
+Task mature, Loss 0.4295244812965393
+Task gory, Loss 0.49617770314216614
+Task sarcasm, Loss 0.05570871755480766
+Task slapstick, Loss 0.2325020730495453
+
+Image found
+Audio found
+Task mature
+Accuracy: 0.6851851851851852, F1 Score: 0.3982
+Average Task Loss 0.6604622602462769
+
+Task gory
+Accuracy: 0.8842592592592593, F1 Score: 0.2647
+Average Task Loss 0.712492048740387
+
+Task sarcasm
+Accuracy: 0.7824074074074074, F1 Score: 0.3380
+Average Task Loss 0.7730526328086853
+
+Task slapstick
+Accuracy: 0.7824074074074074, F1 Score: 0.3088
+Average Task Loss 0.6432274580001831
+
+Average Total Loss 2.7892346382141113
+Average Accuracy: 0.7835648148148149
+Average F1 Score: 0.3274469173185914
+
+Checkpoint results saved to Results/Recreate30/checkpoints_Recreate30.pkl
+Epoch [24, Step [4173], Total Loss: 0.2133, Time: 25.00s
+Task mature, Loss 0.3677622675895691
+Task gory, Loss 0.2624868154525757
+Task sarcasm, Loss 0.11237785220146179
+Task slapstick, Loss 0.2450299859046936
+
+Epoch [24, Step [4183], Total Loss: 0.3852, Time: 50.23s
+Task mature, Loss 0.21807214617729187
+Task gory, Loss 0.5754461288452148
+Task sarcasm, Loss 0.11055085808038712
+Task slapstick, Loss 0.5552808046340942
+
+Epoch [24, Step [4193], Total Loss: 0.3351, Time: 75.46s
+Task mature, Loss 0.3993457555770874
+Task gory, Loss 0.5235587358474731
+Task sarcasm, Loss 0.23339614272117615
+Task slapstick, Loss 0.1952180415391922
+
+Epoch [24, Step [4203], Total Loss: 0.2388, Time: 100.72s
+Task mature, Loss 0.42746350169181824
+Task gory, Loss 0.24491220712661743
+Task sarcasm, Loss 0.1504560112953186
+Task slapstick, Loss 0.33977144956588745
+
+Epoch [24, Step [4213], Total Loss: 0.1825, Time: 125.99s
+Task mature, Loss 0.31773754954338074
+Task gory, Loss 0.23153573274612427
+Task sarcasm, Loss 0.04470423609018326
+Task slapstick, Loss 0.24580581486225128
+
+Epoch [24, Step [4223], Total Loss: 0.2840, Time: 151.13s
+Task mature, Loss 0.3037383258342743
+Task gory, Loss 0.46472182869911194
+Task sarcasm, Loss 0.13251709938049316
+Task slapstick, Loss 0.2059672325849533
+
+Epoch [24, Step [4233], Total Loss: 0.3202, Time: 176.32s
+Task mature, Loss 0.299298495054245
+Task gory, Loss 0.402126669883728
+Task sarcasm, Loss 0.2648312449455261
+Task slapstick, Loss 0.38244688510894775
+
+Epoch [24, Step [4243], Total Loss: 0.2387, Time: 201.62s
+Task mature, Loss 0.3757316470146179
+Task gory, Loss 0.2395654320716858
+Task sarcasm, Loss 0.3178398907184601
+Task slapstick, Loss 0.20886152982711792
+
+Epoch [24, Step [4253], Total Loss: 0.3434, Time: 226.83s
+Task mature, Loss 0.6095507740974426
+Task gory, Loss 0.33162957429885864
+Task sarcasm, Loss 0.18756741285324097
+Task slapstick, Loss 0.5612249374389648
+
+Epoch [24, Step [4263], Total Loss: 0.5003, Time: 252.00s
+Task mature, Loss 0.3078233599662781
+Task gory, Loss 0.5052382349967957
+Task sarcasm, Loss 0.7632884383201599
+Task slapstick, Loss 0.5736244320869446
+
+Epoch [24, Step [4273], Total Loss: 0.2934, Time: 277.17s
+Task mature, Loss 0.33986896276474
+Task gory, Loss 0.3505129814147949
+Task sarcasm, Loss 0.26212114095687866
+Task slapstick, Loss 0.33378171920776367
+
+Epoch [24, Step [4283], Total Loss: 0.2998, Time: 302.37s
+Task mature, Loss 0.4938971698284149
+Task gory, Loss 0.37358081340789795
+Task sarcasm, Loss 0.2442135512828827
+Task slapstick, Loss 0.260694682598114
+
+Epoch [24, Step [4293], Total Loss: 0.3256, Time: 327.64s
+Task mature, Loss 0.2927008271217346
+Task gory, Loss 0.6188291907310486
+Task sarcasm, Loss 0.07123025506734848
+Task slapstick, Loss 0.17300915718078613
+
+Epoch [24, Step [4303], Total Loss: 0.2712, Time: 352.84s
+Task mature, Loss 0.3456849753856659
+Task gory, Loss 0.29748114943504333
+Task sarcasm, Loss 0.24583882093429565
+Task slapstick, Loss 0.34223130345344543
+
+Epoch [24, Step [4313], Total Loss: 0.2473, Time: 378.05s
+Task mature, Loss 0.48673170804977417
+Task gory, Loss 0.3054504990577698
+Task sarcasm, Loss 0.1473584622144699
+Task slapstick, Loss 0.2346353828907013
+
+Epoch [24, Step [4323], Total Loss: 0.2896, Time: 403.33s
+Task mature, Loss 0.4274643063545227
+Task gory, Loss 0.4920801520347595
+Task sarcasm, Loss 0.030857734382152557
+Task slapstick, Loss 0.21940147876739502
+
+Epoch [24, Step [4333], Total Loss: 0.3614, Time: 428.58s
+Task mature, Loss 0.5464375019073486
+Task gory, Loss 0.5470801591873169
+Task sarcasm, Loss 0.05429965257644653
+Task slapstick, Loss 0.3855142593383789
+
+Epoch [24, Step [4343], Total Loss: 0.3164, Time: 453.74s
+Task mature, Loss 0.5354615449905396
+Task gory, Loss 0.3023426830768585
+Task sarcasm, Loss 0.3210172951221466
+Task slapstick, Loss 0.38841691613197327
+
+Image found
+Audio found
+Task mature
+Accuracy: 0.6782407407407407, F1 Score: 0.3085
+Average Task Loss 0.6466067433357239
+
+Task gory
+Accuracy: 0.8657407407407407, F1 Score: 0.2927
+Average Task Loss 0.8525363206863403
+
+Task sarcasm
+Accuracy: 0.8009259259259259, F1 Score: 0.2456
+Average Task Loss 0.579592227935791
+
+Task slapstick
+Accuracy: 0.8055555555555556, F1 Score: 0.3913
+Average Task Loss 0.5955105423927307
+
+Average Total Loss 2.674245834350586
+Average Accuracy: 0.7876157407407407
+Average F1 Score: 0.30951475529646516
+
+Checkpoint results saved to Results/Recreate30/checkpoints_Recreate30.pkl
+Epoch [25, Step [4354], Total Loss: 0.3671, Time: 24.97s
+Task mature, Loss 0.49773117899894714
+Task gory, Loss 0.6649821996688843
+Task sarcasm, Loss 0.10068526864051819
+Task slapstick, Loss 0.15622274577617645
+
+Epoch [25, Step [4364], Total Loss: 0.3396, Time: 50.17s
+Task mature, Loss 0.37745970487594604
+Task gory, Loss 0.553612470626831
+Task sarcasm, Loss 0.09620644897222519
+Task slapstick, Loss 0.3060327172279358
+
+Epoch [25, Step [4374], Total Loss: 0.2328, Time: 75.35s
+Task mature, Loss 0.31865495443344116
+Task gory, Loss 0.33207881450653076
+Task sarcasm, Loss 0.1766914427280426
+Task slapstick, Loss 0.1640465408563614
+
+Epoch [25, Step [4384], Total Loss: 0.3057, Time: 100.60s
+Task mature, Loss 0.4425162374973297
+Task gory, Loss 0.5694810152053833
+Task sarcasm, Loss 0.04728315398097038
+Task slapstick, Loss 0.12114214897155762
+
+Epoch [25, Step [4394], Total Loss: 0.2994, Time: 125.78s
+Task mature, Loss 0.30595606565475464
+Task gory, Loss 0.5131314992904663
+Task sarcasm, Loss 0.0905378982424736
+Task slapstick, Loss 0.22730490565299988
+
+Epoch [25, Step [4404], Total Loss: 0.4506, Time: 150.96s
+Task mature, Loss 0.7522786259651184
+Task gory, Loss 0.5991900563240051
+Task sarcasm, Loss 0.09241433441638947
+Task slapstick, Loss 0.5861165523529053
+
+Epoch [25, Step [4414], Total Loss: 0.2779, Time: 176.11s
+Task mature, Loss 0.35614532232284546
+Task gory, Loss 0.31870386004447937
+Task sarcasm, Loss 0.27198469638824463
+Task slapstick, Loss 0.30207762122154236
+
+Epoch [25, Step [4424], Total Loss: 0.3197, Time: 201.39s
+Task mature, Loss 0.27409058809280396
+Task gory, Loss 0.4954583942890167
+Task sarcasm, Loss 0.2334321290254593
+Task slapstick, Loss 0.23699313402175903
+
+Epoch [25, Step [4434], Total Loss: 0.4365, Time: 226.51s
+Task mature, Loss 0.3804474472999573
+Task gory, Loss 0.5521348714828491
+Task sarcasm, Loss 0.23576469719409943
+Task slapstick, Loss 0.6523830890655518
+
+Epoch [25, Step [4444], Total Loss: 0.3977, Time: 251.69s
+Task mature, Loss 0.18156294524669647
+Task gory, Loss 0.6482613682746887
+Task sarcasm, Loss 0.4053516685962677
+Task slapstick, Loss 0.1956246793270111
+
+Epoch [25, Step [4454], Total Loss: 0.2805, Time: 276.92s
+Task mature, Loss 0.30394071340560913
+Task gory, Loss 0.5043972730636597
+Task sarcasm, Loss 0.10678713023662567
+Task slapstick, Loss 0.1350681334733963
+
+Epoch [25, Step [4464], Total Loss: 0.1983, Time: 302.11s
+Task mature, Loss 0.28739476203918457
+Task gory, Loss 0.30700671672821045
+Task sarcasm, Loss 0.08631914854049683
+Task slapstick, Loss 0.14727504551410675
+
+Epoch [25, Step [4474], Total Loss: 0.3586, Time: 327.22s
+Task mature, Loss 0.40996652841567993
+Task gory, Loss 0.6283870935440063
+Task sarcasm, Loss 0.19342611730098724
+Task slapstick, Loss 0.13772717118263245
+
+Epoch [25, Step [4484], Total Loss: 0.3998, Time: 352.42s
+Task mature, Loss 0.3185100257396698
+Task gory, Loss 0.6306973695755005
+Task sarcasm, Loss 0.2826575040817261
+Task slapstick, Loss 0.29581165313720703
+
+Epoch [25, Step [4494], Total Loss: 0.2668, Time: 377.62s
+Task mature, Loss 0.433505117893219
+Task gory, Loss 0.47970083355903625
+Task sarcasm, Loss 0.04513664171099663
+Task slapstick, Loss 0.11294205486774445
+
+Epoch [25, Step [4504], Total Loss: 0.2177, Time: 402.87s
+Task mature, Loss 0.4263836145401001
+Task gory, Loss 0.3293648958206177
+Task sarcasm, Loss 0.10655301809310913
+Task slapstick, Loss 0.10996981710195541
+
+Epoch [25, Step [4514], Total Loss: 0.2124, Time: 428.06s
+Task mature, Loss 0.4483242928981781
+Task gory, Loss 0.2780826687812805
+Task sarcasm, Loss 0.16319257020950317
+Task slapstick, Loss 0.1185464859008789
+
+Epoch [25, Step [4524], Total Loss: 0.3060, Time: 453.25s
+Task mature, Loss 0.2195984423160553
+Task gory, Loss 0.335633784532547
+Task sarcasm, Loss 0.04216018319129944
+Task slapstick, Loss 0.706608235836029
+
+Image found
+Audio found
+Task mature
+Accuracy: 0.7129629629629629, F1 Score: 0.2530
+Average Task Loss 0.6240444779396057
+
+Task gory
+Accuracy: 0.8726851851851852, F1 Score: 0.3038
+Average Task Loss 0.796227753162384
+
+Task sarcasm
+Accuracy: 0.7962962962962963, F1 Score: 0.3125
+Average Task Loss 0.6652188301086426
+
+Task slapstick
+Accuracy: 0.7847222222222222, F1 Score: 0.4431
+Average Task Loss 0.7459743618965149
+
+Average Total Loss 2.831465482711792
+Average Accuracy: 0.7916666666666667
+Average F1 Score: 0.32810582225057283
+
+Checkpoint results saved to Results/Recreate30/checkpoints_Recreate30.pkl
+Epoch [26, Step [4535], Total Loss: 0.2962, Time: 25.04s
+Task mature, Loss 0.313477098941803
+Task gory, Loss 0.34038931131362915
+Task sarcasm, Loss 0.07985755801200867
+Task slapstick, Loss 0.5634797811508179
+
+Epoch [26, Step [4545], Total Loss: 0.4040, Time: 50.25s
+Task mature, Loss 0.5880064964294434
+Task gory, Loss 0.6389979124069214
+Task sarcasm, Loss 0.18304157257080078
+Task slapstick, Loss 0.26515626907348633
+
+Epoch [26, Step [4555], Total Loss: 0.2943, Time: 75.40s
+Task mature, Loss 0.22278299927711487
+Task gory, Loss 0.22918479144573212
+Task sarcasm, Loss 0.7105429172515869
+Task slapstick, Loss 0.19123440980911255
+
+Epoch [26, Step [4565], Total Loss: 0.3413, Time: 100.62s
+Task mature, Loss 0.3230366110801697
+Task gory, Loss 0.5670220255851746
+Task sarcasm, Loss 0.2731175124645233
+Task slapstick, Loss 0.1379910111427307
+
+Epoch [26, Step [4575], Total Loss: 0.2752, Time: 125.90s
+Task mature, Loss 0.3469361662864685
+Task gory, Loss 0.4619249105453491
+Task sarcasm, Loss 0.07044035196304321
+Task slapstick, Loss 0.20806877315044403
+
+Epoch [26, Step [4585], Total Loss: 0.2752, Time: 151.11s
+Task mature, Loss 0.20451797544956207
+Task gory, Loss 0.5287278294563293
+Task sarcasm, Loss 0.07588809728622437
+Task slapstick, Loss 0.14015313982963562
+
+Epoch [26, Step [4595], Total Loss: 0.2912, Time: 176.30s
+Task mature, Loss 0.3429270088672638
+Task gory, Loss 0.5018251538276672
+Task sarcasm, Loss 0.0759008526802063
+Task slapstick, Loss 0.20501242578029633
+
+Epoch [26, Step [4605], Total Loss: 0.2953, Time: 201.55s
+Task mature, Loss 0.38388893008232117
+Task gory, Loss 0.4795377850532532
+Task sarcasm, Loss 0.11319287121295929
+Task slapstick, Loss 0.21209917962551117
+
+Epoch [26, Step [4615], Total Loss: 0.2568, Time: 226.74s
+Task mature, Loss 0.5049825310707092
+Task gory, Loss 0.3582824766635895
+Task sarcasm, Loss 0.08794261515140533
+Task slapstick, Loss 0.22684979438781738
+
+Epoch [26, Step [4625], Total Loss: 0.4147, Time: 251.99s
+Task mature, Loss 0.18486806750297546
+Task gory, Loss 0.583115816116333
+Task sarcasm, Loss 0.1389380395412445
+Task slapstick, Loss 0.6759796142578125
+
+Epoch [26, Step [4635], Total Loss: 0.3785, Time: 277.21s
+Task mature, Loss 0.25683993101119995
+Task gory, Loss 0.7067916393280029
+Task sarcasm, Loss 0.14451786875724792
+Task slapstick, Loss 0.20581653714179993
+
+Epoch [26, Step [4645], Total Loss: 0.3541, Time: 302.55s
+Task mature, Loss 0.2703205645084381
+Task gory, Loss 0.4964703917503357
+Task sarcasm, Loss 0.024731792509555817
+Task slapstick, Loss 0.6175199151039124
+
+Epoch [26, Step [4655], Total Loss: 0.2072, Time: 327.79s
+Task mature, Loss 0.6910818219184875
+Task gory, Loss 0.20308789610862732
+Task sarcasm, Loss 0.18928492069244385
+Task slapstick, Loss 0.09522896260023117
+
+Epoch [26, Step [4665], Total Loss: 0.3062, Time: 353.03s
+Task mature, Loss 0.33438098430633545
+Task gory, Loss 0.5265372395515442
+Task sarcasm, Loss 0.20111873745918274
+Task slapstick, Loss 0.10961879044771194
+
+Epoch [26, Step [4675], Total Loss: 0.3077, Time: 378.22s
+Task mature, Loss 0.39241358637809753
+Task gory, Loss 0.4901503920555115
+Task sarcasm, Loss 0.08966326713562012
+Task slapstick, Loss 0.27235910296440125
+
+Epoch [26, Step [4685], Total Loss: 0.3014, Time: 403.53s
+Task mature, Loss 0.4665983319282532
+Task gory, Loss 0.4410019516944885
+Task sarcasm, Loss 0.21415051817893982
+Task slapstick, Loss 0.1774861216545105
+
+Epoch [26, Step [4695], Total Loss: 0.3096, Time: 428.70s
+Task mature, Loss 0.43454673886299133
+Task gory, Loss 0.5093896389007568
+Task sarcasm, Loss 0.036327097564935684
+Task slapstick, Loss 0.275409460067749
+
+Epoch [26, Step [4705], Total Loss: 0.3270, Time: 478.68s
+Task mature, Loss 0.2307702600955963
+Task gory, Loss 0.5963600873947144
+Task sarcasm, Loss 0.12331649661064148
+Task slapstick, Loss 0.20354077219963074
+
+Image found
+Audio found
+Task mature
+Accuracy: 0.6967592592592593, F1 Score: 0.3282
+Average Task Loss 0.65754234790802
+
+Task gory
+Accuracy: 0.8865740740740741, F1 Score: 0.3288
+Average Task Loss 0.7780161499977112
+
+Task sarcasm
+Accuracy: 0.7939814814814815, F1 Score: 0.3597
+Average Task Loss 0.687334418296814
+
+Task slapstick
+Accuracy: 0.8078703703703703, F1 Score: 0.3140
+Average Task Loss 0.5412094593048096
+
+Average Total Loss 2.664102077484131
+Average Accuracy: 0.7962962962962963
+Average F1 Score: 0.33268351712137156
+
+Checkpoint results saved to Results/Recreate30/checkpoints_Recreate30.pkl
+Epoch [27, Step [4716], Total Loss: 0.3390, Time: 25.16s
+Task mature, Loss 0.5066367387771606
+Task gory, Loss 0.5272284150123596
+Task sarcasm, Loss 0.08464518934488297
+Task slapstick, Loss 0.30268698930740356
+
+Epoch [27, Step [4726], Total Loss: 0.3508, Time: 50.47s
+Task mature, Loss 0.6380301713943481
+Task gory, Loss 0.5084142684936523
+Task sarcasm, Loss 0.1440453678369522
+Task slapstick, Loss 0.2742154598236084
+
+Epoch [27, Step [4736], Total Loss: 0.3578, Time: 75.63s
+Task mature, Loss 0.24343007802963257
+Task gory, Loss 0.48700541257858276
+Task sarcasm, Loss 0.21498505771160126
+Task slapstick, Loss 0.47817882895469666
+
+Epoch [27, Step [4746], Total Loss: 0.2722, Time: 100.80s
+Task mature, Loss 0.1791173219680786
+Task gory, Loss 0.5198357701301575
+Task sarcasm, Loss 0.10317147523164749
+Task slapstick, Loss 0.12840084731578827
+
+Epoch [27, Step [4756], Total Loss: 0.4034, Time: 126.03s
+Task mature, Loss 0.3456074893474579
+Task gory, Loss 0.5523672103881836
+Task sarcasm, Loss 0.16823188960552216
+Task slapstick, Loss 0.5714539289474487
+
+Epoch [27, Step [4766], Total Loss: 0.2314, Time: 151.28s
+Task mature, Loss 0.3918880522251129
+Task gory, Loss 0.27552205324172974
+Task sarcasm, Loss 0.16795529425144196
+Task slapstick, Loss 0.24215367436408997
+
+Epoch [27, Step [4776], Total Loss: 0.2153, Time: 176.57s
+Task mature, Loss 0.3011706471443176
+Task gory, Loss 0.27765482664108276
+Task sarcasm, Loss 0.17101091146469116
+Task slapstick, Loss 0.1993483155965805
+
+Epoch [27, Step [4786], Total Loss: 0.3266, Time: 201.73s
+Task mature, Loss 0.292684942483902
+Task gory, Loss 0.5468172430992126
+Task sarcasm, Loss 0.057894736528396606
+Task slapstick, Loss 0.3350914716720581
+
+Epoch [27, Step [4796], Total Loss: 0.2248, Time: 226.88s
+Task mature, Loss 0.5233005285263062
+Task gory, Loss 0.31860947608947754
+Task sarcasm, Loss 0.0952826738357544
+Task slapstick, Loss 0.12974151968955994
+
+Epoch [27, Step [4806], Total Loss: 0.3680, Time: 252.01s
+Task mature, Loss 0.2150953710079193
+Task gory, Loss 0.5441682934761047
+Task sarcasm, Loss 0.4571431279182434
+Task slapstick, Loss 0.18700090050697327
+
+Epoch [27, Step [4816], Total Loss: 0.3141, Time: 277.21s
+Task mature, Loss 0.26148319244384766
+Task gory, Loss 0.5401917695999146
+Task sarcasm, Loss 0.1275382786989212
+Task slapstick, Loss 0.2316928505897522
+
+Epoch [27, Step [4826], Total Loss: 0.3263, Time: 302.40s
+Task mature, Loss 0.2034246027469635
+Task gory, Loss 0.5278561115264893
+Task sarcasm, Loss 0.17170816659927368
+Task slapstick, Loss 0.30238842964172363
+
+Epoch [27, Step [4836], Total Loss: 0.1843, Time: 327.59s
+Task mature, Loss 0.2993040680885315
+Task gory, Loss 0.2723996341228485
+Task sarcasm, Loss 0.10198885202407837
+Task slapstick, Loss 0.12513524293899536
+
+Epoch [27, Step [4846], Total Loss: 0.3021, Time: 352.76s
+Task mature, Loss 0.3000548481941223
+Task gory, Loss 0.4587388038635254
+Task sarcasm, Loss 0.24909090995788574
+Task slapstick, Loss 0.1939397007226944
+
+Epoch [27, Step [4856], Total Loss: 0.3425, Time: 377.92s
+Task mature, Loss 0.36875778436660767
+Task gory, Loss 0.44663095474243164
+Task sarcasm, Loss 0.11885282397270203
+Task slapstick, Loss 0.5158368945121765
+
+Epoch [27, Step [4866], Total Loss: 0.2081, Time: 403.13s
+Task mature, Loss 0.28455299139022827
+Task gory, Loss 0.26729628443717957
+Task sarcasm, Loss 0.18472489714622498
+Task slapstick, Loss 0.17905621230602264
+
+Epoch [27, Step [4876], Total Loss: 0.1766, Time: 428.31s
+Task mature, Loss 0.2781163454055786
+Task gory, Loss 0.3036918640136719
+Task sarcasm, Loss 0.03546880930662155
+Task slapstick, Loss 0.10101453959941864
+
+Epoch [27, Step [4886], Total Loss: 0.2116, Time: 453.49s
+Task mature, Loss 0.4249575138092041
+Task gory, Loss 0.265109658241272
+Task sarcasm, Loss 0.03359845653176308
+Task slapstick, Loss 0.2819361686706543
+
+Image found
+Audio found
+Task mature
+Accuracy: 0.6689814814814815, F1 Score: 0.3755
+Average Task Loss 0.7310414910316467
+
+Task gory
+Accuracy: 0.8587962962962963, F1 Score: 0.2989
+Average Task Loss 0.8916358947753906
+
+Task sarcasm
+Accuracy: 0.7847222222222222, F1 Score: 0.3586
+Average Task Loss 0.7413211464881897
+
+Task slapstick
+Accuracy: 0.7847222222222222, F1 Score: 0.4076
+Average Task Loss 0.7134314179420471
+
+Average Total Loss 3.077430248260498
+Average Accuracy: 0.7743055555555556
+Average F1 Score: 0.36016510699952786
+
+Checkpoint results saved to Results/Recreate30/checkpoints_Recreate30.pkl
+Epoch [28, Step [4897], Total Loss: 0.1646, Time: 24.93s
+Task mature, Loss 0.2770563066005707
+Task gory, Loss 0.1819431483745575
+Task sarcasm, Loss 0.049833983182907104
+Task slapstick, Loss 0.27057814598083496
+
+Epoch [28, Step [4907], Total Loss: 0.2595, Time: 50.09s
+Task mature, Loss 0.35818418860435486
+Task gory, Loss 0.331717848777771
+Task sarcasm, Loss 0.25776323676109314
+Task slapstick, Loss 0.19719809293746948
+
+Epoch [28, Step [4917], Total Loss: 0.1989, Time: 75.32s
+Task mature, Loss 0.2878776490688324
+Task gory, Loss 0.3035096228122711
+Task sarcasm, Loss 0.04741298779845238
+Task slapstick, Loss 0.19600100815296173
+
+Epoch [28, Step [4927], Total Loss: 0.2809, Time: 100.65s
+Task mature, Loss 0.26913121342658997
+Task gory, Loss 0.2542644143104553
+Task sarcasm, Loss 0.6370562314987183
+Task slapstick, Loss 0.12428033351898193
+
+Epoch [28, Step [4937], Total Loss: 0.1829, Time: 125.90s
+Task mature, Loss 0.2120571732521057
+Task gory, Loss 0.2797587513923645
+Task sarcasm, Loss 0.045617468655109406
+Task slapstick, Loss 0.20310218632221222
+
+Epoch [28, Step [4947], Total Loss: 0.3453, Time: 151.17s
+Task mature, Loss 0.20132866501808167
+Task gory, Loss 0.5553593635559082
+Task sarcasm, Loss 0.24710482358932495
+Task slapstick, Loss 0.26813971996307373
+
+Epoch [28, Step [4957], Total Loss: 0.1923, Time: 176.44s
+Task mature, Loss 0.20796723663806915
+Task gory, Loss 0.29104116559028625
+Task sarcasm, Loss 0.054847538471221924
+Task slapstick, Loss 0.2203441709280014
+
+Epoch [28, Step [4967], Total Loss: 0.2061, Time: 201.66s
+Task mature, Loss 0.2518788278102875
+Task gory, Loss 0.22208943963050842
+Task sarcasm, Loss 0.135811448097229
+Task slapstick, Loss 0.3246101438999176
+
+Epoch [28, Step [4977], Total Loss: 0.2821, Time: 226.78s
+Task mature, Loss 0.24698570370674133
+Task gory, Loss 0.4500254988670349
+Task sarcasm, Loss 0.12048326432704926
+Task slapstick, Loss 0.2665078639984131
+
+Epoch [28, Step [4987], Total Loss: 0.3263, Time: 251.94s
+Task mature, Loss 0.4333093464374542
+Task gory, Loss 0.5362815856933594
+Task sarcasm, Loss 0.16638851165771484
+Task slapstick, Loss 0.175797700881958
+
+Epoch [28, Step [4997], Total Loss: 0.2807, Time: 277.14s
+Task mature, Loss 0.18104144930839539
+Task gory, Loss 0.46031200885772705
+Task sarcasm, Loss 0.12298174947500229
+Task slapstick, Loss 0.26928502321243286
+
+Epoch [28, Step [5007], Total Loss: 0.3932, Time: 302.42s
+Task mature, Loss 0.4775978624820709
+Task gory, Loss 0.6161412000656128
+Task sarcasm, Loss 0.313026487827301
+Task slapstick, Loss 0.1820276379585266
+
+Epoch [28, Step [5017], Total Loss: 0.3842, Time: 327.68s
+Task mature, Loss 0.2840921878814697
+Task gory, Loss 0.5704900026321411
+Task sarcasm, Loss 0.4560115933418274
+Task slapstick, Loss 0.18182876706123352
+
+Epoch [28, Step [5027], Total Loss: 0.2462, Time: 352.91s
+Task mature, Loss 0.45253986120224
+Task gory, Loss 0.3202732503414154
+Task sarcasm, Loss 0.09544739127159119
+Task slapstick, Loss 0.26871028542518616
+
+Epoch [28, Step [5037], Total Loss: 0.2209, Time: 378.17s
+Task mature, Loss 0.33794867992401123
+Task gory, Loss 0.29038822650909424
+Task sarcasm, Loss 0.0962868183851242
+Task slapstick, Loss 0.25861284136772156
+
+Epoch [28, Step [5047], Total Loss: 0.2917, Time: 403.28s
+Task mature, Loss 0.32001566886901855
+Task gory, Loss 0.4420214891433716
+Task sarcasm, Loss 0.24484537541866302
+Task slapstick, Loss 0.16964015364646912
+
+Epoch [28, Step [5057], Total Loss: 0.2848, Time: 428.57s
+Task mature, Loss 0.306315153837204
+Task gory, Loss 0.4984029531478882
+Task sarcasm, Loss 0.07804505527019501
+Task slapstick, Loss 0.1961832344532013
+
+Epoch [28, Step [5067], Total Loss: 0.3003, Time: 453.78s
+Task mature, Loss 0.31710749864578247
+Task gory, Loss 0.5318737030029297
+Task sarcasm, Loss 0.08831919729709625
+Task slapstick, Loss 0.19087380170822144
+
+Image found
+Audio found
+Task mature
+Accuracy: 0.7013888888888888, F1 Score: 0.3707
+Average Task Loss 0.6961742639541626
+
+Task gory
+Accuracy: 0.8703703703703703, F1 Score: 0.2821
+Average Task Loss 0.830805242061615
+
+Task sarcasm
+Accuracy: 0.7939814814814815, F1 Score: 0.3206
+Average Task Loss 0.7038456201553345
+
+Task slapstick
+Accuracy: 0.7893518518518519, F1 Score: 0.4052
+Average Task Loss 0.6705776453018188
+
+Average Total Loss 2.901402711868286
+Average Accuracy: 0.7887731481481481
+Average F1 Score: 0.34465560864029765
+
+Checkpoint results saved to Results/Recreate30/checkpoints_Recreate30.pkl
+Epoch [29, Step [5078], Total Loss: 0.2325, Time: 25.05s
+Task mature, Loss 0.21990007162094116
+Task gory, Loss 0.31761622428894043
+Task sarcasm, Loss 0.1164456382393837
+Task slapstick, Loss 0.3008187711238861
+
+Epoch [29, Step [5088], Total Loss: 0.4935, Time: 50.24s
+Task mature, Loss 0.27599459886550903
+Task gory, Loss 0.5352253317832947
+Task sarcasm, Loss 1.005773901939392
+Task slapstick, Loss 0.25345760583877563
+
+Epoch [29, Step [5098], Total Loss: 0.2849, Time: 75.49s
+Task mature, Loss 0.21638797223567963
+Task gory, Loss 0.47527509927749634
+Task sarcasm, Loss 0.0927092656493187
+Task slapstick, Loss 0.272886723279953
+
+Epoch [29, Step [5108], Total Loss: 0.3069, Time: 100.65s
+Task mature, Loss 0.21425074338912964
+Task gory, Loss 0.4778590798377991
+Task sarcasm, Loss 0.23874329030513763
+Task slapstick, Loss 0.23295697569847107
+
+Epoch [29, Step [5118], Total Loss: 0.2071, Time: 125.79s
+Task mature, Loss 0.3103548586368561
+Task gory, Loss 0.2204645574092865
+Task sarcasm, Loss 0.2805027961730957
+Task slapstick, Loss 0.15873482823371887
+
+Epoch [29, Step [5128], Total Loss: 0.2649, Time: 150.95s
+Task mature, Loss 0.18585893511772156
+Task gory, Loss 0.40561676025390625
+Task sarcasm, Loss 0.1579759418964386
+Task slapstick, Loss 0.2622375786304474
+
+Epoch [29, Step [5138], Total Loss: 0.2865, Time: 176.20s
+Task mature, Loss 0.26942765712738037
+Task gory, Loss 0.5583553910255432
+Task sarcasm, Loss 0.09096336364746094
+Task slapstick, Loss 0.09033121168613434
+
+Epoch [29, Step [5148], Total Loss: 0.3524, Time: 201.41s
+Task mature, Loss 0.34028953313827515
+Task gory, Loss 0.2777038514614105
+Task sarcasm, Loss 0.5707268118858337
+Task slapstick, Loss 0.46567362546920776
+
+Epoch [29, Step [5158], Total Loss: 0.3059, Time: 226.62s
+Task mature, Loss 0.420904278755188
+Task gory, Loss 0.5133069753646851
+Task sarcasm, Loss 0.03561604768037796
+Task slapstick, Loss 0.25671353936195374
+
+Epoch [29, Step [5168], Total Loss: 0.3114, Time: 251.87s
+Task mature, Loss 0.39194947481155396
+Task gory, Loss 0.5087418556213379
+Task sarcasm, Loss 0.07689940184354782
+Task slapstick, Loss 0.26654523611068726
+
+Epoch [29, Step [5178], Total Loss: 0.3131, Time: 277.04s
+Task mature, Loss 0.3405817151069641
+Task gory, Loss 0.45331478118896484
+Task sarcasm, Loss 0.21774247288703918
+Task slapstick, Loss 0.27078813314437866
+
+Epoch [29, Step [5188], Total Loss: 0.2717, Time: 302.18s
+Task mature, Loss 0.25861960649490356
+Task gory, Loss 0.5131147503852844
+Task sarcasm, Loss 0.07685426622629166
+Task slapstick, Loss 0.12600022554397583
+
+Epoch [29, Step [5198], Total Loss: 0.2626, Time: 327.35s
+Task mature, Loss 0.6970502734184265
+Task gory, Loss 0.2886410653591156
+Task sarcasm, Loss 0.08839911222457886
+Task slapstick, Loss 0.2985776662826538
+
+Epoch [29, Step [5208], Total Loss: 0.2934, Time: 352.53s
+Task mature, Loss 0.21623553335666656
+Task gory, Loss 0.5701175928115845
+Task sarcasm, Loss 0.05331077054142952
+Task slapstick, Loss 0.16519472002983093
+
+Epoch [29, Step [5218], Total Loss: 0.2783, Time: 377.79s
+Task mature, Loss 0.41674429178237915
+Task gory, Loss 0.4768385887145996
+Task sarcasm, Loss 0.03354616463184357
+Task slapstick, Loss 0.19572484493255615
+
+Epoch [29, Step [5228], Total Loss: 0.3411, Time: 402.98s
+Task mature, Loss 0.5257548093795776
+Task gory, Loss 0.5281887054443359
+Task sarcasm, Loss 0.14527922868728638
+Task slapstick, Loss 0.2407393753528595
+
+Epoch [29, Step [5238], Total Loss: 0.3836, Time: 428.17s
+Task mature, Loss 0.35644128918647766
+Task gory, Loss 0.3121680021286011
+Task sarcasm, Loss 0.6772451400756836
+Task slapstick, Loss 0.4383253753185272
+
+Epoch [29, Step [5248], Total Loss: 0.3940, Time: 453.33s
+Task mature, Loss 0.2138400375843048
+Task gory, Loss 0.5330426096916199
+Task sarcasm, Loss 0.1509544551372528
+Task slapstick, Loss 0.6459172368049622
+
+Image found
+Audio found
+Task mature
+Accuracy: 0.6805555555555556, F1 Score: 0.3365
+Average Task Loss 0.6865273714065552
+
+Task gory
+Accuracy: 0.8634259259259259, F1 Score: 0.3218
+Average Task Loss 0.9802173972129822
+
+Task sarcasm
+Accuracy: 0.8055555555555556, F1 Score: 0.3438
+Average Task Loss 0.6953599452972412
+
+Task slapstick
+Accuracy: 0.8009259259259259, F1 Score: 0.4267
+Average Task Loss 0.7396284937858582
+
+Average Total Loss 3.101733446121216
+Average Accuracy: 0.7876157407407408
+Average F1 Score: 0.3571985521662246
+
+Checkpoint results saved to Results/Recreate30/checkpoints_Recreate30.pkl
+Epoch [30, Step [5259], Total Loss: 0.3023, Time: 24.99s
+Task mature, Loss 0.42527690529823303
+Task gory, Loss 0.45401906967163086
+Task sarcasm, Loss 0.23036649823188782
+Task slapstick, Loss 0.16067808866500854
+
+Epoch [30, Step [5269], Total Loss: 0.2881, Time: 50.19s
+Task mature, Loss 0.48711246252059937
+Task gory, Loss 0.3944409191608429
+Task sarcasm, Loss 0.1349625289440155
+Task slapstick, Loss 0.27285391092300415
+
+Epoch [30, Step [5279], Total Loss: 0.3122, Time: 75.37s
+Task mature, Loss 0.3876878619194031
+Task gory, Loss 0.49395447969436646
+Task sarcasm, Loss 0.10107695311307907
+Task slapstick, Loss 0.27811798453330994
+
+Epoch [30, Step [5289], Total Loss: 0.2515, Time: 100.55s
+Task mature, Loss 0.6415984630584717
+Task gory, Loss 0.26841628551483154
+Task sarcasm, Loss 0.2337196171283722
+Task slapstick, Loss 0.16637323796749115
+
+Epoch [30, Step [5299], Total Loss: 0.5239, Time: 125.71s
+Task mature, Loss 0.7410237789154053
+Task gory, Loss 0.7274474501609802
+Task sarcasm, Loss 0.2256917655467987
+Task slapstick, Loss 0.5684866905212402
+
+Epoch [30, Step [5309], Total Loss: 0.2702, Time: 150.86s
+Task mature, Loss 0.2778036594390869
+Task gory, Loss 0.4697561264038086
+Task sarcasm, Loss 0.11296341568231583
+Task slapstick, Loss 0.15952882170677185
+
+Epoch [30, Step [5319], Total Loss: 0.2969, Time: 176.00s
+Task mature, Loss 0.23666293919086456
+Task gory, Loss 0.49896788597106934
+Task sarcasm, Loss 0.12018796056509018
+Task slapstick, Loss 0.24824582040309906
+
+Epoch [30, Step [5329], Total Loss: 0.2839, Time: 201.22s
+Task mature, Loss 0.31999921798706055
+Task gory, Loss 0.4972422122955322
+Task sarcasm, Loss 0.08710160851478577
+Task slapstick, Loss 0.1777430921792984
+
+Epoch [30, Step [5339], Total Loss: 0.2102, Time: 226.39s
+Task mature, Loss 0.17917697131633759
+Task gory, Loss 0.2869342863559723
+Task sarcasm, Loss 0.1102294921875
+Task slapstick, Loss 0.2773616909980774
+
+Epoch [30, Step [5349], Total Loss: 0.2565, Time: 251.58s
+Task mature, Loss 0.22643744945526123
+Task gory, Loss 0.4926391839981079
+Task sarcasm, Loss 0.08594308793544769
+Task slapstick, Loss 0.09805306792259216
+
+Epoch [30, Step [5359], Total Loss: 0.2498, Time: 276.77s
+Task mature, Loss 0.3226433992385864
+Task gory, Loss 0.33143115043640137
+Task sarcasm, Loss 0.25441300868988037
+Task slapstick, Loss 0.17034202814102173
+
+Epoch [30, Step [5369], Total Loss: 0.2657, Time: 301.91s
+Task mature, Loss 0.4011791944503784
+Task gory, Loss 0.4596724510192871
+Task sarcasm, Loss 0.0510820597410202
+Task slapstick, Loss 0.15738165378570557
+
+Epoch [30, Step [5379], Total Loss: 0.2310, Time: 327.13s
+Task mature, Loss 0.17308400571346283
+Task gory, Loss 0.2600642442703247
+Task sarcasm, Loss 0.2235742211341858
+Task slapstick, Loss 0.32486581802368164
+
+Epoch [30, Step [5389], Total Loss: 0.2654, Time: 352.26s
+Task mature, Loss 0.4764861762523651
+Task gory, Loss 0.29674744606018066
+Task sarcasm, Loss 0.22858013212680817
+Task slapstick, Loss 0.2666575014591217
+
+Epoch [30, Step [5399], Total Loss: 0.2590, Time: 377.44s
+Task mature, Loss 0.27288293838500977
+Task gory, Loss 0.28608548641204834
+Task sarcasm, Loss 0.30374372005462646
+Task slapstick, Loss 0.2826302647590637
+
+Epoch [30, Step [5409], Total Loss: 0.2894, Time: 402.58s
+Task mature, Loss 0.23048105835914612
+Task gory, Loss 0.5489793419837952
+Task sarcasm, Loss 0.0723327249288559
+Task slapstick, Loss 0.16154028475284576
+
+Epoch [30, Step [5419], Total Loss: 0.2991, Time: 427.69s
+Task mature, Loss 0.28846246004104614
+Task gory, Loss 0.5578292012214661
+Task sarcasm, Loss 0.07293547689914703
+Task slapstick, Loss 0.1625739336013794
+
+Epoch [30, Step [5429], Total Loss: 0.2843, Time: 452.82s
+Task mature, Loss 0.2693835198879242
+Task gory, Loss 0.46468204259872437
+Task sarcasm, Loss 0.2455088049173355
+Task slapstick, Loss 0.1118055060505867
+
+Image found
+Audio found
+Task mature
+Accuracy: 0.6990740740740741, F1 Score: 0.2857
+Average Task Loss 0.6851626038551331
+
+Task gory
+Accuracy: 0.8680555555555556, F1 Score: 0.3294
+Average Task Loss 1.0070751905441284
+
+Task sarcasm
+Accuracy: 0.7986111111111112, F1 Score: 0.3040
+Average Task Loss 0.6769177913665771
+
+Task slapstick
+Accuracy: 0.8055555555555556, F1 Score: 0.3636
+Average Task Loss 0.628332793712616
+
+Average Total Loss 2.997488498687744
+Average Accuracy: 0.7928240740740742
+Average F1 Score: 0.3206906035141329
+
+Checkpoint results saved to Results/Recreate30/checkpoints_Recreate30.pkl
+Experiment results saved to Results/Recreate30/Recreate30.pkl
+All plots saved to Results/Recreate30
+Model Loaded
+Image found
+Audio found
+{'accuracies': {'mature': 0.7984429065743944, 'gory': 0.9411764705882353, 'sarcasm': 0.8624567474048442, 'slapstick': 0.8814878892733564}, 'f1_scores': {'mature': 0.3979328165374677, 'gory': 0.39285714285714285, 'sarcasm': 0.5046728971962616, 'slapstick': 0.30456852791878175}, 'average_accuracy': 0.8708910034602075, 'average_f1_score': 0.40000784612741347, 'val_average_total_loss': 2.0046303272247314, 'val_average_task_loss': {'mature': 0.49907422065734863, 'gory': 0.5488200187683105, 'sarcasm': 0.5685573816299438, 'slapstick': 0.38817885518074036}}
+Running Dynamic Difficulty Sampling
+Created Datasets
+Total Steps 21720, Number of Epochs: 30
+Epoch 0 Starting Sample Weighs: {'mature': 0.25, 'gory': 0.25, 'sarcasm': 0.25, 'slapstick': 0.25}
+Dynamic Difficulty Sampling on the following tasks: ['mature', 'gory', 'sarcasm', 'slapstick']
+Number of Data Points 2890 / Batch Size 16 = Steps 180.625
+Image found
+Audio found
+Image found
+Audio found
+Image found
+Audio found
+Image found
+Audio found
+Unweighted
+Epoch [1, Step [10], Total Loss: 1.2481, Time: 27.29s
+Task mature, Loss 0.5231116414070129
+Task mature Current Index: 40
+Task gory, Loss 0.3003828227519989
+Task gory Current Index: 40
+Task sarcasm, Loss 0.25811707973480225
+Task sarcasm Current Index: 40
+Task slapstick, Loss 0.16646398603916168
+Task slapstick Current Index: 40
+
+Epoch [1, Step [20], Total Loss: 1.2218, Time: 54.60s
+Task mature, Loss 0.2259097397327423
+Task mature Current Index: 80
+Task gory, Loss 0.39925307035446167
+Task gory Current Index: 80
+Task sarcasm, Loss 0.22094649076461792
+Task sarcasm Current Index: 80
+Task slapstick, Loss 0.3756715655326843
+Task slapstick Current Index: 80
+
+Average Total Loss 1.734444499015808
+Average Loss Per Task: ['mature: 0.48281699419021606', 'gory: 0.41133514046669006', 'sarcasm: 0.4611798822879791', 'slapstick: 0.37911251187324524']
+Updated Sample Weights {'mature': tensor(0.2784, device='cuda:0', grad_fn=<DivBackward0>), 'gory': tensor(0.2372, device='cuda:0', grad_fn=<DivBackward0>), 'sarcasm': tensor(0.2659, device='cuda:0', grad_fn=<DivBackward0>), 'slapstick': tensor(0.2186, device='cuda:0', grad_fn=<DivBackward0>)}
+Dynamic Difficulty Sampling Crashed with Exception: CUDA out of memory. Tried to allocate 206.00 MiB. GPU 
